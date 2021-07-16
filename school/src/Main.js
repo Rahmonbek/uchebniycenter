@@ -95,7 +95,7 @@ state = {
             <FcBusinessman style={{fontSize:'43px',backgroundColor:'rgba(0,0,0,0.3)',borderRadius:'50%'}}/>
             <BiChevronDown style={{marginTop:'10px',marginLeft:'5px'}}/>
             <div>
-              <h6>Alina Mclourd</h6>
+              <h6>MAlina Mclourd</h6>
               <p>Zako IT admin</p>
             </div>
             </div>
