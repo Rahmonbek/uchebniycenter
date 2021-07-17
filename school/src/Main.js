@@ -16,6 +16,7 @@ import {VscChromeClose} from 'react-icons/vsc'
 import {FcBusinessman} from 'react-icons/fc'
 import Davomat from './pages/Davomat';
 import Guruhlar from './pages/Guruhlar';
+import Dashboard from './pages/Dashboard';
 export default class Main extends Component {
 state = {
     collapsed: false,
@@ -111,7 +112,7 @@ state = {
         <h5 className={this.state.collapsed? styles.headingMenu1:styles.headingMenu2}>Admin</h5>
         <div className={this.state.collapsed? styles.hrMenu1:styles.hrMenu2}></div>
           <Menu.Item key="1" icon={<PieChartOutlined style={{fontSize:'18px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2} > 
-            Dashboard
+          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/"> Bosh bo'lim</Link>
           </Menu.Item>
           <Menu.Item key="2" icon={<DiJavascript1 style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
             Kurslar
@@ -122,7 +123,7 @@ state = {
             <Menu.Item className={this.state.collapsed? styles.list1:styles.list2} key="6">Unit</Menu.Item>
           </SubMenu>
           <Menu.Item key="8" icon={<TiTickOutline style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
-           <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/davomat/uz">Davomat</Link>
+           <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/davomat">Davomat</Link>
           </Menu.Item>
           <Menu.Item key="9" icon={<BiDollarCircle style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
             To'lov
@@ -133,7 +134,7 @@ state = {
             O'quvchi qo'shish
           </Menu.Item>
           <Menu.Item key="11" icon={<AiOutlineGooglePlus style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
-          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/guruhlar/uz">Guruh qo'shish</Link>
+          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/guruhlar">Guruh qo'shish</Link>
           </Menu.Item>
           <Menu.Item key="12" icon={<ImUserPlus style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
             O'qituvchi qo'shish
@@ -142,10 +143,13 @@ state = {
       </div>  
      <div className={this.state.collapsed?styles.forget1:styles.forget}>
      <Switch>
-       <Route exact path="/davomat/uz">
+     <Route exact path="/davomat">
          <Davomat/>
        </Route>
-       <Route exact path="/guruhlar/uz">
+       <Route exact path="/">
+         <Dashboard/>
+       </Route>
+       <Route exact path="/guruhlar">
          <Guruhlar/>
        </Route>
      </Switch>
