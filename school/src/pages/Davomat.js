@@ -1,9 +1,10 @@
 import React,{useState,useEffect} from 'react'
-import {Container,Row,Col,Button,Table } from 'react-bootstrap'
+import {Container,Row,Col,Button,Table,Form } from 'react-bootstrap'
 import styles from '../css/davomat.module.css'
 import MUIDataTable from "mui-datatables";
 export default function Davomat() {
     const [oylar,setOy]=useState('0')
+    const [dataone,setData1]=useState([])
     const [guruhlar,setGuruhlar]=useState(
         [
             {
@@ -102,11 +103,14 @@ export default function Davomat() {
             ]
         )
        const [data,setData]=useState([])
+       const [data3,setData3]=useState([])
        const takeOy=()=>{
-            console.log(oylar)
             setData([])
             setData(guruhlar[oylar].oy)
-            console.log(data)
+            setData1()
+            setData1(guruhlar[oylar].oquvchilar)
+            setData3([])
+            setData3(guruhlar[oylar].oquvchilar)
         }
         useEffect(()=>{
             takeOy()
@@ -169,15 +173,13 @@ export default function Davomat() {
                             }
                         </Row>
                     </Col>
-                    <Col lg={12}>
-                           {
-                               guruhlar.map((item,key)=>{
-                                   return(
-                                    <Table striped bordered hover>
+                    <Col lg={12} className={styles.backgroundTable}>
+                     
+                                    <Table striped bordered hover responsive>
                                     <thead>
                                       <tr>
                                         <th>#</th>
-                                        <th>{item.guruh}</th>
+                                        <th>guruh</th>
                                         <th>
                                             <p>1-dars</p>
                                             <p><input type="date"></input></p>
@@ -228,31 +230,32 @@ export default function Davomat() {
                                         </th>
                                       </tr>
                                     </thead>
-                                      {
-                                            item.oquvchilar.map((item2,key2)=>{
-                                                return(
-
-                                                    <tbody>
+                                    {
+                               dataone.map((item,key)=>{
+                                   return(
+                                    <tbody>
                                                         <tr>
-                                                        <td>{key2+1}</td>
-                                                        <td>{item2}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td><Button></Button></td>
+                                                        <td>{key+1}</td>
+                                                        <td>{item}</td>
+             <td><Form.Group className="mb-3" controlId="formBasicCheckbox"><Form.Check type="checkbox"/></Form.Group></td>
+             <td><Form.Group className="mb-3" controlId="formBasicCheckbox"><Form.Check type="checkbox"/></Form.Group></td>
+             <td><Form.Group className="mb-3" controlId="formBasicCheckbox"><Form.Check type="checkbox"/></Form.Group></td>
+             <td><Form.Group className="mb-3" controlId="formBasicCheckbox"><Form.Check type="checkbox"/></Form.Group></td>
+             <td><Form.Group className="mb-3" controlId="formBasicCheckbox"><Form.Check type="checkbox"/></Form.Group></td>
+             <td><Form.Group className="mb-3" controlId="formBasicCheckbox"><Form.Check type="checkbox"/></Form.Group></td>
+             <td><Form.Group className="mb-3" controlId="formBasicCheckbox"><Form.Check type="checkbox"/></Form.Group></td>
+             <td><Form.Group className="mb-3" controlId="formBasicCheckbox"><Form.Check type="checkbox"/></Form.Group></td>
+             <td><Form.Group className="mb-3" controlId="formBasicCheckbox"><Form.Check type="checkbox"/></Form.Group></td>
+             <td><Form.Group className="mb-3" controlId="formBasicCheckbox"><Form.Check type="checkbox"/></Form.Group></td>
+             <td><Form.Group className="mb-3" controlId="formBasicCheckbox"><Form.Check type="checkbox"/></Form.Group></td>
+             <td><Form.Group className="mb-3" controlId="formBasicCheckbox"><Form.Check type="checkbox"/></Form.Group></td>
+  
                                                     </tr>
                                                     </tbody>
-
-                                                )
-                                            })
-                                        }
-
-                                  </Table>
                                    )
-                               })
-                           }
-                            <span id="front2"></span>
+                                      })
+                                    }
+                                  </Table>
                         </Col>
                 </Row>
             </Container>
