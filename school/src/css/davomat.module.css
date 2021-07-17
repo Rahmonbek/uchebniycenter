@@ -54,40 +54,43 @@
 }
 .gr{
     background-color: #D0EEFF;
-    width:60px !important;
+    width:47px !important;
     height: 50px;
-    margin:2%;
+    margin:1%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color:#3F6AD8;
-    font-size: 16px;
+    color:#3F6AD8 !important;
+    font-size: 13px;
     font-weight: 700;
     border-radius: 5px;
+    cursor: pointer;
 }
 .gr2{
     background-color: #FDF1D3;
-    width:60px !important;
+    width:47px !important;
     height: 50px;
-    margin:2%;
+    margin:1%;
     display: flex;
     justify-content: center;
     align-items: center;
     color:#F0B526;
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 700;
     border-radius: 5px;
+    cursor: pointer;
 }
 .gr3{
     background-color: #F7D3DC;
-    width:61px !important;
+    width:47px !important;
     height: 50px;
-    margin:2%;
+    margin:1%;
     display: flex;
     justify-content: center;
     align-items: center;
     color:#DD3D63;
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 700;
     border-radius: 5px;
+    cursor: pointer;
 }
