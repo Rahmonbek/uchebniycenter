@@ -1,5 +1,6 @@
 body{
   background-color: #f1f5f78a !important;
+  background-color:#F1F4F6 !important;
 }
 .ant-menu.ant-menu-dark, .ant-menu-dark .ant-menu-sub, .ant-menu.ant-menu-dark .ant-menu-sub {
   color: rgba(255, 255, 255, 0.65);
