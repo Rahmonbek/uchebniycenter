@@ -2,7 +2,7 @@ import {url} from './Host'
 export default getGroups=()=>{
     var config={
         url:url,
-        method:'g'
+        method:'get'
     }
 
     return(httpRequest(config))
