@@ -54,7 +54,7 @@ body{
 } 
 
 .collapsed2{
-    width: 280px !important;
+    width: 240px !important;
     position: sticky !important;
     top: 60px;
     height: calc(100vh - 60px) !important;
