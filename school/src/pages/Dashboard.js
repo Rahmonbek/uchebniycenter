@@ -162,7 +162,7 @@ export default class Dashboard extends Component {
 
          <div className={style.graf} >
              <h4 className={style.titleh}>O'quvchilar</h4>
-             <div style={{width:'200px', height:'6px', backgroundColor:'#f9d40d', marginLeft:'30px', marginBottom:'20px'}}></div>
+             <div style={{width:'200px', height:'6px', marginBottom:'20px', backgroundColor:'#f9d40d', marginLeft:'30px', marginBottom:'20px'}}></div>
              <Row style={{justifyConten:'center'}}>
                  <Col lg={4} md={6} sm={12}>
                  <div style={{overFlowX:'hidden', width:'100%'}} >
@@ -180,7 +180,7 @@ export default class Dashboard extends Component {
               </div>
          <div className={style.graf} >
              <h4 className={style.titleh}>Foyda</h4>
-             <div style={{width:'200px', height:'6px', backgroundColor:'green', marginLeft:'30px', marginBottom:'20px'}}></div>
+             <div style={{width:'200px', height:'6px', marginBottom:'20px', backgroundColor:'green', marginLeft:'30px', marginBottom:'20px'}}></div>
              <Row style={{justifyConten:'center'}}>
                  <Col lg={4} md={6} sm={12}>
                  <div style={{overFlowX:'hidden', width:'100%'}} >
@@ -198,7 +198,7 @@ export default class Dashboard extends Component {
               </div>
          <div className={style.graf} >
              <h4 className={style.titleh}>Guruhlar</h4>
-             <div style={{width:'200px', height:'6px', backgroundColor:'#de0202', marginLeft:'30px', marginBottom:'20px'}}></div>
+             <div style={{width:'200px', height:'6px', marginBottom:'20px', backgroundColor:'#de0202', marginLeft:'30px', marginBottom:'20px'}}></div>
              <Row style={{justifyConten:'center'}}>
                  <Col lg={4} md={6} sm={12}>
                  <div style={{overFlowX:'hidden', width:'100%'}} >
