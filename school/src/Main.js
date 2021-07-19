@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import './App.css'
 import{BrowserRouter, Route, Switch,Link} from 'react-router-dom'
 import styles from './top.module.css'
-import { Menu} from 'antd';
+import { Menu, Dropdown, Button } from 'antd';
+
 import {PieChartOutlined,} from '@ant-design/icons';
 import {FaBell,FaLanguage} from 'react-icons/fa'
 import {DiJavascript1} from 'react-icons/di'
@@ -17,6 +18,8 @@ import {FcBusinessman} from 'react-icons/fc'
 import Davomat from './pages/Davomat';
 import Guruhlar from './pages/Guruhlar';
 import Dashboard from './pages/Dashboard';
+import logo1 from './img/logo1.png'
+import { Col, Row } from 'react-bootstrap';
 export default class Main extends Component {
 state = {
     collapsed: false,
@@ -93,12 +96,15 @@ state = {
           </div>
           <span className={styles.hr}>|</span>
           <div className={styles.user}>
-            <FcBusinessman style={{fontSize:'43px',backgroundColor:'rgba(0,0,0,0.3)',borderRadius:'50%'}}/>
-            <BiChevronDown style={{marginTop:'10px',marginLeft:'5px'}}/>
-            <div>
-              <h6>MAlina Mclourd</h6>
-              <p>Zako IT admin</p>
-            </div>
+          
+            <Row>
+              <Col className={styles.logo1} lg={3}> <img src={logo1} style={{width:'45px', height:'45px'}}></img></Col>
+              <Col className={styles.logo1text} lg={9}>
+               
+    <h6>Ismoilov Rahmon</h6>
+                <p>IT Tower</p>
+              </Col>
+            </Row>
             </div>
       </div> 
      <div style={{display:'flex',flexDirection:'row'}}>

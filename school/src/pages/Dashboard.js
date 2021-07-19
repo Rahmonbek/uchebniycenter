@@ -13,84 +13,84 @@ export default class Dashboard extends Component {
                 "name": "2021 Mart",
                 "O'quvchilar": 24,
                 "Foyda": 2400000,
-                "O'qituvchilar": 4
+                "Guruhlar": 4
               },
               {
                 "name": "2021 Aprel",
                 "O'quvchilar": 13,
                 "Foyda": 1300000,
-                "O'qituvchilar": 3
+                "Guruhlar": 3
               },
               {
                 "name": "2021 May",
                 "O'quvchilar": 98,
                 "Foyda": 9800000,
-                "O'qituvchilar": 8
+                "Guruhlar": 8
               },
               {
                 "name": "2021 Iyun",
                 "O'quvchilar": 39,
                 "Foyda": 3900000,
-                "O'qituvchilar": 9
+                "Guruhlar": 9
               },
               {
                 "name": "2021 Iyul",
                 "O'quvchilar": 48,
                 "Foyda": 4800000,
-                "O'qituvchilar": 8
+                "Guruhlar": 8
               },
               {
                 "name": "2021 Avgust",
                 "O'quvchilar": 38,
                 "Foyda": 3800000,
-                "O'qituvchilar": 8
+                "Guruhlar": 8
               },
               {
                 "name": "2021 Mart",
                 "O'quvchilar": 43,
                 "Foyda": 4300000,
-                "O'qituvchilar": 3
+                "Guruhlar": 3
               },{
                 "name": "2021 Mart",
                 "O'quvchilar": 24,
                 "Foyda": 2400000,
-                "O'qituvchilar": 4
+                "Guruhlar": 4
               },
               {
                 "name": "2021 Aprel",
                 "O'quvchilar": 13,
                 "Foyda": 1300000,
-                "O'qituvchilar": 3
+                "Guruhlar": 3
               },
               {
                 "name": "2021 May",
                 "O'quvchilar": 98,
                 "Foyda": 9800000,
-                "O'qituvchilar": 8
+                "Guruhlar": 8
               },
               {
                 "name": "2021 Iyun",
                 "O'quvchilar": 39,
                 "Foyda": 3900000,
-                "O'qituvchilar": 9
+                "Guruhlar": 9
               },
               {
                 "name": "2021 Iyul",
                 "O'quvchilar": 48,
                 "Foyda": 4800000,
-                "O'qituvchilar": 8
+                "Guruhlar": 8
               },
               {
                 "name": "2021 Avgust",
                 "O'quvchilar": 38,
                 "Foyda": 3800000,
-                "O'qituvchilar": 8
+                "Guruhlar": 8
               },
               {
                 "name": "2021 Mart",
                 "O'quvchilar": 43,
                 "Foyda": 4300000,
-                "O'qituvchilar": 3
+                "Guruhlar": 3
               },
             ], 
           grafWidth:0
@@ -151,7 +151,7 @@ export default class Dashboard extends Component {
                </div>
             </Col>
             <Col lg="8">
-              <p className={style.xira}>O'qituvchilar</p>
+              <p className={style.xira}>Foyda</p>
               <h1 className={style.title}>6</h1>
               <p className={style.xira2}><span style={{fontWeight:'bold', color:'green'}}>14 %</span> o'sdi</p>
             </Col>
@@ -161,18 +161,54 @@ export default class Dashboard extends Component {
          </div>
 
          <div className={style.graf} >
+             <h4 className={style.titleh}>O'quvchilar</h4>
+             <div style={{width:'200px', height:'6px', backgroundColor:'#f9d40d', marginLeft:'30px', marginBottom:'20px'}}></div>
              <Row style={{justifyConten:'center'}}>
                  <Col lg={4} md={6} sm={12}>
                  <div style={{overFlowX:'hidden', width:'100%'}} >
-                 <BarChart style={{backgroundColor:'white', marginTop:'20px'}} width={900} height={300} data={this.state.data}>
+                 <BarChart style={{backgroundColor:'white', marginTop:'20px', marginBottom:'20px'}} width={900} height={300} data={this.state.data}>
   <CartesianGrid strokeDasharray="3 3" />
   <XAxis dataKey="name" />
   <YAxis/>
   <Tooltip />
   <Legend />
   <Bar dataKey="O'quvchilar" fill="#f9d40d" /> 
-  <Bar dataKey="O'qituvchilar" fill="#f9440d" /> 
-  <Bar dataKey="Foyda" fill="#f5d40d" />
+  
+</BarChart></div>
+                 </Col>
+             </Row>
+              </div>
+         <div className={style.graf} >
+             <h4 className={style.titleh}>Foyda</h4>
+             <div style={{width:'200px', height:'6px', backgroundColor:'green', marginLeft:'30px', marginBottom:'20px'}}></div>
+             <Row style={{justifyConten:'center'}}>
+                 <Col lg={4} md={6} sm={12}>
+                 <div style={{overFlowX:'hidden', width:'100%'}} >
+                 <BarChart style={{backgroundColor:'white', marginTop:'20px', marginBottom:'20px'}} width={900} height={300} data={this.state.data}>
+  <CartesianGrid strokeDasharray="3 3" />
+  <XAxis dataKey="name" />
+  <YAxis/>
+  <Tooltip />
+  <Legend />
+  <Bar dataKey="Foyda" fill="green" /> 
+  
+</BarChart></div>
+                 </Col>
+             </Row>
+              </div>
+         <div className={style.graf} >
+             <h4 className={style.titleh}>Guruhlar</h4>
+             <div style={{width:'200px', height:'6px', backgroundColor:'#de0202', marginLeft:'30px', marginBottom:'20px'}}></div>
+             <Row style={{justifyConten:'center'}}>
+                 <Col lg={4} md={6} sm={12}>
+                 <div style={{overFlowX:'hidden', width:'100%'}} >
+                 <BarChart style={{backgroundColor:'white', marginTop:'20px', marginBottom:'20px'}} width={900} height={300} data={this.state.data}>
+  <CartesianGrid strokeDasharray="3 3" />
+  <XAxis dataKey="name" />
+  <YAxis/>
+  <Tooltip />
+  <Legend />
+  <Bar dataKey="Guruhlar" fill="#de0202" /> 
   
 </BarChart></div>
                  </Col>

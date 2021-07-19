@@ -9,9 +9,12 @@
 .title{margin:5px}
 .cards p{margin:0px; color:grey; font-size: 15px;}
 .h{width:100%; text-align:center; flex:100%; font-size:28px; margin:0px; padding-bottom:20px; border-bottom: 1px solid grey;}
-.graf{width:90%; margin:auto; background-color: white; padding:20px; margin-top:50px; margin-bottom: 100px;}
+.graf{width:90%; margin:auto; background-color: white; padding:20px; margin-top:50px; margin-bottom: 100px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    overflow-x:auto;
+}
 
 @media (max-width:900px){
     .graf{width:100%}
 }
-
+.titleh{margin-left:30px; letter-spacing: 4px;}
