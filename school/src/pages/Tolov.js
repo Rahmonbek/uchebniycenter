@@ -8,6 +8,8 @@ import {BsPersonPlusFill} from 'react-icons/bs'
 import MUIDataTable from "mui-datatables";
 import { DatePicker, Space } from 'antd';
 import {FcPlus} from 'react-icons/fc'
+import {FiPieChart,FiCheckCircle} from 'react-icons/fi'
+import {AiFillEdit,AiOutlineDelete} from 'react-icons/ai'
 export default function Tolov() {
 const [visible,setVisible]=useState(false)
 const { Option } = Select;
@@ -33,6 +35,22 @@ const handleProvinceChange = value => {
   };
     const [oylar,setOy]=useState('0')
     const [dataone,setData1]=useState([])
+    const [tolov,setTolov]=useState([
+        {
+            ismi:'malikov',
+            guruh:'2-fr',
+            sana:'2021-07-21',
+            oy:'may',
+            summa:'350000'
+        },
+        {
+            ismi:'malikov',
+            guruh:'5-py',
+            sana:'2021-07-21',
+            oy:'may',
+            summa:'320000'
+        }
+    ])
     const [guruhlar,setGuruhlar]=useState(
         [
             {
@@ -235,24 +253,35 @@ const handleProvinceChange = value => {
                         </Row>
                     </Col>
                     <Col lg={12} className={styles.backgroundTable}>
-                    <Table striped bordered hover>
+                        <h5>Oxirgi to'lov qilganlar</h5>
+                    <Table style={{marginTop:'20px'}}>
                         <thead>
                             <tr>
                             <th>#</th>
                             <th>F.I.O</th>
+                            <th>Guruh</th>
                             <th>Sana</th>
-                            <th>To'lov</th>
+                            <th>Oy</th>
+                            <th>Summa</th>
+                            <th>O'zgartirish/O'chirish</th>
                             </tr>
                         </thead>
                         {
-                          data3.map((item,key)=>{
+                          tolov.map((item,key)=>{
                               return(
                                 <tbody>
                                 <tr>
                                 <td>{key+1}</td>
-                                <td>{item}</td>
+                                <td>{item.guruh}</td>
+                                <td>{item.ismi}</td>
                                 <td>{item.sana}</td>
-                                <td>{item.tolov}</td>
+                                <td>{item.oy}</td>
+                                <td>{item.summa}
+                                {
+                                     (item.summa<350000)?<FiPieChart style={{fontSize:'16px',color:'red',marginLeft:'5px',marginTop:'-5px'}}/>:<FiCheckCircle style={{fontSize:'16px',color:'green',marginLeft:'5px',marginTop:'-5px'}}/>
+                                }
+                                </td>
+                                <td><AiFillEdit style={{fontSize:'16px',color:'green',marginLeft:'5px',marginTop:'-5px'}}/> <AiOutlineDelete style={{fontSize:'16px',color:'red',marginLeft:'5px',marginTop:'-5px'}}/> </td>
                                 </tr>
                             </tbody>
                               )
