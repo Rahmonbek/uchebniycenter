@@ -150,35 +150,27 @@ const handleProvinceChange = value => {
              document.getElementById('formAdmin').reset()
              setVisible(false)
           };
-          const [kurs,setKurs]=useState([])
+          const [oylar1,setOylar]=useState([])
           const [sana,setSana]=useState([])
           const onChange=(value)=> {
-            setKurs(value)
+            setOylar(value)
           }
           const onChangedate=(date, dateString)=> {
             setSana(dateString)
           }
           const saveTolov=()=>{
-            var kurs1=kurs
             var guruh1=kurslar
             var name=secondCity
-            var oy=document.getElementById('oy').value
+            var oy=oylar1
             var summa=document.getElementById('summa').value
             var date=sana
             var tolov1={
-                kurs1,
                 guruh1,
                 name,
                 oy,
                 summa,
                 date
             }
-            console.log( kurs1,
-                guruh1,
-                name,
-                oy,
-                summa,
-                date)
          }
 
     return (
@@ -293,7 +285,29 @@ const handleProvinceChange = value => {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="oy">
                             <Form.Label>Oyni kiriting</Form.Label>
-                            <Form.Control type="text" min="0"/>
+                            <Select
+                                showSearch
+                                style={{ width: '100%' }}
+                                placeholder="May"
+                                optionFilterProp="children"
+                                onChange={onChange}
+                                filterOption={(input, option) =>
+                                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                }
+                            >
+                                <Option value="yanvar">Yanvar</Option>
+                                <Option value="fevral">Fevral</Option>
+                                <Option value="mart">Mart</Option>
+                                <Option value="aprel">aprel</Option>
+                                <Option value="may">may</Option>
+                                <Option value="iyun">Mart</Option>
+                                <Option value="iyul">Mart</Option>
+                                <Option value="avgust">Avgust</Option>
+                                <Option value="sentabr">Sentabr</Option>
+                                <Option value="oktabr">Oktabr</Option>
+                                <Option value="noyabr">Noyabr</Option>
+                                <Option value="dekabr">Dekabr</Option>
+                            </Select>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="summa">
                             <Form.Label>Summani kiriting</Form.Label>
