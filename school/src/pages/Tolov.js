@@ -278,23 +278,6 @@ const handleProvinceChange = value => {
                     onCancel={hideModal}
                     >
                      <Form id="formAdmin">
-                     <Form.Label style={{display:'block'}}>Kursni tanlang</Form.Label>
-                     <Form.Group>
-                      <Select
-                        showSearch
-                        style={{ width:'100%' }}
-                        placeholder="Kursni tanlang"
-                        optionFilterProp="children"
-                        onChange={onChange}
-                        filterOption={(input, option) =>
-                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                        }
-                    >
-                        <Option value="front-end">Fron-end</Option>
-                        <Option value="python+jango">Python+jango</Option>
-                        <Option value="Unity">Unity</Option>
-  </Select>,
-                     </Form.Group>
                      <Form.Group className="mb-3" controlId="kurs">
                             <Form.Label style={{display:'block'}}>Guruhni va F.I.O tanlang</Form.Label>
                             <Select defaultValue={provinceData[0]} style={{ width: '50%' }} onChange={handleProvinceChange}>
