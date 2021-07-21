@@ -20,6 +20,7 @@ import Guruhlar from './pages/Guruhlar';
 import Dashboard from './pages/Dashboard';
 import logo1 from './img/logo1.png'
 import Oquvchiqoshish from './pages/Oquvchiqoshish';
+import Tolov from './pages/Tolov'
 import { Col, Row } from 'react-bootstrap';
 export default class Main extends Component {
 state = {
@@ -133,7 +134,7 @@ state = {
            <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/davomat">Davomat</Link>
           </Menu.Item>
           <Menu.Item key="9" icon={<BiDollarCircle style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
-            To'lov
+          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/tolov">To'lov</Link>
           </Menu.Item>
           <h5 className={this.state.collapsed? styles.headingMenu1:styles.headingMenu2}>Registratsiya</h5>
         <div className={this.state.collapsed? styles.hrMenu1:styles.hrMenu2}></div>
@@ -161,6 +162,9 @@ state = {
        </Route>
        <Route exact path="/oquvchi">
          <Oquvchiqoshish/>
+       </Route>
+       <Route exact path="/tolov">
+         <Tolov/>
        </Route>
      </Switch>
      </div>
