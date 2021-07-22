@@ -1,7 +1,5 @@
 
-input[type="checkbox"] {
-	display:none;
-}
+
 input[type="checkbox"]:checked ~ .modal{
   opacity: 1;
   transform: scale(1);

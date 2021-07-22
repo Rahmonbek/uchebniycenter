@@ -173,7 +173,7 @@ export default class Guruhlar extends Component {
 
         return (
             <div>
-                <input type="checkbox" id="modal" />
+                <input type="checkbox" id="modal" className={styles.smbox}/>
                 <label for="modal" className="modal-background" onClick={this.clform}></label>
                 <div className="modal">
                     <div className="modal-header">

@@ -3,6 +3,9 @@
     padding: 0;
 
 }
+.smbox{
+    display: none;
+}
 input[type="checkbox"]:checked ~ .table{
     z-index: -2;
 }
