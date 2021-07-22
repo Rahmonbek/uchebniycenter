@@ -87,12 +87,15 @@ export default class Guruhlar extends Component {
     render() {
         const { Option } = Select;
         const layout = {
+            labelCol: {offset:1},
             wrapperCol: {
-                span: 24,
+                offset:1,
+                span: 22,
             }
         };
         const tailLayout = {
             wrapperCol: {
+                offset:1,
                 span: 19,
             },
         };
@@ -192,7 +195,7 @@ export default class Guruhlar extends Component {
         children.push(<Option key='Shanba'>Shanba</Option>);
 
         return (
-            <div>
+            <div className={styles.matt}>
 <input type="checkbox" id="modal" />
 <label for="modal" class="example-label">Gurux qo'shish</label>
 <label for="modal" class="modal-background" onClick={this.clsmdl}></label>
@@ -203,8 +206,7 @@ export default class Guruhlar extends Component {
         	<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAdVBMVEUAAABNTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU0N3NIOAAAAJnRSTlMAAQIDBAUGBwgRFRYZGiEjQ3l7hYaqtLm8vsDFx87a4uvv8fP1+bbY9ZEAAAB8SURBVBhXXY5LFoJAAMOCIP4VBRXEv5j7H9HFDOizu2TRFljedgCQHeocWHVaAWStXnKyl2oVWI+kd1XLvFV1D7Ng3qrWKYMZ+MdEhk3gbhw59KvlH0eTnf2mgiRwvQ7NW6aqNmncukKhnvo/zzlQ2PR/HgsAJkncH6XwAcr0FUY5BVeFAAAAAElFTkSuQmCC" width="16" height="16" alt=""/>
         </label>
             </div>
-            <div className={styles.formAdmin} style={{ width: '100%', position: 'sticky', top: '400px' }} id="front1">
-
+            <div>
                                 <Form {...layout} ref={this.formRef} name="control-ref" onFinish={this.onFinish}>
                                     <Form.Item name="name"
                                         rules={[
@@ -242,8 +244,6 @@ export default class Guruhlar extends Component {
                                             allowClear
                                             style={{ width: '100%' }}
                                             placeholder="O'quv kun(lar)ini tanlang"
-                                        // value={this.state.kunlar}
-                                        // onChange={handleChange}
                                         >
                                             {children}
                                         </Select>
@@ -271,8 +271,7 @@ export default class Guruhlar extends Component {
                                             ) : null
                                         }
                                     </Form.Item>
-                                    <Form.Item {...tailLayout}>
-                                        
+                                    <Form.Item {...tailLayout}>   
                                         <Button htmlType="submit" style={{backgroundColor:'#3F6AD8',border:'none',color:'white'}}>
                                             Saqlash
                                         </Button>
@@ -281,9 +280,7 @@ export default class Guruhlar extends Component {
                                         </Button>
                                     </Form.Item>
                                 </Form>
-
-                            </div>
-                        
+        </div>
 </div>
                 <Container fluid style={{padding:'5%'}}>
                     <Row>
