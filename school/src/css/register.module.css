@@ -93,11 +93,14 @@
    
     .courses{
         border-radius: 20px;
-       
+        
     }
     .personal{
         width: 100%;
     }
+    /* .content{
+        height: 1000px;
+    } */
 }
 @media (min-width:567px) and (max-width:768px){
     .bg{

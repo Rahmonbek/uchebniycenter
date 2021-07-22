@@ -51,9 +51,44 @@
 .MuiCardHeader-content span{
     font-size: 18px;
 }
-/* .sign_up{
-    visibility: hidden;
+.section ul{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0px 40px 0px;
 }
-.signup:hover .sign_up{
+.section li{
+ list-style-type: none;
+ cursor: pointer;
+ background-color: #3F51B5;
+ width: 100px;
+ height: 30px;
+ text-align: center;
+}
+
+/* .signup:befor{
+   content: "Ro'yxatdan o'tish";
+   width: 200px;
+   height: 30px;
+   visibility: hidden;
+}
+.signup:hover .signup:befor{
     visibility: visible;
 } */
+.root {
+    max-width: 345
+  }
+  .media {
+    height: 0;
+    padding-top: 56.25%;
+  }
+  .expand {
+    transform: rotate(0 deg);
+    margin-left: auto;
+   }
+  .expandOpen {
+    transform: rotate(180 deg);
+  }
+  .avatar {
+    background-color: red;
+  }
