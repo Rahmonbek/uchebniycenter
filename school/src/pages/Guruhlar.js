@@ -26,7 +26,7 @@ export default class Guruhlar extends Component {
             },
             {
                 id: 2,
-                name: 'tower02 ',
+                name: 'tower03 ',
                 soha: 'Unix',
                 mentor: "allakim",
                 kun: 'Dushanba Seshanba Payshanba',
@@ -34,7 +34,7 @@ export default class Guruhlar extends Component {
             },
             {
                 id: 3,
-                name: 'tower02 ',
+                name: 'tower04 ',
                 soha: 'Unix',
                 mentor: "allakim",
                 kun: 'Dushanba Seshanba Payshanba',
@@ -72,7 +72,12 @@ handleCancel=()=>{
         show:false,
         edit: null,
         iValue:{
-
+            id: '',
+            name: '',
+            soha: '',
+            mentor: "",
+            kun: '',
+            vaqt: ""
         }
     })
     document.querySelector("#formGrh").reset()
@@ -85,21 +90,23 @@ edit=(x)=>{
 
     this.setState({
         edit:x,
-        show:true,
         iValue:m
     })
 
-
-
-    document.querySelector("#formGrh").reset()
-
-    this.setState({
-        iValue:m
-    })
+this.openModal()
 }
 
-
-
+resetForm=()=>{
+    document.querySelector("#formGrh").reset()
+    
+}
+openModal=()=>{
+    document.querySelector("#formGrh").reset()
+ 
+    this.setState({
+        show:true
+    })
+}
 
     render() {
         const { Option } = Select;
@@ -292,7 +299,7 @@ edit=(x)=>{
                 <Container fluid style={{padding:'5%'}}>
                     <Row>
                         <Col lg={12}>
-<Button onClick={()=>this.setState({show:true})}>Gurux qo'shish</Button>
+<Button onClick={this.openModal}>Gurux qo'shish</Button>
                         </Col>
                         <br/>
                         <br/>
