@@ -131,19 +131,20 @@ export default function Oqituvchiqoshish() {
     return (
         <div  style={{padding:'5%'}}>
             <div>
-               <h1 style={{fontSize:'25px'}}>O'quvchi qo'shish <BsPersonPlusFill onClick={showModal} style={{color:'#3F6AD8',marginLeft:'20px',marginTop:'-5px',cursor:'pointer'}}/></h1>
+             <Button onClick={showModal}>O'quvchi qo'shish <BsPersonPlusFill style={{color:'#3F6AD8',marginLeft:'10px',marginTop:'-5px',cursor:'pointer'}}/></Button>
             </div>
-            <div>
-            <Table style={{marginTop:'20px'}}  className={styles.backgroundTable}>
+            <div style={{padding:'10px'}} className={styles.backgroundTable}>
+            <h5>O'quvchilar ro'yxati</h5>
+            <Table style={{marginTop:'20px',color:'rgba(0,0,0,0.7)'}}>
                         <thead>
-                            <tr style={{color:'rgba(0,0,0,0.7)'}}>
-                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>#</th>
-                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>F.I.O</th>
-                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>Telefon</th>
-                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>Qo'shimcha telefon</th>
-                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>Kurs/guruh</th>
-                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>Sana</th>
-                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>O'zgartirish/O'chirish</th>
+                            <tr>
+                            <th style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>#</th>
+                            <th style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>F.I.O</th>
+                            <th style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>Telefon</th>
+                            <th style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>Qo'shimcha telefon</th>
+                            <th style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>Kurs/guruh</th>
+                            <th style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>Sana</th>
+                            <th style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>O'zgartirish/O'chirish</th>
                             </tr>
                         </thead>
                         {
@@ -151,11 +152,11 @@ export default function Oqituvchiqoshish() {
                               return(
                                 <tbody>
                                 <tr>
-                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{key+1}</td>
-                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.name}</td>
-                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.telefon}</td>
-                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.telefon2}</td>
-                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>
+                                <td style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>{key+1}</td>
+                                <td style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>{item.name}</td>
+                                <td style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>{item.telefon}</td>
+                                <td style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>{item.telefon2}</td>
+                                <td style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>
                                    {
                                       item.kurslar && Array.isArray(item.kurslar)? item.kurslar.map((item,key)=>{
                                            return(
@@ -166,13 +167,13 @@ export default function Oqituvchiqoshish() {
                                        }):''
                                    } 
                                 </td>
-                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.sana}</td>
+                                <td style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>{item.sana}</td>
                                 {/* <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.sana}</td>
                                 <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.oy}</td>
                                 <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.summa} */}
                             
                             
-                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)'}}><AiFillEdit onClick={()=> onFill(`${key}`)} style={{fontSize:'16px',color:'green',marginLeft:'5px',marginTop:'-5px'}}/> <AiOutlineDelete style={{fontSize:'16px',color:'red',marginLeft:'5px',marginTop:'-5px'}}/> </td>
+                                <td style={{borderBottom:' 1px solid #3F6AD8'}}><AiFillEdit onClick={()=> onFill(`${key}`)} style={{fontSize:'16px',color:'green',marginLeft:'5px',marginTop:'-5px'}}/> <AiOutlineDelete style={{fontSize:'16px',color:'red',marginLeft:'5px',marginTop:'-5px'}}/> </td>
                                 </tr>
                             </tbody>
                               )
@@ -183,7 +184,7 @@ export default function Oqituvchiqoshish() {
             <Modal
             width={700}
           footer={false}
-          title="Modal"
+          title="O'quvchi qo'shish"
           visible={visible}
           onOk={hideModal}
           onCancel={hideModal}
@@ -202,7 +203,7 @@ export default function Oqituvchiqoshish() {
       </Form.Item>
       <Form.Item
         name="telefon"
-        label="Telefonb raqami:"
+        label="Telefon raqami:"
         rules={[
           {
             required: true,
@@ -224,26 +225,26 @@ export default function Oqituvchiqoshish() {
       </Form.Item>
       <Form.Item
         name="kurslar"
-        label="Habitual Residence"
+        label="Kurs/guruh"
         rules={[
           {
             type: 'array',
             required: true,
-            message: 'Please select your habitual residence!',
+            message: 'Kurs/guruhni tanlang!',
           },
         ]}
       >
-        <Cascader options={kurslar1} />
+        <Cascader options={kurslar1} placeholder="Kurs/guruhni tanlang"/>
       </Form.Item>
-      <Form.Item className={edit===null?'':styles.date2} name="sanas"   label="DatePicker">
-      <DatePicker  id="sana" onChange={dates} />
+      <Form.Item className={edit===null?'':styles.date2} name="sanas"   label="Qabul qilingan sana:">
+      <DatePicker  id="sana" onChange={dates} placeholder="Sanani tanlang"/>
     </Form.Item>
       <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
-          Submit
+          Saqlamoq
         </Button>
         <Button htmlType="button" onClick={onReset}>
-          Reset
+          O'chirmoq
         </Button>
       </Form.Item>
     </Form>
