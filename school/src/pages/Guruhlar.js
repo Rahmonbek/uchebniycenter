@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Col, Row } from 'react-bootstrap';
 import styles from '../css/news.module.css'
-import { Form, Input, Button, Select, TimePicker } from 'antd';
+import { Form, Input, Button, Select, TimePicker,Modal } from 'antd';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MUIDataTable from "mui-datatables";
 import moment from 'moment';
@@ -12,7 +12,8 @@ import '../css/modalStyle.css'
 export default class Guruhlar extends Component {
 
     state = {
-        // kunlar:[],
+        iValue:{},
+        show:false,
         edit: null,
         grlar: [
             {
@@ -42,8 +43,6 @@ export default class Guruhlar extends Component {
         ]
     }
 
-    formRef = React.createRef();
-
 
 
     onFinish = (values) => {
@@ -65,23 +64,41 @@ export default class Guruhlar extends Component {
             grlar: mas
         })
 
-        this.onReset()
-    };
-    onReset = () => {
-        this.formRef.current.resetFields();
-        this.setState({
-            edit: null,
-        })
-        document.getElementById("modal").checked=false
-        
+        this.handleCancel()
     };
 
-    clsmdl=()=>{
-        this.formRef.current.resetFields();
-        this.setState({
-            edit: null,
-        })
+handleCancel=()=>{
+    this.setState({
+        show:false,
+        edit: null,
+        iValue:{
+
+        }
+    })
+    document.querySelector("#formGrh").reset()
+}
+edit=(x)=>{
+    var m={
+        name:this.state.grlar[x].name,
+        mentor:this.state.grlar[x].mentor
     }
+
+    this.setState({
+        edit:x,
+        show:true,
+        iValue:m
+    })
+
+
+
+    document.querySelector("#formGrh").reset()
+
+    this.setState({
+        iValue:m
+    })
+}
+
+
 
 
     render() {
@@ -96,7 +113,7 @@ export default class Guruhlar extends Component {
         const tailLayout = {
             wrapperCol: {
                 offset:1,
-                span: 19,
+                span: 23,
             },
         };
         const columns = [
@@ -149,7 +166,8 @@ export default class Guruhlar extends Component {
                 },
             },
             {
-                name: "O'zgartirish",
+                name: "id",
+                label:"O'zgartirish",
                 options: {
                     filter: false,
                     sort: false,
@@ -169,20 +187,7 @@ export default class Guruhlar extends Component {
             filterType: 'checkbox',
             responsive: 'scroll',
             onRowClick: (rowData, rowState) => {
-                var zz=rowData[4].split(" ")
-                var pp=rowData[5].split("-")
-                this.setState({
-                    edit: rowState.rowIndex,
-                })
-                console.log(zz)
-                this.formRef.current.setFieldsValue({
-                    name: rowData[1],
-                    soha: rowData[2],
-                    mentor: rowData[3],
-                    kun:zz,
-                    vaqt:[moment(pp[0],"HH:mm"),moment(pp[1],"HH:mm")]
-                });
-                document.getElementById("modal").checked=true
+              this.edit( rowState.rowIndex)
             },
         };
         const children = [];
@@ -196,18 +201,10 @@ export default class Guruhlar extends Component {
 
         return (
             <div className={styles.matt}>
-<input type="checkbox" id="modal" />
-<label for="modal" class="example-label">Gurux qo'shish</label>
-<label for="modal" class="modal-background" onClick={this.clsmdl}></label>
-<div className="modal">
-            <div className="modal-header">
-                <h3>Gurux haqida</h3>
-                <label for="modal" onClick={this.clsmdl}>
-        	<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAdVBMVEUAAABNTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU0N3NIOAAAAJnRSTlMAAQIDBAUGBwgRFRYZGiEjQ3l7hYaqtLm8vsDFx87a4uvv8fP1+bbY9ZEAAAB8SURBVBhXXY5LFoJAAMOCIP4VBRXEv5j7H9HFDOizu2TRFljedgCQHeocWHVaAWStXnKyl2oVWI+kd1XLvFV1D7Ng3qrWKYMZ+MdEhk3gbhw59KvlH0eTnf2mgiRwvQ7NW6aqNmncukKhnvo/zzlQ2PR/HgsAJkncH6XwAcr0FUY5BVeFAAAAAElFTkSuQmCC" width="16" height="16" alt=""/>
-        </label>
-            </div>
-            <div>
-                                <Form {...layout} ref={this.formRef} name="control-ref" onFinish={this.onFinish}>
+
+<Modal title="Gurux haqida" footer={null} visible={this.state.show} onCancel={this.handleCancel}>
+
+                                <Form {...layout}  name="control-ref" onFinish={this.onFinish} id="formGrh" initialValues={{remember:true, ...this.state.iValue}}>
                                     <Form.Item name="name"
                                         rules={[
                                             {
@@ -227,14 +224,20 @@ export default class Guruhlar extends Component {
                                     >
                                         <Input placeholder="Biriktirilgan mentorni kiriting" />
                                     </Form.Item>
-                                    <Form.Item name="soha" rules={[{ required: true }]}>
+                                    <Form.Item name="soha" 
+                                     rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}
+                                    >
                                         <Select
                                             placeholder="O'quv yo'nalishini tanlang"
                                             allowClear
                                         >
-                                            <Option value="React front-end">React front-end</Option>
-                                            <Option value="Back-end">Back-end</Option>
-                                            <Option value="Unix">Unix</Option>
+                                            <Option style={{zIndex:11111}} value="React front-end">React front-end</Option>
+                                            <Option style={{zIndex:11111}} value="Back-end">Back-end</Option>
+                                            <Option style={{zIndex:11111}} value="Unix">Unix</Option>
                                         </Select>
                                     </Form.Item>
 
@@ -275,23 +278,27 @@ export default class Guruhlar extends Component {
                                         <Button htmlType="submit" style={{backgroundColor:'#3F6AD8',border:'none',color:'white'}}>
                                             Saqlash
                                         </Button>
-                                        <Button htmlType="button" onClick={this.onReset}>
+                                        &nbsp;
+                                        &nbsp;
+                                        &nbsp;
+                                        <Button htmlType="button" onClick={this.handleCancel}>
                                             Bekor qilish
                                         </Button>
                                     </Form.Item>
                                 </Form>
-        </div>
-</div>
+      </Modal>
+           
+
                 <Container fluid style={{padding:'5%'}}>
                     <Row>
                         <Col lg={12}>
-
+<Button onClick={()=>this.setState({show:true})}>Gurux qo'shish</Button>
                         </Col>
-                        <Col lg={12}>
-                          </Col>
+                        <br/>
+                        <br/>
                         <Col lg={12}>
                             <MUIDataTable
-
+                            style={{zIndex:"-22"}}
                                 title={"Guruhlar ro'yxati"}
                                 data={this.state.grlar}
                                 columns={columns}
