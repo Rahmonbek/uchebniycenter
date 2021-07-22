@@ -33,7 +33,7 @@ const showModal = () => {
   };
 const [edit,setEdit]=useState(null)
  const  hideModal = () => {
-     document.getElementById('formAdmin').reset()
+     setEdit(null)
      setVisible(false)
   };
   const saveOquvchi=()=>{
@@ -58,8 +58,13 @@ const [edit,setEdit]=useState(null)
         newoquvchilar[edit]=newoquvchi
         setEdit(null)
     }
-    document.getElementById('formAdmin').reset()
+    reset()
       hideModal()
+  }
+  const reset=()=>{
+document.getElementById('name').value=''
+document.getElementById('telefon').value=''
+document.getElementById('telefon2').value=''
   }
   const [oquvchi,setOquvchi]=useState([
       {
@@ -143,6 +148,7 @@ const options = {
             guruh:rowData[4]
            }
        )
+       console.log(rowData)
     },
 };
     return (
