@@ -227,7 +227,6 @@ export default class Guruhlar extends Component {
                                     </Form.Item>
                                     <Form.Item name="soha" rules={[{ required: true }]}>
                                         <Select
-                                        
                                             placeholder="O'quv yo'nalishini tanlang"
                                             allowClear
                                         >
@@ -242,7 +241,7 @@ export default class Guruhlar extends Component {
                                             mode="multiple"
                                             allowClear
                                             style={{ width: '100%' }}
-                                            placeholder="Please select"
+                                            placeholder="O'quv kun(lar)ini tanlang"
                                         // value={this.state.kunlar}
                                         // onChange={handleChange}
                                         >
