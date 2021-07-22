@@ -5,7 +5,7 @@ import { Form, Input, Button, Select, TimePicker } from 'antd';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MUIDataTable from "mui-datatables";
 import moment from 'moment';
-
+import '../css/modalStyle.css'
 
 
 
@@ -52,7 +52,7 @@ export default class Guruhlar extends Component {
             name: values.name,
             mentor: values.mentor,
             soha: values.soha,
-            kun: values.kun.join("\n"),
+            kun: values.kun.join(" "),
             vaqt: `${values.vaqt[0].format("HH:mm")}-${values.vaqt[1].format("HH:mm")}`,
         }
         var mas = this.state.grlar
@@ -72,9 +72,16 @@ export default class Guruhlar extends Component {
         this.setState({
             edit: null,
         })
+        document.getElementById("modal").checked=false
+        
     };
 
-
+    clsmdl=()=>{
+        this.formRef.current.resetFields();
+        this.setState({
+            edit: null,
+        })
+    }
 
 
     render() {
@@ -146,9 +153,9 @@ export default class Guruhlar extends Component {
                     empty: true,
                     customBodyRenderLite: () => {
                         return (
-                            <a href="#front1"><Button className={styles.inputFormBtn1}>
+                            <Button className={styles.inputFormBtn1}>
                                 O'zgartirish
-                            </Button></a>
+                            </Button>
                         );
                     }
                 }
@@ -172,6 +179,7 @@ export default class Guruhlar extends Component {
                     kun:zz,
                     vaqt:[moment(pp[0],"HH:mm"),moment(pp[1],"HH:mm")]
                 });
+                document.getElementById("modal").checked=true
             },
         };
         const children = [];
@@ -185,14 +193,17 @@ export default class Guruhlar extends Component {
 
         return (
             <div>
-
-                <Container fluid style={{padding:'5%'}}>
-                    <Row>
-                        <Col lg={12}>
-                        </Col>
-                        <Col lg={12}>
-                            <div className={styles.formAdmin} style={{ width: '100%', position: 'sticky', top: '400px' }} id="front1">
-                                <h4>Guruh kiritish</h4>
+<input type="checkbox" id="modal" />
+<label for="modal" class="example-label">Gurux qo'shish</label>
+<label for="modal" class="modal-background" onClick={this.clsmdl}></label>
+<div className="modal">
+            <div className="modal-header">
+                <h3>Gurux haqida</h3>
+                <label for="modal" onClick={this.clsmdl}>
+        	<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAdVBMVEUAAABNTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU0N3NIOAAAAJnRSTlMAAQIDBAUGBwgRFRYZGiEjQ3l7hYaqtLm8vsDFx87a4uvv8fP1+bbY9ZEAAAB8SURBVBhXXY5LFoJAAMOCIP4VBRXEv5j7H9HFDOizu2TRFljedgCQHeocWHVaAWStXnKyl2oVWI+kd1XLvFV1D7Ng3qrWKYMZ+MdEhk3gbhw59KvlH0eTnf2mgiRwvQ7NW6aqNmncukKhnvo/zzlQ2PR/HgsAJkncH6XwAcr0FUY5BVeFAAAAAElFTkSuQmCC" width="16" height="16" alt=""/>
+        </label>
+            </div>
+            <div className={styles.formAdmin} style={{ width: '100%', position: 'sticky', top: '400px' }} id="front1">
 
                                 <Form {...layout} ref={this.formRef} name="control-ref" onFinish={this.onFinish}>
                                     <Form.Item name="name"
@@ -216,6 +227,7 @@ export default class Guruhlar extends Component {
                                     </Form.Item>
                                     <Form.Item name="soha" rules={[{ required: true }]}>
                                         <Select
+                                        
                                             placeholder="O'quv yo'nalishini tanlang"
                                             allowClear
                                         >
@@ -261,9 +273,10 @@ export default class Guruhlar extends Component {
                                         }
                                     </Form.Item>
                                     <Form.Item {...tailLayout}>
-                                        <a href="#front2"><Button htmlType="submit" style={{backgroundColor:'#3F6AD8',border:'none',color:'white'}}>
+                                        
+                                        <Button htmlType="submit" style={{backgroundColor:'#3F6AD8',border:'none',color:'white'}}>
                                             Saqlash
-                                        </Button></a>
+                                        </Button>
                                         <Button htmlType="button" onClick={this.onReset}>
                                             Bekor qilish
                                         </Button>
@@ -271,7 +284,15 @@ export default class Guruhlar extends Component {
                                 </Form>
 
                             </div>
+                        
+</div>
+                <Container fluid style={{padding:'5%'}}>
+                    <Row>
+                        <Col lg={12}>
+
                         </Col>
+                        <Col lg={12}>
+                          </Col>
                         <Col lg={12}>
                             <MUIDataTable
 
