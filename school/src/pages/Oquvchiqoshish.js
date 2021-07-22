@@ -18,7 +18,7 @@ const cityData = {
 
 const [cities, setCities] = React.useState(cityData[provinceData[0]]);
   const [secondCity, setSecondCity] = React.useState(cityData[provinceData[0]][0]);
-const[kurslar,setKurslar]=useState(provinceData[0])
+const[kurslar,setKurslar]=useState([])
   const handleProvinceChange = value => {
       setKurslar(value)
     setCities(cityData[value]);

@@ -1,9 +1,9 @@
 import React,{useState,useEffect} from 'react'
-import {Container,Row,Col,Button,Table,Form } from 'react-bootstrap'
+import {Container,Row,Col,Button,Table} from 'react-bootstrap'
 import styles from '../css/davomat.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Modal} from 'antd';
-import { Select } from 'antd';
+import { Modal,Form} from 'antd';
+import { Select,Input} from 'antd';
 import {BsPersonPlusFill} from 'react-icons/bs'
 import MUIDataTable from "mui-datatables";
 import { DatePicker, Space } from 'antd';
@@ -42,13 +42,6 @@ const handleProvinceChange = value => {
             sana:'2021-07-21',
             oy:'may',
             summa:'350000'
-        },
-        {
-            ismi:'malikov',
-            guruh:'5-py',
-            sana:'2021-07-21',
-            oy:'may',
-            summa:'320000'
         }
     ])
     const [guruhlar,setGuruhlar]=useState(
@@ -190,6 +183,29 @@ const handleProvinceChange = value => {
                 date
             }
          }
+         const [form] = Form.useForm();
+
+         const layout = {
+           labelCol: { span: 8 },
+           wrapperCol: { span: 16 },
+         };
+         const tailLayout = {
+           wrapperCol: { offset: 8, span: 16 },
+         };
+        const onFinish = (values) => {
+            console.log(values);
+        };
+
+        const onReset = () => {
+            form.resetFields();
+        };
+
+        const onFill = () => {
+            form.setFieldsValue({
+            note: 'Hello world!',
+            gender: 'male',
+            });
+        };
 
     return (
         
@@ -298,57 +314,34 @@ const handleProvinceChange = value => {
                     onOk={saveTolov}
                     onCancel={hideModal}
                     >
-                     <Form id="formAdmin">
-                     <Form.Group className="mb-3" controlId="kurs">
-                            <Form.Label style={{display:'block'}}>Guruhni va F.I.O tanlang</Form.Label>
-                            <Select defaultValue={provinceData[0]} style={{ width: '50%' }} onChange={handleProvinceChange}>
-        {provinceData.map(province => (
-          <Option key={province}>{province}</Option>
-        ))}
-      </Select>
-      <Select style={{ width: '50%' }} value={secondCity} onChange={onSecondCityChange}>
-        {cities.map(city => (
-          <Option key={city}>{city}</Option>
-        ))}
-      </Select>
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="oy">
-                            <Form.Label>Oyni kiriting</Form.Label>
-                            <Select
-                                showSearch
-                                style={{ width: '100%' }}
-                                placeholder="May"
-                                optionFilterProp="children"
-                                onChange={onChange}
-                                filterOption={(input, option) =>
-                                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                }
-                            >
-                                <Option value="yanvar">Yanvar</Option>
-                                <Option value="fevral">Fevral</Option>
-                                <Option value="mart">Mart</Option>
-                                <Option value="aprel">aprel</Option>
-                                <Option value="may">may</Option>
-                                <Option value="iyun">Mart</Option>
-                                <Option value="iyul">Mart</Option>
-                                <Option value="avgust">Avgust</Option>
-                                <Option value="sentabr">Sentabr</Option>
-                                <Option value="oktabr">Oktabr</Option>
-                                <Option value="noyabr">Noyabr</Option>
-                                <Option value="dekabr">Dekabr</Option>
-                            </Select>
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="summa">
-                            <Form.Label>Summani kiriting</Form.Label>
-                            <Form.Control type="number" min="0" />
-                        </Form.Group>
-                        <Form.Group>
-                        <Form.Label style={{display:'block'}}>Sanani kiriting</Form.Label>
-                        <Space direction="vertical">
-                            <DatePicker onChange={onChangedate} />
-                        </Space>
-                        </Form.Group>
-                        </Form>
+                     <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
+      <Form.Item name="note" label="Note" rules={[{ required: true }]}>
+        <Input />
+      </Form.Item>
+      <Form.Item
+        noStyle
+        shouldUpdate={(prevValues, currentValues) => prevValues.gender !== currentValues.gender}
+      >
+        {({ getFieldValue }) =>
+          getFieldValue('gender') === 'other' ? (
+            <Form.Item name="customizeGender" label="Customize Gender" rules={[{ required: true }]}>
+              <Input />
+            </Form.Item>
+          ) : null
+        }
+      </Form.Item>
+      <Form.Item {...tailLayout}>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+        <Button htmlType="button" onClick={onReset}>
+          Reset
+        </Button>
+        <Button type="link" htmlType="button" onClick={onFill}>
+          Fill form
+        </Button>
+      </Form.Item>
+    </Form>
                     </Modal>
         </div>
     )
