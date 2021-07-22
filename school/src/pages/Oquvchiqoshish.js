@@ -119,7 +119,7 @@ const [edit,setEdit]=useState(null)
             empty: true,
             customBodyRenderLite: () => {
                 return (
-                    <a href="#front1"><Button onClick={showModal} className={styles.inputFormBtn1}>
+                    <a><Button onClick={showModal} className={styles.inputFormBtn1}>
                         O'zgartirish
                     </Button></a>
                 );

@@ -256,14 +256,14 @@ const handleProvinceChange = value => {
                         <h5>Oxirgi to'lov qilganlar</h5>
                     <Table style={{marginTop:'20px'}}>
                         <thead>
-                            <tr>
-                            <th>#</th>
-                            <th>F.I.O</th>
-                            <th>Guruh</th>
-                            <th>Sana</th>
-                            <th>Oy</th>
-                            <th>Summa</th>
-                            <th>O'zgartirish/O'chirish</th>
+                            <tr style={{color:'rgba(0,0,0,0.7)'}}>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>#</th>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>F.I.O</th>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>Guruh</th>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>Sana</th>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>Oy</th>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>Summa</th>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>O'zgartirish/O'chirish</th>
                             </tr>
                         </thead>
                         {
@@ -271,17 +271,17 @@ const handleProvinceChange = value => {
                               return(
                                 <tbody>
                                 <tr>
-                                <td>{key+1}</td>
-                                <td>{item.guruh}</td>
-                                <td>{item.ismi}</td>
-                                <td>{item.sana}</td>
-                                <td>{item.oy}</td>
-                                <td>{item.summa}
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{key+1}</td>
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.guruh}</td>
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.ismi}</td>
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.sana}</td>
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.oy}</td>
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.summa}
                                 {
                                      (item.summa<350000)?<FiPieChart style={{fontSize:'16px',color:'red',marginLeft:'5px',marginTop:'-5px'}}/>:<FiCheckCircle style={{fontSize:'16px',color:'green',marginLeft:'5px',marginTop:'-5px'}}/>
                                 }
                                 </td>
-                                <td><AiFillEdit style={{fontSize:'16px',color:'green',marginLeft:'5px',marginTop:'-5px'}}/> <AiOutlineDelete style={{fontSize:'16px',color:'red',marginLeft:'5px',marginTop:'-5px'}}/> </td>
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)'}}><AiFillEdit style={{fontSize:'16px',color:'green',marginLeft:'5px',marginTop:'-5px'}}/> <AiOutlineDelete style={{fontSize:'16px',color:'red',marginLeft:'5px',marginTop:'-5px'}}/> </td>
                                 </tr>
                             </tbody>
                               )
