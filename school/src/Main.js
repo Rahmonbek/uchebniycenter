@@ -19,6 +19,9 @@ import Davomat from './pages/Davomat';
 import Guruhlar from './pages/Guruhlar';
 import Dashboard from './pages/Dashboard';
 import logo1 from './img/logo1.png'
+import Oquvchiqoshish from './pages/Oquvchiqoshish';
+import Tolov from './pages/Tolov'
+// import Oqituvchiqoshish from './pages/Oqituvchiqoshish';
 import { Col, Row } from 'react-bootstrap';
 export default class Main extends Component {
 state = {
@@ -132,18 +135,18 @@ state = {
            <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/davomat">Davomat</Link>
           </Menu.Item>
           <Menu.Item key="9" icon={<BiDollarCircle style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
-            To'lov
+          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/tolov">To'lov</Link>
           </Menu.Item>
           <h5 className={this.state.collapsed? styles.headingMenu1:styles.headingMenu2}>Registratsiya</h5>
         <div className={this.state.collapsed? styles.hrMenu1:styles.hrMenu2}></div>
           <Menu.Item key="10" icon={<BsPersonPlusFill style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
-            O'quvchi qo'shish
+          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/oquvchi">O'quvchi qo'shish</Link>
           </Menu.Item>
           <Menu.Item key="11" icon={<AiOutlineGooglePlus style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
           <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/guruhlar">Guruh qo'shish</Link>
           </Menu.Item>
           <Menu.Item key="12" icon={<ImUserPlus style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
-            O'qituvchi qo'shish
+          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/oqituvchi">O'qituvchi qo'shish</Link>
           </Menu.Item>
         </Menu>
       </div>  
@@ -158,6 +161,15 @@ state = {
        <Route exact path="/guruhlar">
          <Guruhlar/>
        </Route>
+       <Route exact path="/oquvchi">
+         <Oquvchiqoshish/>
+       </Route>
+       <Route exact path="/tolov">
+         <Tolov/>
+       </Route>
+       {/* <Route exact path="/oqituvchi">
+         <Oqituvchiqoshish/>
+       </Route> */}
      </Switch>
      </div>
      </div>

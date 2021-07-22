@@ -14,7 +14,7 @@
 }
 .content{
     width: 85%;
-    height: 85vh;
+    height: auto;
     margin: auto;
    background-color: #FFF;
    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
@@ -90,27 +90,26 @@
         height:190vh;
        
     }
-    .content{
-        margin-top: -590px;
-    }
+   
     .courses{
-        border-radius: 40px;
-       
+        border-radius: 20px;
+        
     }
     .personal{
         width: 100%;
     }
+    /* .content{
+        height: 1000px;
+    } */
 }
 @media (min-width:567px) and (max-width:768px){
     .bg{
         height:190vh;
        
     }
-    .content{
-        margin-top: -590px;
-    }
+   
     .courses{
-        border-radius: 40px;
+        border-radius: 20px;
        
     }
     .personal{
@@ -122,11 +121,9 @@
         height:190vh;
        
     }
-    .content{
-        margin-top: -590px;
-    }
+   
     .courses{
-        border-radius: 40px;
+        border-radius: 20px;
        
     }
     .personal{

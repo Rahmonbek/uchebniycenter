@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.header{
+    width: 100%;
+    height: 200px;
+    background-image: url(../img/courses_header.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding: 0px 20px 0px 20px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    margin-bottom: 50px;
+    /* background-image: linear-gradient(to left, rgb(149,153,226) 0%, rgb(139,198,236) 100%); */
+    /* background-color: #9195a0; */
+   
+}
+.bg{
+    background-color: #F2F2F2;
+    padding-bottom: 30px;
+}
+.header h1{
+    font-size: 70px;
+    font-weight: 400;
+    color: #fff;
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    padding-top: 40px;
+}
+.log_in{
+   float: right;
+   
+   font-size: 35px;
+   color: #fff;
+   cursor: pointer;
+   /* position: relative;
+   top:20px;
+   left: 1400px; */
+}
+.section{
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+.MuiCardHeader-content span{
+    font-size: 18px;
+}
+.section ul{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0px 40px 0px;
+}
+.section li{
+ list-style-type: none;
+ cursor: pointer;
+ background-color: #3F51B5;
+ width: 100px;
+ height: 30px;
+ text-align: center;
+}
+
+/* .signup:befor{
+   content: "Ro'yxatdan o'tish";
+   width: 200px;
+   height: 30px;
+   visibility: hidden;
+}
+.signup:hover .signup:befor{
+    visibility: visible;
+} */
+.root {
+    max-width: 345
+  }
+  .media {
+    height: 0;
+    padding-top: 56.25%;
+  }
+  .expand {
+    transform: rotate(0 deg);
+    margin-left: auto;
+   }
+  .expandOpen {
+    transform: rotate(180 deg);
+  }
+  .avatar {
+    background-color: red;
+  }
