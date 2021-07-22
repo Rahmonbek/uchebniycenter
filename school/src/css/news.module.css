@@ -3,34 +3,24 @@
     padding: 0;
 
 }
-
-.matt Button{
-    margin-right: 12px;
+input[type="checkbox"]:checked ~ .table{
+    z-index: -2;
 }
-.matt Input{
-    font-size: 14px;
-}
-
-.formAdmin h4{
-    font-family: 'Quicksand',sans-serif;
-    font-weight: 600;
-    font-size: 22px;
-    margin-bottom: 70px;
-    position: relative;
-}
-.formAdmin h4::before{
-    content:'';
-    position: absolute;
-    top: 200%;
-    left: 0;
-    width: 70px;
-    height: 1px;
-    background-color:rgba(0,0,0,0.2);
+.table{
+    box-shadow: 0px 0px 22px #0f0f0f;
+    padding-right: 11px;
+    margin-top: 52px;
 }
 .inputFormBtn{
     background-color:#1A86D0;
     border:none;
     margin-right: 13px !important;
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 .name1{
     margin-top: 16px;

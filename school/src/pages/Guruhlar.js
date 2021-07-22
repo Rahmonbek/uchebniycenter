@@ -1,19 +1,17 @@
 import React, { Component } from 'react'
 import { Container, Col, Row } from 'react-bootstrap';
 import styles from '../css/news.module.css'
-import { Form, Input, Button, Select, TimePicker,Modal } from 'antd';
+import { Form, Input, Button, Select, TimePicker, Table } from 'antd';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MUIDataTable from "mui-datatables";
 import moment from 'moment';
-import '../css/modalStyle.css'
+import "../css/modalStyle.css"
 
 
 
 export default class Guruhlar extends Component {
 
     state = {
-        iValue:{},
-        show:false,
+
         edit: null,
         grlar: [
             {
@@ -22,7 +20,8 @@ export default class Guruhlar extends Component {
                 soha: 'Unix',
                 mentor: "allakim",
                 kun: 'Dushanba Seshanba Payshanba',
-                vaqt: "12:00-16:00"
+                vaqt: "12:00-14:00",
+                qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus kina"
             },
             {
                 id: 2,
@@ -30,7 +29,8 @@ export default class Guruhlar extends Component {
                 soha: 'Unix',
                 mentor: "allakim",
                 kun: 'Dushanba Seshanba Payshanba',
-                vaqt: "12:00-16:00"
+                vaqt: "12:00-15:00",
+                qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus kina"
             },
             {
                 id: 3,
@@ -38,10 +38,13 @@ export default class Guruhlar extends Component {
                 soha: 'Unix',
                 mentor: "allakim",
                 kun: 'Dushanba Seshanba Payshanba',
-                vaqt: "12:00-16:00"
+                vaqt: "12:00-16:00",
+                qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus kina"
             },
         ]
     }
+
+    formRef = React.createRef();
 
 
 
@@ -53,6 +56,7 @@ export default class Guruhlar extends Component {
             soha: values.soha,
             kun: values.kun.join(" "),
             vaqt: `${values.vaqt[0].format("HH:mm")}-${values.vaqt[1].format("HH:mm")}`,
+            qushimcha: values.qushimcha
         }
         var mas = this.state.grlar
         if (this.state.edit === null) { mas.push(ob) }
@@ -63,133 +67,101 @@ export default class Guruhlar extends Component {
         this.setState({
             grlar: mas
         })
-
-        this.handleCancel()
+        console.log(mas)
+        this.onReset()
     };
-
-handleCancel=()=>{
-    this.setState({
-        show:false,
-        edit: null,
-        iValue:{
-
-        }
-    })
-    document.querySelector("#formGrh").reset()
-}
-edit=(x)=>{
-    var m={
-        name:this.state.grlar[x].name,
-        mentor:this.state.grlar[x].mentor
+    onReset = () => {
+        this.formRef.current.resetFields();
+        this.setState({
+            edit: null,
+        })
+        document.getElementById("modal").checked = false
+    };
+    clform = () => {
+        this.formRef.current.resetFields();
     }
+    editRow = (x) => {
 
-    this.setState({
-        edit:x,
-        show:true,
-        iValue:m
-    })
+        var a = this.state.grlar[x - 1]
+        var day = a.kun.split(" ")
+        var tim = a.vaqt.split("-")
+        var time = [moment(tim[0], 'HH:mm'), moment(tim[1], 'HH:mm')]
+        this.setState({
+            edit: x - 1
+        })
+        this.formRef.current.setFieldsValue({
+            name: a.name,
+            mentor: a.mentor,
+            soha: a.soha,
+            kun: day,
+            vaqt: time,
+            qushimcha: a.qushimcha
+        });
 
-
-
-    document.querySelector("#formGrh").reset()
-
-    this.setState({
-        iValue:m
-    })
-}
-
-
+        document.getElementById("modal").checked = true
+    }
 
 
     render() {
         const { Option } = Select;
         const layout = {
-            labelCol: {offset:1},
             wrapperCol: {
-                offset:1,
                 span: 22,
+                offset: 1,
+            },
+            labelCol: {
+                offset: 1
             }
         };
         const tailLayout = {
             wrapperCol: {
-                offset:1,
-                span: 23,
+                span: 22,
+                offset: 1
             },
         };
         const columns = [
             {
-                name: "id",
-                label: "#",
-                options: {
-                    filter: true,
-                    sort: false,
-                }
+                title: '#',
+                dataIndex: 'id',
+                key: 'id',
             },
             {
-                name: "name",
-                label: "gr Nomi",
-                options: {
-                    filter: true,
-                    sort: false,
-                },
+                title: 'Gurux nomi',
+                dataIndex: 'name',
+                key: 'name',
             },
             {
-                name: "soha",
-                label: "Soxasi",
-                options: {
-                    filter: true,
-                    sort: false,
-                },
+                title: 'Mentor',
+                dataIndex: 'mentor',
+                key: 'mentor',
             },
             {
-                name: 'mentor',
-                label: "Mas'ul mentor",
-                options: {
-                    filter: true,
-                    sort: false,
-                },
+                title: "O'quv yo'nalishi",
+                dataIndex: 'soha',
+                key: 'soha',
             },
             {
-                name: "kun",
-                label: "Dars kunlari",
-                options: {
-                    filter: true,
-                    sort: false,
-                },
+                title: "Dars kun(lar)i",
+                dataIndex: 'kun',
+                key: 'kun',
             },
             {
-                name: "vaqt",
-                label: "Dars vaqtlari",
-                options: {
-                    filter: true,
-                    sort: false,
-                },
+                title: "Dars vaqti",
+                dataIndex: 'vaqt',
+                key: 'vaqt',
             },
             {
-                name: "id",
-                label:"O'zgartirish",
-                options: {
-                    filter: false,
-                    sort: false,
-                    empty: true,
-                    customBodyRenderLite: () => {
-                        return (
-                            <Button className={styles.inputFormBtn1}>
-                                O'zgartirish
-                            </Button>
-                        );
-                    }
-                }
-
+                title: "Qo'shimcha",
+                dataIndex: "qushimcha",
+                key: "qushimcha",
+            },
+            {
+                title: "O'zgartirish",
+                dataIndex: "id",
+                key: 'operation',
+                render: (id) => <Button type="primary" onClick={() => { this.editRow(id) }}>O'zgartirish</Button>,
             },
         ];
-        const options = {
-            filterType: 'checkbox',
-            responsive: 'scroll',
-            onRowClick: (rowData, rowState) => {
-              this.edit( rowState.rowIndex)
-            },
-        };
         const children = [];
 
         children.push(<Option key='Dushanba'>Dushanba</Option>);
@@ -200,111 +172,120 @@ edit=(x)=>{
         children.push(<Option key='Shanba'>Shanba</Option>);
 
         return (
-            <div className={styles.matt}>
+            <div>
+                <input type="checkbox" id="modal" />
+                <label for="modal" className="modal-background" onClick={this.clform}></label>
+                <div className="modal">
+                    <div className="modal-header">
+                        <h3>Gurux haqida</h3>
+                        <label for="modal" onClick={this.clform}>
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAdVBMVEUAAABNTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU0N3NIOAAAAJnRSTlMAAQIDBAUGBwgRFRYZGiEjQ3l7hYaqtLm8vsDFx87a4uvv8fP1+bbY9ZEAAAB8SURBVBhXXY5LFoJAAMOCIP4VBRXEv5j7H9HFDOizu2TRFljedgCQHeocWHVaAWStXnKyl2oVWI+kd1XLvFV1D7Ng3qrWKYMZ+MdEhk3gbhw59KvlH0eTnf2mgiRwvQ7NW6aqNmncukKhnvo/zzlQ2PR/HgsAJkncH6XwAcr0FUY5BVeFAAAAAElFTkSuQmCC" width="16" height="16" alt="" />
+                        </label>
+                    </div>
 
-<Modal title="Gurux haqida" footer={null} visible={this.state.show} onCancel={this.handleCancel}>
+                    <Form {...layout} ref={this.formRef} name="control-ref" onFinish={this.onFinish}>
+                        <Form.Item name="name"
+                            rules={[
+                                {
+                                    required: true,
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Gurux nomini kiriting" />
+                        </Form.Item>
+                        <Form.Item
+                            name="mentor"
+                            rules={[
+                                {
+                                    required: true,
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Biriktirilgan mentorni kiriting" />
+                        </Form.Item>
+                        <Form.Item name="soha" rules={[{ required: true }]}>
+                            <Select
+                                placeholder="O'quv yo'nalishini tanlang"
+                                allowClear
+                            >
+                                <Option value="React front-end">React front-end</Option>
+                                <Option value="Back-end">Back-end</Option>
+                                <Option value="Unix">Unix</Option>
+                            </Select>
+                        </Form.Item>
 
-                                <Form {...layout}  name="control-ref" onFinish={this.onFinish} id="formGrh" initialValues={{remember:true, ...this.state.iValue}}>
-                                    <Form.Item name="name"
+                        <Form.Item name="kun" rules={[{ required: true }]}>
+                            <Select
+                                mode="multiple"
+                                allowClear
+                                style={{ width: '100%' }}
+                                placeholder="Please select"
+                            >
+                                {children}
+                            </Select>
+                        </Form.Item>
+                        <Form.Item name="vaqt" label="Dars vaqtini kiriting" rules={[{ required: true }]}>
+                            <TimePicker.RangePicker showTime={{ format: 'HH:mm' }} />
+                        </Form.Item>
+                        <Form.Item name="qushimcha"
+                            rules={[
+                                {
+                                    required: true,
+                                },
+                            ]}
+                        >
+                            <Input.TextArea rows="3" placeholder="Qo'shimcha ma'lumot..." />
+                        </Form.Item>
+                        <Form.Item
+                            noStyle
+                            shouldUpdate={(prevValues, currentValues) => prevValues.gender !== currentValues.gender}
+                        >
+                            {({ getFieldValue }) =>
+                                getFieldValue('gender') === 'other' ? (
+                                    <Form.Item
+                                        name="customizeGender"
+                                        label="Customize Gender"
                                         rules={[
                                             {
                                                 required: true,
                                             },
                                         ]}
                                     >
-                                        <Input placeholder="Gurux nomini kiriting" />
+                                        <Input />
                                     </Form.Item>
-                                    <Form.Item
-                                        name="mentor"
-                                        rules={[
-                                            {
-                                                required: true,
-                                            },
-                                        ]}
-                                    >
-                                        <Input placeholder="Biriktirilgan mentorni kiriting" />
-                                    </Form.Item>
-                                    <Form.Item name="soha" 
-                                     rules={[
-                                        {
-                                            required: true,
-                                        },
-                                    ]}
-                                    >
-                                        <Select
-                                            placeholder="O'quv yo'nalishini tanlang"
-                                            allowClear
-                                        >
-                                            <Option style={{zIndex:11111}} value="React front-end">React front-end</Option>
-                                            <Option style={{zIndex:11111}} value="Back-end">Back-end</Option>
-                                            <Option style={{zIndex:11111}} value="Unix">Unix</Option>
-                                        </Select>
-                                    </Form.Item>
+                                ) : null
+                            }
+                        </Form.Item>
+                        <Form.Item {...tailLayout}>
+                            <Button htmlType="submit" type="primary">
+                                Saqlash
+                            </Button>
+                            &nbsp;
+                            &nbsp;
+                            &nbsp;
+                            <Button htmlType="button" onClick={this.onReset}>
+                                Bekor qilish
+                            </Button>
+                        </Form.Item>
+                    </Form>
 
-                                    <Form.Item name="kun" rules={[{ required: true }]}>
-                                        <Select
-                                            mode="multiple"
-                                            allowClear
-                                            style={{ width: '100%' }}
-                                            placeholder="O'quv kun(lar)ini tanlang"
-                                        >
-                                            {children}
-                                        </Select>
-                                    </Form.Item>
-                                    <Form.Item name="vaqt" label="Dars vaqtini kiriting" rules={[{ required: true }]}>
-                                        <TimePicker.RangePicker showTime={{ format: 'HH:mm' }} />
-                                    </Form.Item>
-                                    <Form.Item
-                                        noStyle
-                                        shouldUpdate={(prevValues, currentValues) => prevValues.gender !== currentValues.gender}
-                                    >
-                                        {({ getFieldValue }) =>
-                                            getFieldValue('gender') === 'other' ? (
-                                                <Form.Item
-                                                    name="customizeGender"
-                                                    label="Customize Gender"
-                                                    rules={[
-                                                        {
-                                                            required: true,
-                                                        },
-                                                    ]}
-                                                >
-                                                    <Input />
-                                                </Form.Item>
-                                            ) : null
-                                        }
-                                    </Form.Item>
-                                    <Form.Item {...tailLayout}>   
-                                        <Button htmlType="submit" style={{backgroundColor:'#3F6AD8',border:'none',color:'white'}}>
-                                            Saqlash
-                                        </Button>
-                                        &nbsp;
-                                        &nbsp;
-                                        &nbsp;
-                                        <Button htmlType="button" onClick={this.handleCancel}>
-                                            Bekor qilish
-                                        </Button>
-                                    </Form.Item>
-                                </Form>
-      </Modal>
-           
-
-                <Container fluid style={{padding:'5%'}}>
+                </div>
+                <Container fluid>
                     <Row>
                         <Col lg={12}>
-<Button onClick={()=>this.setState({show:true})}>Gurux qo'shish</Button>
-                        </Col>
-                        <br/>
-                        <br/>
-                        <Col lg={12}>
-                            <MUIDataTable
-                            style={{zIndex:"-22"}}
-                                title={"Guruhlar ro'yxati"}
-                                data={this.state.grlar}
+                            <Table
+                                className={styles.table}
+                                dataSource={this.state.grlar}
                                 columns={columns}
-                                options={options}
-                            />
-                            <span id="front2"></span>
+                                bordered
+                                title={() => {
+                                    return (
+                                        <div className={styles.header}>
+                                            <h4>Guruhlar ro'yxati</h4>
+                                            <Button onClick={() => document.getElementById("modal").checked = true}>Gurux qo'shish</Button>
+                                        </div>)
+                                }}
+                            />;
                         </Col>
                     </Row>
                 </Container>
