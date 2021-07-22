@@ -1,202 +1,253 @@
-import React,{useEffect,useState} from 'react'
-import styles from '../css/news.module.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import MUIDataTable from "mui-datatables";
-import { Modal, Button } from 'antd';
-import { Select } from 'antd';
-import {Form} from 'react-bootstrap'
+import React,{useState} from 'react'
+import { Modal, Button, Cascader,DatePicker } from 'antd';
+import styles from '../css/davomat.module.css'
 import {BsPersonPlusFill} from 'react-icons/bs'
-export default function Oquvchiqoshish() {
-const [visible,setVisible]=useState(false)
-const { Option } = Select;
-const provinceData = ['Front-end', 'Python','Unity'];
-const cityData = {
-  'Front-end': ['1-fr', '2-fr', '3-fr'],
-  'Python': ['1-py', '2-py', '3-py'],
-  'Unity':['1-un','2-un','3-un']
-};
-
-const [cities, setCities] = React.useState(cityData[provinceData[0]]);
-  const [secondCity, setSecondCity] = React.useState(cityData[provinceData[0]][0]);
-const[kurslar,setKurslar]=useState([])
-  const handleProvinceChange = value => {
-      setKurslar(value)
-    setCities(cityData[value]);
-    setSecondCity(cityData[value][0]);
-  };
-
-  const onSecondCityChange = value => {
-    setSecondCity(value);
-  };
-const showModal = () => {
-    setVisible(true)
-  };
-const [edit,setEdit]=useState(null)
- const  hideModal = () => {
-     setEdit(null)
-     setVisible(false)
-  };
-  const saveOquvchi=()=>{
-      var name=document.getElementById('name').value
-      var telefon=document.getElementById('telefon').value
-      var telefon2=document.getElementById('telefon2').value
-      var kurs=kurslar
-      var guruh=secondCity
-      var newoquvchi={
-          name,
-          telefon,
-          telefon2,
-          kurs,
-          guruh
-      }
-      console.log(newoquvchi)
-      var newoquvchilar=oquvchi
-      if(edit===null){
-       newoquvchilar.push(newoquvchi)
-       setOquvchi(newoquvchilar)
-    }else{
-        newoquvchilar[edit]=newoquvchi
-        setEdit(null)
-    }
-    reset()
-      hideModal()
-  }
-  const reset=()=>{
-document.getElementById('name').value=''
-document.getElementById('telefon').value=''
-document.getElementById('telefon2').value=''
-  }
-  const [oquvchi,setOquvchi]=useState([
-      {
-          name:'Jabborov Asilbek',
-          telefon:'3716578657',
-          telefon2:'92735946574',
-          kurs:'front-end',
-          guruh:'2-fr'
-      }
-  ])
-  const columns = [
-    {
-        name: "name",
-        label: "F.I.O",
-        options: {
-            filter: true,
-            sort: false,
-        },
-    },
-    {
-        name: "telefon",
-        label: "Telefon",
-        options: {
-            filter: true,
-            sort: false,
-        },
-    },
-    {
-        name: 'telefon2',
-        label: "Qo'shimcha telefon",
-        options: {
-            filter: true,
-            sort: false,
-        },
-    },
-    {
-        name: "kurs",
-        label: "Kurs",
-        options: {
-            filter: true,
-            sort: false,
-        },
-    },
-    {
-        name: "guruh",
-        label: "guruh",
-        options: {
-            filter: true,
-            sort: false,
-        },
-    },
-    {
-        name: "O'zgartirish",
-        options: {
-            filter: false,
-            sort: false,
-            empty: true,
-            customBodyRenderLite: () => {
-                return (
-                    <a><Button onClick={showModal} className={styles.inputFormBtn1}>
-                        O'zgartirish
-                    </Button></a>
-                );
-            }
+import { Form, Input, Select } from 'antd';
+import {AiFillEdit,AiOutlineDelete} from 'react-icons/ai'
+import {Table} from 'react-bootstrap'
+import moment from 'moment';
+export default function Oqituvchiqoshish() {
+    const [edit,setEdit]=useState(null)
+    const [oqituvchi,setOqituvchi]=useState([
+        {
+            name:'Abdulbosit Xayitov',
+            telefon:'+87647568775',
+            telefon2:'+8743568775',
+            kurslar:["python", "1-py"],
+            sana:"2021-07-08"
+            
         }
+    ])
+    const dateFormat = 'YYYY/MM/DD'
+    const [visible,setVisible]=useState(false)
+    const showModal = () => {
+        setVisible(true)
+      }
+     const  hideModal = () => {
+         onReset()
+         setVisible(false)
+      }
+      const { Option } = Select;
+      const layout = {
+        labelCol: {
+            span: 8,
+        },
+        wrapperCol: {
+            span: 16,
+        },
+        };
+        const tailLayout = {
+        wrapperCol: {
+            offset: 8,
+            span: 16,
+        },
+      } 
+  const [form] = Form.useForm();
+  const [gender,setGender]=useState([])
+  const onGenderChange = (value) => {
+    setGender([])
+    setGender(value)
+  };
+  const [data,setDate]=useState([])
+    const onFinish = (values) => {
+        console.log(values)
+        var newoquvchi = {
+            name:values.name,
+            telefon:values.telefon,  
+            telefon2:values.telefon2,  
+            kurslar:values.kurslar,
+            sana:data
+        }
+        console.log(newoquvchi)
+        var newoqituvchilar=oqituvchi
+        if(edit===null){
+            newoqituvchilar.push(newoquvchi)
+        setOqituvchi(newoqituvchilar)
+        }else{
+            newoqituvchilar[edit]=newoquvchi
+            setEdit(null)
+        }
+        hideModal()
+        onReset()
+    }
+    const dates=(date,dateString)=>{
+        setDate(dateString)
+        console.log(data)
+    }
+    const onReset = () => {
+        form.resetFields();
+        setEdit(null)
+    };
 
+    const onFill = (id) => {
+    
+        var newoqituvchilar=oqituvchi[id]
+        console.log(newoqituvchilar)
+        form.setFieldsValue({
+            name:newoqituvchilar.name,
+            telefon:newoqituvchilar.telefon,  
+            telefon2:newoqituvchilar.telefon2,  
+            kurslar:newoqituvchilar.kurslar,
+            sana:newoqituvchilar.sana
+        });
+        console.log(id)
+        setEdit(id)
+        showModal()
+    };
+  const kurslar1 = [
+    {
+      value: 'python',
+      label: 'Python',
+      children: [
+        {
+          value: '1-py',
+          label: '1-py',
+        },
+        {
+            value: '2-py',
+            label: '2-py',
+          },
+          {
+            value: '3-py',
+            label: '3-py',
+          },
+      ],
     },
-];
-const [oquvchi1,setOquvchi1]=useState([])
-const options = {
-    filterType: 'checkbox',
-    responsive: 'scroll',
-    onRowClick: (rowData, rowState) => {
-       setEdit(rowState.rowIndex)
-       setOquvchi1(
-           {
-            name: rowData[0],
-            telefon: rowData[1],
-            telefon2: rowData[2],
-            kurs:rowData[3],
-            guruh:rowData[4]
-           }
-       )
-       console.log(rowData)
+    {
+      value: 'frontEnd',
+      label: 'Front-end',
+      children: [
+        {
+          value: '1-fr',
+          label: '1-fr',
+        },
+        {
+            value: '2-fr',
+            label: '2-fr',
+          },
+      ],
     },
-};
+  ];
     return (
-        <div style={{padding:'5%'}}>
+        <div  style={{padding:'5%'}}>
             <div>
                <h1 style={{fontSize:'25px'}}>O'quvchi qo'shish <BsPersonPlusFill onClick={showModal} style={{color:'#3F6AD8',marginLeft:'20px',marginTop:'-5px',cursor:'pointer'}}/></h1>
             </div>
-            <MUIDataTable
-                    title={"O'quvchilar ro'yxati"}
-                    data={oquvchi}
-                    columns={columns}
-                    options={options}
-                    />
+            <div>
+            <Table style={{marginTop:'20px'}}  className={styles.backgroundTable}>
+                        <thead>
+                            <tr style={{color:'rgba(0,0,0,0.7)'}}>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>#</th>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>F.I.O</th>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>Telefon</th>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>Qo'shimcha telefon</th>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>Kurs/guruh</th>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>Sana</th>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>O'zgartirish/O'chirish</th>
+                            </tr>
+                        </thead>
+                        {
+                          oqituvchi && Array.isArray(oqituvchi)? oqituvchi.map((item,key)=>{
+                              return(
+                                <tbody>
+                                <tr>
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{key+1}</td>
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.name}</td>
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.telefon}</td>
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.telefon2}</td>
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>
+                                   {
+                                      item.kurslar && Array.isArray(item.kurslar)? item.kurslar.map((item,key)=>{
+                                           return(
+                                               <ul>
+                                                   <li>{item}</li>
+                                               </ul>
+                                           )
+                                       }):''
+                                   } 
+                                </td>
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.sana}</td>
+                                {/* <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.sana}</td>
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.oy}</td>
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.summa} */}
+                            
+                            
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)'}}><AiFillEdit onClick={()=> onFill(`${key}`)} style={{fontSize:'16px',color:'green',marginLeft:'5px',marginTop:'-5px'}}/> <AiOutlineDelete style={{fontSize:'16px',color:'red',marginLeft:'5px',marginTop:'-5px'}}/> </td>
+                                </tr>
+                            </tbody>
+                              )
+                          }):''
+                        }
+                        </Table>
+            </div>
             <Modal
-                    title="O'quvchi qo'shish"
-                    visible={visible}
-                    onOk={saveOquvchi}
-                    onCancel={hideModal}
-                    >
-                     <Form id="formAdmin">
-                        <Form.Group className="mb-3" controlId="name">
-                            <Form.Label>F.I.O kiriting</Form.Label>
-                            <Form.Control type="text" placeholder="F.I.O"  defaultValue={oquvchi1.name}/>
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="telefon">
-                            <Form.Label>Telefon raqam kiriting</Form.Label>
-                            <Form.Control type="number" min="0" placeholder="9989926571235" defaultValue={oquvchi1.telefon}/>
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="telefon2">
-                            <Form.Label>Qo'shimcha telefon raqam kiriting</Form.Label>
-                            <Form.Control type="number" min="0" placeholder="9989926571235" defaultValue={oquvchi1.telefon2}/>
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="kurs">
-                            <Form.Label style={{display:'block'}}>Kursni va guruhni tanlang</Form.Label>
-                            <Select defaultValue={provinceData[0]} style={{ width: 120 }} onChange={handleProvinceChange}>
-        {provinceData.map(province => (
-          <Option key={province}>{province}</Option>
-        ))}
-      </Select>
-      <Select style={{ width: 120 }} value={secondCity} onChange={onSecondCityChange}>
-        {cities.map(city => (
-          <Option key={city}>{city}</Option>
-        ))}
-      </Select>
-                        </Form.Group>
-                        </Form>
-                    </Modal>
+            width={700}
+          footer={false}
+          title="Modal"
+          visible={visible}
+          onOk={hideModal}
+          onCancel={hideModal}
+        >
+          <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
+      <Form.Item
+        name="name"
+        label="F.I.O"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="telefon"
+        label="Telefonb raqami:"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="telefon2"
+        label="Qo'shimcha telefon raqami:"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="kurslar"
+        label="Habitual Residence"
+        rules={[
+          {
+            type: 'array',
+            required: true,
+            message: 'Please select your habitual residence!',
+          },
+        ]}
+      >
+        <Cascader options={kurslar1} />
+      </Form.Item>
+      <Form.Item className={edit===null?'':styles.date2} name="sanas"   label="DatePicker">
+      <DatePicker  id="sana" onChange={dates} />
+    </Form.Item>
+      <Form.Item {...tailLayout}>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+        <Button htmlType="button" onClick={onReset}>
+          Reset
+        </Button>
+      </Form.Item>
+    </Form>
+        </Modal>
         </div>
     )
 }

@@ -21,6 +21,7 @@ import Dashboard from './pages/Dashboard';
 import logo1 from './img/logo1.png'
 import Oquvchiqoshish from './pages/Oquvchiqoshish';
 import Tolov from './pages/Tolov'
+// import Oqituvchiqoshish from './pages/Oqituvchiqoshish';
 import { Col, Row } from 'react-bootstrap';
 export default class Main extends Component {
 state = {
@@ -145,7 +146,7 @@ state = {
           <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/guruhlar">Guruh qo'shish</Link>
           </Menu.Item>
           <Menu.Item key="12" icon={<ImUserPlus style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
-            O'qituvchi qo'shish
+          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/oqituvchi">O'qituvchi qo'shish</Link>
           </Menu.Item>
         </Menu>
       </div>  
@@ -166,6 +167,9 @@ state = {
        <Route exact path="/tolov">
          <Tolov/>
        </Route>
+       {/* <Route exact path="/oqituvchi">
+         <Oqituvchiqoshish/>
+       </Route> */}
      </Switch>
      </div>
      </div>
