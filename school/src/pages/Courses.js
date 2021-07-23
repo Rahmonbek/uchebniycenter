@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../css/courses.module.css';
 import '../App.css'
@@ -37,55 +37,26 @@ import Aos from 'aos';
 import 'aos/dist/aos.css';
 import { Menu, Switch } from 'antd'
 import { NavLink } from 'react-router-dom';
+import {
+  MDBTabs,
+  MDBTabsItem,
+  MDBTabsLink,
+  MDBTabsContent,
+  MDBTabsPane
+} from 'mdb-react-ui-kit';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      maxWidth: 345,
-    },
-    media: {
-      height: 0,
-      paddingTop: '56.25%', // 16:9
-    },
-    expand: {
-      transform: 'rotate(0deg)',
-      marginLeft: 'auto',
-      transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest,
-      }),
-    },
-    expandOpen: {
-      transform: 'rotate(180deg)',
-    },
-    avatar: {
-      backgroundColor: red[500],
-    },
-  }));
+
+
 
   export default class Courses extends Component {
     
     state={
 expanded:[],
-hover:'red',
-current: 'mail',
-        theme: 'white',
-        textTheme:'black',
-        currentS: '1',
+justifyActive:'tab1',
+
     }
 
-    changeTheme = value => {
-      this.setState({
-        
-          hover: value ? 'blue' : 'gold',
-      });
-     
-      localStorage.removeItem('hover')
-  
-      
-      localStorage.setItem('hover', value ? 'blue' : 'gold')
-      
-      
-      
-    };
+
     componentDidMount(){
       Aos.init({
         duration:2000
@@ -101,12 +72,14 @@ current: 'mail',
    
       this.setState({expanded:a})
     };
-    handleClick = e => {
-      console.log('click ', e);
-      this.setState({ current: e.key,
-          currentS: e.key, });
-            };
+    
+    handleJustifyClick = (value) => {
+      if (value === this.state.justifyActive) {
+        return;
+      }
   
+      this.setState({justifyActive:value});
+    };
     render(){
       return (
         
@@ -132,18 +105,30 @@ current: 'mail',
                     {/* Section----- */}
                     <div className={styles.section}>
                     <Container>
-                    <Menu className="navbarK" style={{padding:'10px 10px 20px 10px', zIndex:'123', position:'relative', backgroundColor:this.state.theme, marginTop:'15px', color:this.state.textTheme, width:'100%'}} onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
-                    <Menu.Item key="setting:11"><NavLink activeStyle={{color:this.state.hover}} style={{ color:this.state.textTheme}} to="#">Korxona faoliyati haqida</NavLink></Menu.Item>
-                      <Menu.Item key="setting:21"><NavLink activeStyle={{color:this.state.hover}} style={{ color:this.state.textTheme}} to="#">Bo'limlar</NavLink></Menu.Item>
-             <Menu.Item key="setting:31"><NavLink activeStyle={{color:this.state.hover}} style={{ color:this.state.textTheme}} to="#">Boshqaruv</NavLink></Menu.Item>
-             <Menu.Item key="setting:41"><NavLink activeStyle={{color:this.state.hover}} style={{ color:this.state.textTheme}} to="#">Tashkiliy tuzilma</NavLink></Menu.Item>
-                      </Menu>
-                      <ul>
-                        <li>ALL</li>
-                        <li>IT</li>
-                        <li>TIL</li>
-                        <li>ABITURENT</li>
-                      </ul>
+                    <MDBTabs justify className='mb-3'>
+        <MDBTabsItem>
+          <MDBTabsLink onClick={() => this.handleJustifyClick('tab1')} active={this.state.justifyActive === 'tab1'} style={{backgroundColor:'transparent', borderBottom:'2px solid blue'}}>
+          All
+          </MDBTabsLink>
+        </MDBTabsItem>
+        <MDBTabsItem>
+          <MDBTabsLink onClick={() => this.handleJustifyClick('tab2')} active={this.state.justifyActive === 'tab2'}>
+           IT
+          </MDBTabsLink>
+        </MDBTabsItem>
+        <MDBTabsItem>
+          <MDBTabsLink onClick={() => this.handleJustifyClick('tab3')} active={this.state.justifyActive === 'tab3'}>
+            TIL
+          </MDBTabsLink>
+        </MDBTabsItem>
+        <MDBTabsItem>
+          <MDBTabsLink onClick={() => this.handleJustifyClick('tab4')} active={this.state.justifyActive === 'tab4'}>
+            ABITURENT
+          </MDBTabsLink>
+        </MDBTabsItem>
+      </MDBTabs>
+
+      
                     
              <Row>
              <Col lg={4} md={6} sm={12}>
