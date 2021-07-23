@@ -21,6 +21,7 @@ import Dashboard from './pages/Dashboard';
 import logo1 from './img/logo1.png'
 import Oquvchiqoshish from './pages/Oquvchiqoshish';
 import Tolov from './pages/Tolov'
+import Oquvchi from './pages/Oquvchi';
 // import Oqituvchiqoshish from './pages/Oqituvchiqoshish';
 import { Col, Row } from 'react-bootstrap';
 export default class Main extends Component {
@@ -162,14 +163,12 @@ state = {
          <Guruhlar/>
        </Route>
        <Route exact path="/oquvchi">
-         <Oquvchiqoshish/>
+         <Oquvchi/>
        </Route>
        <Route exact path="/tolov">
          <Tolov/>
        </Route>
-       {/* <Route exact path="/oqituvchi">
-         <Oqituvchiqoshish/>
-       </Route> */}
+
      </Switch>
      </div>
      </div>
