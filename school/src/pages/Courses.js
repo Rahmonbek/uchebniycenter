@@ -1,6 +1,7 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../css/courses.module.css';
+import '../App.css'
 import { Button, Col, Container, Image, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
 import logo from '../img/logo1.png'
 import frontend from '../img/frontend.jpg'
@@ -22,6 +23,11 @@ import { red } from '@material-ui/core/colors';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import TelegramIcon from '@material-ui/icons/Telegram';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import CallIcon from '@material-ui/icons/Call';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Link } from 'react-router-dom';
 import AOS from 'aos';
@@ -29,35 +35,28 @@ import 'aos/dist/aos.css';
 import {FaSignInAlt} from 'react-icons/fa'
 import Aos from 'aos';
 import 'aos/dist/aos.css';
+import { Menu, Switch } from 'antd'
+import { NavLink } from 'react-router-dom';
+import {
+  MDBTabs,
+  MDBTabsItem,
+  MDBTabsLink,
+  MDBTabsContent,
+  MDBTabsPane
+} from 'mdb-react-ui-kit';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      maxWidth: 345,
-    },
-    media: {
-      height: 0,
-      paddingTop: '56.25%', // 16:9
-    },
-    expand: {
-      transform: 'rotate(0deg)',
-      marginLeft: 'auto',
-      transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest,
-      }),
-    },
-    expandOpen: {
-      transform: 'rotate(180deg)',
-    },
-    avatar: {
-      backgroundColor: red[500],
-    },
-  }));
+
+
 
   export default class Courses extends Component {
     
     state={
-expanded:[]
+expanded:[],
+justifyActive:'tab1',
+
     }
+
+
     componentDidMount(){
       Aos.init({
         duration:2000
@@ -73,7 +72,14 @@ expanded:[]
    
       this.setState({expanded:a})
     };
+    
+    handleJustifyClick = (value) => {
+      if (value === this.state.justifyActive) {
+        return;
+      }
   
+      this.setState({justifyActive:value});
+    };
     render(){
       return (
         
@@ -99,13 +105,30 @@ expanded:[]
                     {/* Section----- */}
                     <div className={styles.section}>
                     <Container>
-   
-                      <ul>
-                        <li>ALL</li>
-                        <li>IT</li>
-                        <li>TIL</li>
-                        <li>ABITURENT</li>
-                      </ul>
+                    <MDBTabs justify className='mb-3'>
+        <MDBTabsItem>
+          <MDBTabsLink onClick={() => this.handleJustifyClick('tab1')} active={this.state.justifyActive === 'tab1'} style={{backgroundColor:'transparent', borderBottom:'2px solid blue'}}>
+          All
+          </MDBTabsLink>
+        </MDBTabsItem>
+        <MDBTabsItem>
+          <MDBTabsLink onClick={() => this.handleJustifyClick('tab2')} active={this.state.justifyActive === 'tab2'}>
+           IT
+          </MDBTabsLink>
+        </MDBTabsItem>
+        <MDBTabsItem>
+          <MDBTabsLink onClick={() => this.handleJustifyClick('tab3')} active={this.state.justifyActive === 'tab3'}>
+            TIL
+          </MDBTabsLink>
+        </MDBTabsItem>
+        <MDBTabsItem>
+          <MDBTabsLink onClick={() => this.handleJustifyClick('tab4')} active={this.state.justifyActive === 'tab4'}>
+            ABITURENT
+          </MDBTabsLink>
+        </MDBTabsItem>
+      </MDBTabs>
+
+      
                     
              <Row>
              <Col lg={4} md={6} sm={12}>
@@ -127,7 +150,7 @@ expanded:[]
              <OverlayTrigger
           
     placement="bottom"
-    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'20px'}}>Registratsiya</Tooltip>}
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Registratsiya</Tooltip>}
   >
     {({ ref, ...triggerHandler }) => (
       <Button
@@ -145,7 +168,7 @@ expanded:[]
         
       </Button>
     )}
-  </OverlayTrigger>,
+  </OverlayTrigger>
                  {/* <IconButton  >
                  <PersonAddIcon color="primary"/>
                </IconButton> */}
@@ -175,10 +198,146 @@ expanded:[]
              </Typography>
            </CardContent>
            <CardActions disableSpacing>
-             <IconButton aria-label="share">
-               <ShareIcon />
+           <OverlayTrigger
+          
+          placement="bottom"
+          overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>O'quv markaz to'g'risida batafsil ma'lumot</Tooltip>}
+        >
+          {({ ref, ...triggerHandler }) => (
+            <Button
+            size='small'
+              variant="#F2F2F2"
+              {...triggerHandler}
+              className="d-inline-flex align-items-center"
+            >
+              <Image
+                ref={ref}
+                
+              />
+             
+             <IconButton >
+               <InfoOutlinedIcon />
+             </IconButton> 
+            </Button>
+          )}
+        </OverlayTrigger>
+             
+            <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Telegram</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+         <a href='http://t.me/ItTower'>
+               <IconButton >
+               <TelegramIcon />
              </IconButton>
-             <IconButton
+            </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+         
+            
+            <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Instagram</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+        <a href='http://instagram.com/ItTower'>
+               <IconButton >
+               <InstagramIcon />
+             </IconButton>
+            </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+            <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Telefon qilish</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+         <a href='tel:+998935555555'>
+               <IconButton >
+               <CallIcon />
+             </IconButton>
+            </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+            
+             <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Email</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+        <a href='mailto:ItTower@gmail.com'>
+               <IconButton >
+               <MailOutlineIcon />
+             </IconButton>
+             </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+             
+             <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Kurs haqida batafsil ma'lumot</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+  variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+    <IconButton 
                className={clsx(styles.expand, {
                  [styles.expandOpen]: this.state.expanded[0],
                })}
@@ -189,6 +348,11 @@ expanded:[]
              >
                <ExpandMoreIcon />
              </IconButton>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+             
            </CardActions>
            <Collapse in={this.state.expanded[0]} timeout="auto" unmountOnExit>
              <CardContent>
@@ -229,7 +393,7 @@ expanded:[]
                 <OverlayTrigger
           
     placement="bottom"
-    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'20px'}}>Registratsiya</Tooltip>}
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Registratsiya</Tooltip>}
   >
     {({ ref, ...triggerHandler }) => (
       <Button
@@ -247,7 +411,7 @@ expanded:[]
         
       </Button>
     )}
-  </OverlayTrigger>,
+  </OverlayTrigger>
                  
                </div>
              </Link>
@@ -274,10 +438,143 @@ expanded:[]
              </Typography>
            </CardContent>
            <CardActions disableSpacing>
-             <IconButton aria-label="share">
-               <ShareIcon />
+              <OverlayTrigger
+          
+          placement="bottom"
+          overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>O'quv markaz to'g'risida batafsil ma'lumot</Tooltip>}
+        >
+          {({ ref, ...triggerHandler }) => (
+            <Button
+              variant="#F2F2F2"
+              {...triggerHandler}
+              className="d-inline-flex align-items-center"
+            >
+              <Image
+                ref={ref}
+                
+              />
+             <IconButton >
+               <InfoOutlinedIcon />
              </IconButton>
-             <IconButton
+              
+            </Button>
+          )}
+        </OverlayTrigger>
+            <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Telegram</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+          <a href='@ItTower'>
+               <IconButton >
+               <TelegramIcon />
+             </IconButton>
+            </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+            
+            
+            <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Instagram</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+         <a href='http://instagram.com/ItTower'>
+               <IconButton >
+               <InstagramIcon />
+             </IconButton>
+            </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+            <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Telefon qilish</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+        <a href='tel:+998935555555'>
+               <IconButton >
+               <CallIcon />
+             </IconButton>
+            </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+            
+             <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Email</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+     <a>
+               <IconButton >
+               <MailOutlineIcon />
+             </IconButton>
+             </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+           <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Kurs haqida batafsil ma'lumot</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+         <IconButton
                className={clsx(styles.expand, {
                  [styles.expandOpen]: this.state.expanded[1],
                })}
@@ -287,6 +584,12 @@ expanded:[]
              >
                <ExpandMoreIcon />
              </IconButton>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+
+           
            </CardActions>
            <Collapse in={this.state.expanded[1]} timeout="auto" unmountOnExit>
              <CardContent>
@@ -333,7 +636,7 @@ expanded:[]
                 <OverlayTrigger
           
     placement="bottom"
-    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'20px'}}>Registratsiya</Tooltip>}
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Registratsiya</Tooltip>}
   >
     {({ ref, ...triggerHandler }) => (
       <Button
@@ -351,7 +654,7 @@ expanded:[]
         
       </Button>
     )}
-  </OverlayTrigger>,
+  </OverlayTrigger>
                  
                </div>
              </Link>
@@ -378,10 +681,143 @@ expanded:[]
              </Typography>
            </CardContent>
            <CardActions disableSpacing>
-             <IconButton aria-label="share">
-               <ShareIcon />
+              <OverlayTrigger
+          
+          placement="bottom"
+          overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>O'quv markaz to'g'risida batafsil ma'lumot</Tooltip>}
+        >
+          {({ ref, ...triggerHandler }) => (
+            <Button
+              variant="#F2F2F2"
+              {...triggerHandler}
+              className="d-inline-flex align-items-center"
+            >
+              <Image
+                ref={ref}
+                
+              />
+             <IconButton >
+               <InfoOutlinedIcon />
              </IconButton>
-             <IconButton
+              
+            </Button>
+          )}
+        </OverlayTrigger>
+            <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Telegram</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+        <a href='@ItTower'>
+               <IconButton >
+               <TelegramIcon />
+             </IconButton>
+            </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+            
+            
+            <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Instagram</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+        <a href='http://instagram.com/ItTower'>
+               <IconButton >
+               <InstagramIcon />
+             </IconButton>
+            </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+            <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Telefon qilish</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+      <a href='tel:+998935555555'>
+               <IconButton >
+               <CallIcon />
+             </IconButton>
+            </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+            
+             <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Email</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+        <a>
+               <IconButton >
+               <MailOutlineIcon />
+             </IconButton>
+             </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+           <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Kurs haqida batafsil ma'lumot</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+      <IconButton
                className={clsx(styles.expand, {
                  [styles.expandOpen]: this.state.expanded[2],
                })}
@@ -391,6 +827,12 @@ expanded:[]
              >
                <ExpandMoreIcon />
              </IconButton>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+
+           
            </CardActions>
          
            <Collapse in={this.state.expanded[2]} timeout="auto" unmountOnExit>
@@ -432,7 +874,7 @@ expanded:[]
                 <OverlayTrigger
           
     placement="bottom"
-    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'20px'}}>Registratsiya</Tooltip>}
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Registratsiya</Tooltip>}
   >
     {({ ref, ...triggerHandler }) => (
       <Button
@@ -450,7 +892,7 @@ expanded:[]
         
       </Button>
     )}
-  </OverlayTrigger>,
+  </OverlayTrigger>
                  
                </div>
              </Link>
@@ -477,10 +919,144 @@ expanded:[]
              </Typography>
            </CardContent>
            <CardActions disableSpacing>
-             <IconButton aria-label="share">
-               <ShareIcon />
+              <OverlayTrigger
+          
+          placement="bottom"
+          overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>O'quv markaz to'g'risida batafsil ma'lumot</Tooltip>}
+        >
+          {({ ref, ...triggerHandler }) => (
+            <Button
+              variant="#F2F2F2"
+              {...triggerHandler}
+              className="d-inline-flex align-items-center"
+            >
+              <Image
+                ref={ref}
+                
+              />
+             <IconButton >
+               <InfoOutlinedIcon />
              </IconButton>
-             <IconButton
+              
+            </Button>
+          )}
+        </OverlayTrigger>
+            <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Telegram</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+        <a href='@ItTower'>
+               <IconButton >
+               <TelegramIcon />
+             </IconButton>
+            </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+            
+            
+            <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Instagram</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+        <a href='http://instagram.com/ItTower'>
+               <IconButton >
+               <InstagramIcon />
+             </IconButton>
+            </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+            <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Telefon qilish</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+          <a href='tel:+998935555555'>
+               <IconButton >
+               <CallIcon />
+             </IconButton>
+            </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+           
+             <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Email</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+         <a>
+               <IconButton >
+               <MailOutlineIcon />
+             </IconButton>
+             </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+             
+             <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Kurs haqida batafsil ma'lumot</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+  variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+       <IconButton
                className={clsx(styles.expand, {
                  [styles.expandOpen]: this.state.expanded[3],
                })}
@@ -491,6 +1067,11 @@ expanded:[]
              >
                <ExpandMoreIcon />
              </IconButton>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+             
            </CardActions>
            <Collapse in={this.state.expanded[3]} timeout="auto" unmountOnExit>
              <CardContent>
@@ -537,7 +1118,7 @@ expanded:[]
                 <OverlayTrigger
           
     placement="bottom"
-    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'20px'}}>Registratsiya</Tooltip>}
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Registratsiya</Tooltip>}
   >
     {({ ref, ...triggerHandler }) => (
       <Button
@@ -555,7 +1136,7 @@ expanded:[]
         
       </Button>
     )}
-  </OverlayTrigger>,
+  </OverlayTrigger>
                  
                </div>
              </Link>
@@ -582,10 +1163,143 @@ expanded:[]
              </Typography>
            </CardContent>
            <CardActions disableSpacing>
-             <IconButton aria-label="share">
-               <ShareIcon />
+              <OverlayTrigger
+          
+          placement="bottom"
+          overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>O'quv markaz to'g'risida batafsil ma'lumot</Tooltip>}
+        >
+          {({ ref, ...triggerHandler }) => (
+            <Button
+              variant="#F2F2F2"
+              {...triggerHandler}
+              className="d-inline-flex align-items-center"
+            >
+              <Image
+                ref={ref}
+                
+              />
+             <IconButton >
+               <InfoOutlinedIcon />
              </IconButton>
-             <IconButton
+              
+            </Button>
+          )}
+        </OverlayTrigger>
+            <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Telegram</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+        <a href='@ItTower'>
+               <IconButton >
+               <TelegramIcon />
+             </IconButton>
+            </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+         
+            
+            <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Instagram</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+         <a href='http://instagram.com/ItTower'>
+               <IconButton >
+               <InstagramIcon />
+             </IconButton>
+            </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+            <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Telefon qilish</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+         <a href='tel:+998935555555'>
+               <IconButton >
+               <CallIcon />
+             </IconButton>
+            </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+           
+             <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Email</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+         <a>
+               <IconButton >
+               <MailOutlineIcon />
+             </IconButton>
+             </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+           <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Kurs haqida batafsil ma'lumot</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+           <IconButton
                className={clsx(styles.expand, {
                  [styles.expandOpen]: this.state.expanded[4],
                })}
@@ -595,6 +1309,12 @@ expanded:[]
              >
                <ExpandMoreIcon />
              </IconButton>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+
+         
            </CardActions>
            <Collapse in={this.state.expanded[4]} timeout="auto" unmountOnExit>
              <CardContent>
@@ -635,7 +1355,7 @@ expanded:[]
                 <OverlayTrigger
           
     placement="bottom"
-    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'20px'}}>Registratsiya</Tooltip>}
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Registratsiya</Tooltip>}
   >
     {({ ref, ...triggerHandler }) => (
       <Button
@@ -653,7 +1373,7 @@ expanded:[]
         
       </Button>
     )}
-  </OverlayTrigger>,
+  </OverlayTrigger>
                  
                </div>
              </Link>
@@ -680,10 +1400,143 @@ expanded:[]
              </Typography>
            </CardContent>
            <CardActions disableSpacing>
-             <IconButton aria-label="share">
-               <ShareIcon />
+              <OverlayTrigger
+          
+          placement="bottom"
+          overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>O'quv markaz to'g'risida batafsil ma'lumot</Tooltip>}
+        >
+          {({ ref, ...triggerHandler }) => (
+            <Button
+              variant="#F2F2F2"
+              {...triggerHandler}
+              className="d-inline-flex align-items-center"
+            >
+              <Image
+                ref={ref}
+                
+              />
+             <IconButton >
+               <InfoOutlinedIcon />
              </IconButton>
-             <IconButton
+              
+            </Button>
+          )}
+        </OverlayTrigger>
+            <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Telegram</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+        <a href='@ItTower'>
+               <IconButton >
+               <TelegramIcon />
+             </IconButton>
+            </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+            
+            
+            <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Instagram</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+         <a href='http://instagram.com/ItTower'>
+               <IconButton >
+               <InstagramIcon />
+             </IconButton>
+            </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+            <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Telefon qilish</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+        <a href='tel:+998935555555'>
+               <IconButton >
+               <CallIcon />
+             </IconButton>
+            </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+            
+             <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Email</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+        <a>
+               <IconButton >
+               <MailOutlineIcon />
+             </IconButton>
+             </a>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+           <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Kurs haqida batafsil ma'lumot</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+        variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+         <IconButton
                className={clsx(styles.expand, {
                  [styles.expandOpen]: this.state.expanded[5],
                })}
@@ -693,6 +1546,12 @@ expanded:[]
              >
                <ExpandMoreIcon />
              </IconButton>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+
+            
            </CardActions>
          
            <Collapse in={this.state.expanded[5]} timeout="auto" unmountOnExit>

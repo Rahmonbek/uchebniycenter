@@ -16,7 +16,7 @@ import {GoSearch} from 'react-icons/go'
 import {VscChromeClose} from 'react-icons/vsc'
 import {FcBusinessman} from 'react-icons/fc'
 import Davomat from './pages/Davomat';
-import Guruhlar from './pages/Guruhlar';
+// import Guruhlar from './pages/Guruhlar';
 import Dashboard from './pages/Dashboard';
 import logo1 from './img/logo1.png'
 import Oquvchiqoshish from './pages/Oquvchiqoshish';
@@ -24,6 +24,8 @@ import Tolov from './pages/Tolov'
 import Oquvchi from './pages/Oquvchi';
 import Oqituvchi from './pages/Oqituvchi';
 import { Col, Row } from 'react-bootstrap';
+import Malumot from './pages/Malumot'
+import LearningCenter from './pages/LearningCenter';
 export default class Main extends Component {
 state = {
     collapsed: false,
@@ -125,7 +127,7 @@ state = {
           <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/"> Bosh bo'lim</Link>
           </Menu.Item>
           <Menu.Item key="2" icon={<DiJavascript1 style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
-            Kurslar
+          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/kurslar">Kurslar</Link>
           </Menu.Item>
           <SubMenu key="sub1" icon={<BiGroup style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2} title="Guruhlar">
             <Menu.Item className={this.state.collapsed? styles.list1:styles.list2} key="4">Front-end (React)</Menu.Item>
@@ -160,7 +162,7 @@ state = {
          <Dashboard/>
        </Route>
        <Route exact path="/guruhlar">
-         <Guruhlar/>
+         <LearningCenter/>
        </Route>
        <Route exact path="/oquvchi">
          <Oquvchi/>
@@ -170,6 +172,9 @@ state = {
        </Route>
        <Route exact path="/oqituvchi">
          <Oqituvchi/>
+       </Route>
+       <Route exact path="/kurslar">
+         <Malumot/>
        </Route>
 
      </Switch>
