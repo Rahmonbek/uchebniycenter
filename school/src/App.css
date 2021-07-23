@@ -149,3 +149,15 @@ element.style {
 .d-inline-flex{
   padding: 8px !important;
 }
+.nav-tabs, .nav-link{
+ border: none !important;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+  background-color:#3F51B5;
+  /* border-bottom: 2px solid #fff !important; */
+  color: #fff;
+}
+.nav-link{
+  font-size: 20px;
+  font-weight: 400;
+}

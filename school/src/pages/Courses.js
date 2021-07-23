@@ -105,23 +105,23 @@ justifyActive:'tab1',
                     {/* Section----- */}
                     <div className={styles.section}>
                     <Container>
-                    <MDBTabs justify className='mb-3'>
-        <MDBTabsItem>
-          <MDBTabsLink onClick={() => this.handleJustifyClick('tab1')} active={this.state.justifyActive === 'tab1'} style={{backgroundColor:'transparent', borderBottom:'2px solid blue'}}>
+                    <MDBTabs justify className='mb-3' >
+        <MDBTabsItem style={{marginBottom:'40px'}}>
+          <MDBTabsLink onClick={() => this.handleJustifyClick('tab1')} active={this.state.justifyActive === 'tab1'} >
           All
           </MDBTabsLink>
         </MDBTabsItem>
-        <MDBTabsItem>
+        <MDBTabsItem style={{marginBottom:'40px'}}>
           <MDBTabsLink onClick={() => this.handleJustifyClick('tab2')} active={this.state.justifyActive === 'tab2'}>
            IT
           </MDBTabsLink>
         </MDBTabsItem>
-        <MDBTabsItem>
+        <MDBTabsItem style={{marginBottom:'40px'}}>
           <MDBTabsLink onClick={() => this.handleJustifyClick('tab3')} active={this.state.justifyActive === 'tab3'}>
             TIL
           </MDBTabsLink>
         </MDBTabsItem>
-        <MDBTabsItem>
+        <MDBTabsItem style={{marginBottom:'40px'}}>
           <MDBTabsLink onClick={() => this.handleJustifyClick('tab4')} active={this.state.justifyActive === 'tab4'}>
             ABITURENT
           </MDBTabsLink>
