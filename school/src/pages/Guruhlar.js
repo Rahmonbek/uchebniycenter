@@ -70,6 +70,7 @@ export default class Guruhlar extends Component {
         console.log(mas)
         this.onReset()
     };
+<<<<<<< Updated upstream
     onReset = () => {
         this.formRef.current.resetFields();
         this.setState({
@@ -79,6 +80,28 @@ export default class Guruhlar extends Component {
     };
     clform = () => {
         this.formRef.current.resetFields();
+=======
+
+handleCancel=()=>{
+    this.setState({
+        show:false,
+        edit: null,
+        iValue:{
+            id: '',
+            name: '',
+            soha: '',
+            mentor: "",
+            kun: '',
+            vaqt: ""
+        }
+    })
+    document.getElementById("formGrh").reset()
+}
+edit=(x)=>{
+    var m={
+        name:this.state.grlar[x].name,
+        mentor:this.state.grlar[x].mentor
+>>>>>>> Stashed changes
     }
     editRow = (x) => {
 
@@ -101,7 +124,26 @@ export default class Guruhlar extends Component {
         document.getElementById("modal").checked = true
     }
 
+<<<<<<< Updated upstream
+=======
+resetForm=()=>{
+    document.querySelector("#formGrh").reset()
+    
+}
+openModal=()=>{
+ console.log(
+    document.getElementById("formGrh") 
+ )
+    this.setState({
+        show:true
+    })
+    // document.getElementById("formGrh").reset()
+>>>>>>> Stashed changes
 
+}
+componentDidUpdate(){
+    console.log(document.querySelector("#formGrh"))
+}
     render() {
         const { Option } = Select;
         const layout = {
@@ -214,6 +256,7 @@ export default class Guruhlar extends Component {
                             </Select>
                         </Form.Item>
 
+<<<<<<< Updated upstream
                         <Form.Item name="kun" rules={[{ required: true }]}>
                             <Select
                                 mode="multiple"
@@ -242,6 +285,18 @@ export default class Guruhlar extends Component {
                         >
                             {({ getFieldValue }) =>
                                 getFieldValue('gender') === 'other' ? (
+=======
+                                <Form  id="formGrh" name="basic" onFinish={this.onFinish} initialValues={{remember:true, ...this.state.iValue}}>
+                                    <Form.Item name="name"
+                                        rules={[
+                                            {
+                                                required: true,
+                                            },
+                                        ]}
+                                    >
+                                        <Input placeholder="Gurux nomini kiriting" />
+                                    </Form.Item>
+>>>>>>> Stashed changes
                                     <Form.Item
                                         name="customizeGender"
                                         label="Customize Gender"
