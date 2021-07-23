@@ -16,7 +16,7 @@ import {GoSearch} from 'react-icons/go'
 import {VscChromeClose} from 'react-icons/vsc'
 import {FcBusinessman} from 'react-icons/fc'
 import Davomat from './pages/Davomat';
-import Guruhlar from './pages/Guruhlar';
+// import Guruhlar from './pages/Guruhlar';
 import Dashboard from './pages/Dashboard';
 import logo1 from './img/logo1.png'
 import Oquvchiqoshish from './pages/Oquvchiqoshish';
@@ -24,6 +24,7 @@ import Tolov from './pages/Tolov'
 import Oquvchi from './pages/Oquvchi';
 import Oqituvchi from './pages/Oqituvchi';
 import { Col, Row } from 'react-bootstrap';
+import LearningCenter from './pages/LearningCenter';
 export default class Main extends Component {
 state = {
     collapsed: false,
@@ -160,7 +161,7 @@ state = {
          <Dashboard/>
        </Route>
        <Route exact path="/guruhlar">
-         <Guruhlar/>
+         <LearningCenter/>
        </Route>
        <Route exact path="/oquvchi">
          <Oquvchi/>
