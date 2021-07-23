@@ -240,43 +240,54 @@ handleCancel=()=>{
 
       <Form.Item         
 label="Guruhning yo'nalishini tanlang"
-        name="name"
+        name="yonalish"
         rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
-<Select style={{width:'100%'}} defaultValue={this.state.category.id}  onChange={this.handleChange}>
-      {
+<Select
+    mode="multiple"
+    style={{ width: '100%' }}
+    placeholder="Yo'nalishni tanlang"
+    defaultValue={[this.state.category[0].id]}
+    
+    optionLabelProp="label"
+  >
+       {
           this.state.category.map(item=>{
-              return(<Option value={item.id}>{item.name}</Option>)
+              return(<Option value={item.id}  label={item.name}><div className="demo-option-label-item">{item.name}</div></Option>)
           })
       }
-      
-      
-      
-      </Select>
+     
+  </Select>
 </Form.Item>
 <Form.Item         
 label="Guruhning o'qituvchisini tanlang"
-        name="name"
+        name="mentor"
         rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
-<Select style={{width:'100%'}} defaultValue={this.state.mentor.id}  onChange={this.handleChange}>
-      {
+<Select
+    mode="multiple"
+    style={{ width: '100%' }}
+    placeholder="O'qutuvchini tanlang"
+    defaultValue={[this.state.mentor[0].id]}
+    
+    optionLabelProp="label"
+  >
+       {
           this.state.mentor.map(item=>{
-              return(<Option value={item.id}>{item.name}</Option>)
+              return(<Option value={item.id}  label={item.fullname}><div className="demo-option-label-item">{item.fullname}</div></Option>)
           })
       }
-      
-      
-      
-      </Select>
+     
+  </Select>
+
 </Form.Item>
 
 <Form.Item         
 label="Guruhda o'tiladigan fanlarni/dasturlarni tanlang"
-        name="name"
+        name="fanlar"
         rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
-<Select style={{width:'100%'}} defaultValue={this.state.fanlar.id}  onChange={this.handleChange}>
+<Select style={{width:'100%'}} defaultValue={this.state.fanlar[0].id}>
       {
           this.state.fanlar.map(item=>{
               return(<Option value={item.id}>{item.name}</Option>)
