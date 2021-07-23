@@ -13,14 +13,14 @@ export default function Oqituvchiqoshish() {
     const [oqituvchi,setOqituvchi]=useState([
         {
             name:'Abdulbosit Xayitov',
-            tugilgansana:'2021-07-08',
+            tugilgansana:'2021-06-30',
             telefon:'+87647568775',
             email:'xayitov@gmail.com',
             rasm: <img style={{width:'200px'}} src={rasm1}/>,
             yonalish:'front-end developer',
-            texnologiyalar:['html','css','bootstrap','js','ajax','react','redux'],
+            texnologiyalar:['html','css','bootstrap','js','ajax','react','redux','android'],
             malumot:'bhgberu hgbuhurh uyhvyuvbyuhyu hguyh2uqhf2 yh2u3gh2uyhg yuhgyuhryurfhfyqfb quyfhqyugbq hbqhybfhqbf',
-            ishsana:"2021-07-08" 
+            ishsana:"2021-06-30" 
             
         }
     ])
@@ -99,14 +99,14 @@ const [data1,setDate1]=useState([])
       console.log(newoqituvchilar)
       form.setFieldsValue({
         name:newoqituvchilar.name,
-        tugilgansana:data1,
+        tugilgansana:newoqituvchilar.tugilgansana,
         telefon:newoqituvchilar.telefon,  
         email:newoqituvchilar.email,  
       //   rasm:newoqituvchilar.rasm,  
         yonalish:newoqituvchilar.yonalish,
         texnologiyalar:newoqituvchilar.texnologiyalar,
         malumot:newoqituvchilar.malumot,
-        ishsana:data
+        ishsana:newoqituvchilar.ishsana
       });
       console.log(id)
       setEdit(id)
@@ -201,16 +201,17 @@ return (
            name="name"
            label="F.I.O"
            rules={[
-             {
+             { 
+
                required: true,
              },
            ]}
          >
            <Input />
          </Form.Item>
-         <Form.Item  name="tugilgansana"   label="Tug'ilgan sana:">
-         <DatePicker  onChange={dates1} placeholder="Sanani tanlang"/>
-       </Form.Item>
+         <Form.Item  name="bfhbf" label="Tug'ilgan sana:">
+        <DatePicker type="object" name="tugilgansana"/>
+      </Form.Item>
          <Form.Item
            name="telefon"
            label="Telefon raqami:"
@@ -281,8 +282,8 @@ return (
                         >
                             <Input.TextArea rows="3" placeholder="Qo'shimcha ma'lumot..." />
                         </Form.Item>
-         <Form.Item className={edit===null?'':styles.date2} name="ishsana"   label="Ish boshlagan sana:">
-         <DatePicker  onChange={dates} placeholder="Sanani tanlang"/>
+         <Form.Item className={edit===null?'':styles.date2}  label="Ish boshlagan sana:">
+         <DatePicker name="ishsana"   onChange={dates} placeholder="Sanani tanlang"/>
        </Form.Item>
          <Form.Item {...tailLayout}>
            <Button type="primary" htmlType="submit">
