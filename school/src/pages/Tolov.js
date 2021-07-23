@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { Modal, Button, Cascader, DatePicker } from 'antd';
+import { Modal, Cascader, DatePicker } from 'antd';
 import styles from '../css/davomat.module.css'
 import {Container,Row,Col} from 'react-bootstrap'
 import {BsPersonPlusFill} from 'react-icons/bs'
@@ -8,7 +8,8 @@ import {FiPieChart,FiCheckCircle} from 'react-icons/fi'
 import {FcPlus} from 'react-icons/fc'
 import {AiFillEdit,AiOutlineDelete} from 'react-icons/ai'
 import {Table} from 'react-bootstrap'
-
+import { Card, Button,Fab ,IconButton,Divider} from 'ui-neumorphism'
+import 'ui-neumorphism/dist/index.css'
 export default function Tolov() {
     const [guruhlar,setGuruhlar]=useState(
         [
@@ -274,20 +275,21 @@ const takeOy=()=>{
     return (
         <div style={{padding:'5%'}}>
               <div style={{marginBottom:'20px'}}>
-            <Button onClick={showModal}>To'lov <FcPlus style={{color:'#3F6AD8',marginLeft:'10px',marginTop:'-5px',cursor:'pointer'}}/></Button>
+            <Button bgColor='#F1F4F6' onClick={showModal}>To'lov <FcPlus style={{color:'#3F6AD8',marginLeft:'10px',marginTop:'-5px',cursor:'pointer'}}/></Button>
             </div>
-            <div style={{padding:'10px',marginBottom:'20px'}} className={styles.backgroundTable}>
-            <h5>Oxirgi to'lov qilganlar ro'yxati</h5>
-            <Table style={{marginTop:'20px'}} style={{color:'rgba(0,0,0,0.7)'}}>
+            <Card style={{padding:'10px',marginBottom:'20px', backgroundColor:'#F1F4F6'}} className={styles.backgroundTable}>
+            <h6>Oxirgi to'lov qilganlar ro'yxati</h6>
+            <Card inset style={{backgroundColor:'#F1F4F6',marginTop:'20px'}}>
+            <Table  style={{marginTop:'20px'}} style={{color:'rgba(0,0,0,0.7)'}}>
                         <thead>
                             <tr>
-                            <th style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>#</th>
-                            <th style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>F.I.O</th>
-                            <th style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>Kurs</th>
-                            <th style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>Guruh</th>
-                            <th style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>Summa</th>
-                            <th style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>Sana</th>
-                            <th style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>O'zgartirish/O'chirish</th>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>#</th>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>F.I.O</th>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>Kurs</th>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>Guruh</th>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>Summa</th>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>Sana</th>
+                            <th style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>O'zgartirish/O'chirish</th>
                             </tr>
                         </thead>
                         {
@@ -295,78 +297,74 @@ const takeOy=()=>{
                               return(
                                 <tbody>
                                 <tr>
-                                <td style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>{key+1}</td>
-                                <td style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>{item.name[2]}</td>
-                                <td style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>{item.name[0]}</td>
-                                <td style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>{item.name[1]}</td>
-                                <td style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>{item.summa}
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{key+1}</td>
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.name[2]}</td>
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.name[0]}</td>
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.name[1]}</td>
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.summa}
                                 {
                                      (item.summa<350000)?<FiPieChart style={{fontSize:'16px',color:'red',marginLeft:'5px',marginTop:'-5px'}}/>:<FiCheckCircle style={{fontSize:'16px',color:'green',marginLeft:'5px',marginTop:'-5px'}}/>
                                 }
                                 </td>
-                                <td style={{borderBottom:' 1px solid #3F6AD8',padding:'10px'}}>{item.sana}</td>                          
-                                <td style={{borderBottom:' 1px solid #3F6AD8'}}><AiFillEdit onClick={()=> onFill(`${key}`)} style={{fontSize:'16px',color:'green',marginLeft:'5px',marginTop:'-5px'}}/> <AiOutlineDelete style={{fontSize:'16px',color:'red',marginLeft:'5px',marginTop:'-5px'}}/> </td>
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)',padding:'10px'}}>{item.sana}</td>                          
+                                <td style={{borderBottom:' 1px solid rgba(0,0,0,0.1)'}}><IconButton  rounded text={false} color='var(--error)' bgColor="#F1F4F6" style={{borderRadius:'15px',width:'30px'}}><AiFillEdit onClick={()=> onFill(`${key}`)} style={{fontSize:'16px',color:'green'}}/></IconButton> <IconButton  rounded text={false} color='var(--error)' bgColor="#F1F4F6" style={{borderRadius:'15px'}}><AiOutlineDelete style={{fontSize:'16px',color:'red'}}/></IconButton> </td>
                                 </tr>
                             </tbody>
                               )
                           }):''
                         }
                         </Table>
-            </div>
-            <Container>
+                </Card>
+            </Card>
+            <Container style={{padding:'0'}}>
                 <Row>
-                <Col lg={4} md={6} sm={12} className={styles.card1}>
+                <Col lg={4} md={6} sm={12}>
+                        <Card className={styles.card1} style={{backgroundColor:'#F1F4F6',marginTop:'20px'}}>
                         <h1>Front-end guruhlari</h1>
                         <Row>
                             
                                 {
                                     guruhlar.map((item,key)=>{
                                         return(
-                                            <Col lg={2} style={{padding:'0'}} onClick={()=>{setOy(`${key}`)} } className={styles.gr}>{item.guruh}</Col>
+                                            <Fab bgColor="#F1F4F6"  style={{padding:'0',}} onClick={()=>{setOy(`${key}`)} } className={styles.gr}>{item.guruh}</Fab>
                                         )
                                     })
                                 }
                             
                         </Row>
+                        </Card>
                     </Col>
-                    <Col lg={4} md={6} sm={12} className={styles.card2}>
-                        <h1>Python+Jango guruhlari</h1>
+                    <Col lg={4} md={6} sm={12}>
+                       <Card  className={styles.card1} style={{backgroundColor:'#F1F4F6',marginTop:'20px'}}>
+                       <h1>Python+Jango guruhlari</h1>
                         <Row>
                             
                                 {
                                     python.map((item,key)=>{
                                         return(
-                                            <Col lg={2} style={{padding:'0'}} className={styles.gr2}>{item.guruh}</Col>
+                                            <Fab bgColor="#F1F4F6"  style={{padding:'0'}} className={styles.gr}>{item.guruh}</Fab>
                                         )
                                     })
                                 }
                             
                         </Row>
+                       </Card>
                     </Col>
-                    <Col lg={4} md={6} sm={12} className={styles.card3}>
+                    <Col lg={4} md={6} sm={12}>
+                        <Card className={styles.card1} style={{backgroundColor:'#F1F4F6',marginTop:'20px'}}>
                         <h1>Mobile Unity guruhlari</h1>
                         <Row>
                             
                                 {
                                     unit.map((item,key)=>{
                                         return(
-                                            <Col lg={2} style={{padding:'0'}} className={styles.gr3}>{item.guruh}</Col>
+                                            <Fab  bgColor="#F1F4F6"  style={{padding:'0',fontSize:'10px'}} className={styles.gr}>{item.guruh}</Fab>
                                         )
                                     })
                                 }
                             
                         </Row>
-                    </Col>
-                    <Col lg={12} style={{marginTop:'20px',padding:'10px',paddingLeft:'20px'}} className={styles.card1}>
-                        <Row>
-                            {
-                                datas.map(item=>{
-                                    return(
-                                        <Col lg={2} style={{padding:'0',color:'black'}} className={styles.gr}>{item}</Col>
-                                    )
-                                })
-                            }
-                        </Row>
+                        </Card>
                     </Col>
                 </Row>
             </Container>

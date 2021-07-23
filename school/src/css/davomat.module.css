@@ -2,27 +2,21 @@
     background-color: #FFFFFF;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
     border-radius: 5px;
-    width: 32% !important;
     margin-right: 10px;
-    border-bottom: 2px solid #3F6AD8;
+    padding:0 15px !important
 
 }
 .card2{
     background-color: #FFFFFF;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
     border-radius: 5px;
-    width: 32% !important;
     margin-right: 10px;
-    border-bottom: 2px solid #F0B526;
 
 }
 .card3{
     background-color: #FFFFFF;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
     border-radius: 5px;
-    width: 32% !important;
-    margin-right: 10px;
-    border-bottom: 2px solid #DD3D63;
 
 }
 .container{
@@ -53,46 +47,10 @@
     
 }
 .gr{
-    background-color: #D0EEFF;
-    width:47px !important;
-    height: 50px;
-    margin:1%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color:#3F6AD8 !important;
-    font-size: 13px;
-    font-weight: 700;
-    border-radius: 5px;
+    width:14% !important;
+    margin:2% !important;
     cursor: pointer;
-}
-.gr2{
-    background-color: #FDF1D3;
-    width:47px !important;
-    height: 50px;
-    margin:1%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color:#F0B526;
-    font-size: 13px;
-    font-weight: 700;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.gr3{
-    background-color: #F7D3DC;
-    width:47px !important;
-    height: 50px;
-    margin:1%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color:#DD3D63;
-    font-size: 13px;
-    font-weight: 700;
-    border-radius: 5px;
-    cursor: pointer;
+    font-size: 15px !important;
 }
 .backgroundTable{
     margin-top: 20px !important;
