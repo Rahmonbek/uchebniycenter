@@ -1,12 +1,21 @@
 import React, { Component } from 'react'
 import { Container, Col, Row } from 'react-bootstrap';
 import styles from '../css/news.module.css'
-import { Button, Input, Select, Table, Modal, Form } from 'antd';
+import { Button, Input, Select, Table, Modal, Form, DatePicker, TimePicker, InputNumber, Upload } from 'antd';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import moment from 'moment';
 import "../css/modalStyle.css";
+import { PlusOutlined } from '@ant-design/icons';
 
 
+function getBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
 
 
 export default class Guruhlar extends Component {
@@ -62,6 +71,7 @@ export default class Guruhlar extends Component {
             id:'6',
             name:'Django'
         },],
+        previewVisible: false,
         mentor:[
             {id:1,
                 fullname:'Ismoilov Rahmon'},
@@ -82,7 +92,7 @@ export default class Guruhlar extends Component {
             {
                 id: 1,
                 name: 'tower02',
-                
+               muddat:'3', 
                 mentor: "allakim",
                 yonalish:['Web dasturlash', 'Android'],
                 fanlar:['HTML', 'CSS', 'React'],
@@ -95,7 +105,7 @@ export default class Guruhlar extends Component {
             {
                 id: 2,
                 name: 'tower02 ',
-                
+               muddat:'3', 
                 mentor: "allakim",
                 yonalish:['Web dasturlash', 'Android'],
                 fanlar:['HTML', 'CSS', 'React'],
@@ -108,7 +118,7 @@ export default class Guruhlar extends Component {
             {
                 id: 3,
                 name: 'tower02 ',
-                
+               muddat:'3', 
                 mentor: "allakim",
                 yonalish:['Web dasturlash', 'Android'],
                 fanlar:['HTML', 'CSS', 'React'],
@@ -122,7 +132,7 @@ export default class Guruhlar extends Component {
         show:false
     }
 
-
+    handleChange = ({ fileList }) => this.setState({ fileList });
 editRow=(id)=>{
     console.log(this.state.grlar[id])
 
@@ -139,12 +149,24 @@ handleCancel=()=>{
     })
 }
 
-
-
+handlePreview = async file => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+    this.setState({
+        previewImage: file.url || file.preview,
+        previewVisible: true,
+       });
+    };
 
     render() {
         const { Option } = Select;
-       
+        const uploadButton = (
+            <div>
+              <PlusOutlined />
+              <div style={{ marginTop: 8 }}>Upload</div>
+            </div>
+          );
       
         const columns = [
             {
@@ -221,7 +243,7 @@ handleCancel=()=>{
                         </Col>
                     </Row>
                 </Container>
-                <Modal title="Guruh" visible={this.state.show} footer={false} onCancel={this.handleCancel}>
+                <Modal title="Guruh" width="70%" visible={this.state.show} footer={false} onCancel={this.handleCancel}>
                 <Form
       name="basic"
       labelCol={{ span: 24 }}
@@ -230,12 +252,14 @@ handleCancel=()=>{
       onFinish={this.onFinish}
       
     >
-      <Form.Item
+        <Row>
+            <Col lg={6} md={12} sm={12}>
+            <Form.Item
         label="Guruhni nomini kiriting"
         name="name"
         rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
-        <Input />
+        <Input placeholder="Guruhning nomini kiriting"/>
       </Form.Item>
 
       <Form.Item         
@@ -247,39 +271,17 @@ label="Guruhning yo'nalishini tanlang"
     mode="multiple"
     style={{ width: '100%' }}
     placeholder="Yo'nalishni tanlang"
-    defaultValue={[this.state.category[0].id]}
+    defaultValue={[this.state.category[0].name]}
     
     optionLabelProp="label"
   >
        {
           this.state.category.map(item=>{
-              return(<Option value={item.id}  label={item.name}><div className="demo-option-label-item">{item.name}</div></Option>)
+              return(<Option value={item.name}  label={item.name}><div className="demo-option-label-item">{item.name}</div></Option>)
           })
       }
      
   </Select>
-</Form.Item>
-<Form.Item         
-label="Guruhning o'qituvchisini tanlang"
-        name="mentor"
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
->
-<Select
-    mode="multiple"
-    style={{ width: '100%' }}
-    placeholder="O'qutuvchini tanlang"
-    defaultValue={[this.state.mentor[0].id]}
-    
-    optionLabelProp="label"
-  >
-       {
-          this.state.mentor.map(item=>{
-              return(<Option value={item.id}  label={item.fullname}><div className="demo-option-label-item">{item.fullname}</div></Option>)
-          })
-      }
-     
-  </Select>
-
 </Form.Item>
 
 <Form.Item         
@@ -290,7 +292,7 @@ label="Guruhda o'tiladigan fanlarni/dasturlarni tanlang"
 <Select style={{width:'100%'}} defaultValue={this.state.fanlar[0].id}>
       {
           this.state.fanlar.map(item=>{
-              return(<Option value={item.id}>{item.name}</Option>)
+              return(<Option value={item.name}>{item.name}</Option>)
           })
       }
       
@@ -298,7 +300,121 @@ label="Guruhda o'tiladigan fanlarni/dasturlarni tanlang"
       
       </Select>
 </Form.Item>
+<Form.Item         
+label="Guruhning o'qituvchisini tanlang"
+        name="mentor"
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+>
+<Select
+    mode="multiple"
+    style={{ width: '100%' }}
+    placeholder="O'qutuvchini tanlang"
+    defaultValue={[this.state.mentor[0].fullname]}
+    
+    optionLabelProp="label"
+  >
+       {
+          this.state.mentor.map(item=>{
+              return(<Option value={item.fullname}  label={item.fullname}><div className="demo-option-label-item">{item.fullname}</div></Option>)
+          })
+      }
+     
+  </Select>
+
+</Form.Item>
+<Row>
+    <Col lg={6}>
+    <Form.Item
+        label="Ochilish sanasini kiriting"
+        name="date"
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+      >
+        <DatePicker />
+      </Form.Item>
+
+
+    </Col>
+    <Col lg={6}>
+    <Form.Item
+        label="Dars vaqtini kiriting"
+        name="vaqt"
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+      >
+        <TimePicker.RangePicker />
+      </Form.Item>
+
+
+    </Col>
+</Row>
       
+            </Col>
+<Col lg={6} sm={12} md={12}>
+<Row>
+    <Col lg={5}>
+    <Form.Item
+        label="Dars nechchi oy davom etishini kiriting"
+        name="muddat"
+        
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+      >
+        <InputNumber min="0"/>
+      </Form.Item>
+
+    
+    </Col>
+    <Col lg={7}>
+    <Form.Item         
+label="Haftani qaysi kunlari dars bo'lishini kiriting"
+        name="kun"
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+>
+<Select
+    mode="multiple"
+    style={{ width: '100%' }}
+    placeholder="Hafta kunlarini tanglang"
+    defaultValue={['Dushanba']}
+    
+    optionLabelProp="label"
+  >
+       <Option value="Dushanba"  label="Dushanba"><div className="demo-option-label-item">Dushanba</div></Option>
+       <Option value="Seshanba"  label="Seshanba"><div className="demo-option-label-item">Seshanba</div></Option>
+       <Option value="Chorshanba"  label="Chorshanba"><div className="demo-option-label-item">Chorshanba</div></Option>
+       <Option value="Payshanba"  label="Payshanba"><div className="demo-option-label-item">Payshanba</div></Option>
+       <Option value="Juma"  label="Juma"><div className="demo-option-label-item">Juma</div></Option>
+       <Option value="Shanba"  label="Shanba"><div className="demo-option-label-item">Shanba</div></Option>
+       <Option value="Yakshanba"  label="Yakshanba"><div className="demo-option-label-item">Yakshanba</div></Option>
+     
+  </Select>
+
+</Form.Item>
+
+    </Col>
+    </Row>      
+    <Form.Item         
+label="Haftani qaysi kunlari dars bo'lishini kiriting"
+        name="kun"
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+>
+<Upload
+          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          listType="picture-card"
+        //   fileList={this.state.fileList}
+        //   onPreview={this.handlePreview}
+          onChange={this.handleChange}
+        >
+          {/* {this.state.fileList.length >= 8 ? null : uploadButton} */}
+        </Upload>
+        <Modal
+          visible={this.state.previewVisible}
+        //   title={this.state.previewTitle}
+          footer={null}
+          onCancel={this.handleCancel}
+        >
+          <img alt="example" style={{ width: '100%' }} src={this.state.previewImage} />
+        </Modal>
+</Form.Item>
+</Col>
+        </Row>
       <Form.Item>
       <Button type="danger" htmlType="submit">
 Bekor qilish
