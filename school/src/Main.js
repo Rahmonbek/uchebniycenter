@@ -16,7 +16,7 @@ import {GoSearch} from 'react-icons/go'
 import {VscChromeClose} from 'react-icons/vsc'
 import {FcBusinessman} from 'react-icons/fc'
 import Davomat from './pages/Davomat';
-// import Guruhlar from './pages/Guruhlar';
+import Guruhlar from './pages/Guruhlar';
 import Dashboard from './pages/Dashboard';
 import logo1 from './img/logo1.png'
 import Oquvchiqoshish from './pages/Oquvchiqoshish';
@@ -148,6 +148,9 @@ state = {
           <Menu.Item key="11" icon={<AiOutlineGooglePlus style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
           <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/guruhlar">Guruh qo'shish</Link>
           </Menu.Item>
+          <Menu.Item key="11" className={this.state.collapsed? styles.list1:styles.list2}>
+          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/lcenter">Ro'yxatdan o'tish</Link>
+          </Menu.Item>
           <Menu.Item key="12" icon={<ImUserPlus style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
           <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/oqituvchi">O'qituvchi qo'shish</Link>
           </Menu.Item>
@@ -162,6 +165,9 @@ state = {
          <Dashboard/>
        </Route>
        <Route exact path="/guruhlar">
+         <Guruhlar/>
+       </Route>
+       <Route exact path="/lcenter">
          <LearningCenter/>
        </Route>
        <Route exact path="/oquvchi">
