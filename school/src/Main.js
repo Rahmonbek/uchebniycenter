@@ -22,7 +22,7 @@ import logo1 from './img/logo1.png'
 import Oquvchiqoshish from './pages/Oquvchiqoshish';
 import Tolov from './pages/Tolov'
 import Oquvchi from './pages/Oquvchi';
-// import Oqituvchiqoshish from './pages/Oqituvchiqoshish';
+import Oqituvchi from './pages/Oqituvchi';
 import { Col, Row } from 'react-bootstrap';
 export default class Main extends Component {
 state = {
@@ -167,6 +167,9 @@ state = {
        </Route>
        <Route exact path="/tolov">
          <Tolov/>
+       </Route>
+       <Route exact path="/oqituvchi">
+         <Oqituvchi/>
        </Route>
 
      </Switch>
