@@ -30,8 +30,6 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Link } from 'react-router-dom';
-import AOS from 'aos';
-import 'aos/dist/aos.css'; 
 import {FaSignInAlt} from 'react-icons/fa'
 import Aos from 'aos';
 import 'aos/dist/aos.css';
@@ -88,7 +86,7 @@ justifyActive:'tab1',
             <div className={styles.bg}>
            
                        <header className={styles.header}>
-                         <Link to='/main/uz'>
+                         <Link to='/cabinet'>
                          <div className={styles.log_in}>
                          <FaSignInAlt  / >
                          </div>
@@ -133,7 +131,7 @@ justifyActive:'tab1',
              <Row>
              <Col lg={4} md={6} sm={12}>
                <Row>
-                 <Col lg={12}>
+  <Col lg={12}>
                  <Card className={styles.root} style={{margin:'auto', marginBottom:'20px'}} data-aos="zoom-in-up">
            <CardHeader 
              avatar={

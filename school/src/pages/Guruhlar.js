@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Col, Row } from 'react-bootstrap';
+import { Container, Col, Row,Image, OverlayTrigger,  Tooltip } from 'react-bootstrap';
 import styles from '../css/news.module.css'
 import { Button, Input, Select, Table, Modal, Form, DatePicker, TimePicker, InputNumber, Upload, message } from 'antd';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,6 +9,42 @@ import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
+import {
+    MDBTabs,
+    MDBTabsItem,
+    MDBTabsLink,
+    MDBTabsContent,
+    MDBTabsPane
+  } from 'mdb-react-ui-kit';  
+import style from '../css/courses.module.css';
+import '../App.css'
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Collapse from '@material-ui/core/Collapse';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import { red } from '@material-ui/core/colors';
+import DeleteIcon from '@material-ui/icons/Delete';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import TelegramIcon from '@material-ui/icons/Telegram';
+import BorderColorIcon from '@material-ui/icons/BorderColor';
+import CallIcon from '@material-ui/icons/Call';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { Link } from 'react-router-dom';
+
+
+const { TextArea } = Input;
 
 
 
@@ -16,7 +52,9 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 export default class Guruhlar extends Component {
 
     state = {
-
+        expanded:[],
+        justifyActive:'tab1',
+        
         edit: null,
         category:[{
             id:'1',
@@ -69,30 +107,31 @@ export default class Guruhlar extends Component {
         previewVisible: false,
         mentor:[
             {id:1,
-                fullname:'Ismoilov Rahmon'},
+                fullname:'Isdmoilov Rahmon'},
                 {id:2,
-                    fullname:'Ismoilov Rahmon'},
+                    fullname:'Ismodilov Rahmon'},
                     {id:3,
-                        fullname:'Ismoilov Rahmon'},
+                        fullname:'Ismoilov Radhmon'},
                         {id:4,
-                            fullname:'Ismoilov Rahmon'},
+                            fullname:'Ismodilov Rahmon'},
                             {id:5,
-                                fullname:'Ismoilov Rahmon'},
+                                fullname:'Ismoilov Rahmdon'},
                                 {id:6,
-                                    fullname:'Ismoilov Rahmon'},
+                                    fullname:'Idsmoilov Rahmon'},
                                     {id:7,
-                                        fullname:'Ismoilov Rahmon'},
+                                        fullname:'Ismoilov Rahmodn'},
         ],
+        date:'',
         grlar: [
             {
                 id: 1,
                 name: 'tower02',
                muddat:'3', 
-                mentor: "allakim",
+                mentor: ["allakim"],
                 yonalish:['Web dasturlash', 'Android'],
                 fanlar:['HTML', 'CSS', 'React'],
                 image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
-                kun: 'Dushanba Seshanba Payshanba',
+                kun: ['Dushanba', 'Seshanba', 'Payshanba'],
                 vaqt: "12:00-14:00",
                 date:"21-11-2020",
                 qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus kina",
@@ -101,11 +140,11 @@ export default class Guruhlar extends Component {
                 id: 2,
                 name: 'tower02 ',
                muddat:'3', 
-                mentor: "allakim",
+                mentor: ["allakim"],
                 yonalish:['Web dasturlash', 'Android'],
                 fanlar:['HTML', 'CSS', 'React'],
                 image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
-                kun: 'Dushanba Seshanba Payshanba',
+                kun: ['Dushanba', 'Seshanba', 'Payshanba'],
                 vaqt: "12:00-15:00",
                 date:"21-11-2020",
                 qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus kina",
@@ -114,11 +153,11 @@ export default class Guruhlar extends Component {
                 id: 3,
                 name: 'tower02 ',
                muddat:'3', 
-                mentor: "allakim",
+                mentor: ["allakim"],
                 yonalish:['Web dasturlash', 'Android'],
                 fanlar:['HTML', 'CSS', 'React'],
                 image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
-                kun: 'Dushanba Seshanba Payshanba',
+                kun: ['Dushanba', 'Seshanba', 'Payshanba'],
                 vaqt: "12:00-16:00",
                 date:"21-11-2020",
                 qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus kina",
@@ -139,7 +178,43 @@ handleCancel=()=>{
         show:false
     })
 }
+onFinish=(value)=>{
+    var date=value.date._d.toLocaleDateString()
+    var time=value.vaqt[0]._d.toLocaleTimeString()+ ' - '+value.vaqt[1]._d.toLocaleTimeString()
+    var config={
+        id: this.state.grlar[this.state.grlar.length-1].id+1,
+                name: value.name,
+               muddat:value.muddat, 
+                mentor: value.mentor,
+                yonalish:value.yonalish,
+                fanlar:value.fanlar,
+                image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
+                kun: value.kun,
+                vaqt: time,
+                date:date,
+                qushimcha: value.qushimcha, 
+        image:value.image
+    }
 
+this.setState({
+    grlar:this.state.grlar.push(config)
+})
+}
+handleExpandClick = (id) => {
+    var a=this.state.expanded
+    a[id]=!a[id]
+ 
+    this.setState({expanded:a})
+  };
+  
+  handleJustifyClick = (value) => {
+    if (value === this.state.justifyActive) {
+      return;
+    }
+
+    this.setState({justifyActive:value});
+  };
+  
 
     render() {
         const { Option } = Select;
@@ -201,45 +276,157 @@ handleCancel=()=>{
         children.push(<Option key='Payshanba'>Payshanba</Option>);
         children.push(<Option key='JUMA'>JUMA</Option>);
         children.push(<Option key='Shanba'>Shanba</Option>);
-        const props = {
+        const text = {
             name: 'file',
             action: '',
             headers: {
               authorization: 'authorization-text',
             },
             onChange(info) {
-              if (info.file.status !== 'uploading') {
-                console.log(info.file, info.fileList);
-              }
-              if (info.file.status === 'done') {
-                message.success(`${info.file.name} file uploaded successfully`);
-              } else if (info.file.status === 'error') {
-                message.error(`${info.file.name} file upload failed.`);
-              }
-            },
-          };
+                if (info.file.status !== 'uploading') {
+                  console.log(info.file, info.fileList);
+                }
+                if (info.file.status === 'done') {
+                  message.success(`${info.file.name} file uploaded successfully`);
+                } else if (info.file.status === 'error') {
+                  message.error(`${info.file.name} file upload failed.`);
+                }
+              
+              },
+            }
+        
         return (
             <div>
                 <input type="checkbox" id="modal" className={styles.smbox}/>
                 <label for="modal" className="modal-background" onClick={this.clform}></label>
-                <Container fluid>
-                    <Row>
-                            <Col lg={12}>
-                            <Table
-                                className={styles.table}
-                                dataSource={this.state.grlar}
-                                columns={columns}
-                                bordered
-                                title={() => {
-                                    return (
-                                        <div className={styles.header}>
-                                            <h4>Guruhlar ro'yxati</h4>
-                                            <Button onClick={this.openModal}>Gurux qo'shish</Button>
-                                        </div>)
-                                }}
-                            />;
-                        </Col>
-                    </Row>
+                <Container fluid><br/><br/>
+                <Button onClick={this.openModal} type="primary">Gurux qo'shish</Button>
+                  <Row>
+                      {
+                          this.state.grlar.map((item, key)=>{
+                              return(<Col lg={4} md={6} sm={12}>
+                                   <Card className={style.root} style={{margin:'auto', marginBottom:'20px'}} data-aos="zoom-in-up">
+           <CardHeader 
+             
+             title={item.name}
+             
+             // subheader="01.08.2021"
+           />
+           <CardMedia
+             className={style.media}
+             image={item.image}
+           //   title="Paella dish"
+           />
+           <CardContent>
+             <Typography variant="body2" color="textSecondary" component="p">
+             <p> <b>Mentor: </b>{item.mentor.map(item1=>{return(item1+' ')})}</p>
+             <p> <b>Yo'nalishi: </b>{item.yonalish.map(item1=>{return(item1+' ')})}</p>
+              <p> <b>Fanlar/Dasturlar: </b>{item.fanlar.map(item1=>{return(item1+' ')})}</p>
+              
+              <p> <b>Boshlanish vaqti: </b>{item.date}</p>
+             
+              <p> <b>Muddati: </b>{item.muddat} oy</p>
+              <p> <b>Kunlari: </b>{item.kun.map(item1=>{return(item1+' ')})}</p>
+              <p> <b>Vaqti: </b>{item.vaqt}</p>
+              
+             </Typography>
+           </CardContent>
+           <CardActions disableSpacing style={{display:'flex', justifyContent:'space-around'}}>
+           <OverlayTrigger
+          
+          placement="bottom"
+          overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>O'zgartirish</Tooltip>}
+        >
+          {({ ref, ...triggerHandler }) => (
+            <Button
+           
+              variant="blue"
+              {...triggerHandler}
+              className="d-inline-flex align-items-center"
+            >
+              <Image
+                ref={ref}
+                
+              />
+             
+             <IconButton >
+               <BorderColorIcon />
+             </IconButton> 
+            </Button>
+          )}
+        </OverlayTrigger>
+             
+        <OverlayTrigger
+          
+          placement="bottom"
+          overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>O'chirish</Tooltip>}
+        >
+          {({ ref, ...triggerHandler }) => (
+            <Button
+           
+              variant="#f70707d9"
+              {...triggerHandler}
+              className="d-inline-flex align-items-center"
+            >
+              <Image
+                ref={ref}
+                
+              />
+             
+             <IconButton >
+               <DeleteIcon />
+             </IconButton> 
+            </Button>
+          )}
+        </OverlayTrigger>
+          
+              <OverlayTrigger
+          
+    placement="bottom"
+    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Kurs haqida batafsil ma'lumot</Tooltip>}
+  >
+    {({ ref, ...triggerHandler }) => (
+      <Button
+  variant="#F2F2F2"
+        {...triggerHandler}
+        className="d-inline-flex align-items-center"
+      >
+        <Image
+          ref={ref}
+          
+        />
+    <IconButton 
+               className={clsx(styles.expand, {
+                 [styles.expandOpen]: this.state.expanded[key],
+               })}
+               onClick={()=>{this.handleExpandClick(key)}}
+               aria-expanded={this.state.expanded[key]}
+               aria-label="show more"
+               
+             >
+               <ExpandMoreIcon />
+             </IconButton>
+        
+      </Button>
+    )}
+  </OverlayTrigger>
+             
+           </CardActions>
+           <Collapse in={this.state.expanded[key]} timeout="auto" unmountOnExit>
+             <CardContent>
+             
+               <Typography paragraph>
+             {item.qushimcha}
+               </Typography>
+               
+             
+             </CardContent>
+           </Collapse>
+         </Card>
+                              </Col>)
+                          })
+                      }
+                  </Row>
                 </Container>
                 <Modal title="Guruh" width="70%" visible={this.state.show} footer={false} onCancel={this.handleCancel}>
                 <Form
@@ -269,7 +456,7 @@ label="Guruhning yo'nalishini tanlang"
     mode="multiple"
     style={{ width: '100%' }}
     placeholder="Yo'nalishni tanlang"
-    defaultValue={[this.state.category[0].name]}
+    defaultValue={[]}
     
     optionLabelProp="label"
   >
@@ -287,7 +474,13 @@ label="Guruhda o'tiladigan fanlarni/dasturlarni tanlang"
         name="fanlar"
         rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
-<Select style={{width:'100%'}} defaultValue={this.state.fanlar[0].id}>
+<Select 
+ mode="multiple"
+ style={{ width: '100%' }}
+ placeholder="Yo'nalishni tanlang"
+ defaultValue={[]}
+ 
+ optionLabelProp="label">
       {
           this.state.fanlar.map(item=>{
               return(<Option value={item.name}>{item.name}</Option>)
@@ -307,7 +500,7 @@ label="Guruhning o'qituvchisini tanlang"
     mode="multiple"
     style={{ width: '100%' }}
     placeholder="O'qutuvchini tanlang"
-    defaultValue={[this.state.mentor[0].fullname]}
+    defaultValue={[]}
     
     optionLabelProp="label"
   >
@@ -370,7 +563,7 @@ label="Haftani qaysi kunlari dars bo'lishini kiriting"
     mode="multiple"
     style={{ width: '100%' }}
     placeholder="Hafta kunlarini tanglang"
-    defaultValue={['Dushanba']}
+    defaultValue={[]}
     
     optionLabelProp="label"
   >
@@ -389,38 +582,18 @@ label="Haftani qaysi kunlari dars bo'lishini kiriting"
     </Col>
     </Row>      
     <Form.Item         
-label="Guruh uchun rasm tanlang"
-        name="kun"
+label="Guruh uchun qo'shimcha ma'lumot kiriting"
+        name="image"
         rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
-<Upload {...props}>
-    <Button icon={<UploadOutlined />}>Rasmni tanlang</Button>
-</Upload>
+<Input type="file"/>
 </Form.Item>
-<Form.Item         
-label="Guruh uchun qo'simcha ma'lumot kiriting"
-        name="kun"
+    <Form.Item         
+label="Guruh uchun qo'shimcha ma'lumot kiriting"
+        name="qushimcha"
         rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
-<CKEditor
-                    editor={ ClassicEditor }
-                    data="<p>Hello from CKEditor 5!</p>"
-                    onReady={ editor => {
-                        // You can store the "editor" and use when it is needed.
-                        console.log( 'Editor is ready to use!', editor );
-                    } }
-                    onChange={ ( event, editor ) => {
-                        const data = editor.getData();
-                        console.log( { event, editor, data } );
-                    } }
-                    onBlur={ ( event, editor ) => {
-                        console.log( 'Blur.', editor );
-                    } }
-                    onFocus={ ( event, editor ) => {
-                        console.log( 'Focus.', editor );
-                    } }
-                />
-
+<TextArea rows={10} cols={60}/>
 </Form.Item>
 </Col>
         </Row>
