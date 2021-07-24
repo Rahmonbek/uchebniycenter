@@ -1,21 +1,16 @@
 import React, { Component } from 'react'
 import { Container, Col, Row } from 'react-bootstrap';
 import styles from '../css/news.module.css'
-import { Button, Input, Select, Table, Modal, Form, DatePicker, TimePicker, InputNumber, Upload } from 'antd';
+import { Button, Input, Select, Table, Modal, Form, DatePicker, TimePicker, InputNumber, Upload, message } from 'antd';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import moment from 'moment';
 import "../css/modalStyle.css";
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
-function getBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-    });
-  }
+
 
 
 export default class Guruhlar extends Component {
@@ -132,11 +127,7 @@ export default class Guruhlar extends Component {
         show:false
     }
 
-    handleChange = ({ fileList }) => this.setState({ fileList });
-editRow=(id)=>{
-    console.log(this.state.grlar[id])
-
-}
+   
 
 openModal=()=>{
     this.setState({
@@ -149,15 +140,6 @@ handleCancel=()=>{
     })
 }
 
-handlePreview = async file => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
-    }
-    this.setState({
-        previewImage: file.url || file.preview,
-        previewVisible: true,
-       });
-    };
 
     render() {
         const { Option } = Select;
@@ -219,7 +201,23 @@ handlePreview = async file => {
         children.push(<Option key='Payshanba'>Payshanba</Option>);
         children.push(<Option key='JUMA'>JUMA</Option>);
         children.push(<Option key='Shanba'>Shanba</Option>);
-
+        const props = {
+            name: 'file',
+            action: '',
+            headers: {
+              authorization: 'authorization-text',
+            },
+            onChange(info) {
+              if (info.file.status !== 'uploading') {
+                console.log(info.file, info.fileList);
+              }
+              if (info.file.status === 'done') {
+                message.success(`${info.file.name} file uploaded successfully`);
+              } else if (info.file.status === 'error') {
+                message.error(`${info.file.name} file upload failed.`);
+              }
+            },
+          };
         return (
             <div>
                 <input type="checkbox" id="modal" className={styles.smbox}/>
@@ -391,30 +389,42 @@ label="Haftani qaysi kunlari dars bo'lishini kiriting"
     </Col>
     </Row>      
     <Form.Item         
-label="Haftani qaysi kunlari dars bo'lishini kiriting"
+label="Guruh uchun rasm tanlang"
         name="kun"
         rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
-<Upload
-          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-          listType="picture-card"
-        //   fileList={this.state.fileList}
-        //   onPreview={this.handlePreview}
-          onChange={this.handleChange}
-        >
-          {/* {this.state.fileList.length >= 8 ? null : uploadButton} */}
-        </Upload>
-        <Modal
-          visible={this.state.previewVisible}
-        //   title={this.state.previewTitle}
-          footer={null}
-          onCancel={this.handleCancel}
-        >
-          <img alt="example" style={{ width: '100%' }} src={this.state.previewImage} />
-        </Modal>
+<Upload {...props}>
+    <Button icon={<UploadOutlined />}>Rasmni tanlang</Button>
+</Upload>
+</Form.Item>
+<Form.Item         
+label="Guruh uchun qo'simcha ma'lumot kiriting"
+        name="kun"
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+>
+<CKEditor
+                    editor={ ClassicEditor }
+                    data="<p>Hello from CKEditor 5!</p>"
+                    onReady={ editor => {
+                        // You can store the "editor" and use when it is needed.
+                        console.log( 'Editor is ready to use!', editor );
+                    } }
+                    onChange={ ( event, editor ) => {
+                        const data = editor.getData();
+                        console.log( { event, editor, data } );
+                    } }
+                    onBlur={ ( event, editor ) => {
+                        console.log( 'Blur.', editor );
+                    } }
+                    onFocus={ ( event, editor ) => {
+                        console.log( 'Focus.', editor );
+                    } }
+                />
+
 </Form.Item>
 </Col>
         </Row>
+
       <Form.Item>
       <Button type="danger" htmlType="submit">
 Bekor qilish
