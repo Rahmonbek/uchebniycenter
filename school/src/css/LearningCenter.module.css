@@ -1,3 +1,5 @@
+
+
 .mat{
     width: 100%;
     height: max-content;
@@ -31,35 +33,33 @@
   
   .rasm1 {
     position: relative;
-    width: 100%;
+    width: 1200px;
     height: 100%;
+    left: -600px;
     text-align: center;
     transition: 0.8s;
     transform-style: preserve-3d;
     border-radius: 0px 23px 23px 0px;
 
   }
+
+
+
 .adPanel:hover{
-
     transform: translateX(0px);
-
     transition: transform 0.8s linear;
 }
-  .adPanel:hover .rasm{
-      left: 0px;
-      
-      
-  }
   .adPanel:hover .rasm1 {
     transform: rotateY(-180deg);
-    
+    z-index: -1;
 
   }
 
 
   .muqova1, .muqova2 {
     position: absolute;
-    width: 100%;
+    left: 600px;
+    width: 600px;
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
@@ -70,15 +70,34 @@
     transform: rotateY(180deg);
 padding-top: 88px;
     text-align: center;
+    border-radius: 23px 0px 0px 23px;
   }
   .muqova2 img{
+    width: 60%;
       margin-top: 34px;
       box-shadow: 3xp 3px 3px rgba(0, 0, 0);
   }
   .muqova2 {
     background: radial-gradient(at 180px 120px,#9ea9f1,#7e89d1);;
     color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     border-radius: 0px 23px 23px 0px;
+  }
+  .muqova2 input{
+    display: none;
+  }
+  .muqova2 label{
+    font-size: 22px;
+    margin-bottom: 22px;
+    color: whitesmoke;
+    font-family: tahoma;
+  }
+  .muqova2 span{
+    transform: translateY(-4px);
+    font-size: 28px;  
   }
 .forf{
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
@@ -86,10 +105,10 @@ padding-top: 88px;
     height: 660px;
     padding: 20px;
     border-radius:0px 23px 23px 0px ;
-
+  text-align: center;
 }
 .forf h2{
-    font-family:  Courier;
+        font-family:  Courier;
     border-bottom: 2px solid #462c8e;
     display: inline;
     padding: 8px 12px;
