@@ -6,7 +6,9 @@ import { Button, Upload, Form, Select, Input } from 'antd';
 import EventAvailableOutlinedIcon from '@material-ui/icons/EventAvailableOutlined';
 
 export default class LearningCenter extends Component {
-
+state={
+    ft:false
+}
 
     render() {
 
@@ -19,21 +21,22 @@ export default class LearningCenter extends Component {
         };
         return (
             <div className={style.mat}>
-                <div className={style.adPanel}>
+                <div className={this.state.ft?style.adPanel1:style.adPanel}>
                     <div className={style.rasm}>
-                        <div className={style.rasm1}>
+                        <div className={this.state.ft?style.rasm11:style.rasm1}>
                             <div className={style.muqova1}>
                                 <img src={img1} />
+                                <br/> <br/> 
+                                <h5>Bu joyga qandaydir shior yozsakmikan<br/> masalan:biz bilan hammasi qulay</h5>
                             </div>
                             <div className={style.muqova2}>
                                 <img src={img2} />
-                                <input type="checkbox" className={style.chek} id="ch1" />
-                                <label for="ch1">Royxatdan o'tish <EventAvailableOutlinedIcon /></label>
+                                <p className={style.btn} onClick={()=>this.setState({ft:true})}>Royxatdan o'tish <EventAvailableOutlinedIcon /></p>
                             </div>
                         </div>
                     </div>
                     <div className={style.forf}>
-                        <h2>O'quv markazi haqida</h2>
+                        <h3 onClick={()=>this.setState({ft:false})}>O'quv markazi haqida</h3>
                         <br />
                         <br />
                         <br />
