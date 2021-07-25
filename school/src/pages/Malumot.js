@@ -3,6 +3,8 @@ import styles from '../css/about.module.css'
 import back from '../img/back.png'
 import { Container,Row,Col } from 'react-bootstrap'
 import logo2 from '../img/12347.png'
+import {FaSignInAlt} from 'react-icons/fa'
+
 import { Card, Button,Fab ,IconButton,Divider} from 'ui-neumorphism'
 export default class Malumot extends Component {
     render() {
@@ -44,6 +46,25 @@ export default class Malumot extends Component {
                                <p>“Churn rate paradigm shift innovator facebook android infographic churn paradigm design strategy investor social proof.“</p>
                                <h3>Gerald Richards</h3>
                                <h6>CEO, Example.com</h6>
+                           </Col>
+                       </Row>
+                   </Container>
+                   <Container>
+                       <Row>
+                           <Col lg={4} className={styles.card}>
+                               <FaSignInAlt style={{color:'#9E81C4',fontSize:'40px'}}/>
+                               <h4>Advance Insights</h4>
+                               <p>Churn rate paradigm shift innovator facebook android infographic strategy investor social proof. Churn rate paradigm shift innovator facebook android.</p>
+                           </Col>
+                           <Col lg={4} className={styles.card}>
+                               <FaSignInAlt style={{color:'#9E81C4',fontSize:'40px'}}/>
+                               <h4>Advance Insights</h4>
+                               <p>Churn rate paradigm shift innovator facebook android infographic strategy investor social proof. Churn rate paradigm shift innovator facebook android.</p>
+                           </Col>
+                           <Col lg={4} className={styles.card}>
+                               <FaSignInAlt style={{color:'#9E81C4',fontSize:'40px'}}/>
+                               <h4>Advance Insights</h4>
+                               <p>Churn rate paradigm shift innovator facebook android infographic strategy investor social proof. Churn rate paradigm shift innovator facebook android.</p>
                            </Col>
                        </Row>
                    </Container>
