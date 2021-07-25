@@ -30,7 +30,6 @@ import CallIcon from '@material-ui/icons/Call';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { Link } from 'react-router-dom';
 import {FaSignInAlt} from 'react-icons/fa'
 import Aos from 'aos';
 import 'aos/dist/aos.css';

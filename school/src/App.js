@@ -11,6 +11,7 @@ function App() {
       <Route exact path="/"><Courses/></Route>
       <Route exact path="/cabinet/registration/uz"><Registration/></Route>
       <Route path="/cabinet/"><Main/></Route>
+      <Route path="/malumot"><Malumot/></Route>
       
 
 

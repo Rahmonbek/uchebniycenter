@@ -1,3 +1,4 @@
+
 .top{
     width: 100%;
     height: 93vh;
@@ -80,4 +81,57 @@ align-items: center;
 }
 .card p{
     color:#6d6969
+}
+.afzalliklar{
+    padding-top: 100px;
+}
+.afzalliklar h6{
+    color:#9E81C4;
+    letter-spacing: 1px;
+    margin:10px
+}
+.afzalliklar h1{
+    margin:10px;
+
+}
+.afzalliklar p{
+    margin:10px;
+    color:#6d6969;
+}
+.afzalliklar h4{
+    margin:40px 10px;
+    font-size: 17px;
+    position: relative;
+}
+.afzalliklar h4::after{
+    content: '';
+    position: absolute;
+    top: 150%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(0,0,0,0.1);
+}
+.youtube{
+    height: 800px;
+    background-color: #9E81C4;
+    margin-top: 100px;
+    position: relative;
+    padding-top: 200px;
+    text-align: center;
+}
+.youtube h6{
+    color:rgba(255,255,255,0.6);
+    margin:10px;
+}
+.youtube h1{
+    color:white;
+
+}
+.youtube p{
+    color:rgba(255,255,255,0.6);
+    margin:10px;
+    width: 50%;
+    margin-left: 25%;
+    font-size: 18px;
 }

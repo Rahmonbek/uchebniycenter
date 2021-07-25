@@ -166,3 +166,44 @@ element.style {
 .MuiPaper-elevation1{
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px !important;
 }
+.custom-shape-divider-top-1627219937 {
+  position: absolute;
+  top:0%;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 111111 !important;
+}
+
+.custom-shape-divider-top-1627219937 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 167px;
+}
+
+.custom-shape-divider-top-1627219937 .shape-fill {
+  fill: #FFFFFF;
+}
+.custom-shape-divider-bottom-1627221721 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+  z-index: 1111 !important;
+}
+
+.custom-shape-divider-bottom-1627221721 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 167px;
+}
+
+.custom-shape-divider-bottom-1627221721 .shape-fill {
+  fill: #FFFFFF;
+}
