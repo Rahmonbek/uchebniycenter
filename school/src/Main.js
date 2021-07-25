@@ -124,10 +124,10 @@ state = {
         <h5 className={this.state.collapsed? styles.headingMenu1:styles.headingMenu2}>Admin</h5>
         <div className={this.state.collapsed? styles.hrMenu1:styles.hrMenu2}></div>
           <Menu.Item key="1" icon={<PieChartOutlined style={{fontSize:'18px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2} > 
-          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/"> Bosh bo'lim</Link>
+          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/cabinet/"> Bosh bo'lim</Link>
           </Menu.Item>
           <Menu.Item key="2" icon={<DiJavascript1 style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
-          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/kurslar">Kurslar</Link>
+          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/cabinet/kurslar">Kurslar</Link>
           </Menu.Item>
           <SubMenu key="sub1" icon={<BiGroup style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2} title="Guruhlar">
             <Menu.Item className={this.state.collapsed? styles.list1:styles.list2} key="4">Front-end (React)</Menu.Item>
@@ -135,51 +135,51 @@ state = {
             <Menu.Item className={this.state.collapsed? styles.list1:styles.list2} key="6">Unit</Menu.Item>
           </SubMenu>
           <Menu.Item key="8" icon={<TiTickOutline style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
-           <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/davomat">Davomat</Link>
+           <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/cabinet/davomat">Davomat</Link>
           </Menu.Item>
           <Menu.Item key="9" icon={<BiDollarCircle style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
-          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/tolov">To'lov</Link>
+          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/cabinet/tolov">To'lov</Link>
           </Menu.Item>
           <h5 className={this.state.collapsed? styles.headingMenu1:styles.headingMenu2}>Registratsiya</h5>
         <div className={this.state.collapsed? styles.hrMenu1:styles.hrMenu2}></div>
           <Menu.Item key="10" icon={<BsPersonPlusFill style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
-          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/oquvchi">O'quvchi qo'shish</Link>
+          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/cabinet/oquvchi">O'quvchi qo'shish</Link>
           </Menu.Item>
           <Menu.Item key="11" icon={<AiOutlineGooglePlus style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
-          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/guruhlar">Guruh qo'shish</Link>
+          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/cabinet/guruhlar">Guruh qo'shish</Link>
           </Menu.Item>
           <Menu.Item key="11" className={this.state.collapsed? styles.list1:styles.list2}>
-          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/lcenter">Ro'yxatdan o'tish</Link>
+          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/cabinet/lcenter">Ro'yxatdan o'tish</Link>
           </Menu.Item>
           <Menu.Item key="12" icon={<ImUserPlus style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
-          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/oqituvchi">O'qituvchi qo'shish</Link>
+          <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/cabinet/oqituvchi">O'qituvchi qo'shish</Link>
           </Menu.Item>
         </Menu>
       </div>  
      <div className={this.state.collapsed?styles.forget1:styles.forget}>
      <Switch>
-     <Route exact path="/davomat">
+     <Route exact path="/cabinet/davomat">
          <Davomat/>
        </Route>
-       <Route exact path="/">
+       <Route exact path="/cabinet">
          <Dashboard/>
        </Route>
-       <Route exact path="/guruhlar">
+       <Route exact path="/cabinet/guruhlar">
          <Guruhlar/>
        </Route>
-       <Route exact path="/lcenter">
+       <Route exact path="/cabinet/lcenter">
          <LearningCenter/>
        </Route>
-       <Route exact path="/oquvchi">
+       <Route exact path="/cabinet/oquvchi">
          <Oquvchi/>
        </Route>
-       <Route exact path="/tolov">
+       <Route exact path="/cabinet/tolov">
          <Tolov/>
        </Route>
-       <Route exact path="/oqituvchi">
+       <Route exact path="/cabinet/oqituvchi">
          <Oqituvchi/>
        </Route>
-       <Route exact path="/kurslar">
+       <Route exact path="/cabinet/kurslar">
          <Malumot/>
        </Route>
 

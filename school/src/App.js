@@ -9,9 +9,8 @@ function App() {
     <BrowserRouter>    
       <Switch>    
       <Route exact path="/"><Courses/></Route>
-      <Route exact path="/registration/uz"><Registration/></Route>
-      <Route exact path="/main/uz"><Main/></Route>
-      <Route exact path="/malumot"><Malumot/></Route>
+      <Route exact path="/cabinet/registration/uz"><Registration/></Route>
+      <Route path="/cabinet/"><Main/></Route>
       
 
 
