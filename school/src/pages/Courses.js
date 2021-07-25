@@ -7,7 +7,8 @@ import logo from '../img/logo1.png'
 import frontend from '../img/frontend.jpg'
 import backend from '../img/backend.png'
 import fullstack from '../img/fullstack.png'
-
+import { BrowserRouter,Route,Link } from 'react-router-dom';
+import Malumot from './Malumot';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -29,7 +30,6 @@ import CallIcon from '@material-ui/icons/Call';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; 
 import {FaSignInAlt} from 'react-icons/fa'
@@ -124,6 +124,11 @@ justifyActive:'tab1',
         <MDBTabsItem style={{marginBottom:'40px'}}>
           <MDBTabsLink onClick={() => this.handleJustifyClick('tab4')} active={this.state.justifyActive === 'tab4'}>
             ABITURENT
+          </MDBTabsLink>
+        </MDBTabsItem>
+        <MDBTabsItem style={{marginBottom:'40px'}}>
+          <MDBTabsLink onClick={() => this.handleJustifyClick('tab4')} active={this.state.justifyActive === 'tab4'}>
+           <Link to="/malumot">Biz haqimizda</Link>
           </MDBTabsLink>
         </MDBTabsItem>
       </MDBTabs>
@@ -1585,6 +1590,11 @@ justifyActive:'tab1',
    
              
          </Container>
+         <BrowserRouter>
+         <Route exact path="/malumot">
+           <Malumot/>
+         </Route>
+         </BrowserRouter>
          </div>   
          </div>
         </div>
