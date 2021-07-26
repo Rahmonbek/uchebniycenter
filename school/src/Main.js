@@ -21,7 +21,7 @@ import Dashboard from './pages/Dashboard';
 import logo1 from './img/logo1.png'
 import Oquvchiqoshish from './pages/Oquvchiqoshish';
 import Tolov from './pages/Tolov'
-import Malumot_ozgartirish from './pages/Malumot_ozgartirish'
+import MalumotOzgartirish from './pages/MalumotOzgartirish'
 import Oquvchi from './pages/Oquvchi';
 import Oqituvchi from './pages/Oqituvchi';
 import { Col, Row } from 'react-bootstrap';
@@ -172,7 +172,7 @@ state = {
           <Guruhlar/>
         </Route>
         <Route exact path="/cabinet/malumot_ozgartirish">
-          <Malumot_ozgartirish/>
+          <MalumotOzgartirish/>
         </Route>
         <Route exact path="/cabinet/lcenter">
           <LearningCenter/>
