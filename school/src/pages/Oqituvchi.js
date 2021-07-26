@@ -16,7 +16,7 @@ export default function Oqituvchiqoshish() {
             tugilgansana:'2021-06-30',
             telefon:'+87647568775',
             email:'xayitov@gmail.com',
-            rasm: <img style={{width:'200px'}} src={rasm1}/>,
+            rasm: <img style={{width:'100px', height: '100px'}} src={rasm1}/>,
             yonalish:'front-end developer',
             texnologiyalar:['html','css','bootstrap','js','ajax','react','redux','android'],
             malumot:'bhgberu hgbuhurh uyhvyuvbyuhyu hguyh2uqhf2 yh2u3gh2uyhg yuhgyuhryurfhfyqfb quyfhqyugbq hbqhybfhqbf',
@@ -160,7 +160,7 @@ return (
                                 <tr>
                                 <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{key+1}</td>
                                 <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.name}</td>
-                                <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.tugilgansana}</td>
+                                <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}><p style={{width: 100}}>{item.tugilgansana}</p></td>
                                 <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.telefon}</td>
                                 <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.email}</td>
                                 <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.rasm}</td>
@@ -180,7 +180,7 @@ return (
                                 <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>
                                     <p style={{width:'250px'}}>{item.malumot}</p>
                                 </td>
-                                <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.ishsana}</td>
+                                <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}><p style={{width: 100}}>{item.ishsana}</p></td>
                                 <td style={{border:' 1px solid #3F6AD8'}}><AiFillEdit onClick={()=> onFill(`${key}`)} style={{fontSize:'20px',color:'green',marginLeft:'10px',marginTop:'5px', cursor: 'pointer', marginRight: '10px'}}/> <AiOutlineDelete style={{fontSize:'20px',color:'red',marginLeft:'10px',marginTop:'5px', cursor: 'pointer', marginRight: '10px', float: 'right'}}/> </td>
                                 </tr>
                             </tbody>
