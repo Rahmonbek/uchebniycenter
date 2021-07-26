@@ -62,8 +62,10 @@
     margin-top: 10px;
     position: relative;
     display: inline-block;
+    padding: 10px;
+    border-bottom: 1px solid #3F6AD8;
 }
-.backgroundTable h5::after{
+/* .backgroundTable h5::after{
     content: '';
     position: absolute;
     top: 160%;
@@ -71,7 +73,17 @@
     width: 50%;
     height: 1px;
     background-color:#3F6AD8
-}
+} */
 .date2{
     display: none !important;
+}
+
+.tecnoUl {
+    padding-left: 0;
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+}
+.tecnoUl li {
+    margin: auto 5px;
 }

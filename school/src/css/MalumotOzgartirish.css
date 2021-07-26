@@ -1,8 +1,8 @@
-form {
+#editForm {
     background-color: white;
     width: 90%;
 }
-form .input1 {
+#editForm .input1 {
     border: none;
     border-bottom: 2px solid #1890ff;
 }

@@ -142,7 +142,7 @@ state = {
             <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/cabinet/tolov">To'lov</Link>
             </Menu.Item>
             <Menu.Item key="3" icon={<FaUserEdit style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
-            <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/cabinet/malumot_ozgartirish">Ma'lumotlarni o'zgartirish</Link>
+            <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/cabinet/malumotOzgartirish">Ma'lumotlarni o'zgartirish</Link>
             </Menu.Item>
             <h5 className={this.state.collapsed? styles.headingMenu1:styles.headingMenu2}>Registratsiya</h5>
           <div className={this.state.collapsed? styles.hrMenu1:styles.hrMenu2}></div>
@@ -171,7 +171,7 @@ state = {
         <Route exact path="/cabinet/guruhlar">
           <Guruhlar/>
         </Route>
-        <Route exact path="/cabinet/malumot_ozgartirish">
+        <Route exact path="/cabinet/malumotOzgartirish">
           <MalumotOzgartirish/>
         </Route>
         <Route exact path="/cabinet/lcenter">
