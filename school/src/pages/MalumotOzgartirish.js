@@ -2,7 +2,7 @@ import {  Button,  Form, Input } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import React, {useState} from 'react'
 import { Row } from 'react-bootstrap';
-import './MalumotOzgartirish.css';
+import '../css/MalumotOzgartirish.css';
 const url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnPEMT1O67rK1vm-LfTOAU28Xkwdb2Vx4Ekw&usqp=CAU'
 
 export default function Malumot_ozgartirish() {
