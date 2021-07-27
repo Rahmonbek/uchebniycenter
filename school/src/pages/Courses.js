@@ -30,7 +30,7 @@ import CallIcon from '@material-ui/icons/Call';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import {FaSignInAlt} from 'react-icons/fa'
+import {FaChevronDown} from 'react-icons/fa'
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 import { Menu, Switch } from 'antd'
@@ -43,16 +43,19 @@ import {
   MDBTabsPane
 } from 'mdb-react-ui-kit';
 
-
+import {Carousel} from '3d-react-carousal';
 
 
   export default class Courses extends Component {
-    
+   
     state={
 expanded:[],
 justifyActive:'tab1',
 
+
     }
+  
+  
 
 
     componentDidMount(){
@@ -79,21 +82,51 @@ justifyActive:'tab1',
       this.setState({justifyActive:value});
     };
     render(){
+      let slides = [
+        <img  src="https://picsum.photos/800/300/?random" alt="1" />, 
+      <img  src="https://picsum.photos/800/301/?random" alt="2" />  ,
+      <img  src="https://picsum.photos/800/302/?random" alt="3" />  , 
+      <img  src="https://picsum.photos/800/303/?random" alt="4" />  ,
+      <img src="https://picsum.photos/800/304/?random" alt="5" />  ];
+
+      const { active } = this.state;
       return (
         
         <div>
    
             <div className={styles.bg}>
            
+        
+       
+      
+
+
+           
                        <header className={styles.header}>
-                         <Link to='/cabinet'>
-                         <div className={styles.log_in}>
-                         <FaSignInAlt  / >
-                         </div>
-                         </Link>
+
+                      <div className={styles.navbar}>
+                             <ul>
+                             <Link to="/malumot"><li>Biz haqimizda</li></Link>
+                             <Link to='/cabinet'><li>Kirish</li></Link>
+                             <li>|</li>
+                             <Link to="/malumot"><li>Ro'yxatdan o'tish</li></Link>
+                               
+                               
+                               </ul>
+                      </div>
+  
+    
+    
+
+                       <Carousel slides={slides} autoplay={false} interval={2000} style={{marginTop:'50px'}}/>
+                         
                       
                            <h1 >Yangi kurslar</h1>
-                         
+                       <a href='#1'>
+                       <div className={styles.bottom}>
+                         <FaChevronDown style={{fontSize:'20px',}}/>
+                         </div>
+                       </a>
                        </header>
                       
    
@@ -101,7 +134,7 @@ justifyActive:'tab1',
                     
    
                     {/* Section----- */}
-                    <div className={styles.section}>
+                    <div id='1' className={styles.section}>
                     <Container>
                     <MDBTabs justify className='mb-3' >
         <MDBTabsItem style={{marginBottom:'40px'}}>
@@ -124,11 +157,7 @@ justifyActive:'tab1',
             ABITURENT
           </MDBTabsLink>
         </MDBTabsItem>
-        <MDBTabsItem style={{marginBottom:'40px'}}>
-          <MDBTabsLink onClick={() => this.handleJustifyClick('tab4')} active={this.state.justifyActive === 'tab4'}>
-           <Link to="/malumot">Biz haqimizda</Link>
-          </MDBTabsLink>
-        </MDBTabsItem>
+        
       </MDBTabs>
 
       

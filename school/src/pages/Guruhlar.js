@@ -6,8 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import moment from 'moment';
 import "../css/modalStyle.css";
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import { CKEditor } from '@ckeditor/ckeditor5-react';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import {
     MDBTabs,
