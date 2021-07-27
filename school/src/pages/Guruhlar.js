@@ -186,8 +186,15 @@ export default function Guruhlar() {
 
   const [form] = Form.useForm();
 const editGuruh=(id)=>{
-  // setGuruh(grlar[id])
+//  setGuruh({...grlar[id]})
+ 
+ onReset()
+
+  form.setFieldsValue(grlar[id])
+  setEdit(id)
   setShow(true)
+ 
+  console.log(form.getFieldValue())
 }
 
 
@@ -202,8 +209,8 @@ g[i].value=""
 }
 }
 const onFinish=(value)=>{
-var date=value.date._d.toLocaleDateString()
-var time=value.vaqt[0]._d.toLocaleTimeString()+ ' - '+value.vaqt[1]._d.toLocaleTimeString()
+// var date=value.date._d.toLocaleDateString()
+// var time=value.vaqt[0]._d.toLocaleTimeString()+ ' - '+value.vaqt[1]._d.toLocaleTimeString()
 var foiz=[]
 var g=document.querySelectorAll('#foiz')
 
@@ -223,8 +230,8 @@ var config={
             fanlar:value.fanlar,
             image:"https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg",
             kun: value.kun,
-            vaqt: time,
-            date:date,
+            // vaqt: time,
+            // date:date,
             foiz:foiz,
             qushimcha: value.qushimcha, 
             tolov:value.tolov
@@ -351,7 +358,8 @@ const mentorlar=(value)=>{
         >
           {({ ref, ...triggerHandler }) => (
             <Button
-            onClick={()=>{editGuruh(key)}}
+            onClick={()=>{editGuruh(key); 
+            setShow(true)}}
           
               variant="blue"
               {...triggerHandler}
@@ -449,7 +457,7 @@ const mentorlar=(value)=>{
       id="formGuruh"
       labelCol={{ span: 24 }}
       wrapperCol={{ span: 24 }}
-     
+      initialValues={{ remember: true, guruh }}
       onFinish={onFinish}
       
     >
@@ -538,7 +546,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
           <Input type="number" min="0"/>
         </Form.Item>
 <Row>
-    <Col lg={6}>
+    {/* <Col lg={6}>
     <Form.Item
     initialValue={guruh.date}
         label="Ochilish sanasini kiriting"
@@ -561,7 +569,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
       </Form.Item>
 
 
-    </Col>
+    </Col> */}
 </Row>
       
             </Col>
@@ -640,7 +648,7 @@ label="Guruh uchun qo'shimcha ma'lumot kiriting"
 
       <Form.Item
       initialValue={guruh.qilis}>
-      <Button type="danger"  htmlType="button">
+      <Button type="danger" onClick={handleCancel} htmlType="button">
 Bekor qilish
         </Button>
         
