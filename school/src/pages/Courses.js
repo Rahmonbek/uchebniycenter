@@ -109,7 +109,7 @@ justifyActive:'tab1',
                              <Link to="/malumot"><li>Biz haqimizda</li></Link>
                              <Link to='/cabinet'><li>Kirish</li></Link>
                              <li>|</li>
-                             <Link to="/malumot"><li>Ro'yxatdan o'tish</li></Link>
+                             <Link to="/lcenter"><li>Ro'yxatdan o'tish</li></Link>
                                
                                
                                </ul>

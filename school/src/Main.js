@@ -152,9 +152,7 @@ state = {
             <Menu.Item key="11" icon={<AiOutlineGooglePlus style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
             <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/cabinet/guruhlar">Guruh qo'shish</Link>
             </Menu.Item>
-            <Menu.Item key="11" className={this.state.collapsed? styles.list1:styles.list2}>
-            <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/cabinet/lcenter">Ro'yxatdan o'tish</Link>
-            </Menu.Item>
+           
             <Menu.Item key="12" icon={<ImUserPlus style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
             <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/cabinet/oqituvchi">O'qituvchi qo'shish</Link>
             </Menu.Item>
@@ -174,9 +172,7 @@ state = {
         <Route exact path="/cabinet/malumotOzgartirish">
           <MalumotOzgartirish/>
         </Route>
-        <Route exact path="/cabinet/lcenter">
-          <LearningCenter/>
-        </Route>
+        
         <Route exact path="/cabinet/oquvchi">
           <Oquvchi/>
         </Route>

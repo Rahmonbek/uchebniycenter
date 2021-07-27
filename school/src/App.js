@@ -4,14 +4,16 @@ import Courses from './pages/Courses';
 import Registration from './pages/Registration';
 import Main from './Main';
 import Malumot from './pages/Malumot';
+import LearningCenter from './pages/LearningCenter'
 function App() {
   return (
     <BrowserRouter>    
       <Switch>    
       <Route exact path="/"><Courses/></Route>
-      <Route exact path="/cabinet/registration/uz"><Registration/></Route>
+      <Route exact path="/registration/uz"><Registration/></Route>
       <Route path="/cabinet/"><Main/></Route>
       <Route path="/malumot"><Malumot/></Route>
+      <Route exact path="/lcenter"> <LearningCenter/> </Route>
       
 
 
