@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { Container, Col, Row,Image, OverlayTrigger,  Tooltip } from 'react-bootstrap';
 import styles from '../css/news.module.css'
 import { Button, Input, Select, Table, Modal, Form, DatePicker, TimePicker, InputNumber, Upload, message } from 'antd';
@@ -37,187 +37,217 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import TelegramIcon from '@material-ui/icons/Telegram';
 import BorderColorIcon from '@material-ui/icons/BorderColor';
-import CallIcon from '@material-ui/icons/Call';
-import InstagramIcon from '@material-ui/icons/Instagram';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { Link } from 'react-router-dom';
 
 
 const { TextArea } = Input;
 
 
 
-
-export default class Guruhlar extends Component {
-
-    state = {
-        expanded:[],
-        justifyActive:'tab1',
-        
-        edit: null,
-        category:[{
-            id:'1',
-            name:'Web dasturshlash'
-        },
-        {
-            id:'2',
-            name:'Android',
-        },
-        {
-            id:'3',
-            name:'SMM'
-        },
-        {
-            id:'4',
-            name:'Fanlar'
-        },
-        {
-            id:'5',
-            name:'Grafik dizaynerlik'
-        },
-        {
-            id:'6',
-            name:'Bugalterlik'
-        },],
-        fanlar:[{
-            id:'1',
-            name:'HTML'
-        },
-        {
-            id:'2',
-            name:'CSS',
-        },
-        {
-            id:'3',
-            name:'React'
-        },
-        {
-            id:'4',
-            name:'Ingliz tili'
-        },
-        {
-            id:'5',
-            name:'Python'
-        },
-        {
-            id:'6',
-            name:'Django'
-        },],
-        previewVisible: false,
-        mentor:[
-            {id:1,
-                fullname:'Isdmoilov Rahmon'},
-                {id:2,
-                    fullname:'Ismodilov Rahmon'},
-                    {id:3,
-                        fullname:'Ismoilov Radhmon'},
-                        {id:4,
-                            fullname:'Ismodilov Rahmon'},
-                            {id:5,
-                                fullname:'Ismoilov Rahmdon'},
-                                {id:6,
-                                    fullname:'Idsmoilov Rahmon'},
-                                    {id:7,
-                                        fullname:'Ismoilov Rahmodn'},
-        ],
-        date:'',
-        grlar: [
-            {
-                id: 1,
-                name: 'tower02',
-               muddat:'3', 
-                mentor: ["allakim"],
-                yonalish:['Web dasturlash', 'Android'],
-                fanlar:['HTML', 'CSS', 'React'],
-                image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
-                kun: ['Dushanba', 'Seshanba', 'Payshanba'],
-                vaqt: "12:00-14:00",
-                date:"21-11-2020",
-                qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus kina",
-            },
-            {
-                id: 2,
-                name: 'tower02 ',
-               muddat:'3', 
-                mentor: ["allakim"],
-                yonalish:['Web dasturlash', 'Android'],
-                fanlar:['HTML', 'CSS', 'React'],
-                image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
-                kun: ['Dushanba', 'Seshanba', 'Payshanba'],
-                vaqt: "12:00-15:00",
-                date:"21-11-2020",
-                qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus kina",
-            },
-            {
-                id: 3,
-                name: 'tower02 ',
-               muddat:'3', 
-                mentor: ["allakim"],
-                yonalish:['Web dasturlash', 'Android'],
-                fanlar:['HTML', 'CSS', 'React'],
-                image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
-                kun: ['Dushanba', 'Seshanba', 'Payshanba'],
-                vaqt: "12:00-16:00",
-                date:"21-11-2020",
-                qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus kina",
-            },
-        ],
-        show:false
-    }
-
-   
-
-openModal=()=>{
-    this.setState({
-        show:true
-    })
+export default function Guruhlar() {
+  const[expanded, setExpanded]=useState([])
+  const [justifyActive, setJustifyActive]=useState('tab1')
+  const [mentors, setMentors]=useState([])
+  const [son, setSon]=useState(0)
+  const [edit, setEdit]=useState(null)
+  const [category, setCategory]=useState([
+    {
+      id:'1',
+      name:'Web dasturshlash'
+  },
+  {
+      id:'2',
+      name:'Android',
+  },
+  {
+      id:'3',
+      name:'SMM'
+  },
+  {
+      id:'4',
+      name:'Fanlar'
+  },
+  {
+      id:'5',
+      name:'Grafik dizaynerlik'
+  },
+  {
+      id:'6',
+      name:'Bugalterlik'
+  }
+  ])
+  const [fanlar, setFanlar]=useState([
+    {
+      id:'1',
+      name:'HTML'
+  },
+  {
+      id:'2',
+      name:'CSS',
+  },
+  {
+      id:'3',
+      name:'React'
+  },
+  {
+      id:'4',
+      name:'Ingliz tili'
+  },
+  {
+      id:'5',
+      name:'Python'
+  },
+  {
+      id:'6',
+      name:'Django'
+  }
+  ])
+  const [previewVisible, setPreviewVisible]=useState(false)
+  const [mentor, setMentor]=useState([
+    {id:1,
+      fullname:'Isdmoilov Rahmon'},
+      {id:2,
+          fullname:'Ismodilov Rahmon'},
+          {id:3,
+              fullname:'Ismoilov Radhmon'},
+              {id:4,
+                  fullname:'Ismodfilov Rahmon'},
+                  {id:5,
+                      fullname:'Ismoilov Rahmdon'},
+                      {id:6,
+                          fullname:'Idsmoilov Rahmon'},
+                          {id:7,
+                              fullname:'Ismoilov Rahmodn'}
+  ])
+  const [date, setDate]=useState('')
+  const [grlar, setGrlar]=useState([
+    {
+      id: 1,
+      name: 'tower02',
+     muddat:'3', 
+      mentor: ["allakim"],
+      yonalish:['Web dasturlash', 'Android'],
+      fanlar:['HTML', 'CSS', 'React'],
+      image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
+      kun: ['Dushanba', 'Seshanba', 'Payshanba'],
+      vaqt: "12:00.00-14:00.00",
+      date:"21-11-2020",
+      tolov:"500000",
+      foiz:["30"],
+      qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus kina",
+  },
+  {
+      id: 2,
+      name: 'tower02 ',
+     muddat:'3', 
+      mentor: ["allakim",'Mentor'],
+      yonalish:['Web dasturlash', 'Android'],
+      fanlar:['HTML', 'CSS', 'React'],
+      image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
+      kun: ['Dushanba', 'Seshanba', 'Payshanba'],
+      vaqt: "12:00.00-15:00.00",
+      date:"21-11-2020",
+      tolov:"500000",
+      foiz:["30", '20'],
+      qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus kina",
+  },
+  {
+    id: 3,
+    name: 'tower02',
+   muddat:'3', 
+    mentor: ["allakim"],
+    yonalish:['Web dasturlash', 'Android'],
+    fanlar:['HTML', 'CSS', 'React'],
+    image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
+    kun: ['Dushanba', 'Seshanba', 'Payshanba'],
+    vaqt: "12:00.00-14:00.00",
+    date:"21-11-2020",
+    tolov:"500000",
+    foiz:["30"],
+    qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus kina",
+},
+{
+    id: 4,
+    name: 'tower02 ',
+   muddat:'3', 
+    mentor: ["allakim",'Mentor'],
+    yonalish:['Web dasturlash', 'Android'],
+    fanlar:['HTML', 'CSS', 'React'],
+    image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
+    kun: ['Dushanba', 'Seshanba', 'Payshanba'],
+    vaqt: "12:00.00-15:00.00",
+    date:"21-11-2020",
+    tolov:"500000",
+    foiz:["30", '20'],
+    qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus kina",
 }
-handleCancel=()=>{
-    this.setState({
-        show:false
-    })
+  ])
+  const [show, setShow]=useState(false)
+  const [guruh, setGuruh]=useState({})
+
+
+const editGuruh=(id)=>{
+  // setGuruh(grlar[id])
+  setShow(true)
 }
-onFinish=(value)=>{
-    var date=value.date._d.toLocaleDateString()
-    var time=value.vaqt[0]._d.toLocaleTimeString()+ ' - '+value.vaqt[1]._d.toLocaleTimeString()
-    var config={
-        id: this.state.grlar[this.state.grlar.length-1].id+1,
-                name: value.name,
-               muddat:value.muddat, 
-                mentor: value.mentor,
-                yonalish:value.yonalish,
-                fanlar:value.fanlar,
-                image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
-                kun: value.kun,
-                vaqt: time,
-                date:date,
-                qushimcha: value.qushimcha, 
-        image:value.image
-    }
 
-this.setState({
-    grlar:this.state.grlar.push(config)
-})
+const resetForm=()=>{
+document.getElementById('formGuruh').reset()
 }
-handleExpandClick = (id) => {
-    var a=this.state.expanded
-    a[id]=!a[id]
- 
-    this.setState({expanded:a})
-  };
-  
-  handleJustifyClick = (value) => {
-    if (value === this.state.justifyActive) {
-      return;
-    }
+const handleCancel=()=>{
+  setShow(false)
+  resetForm()
+}
+const onFinish=(value)=>{
+var date=value.date._d.toLocaleDateString()
+var time=value.vaqt[0]._d.toLocaleTimeString()+ ' - '+value.vaqt[1]._d.toLocaleTimeString()
+var foiz=[]
+var g=document.querySelectorAll('#foiz')
 
-    this.setState({justifyActive:value});
-  };
-  
+for(let i=0; i<g.length; i++){
+foiz[i]=g[i].value
+// console.log(g[i].attributes.value.nodeValue)
+}
 
-    render() {
-        const { Option } = Select;
+console.log(foiz)
+
+var config={
+    id: grlar[grlar.length-1].id+1,
+            name: value.name,
+           muddat:value.muddat, 
+            mentor: value.mentor,
+            yonalish:value.yonalish,
+            fanlar:value.fanlar,
+            image:"https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg",
+            kun: value.kun,
+            vaqt: time,
+            date:date,
+            foiz:foiz,
+            qushimcha: value.qushimcha, 
+            tolov:value.tolov
+  }
+  var guruhlar=grlar
+  guruhlar.push(config)
+  setGrlar(guruhlar)
+  console.log(grlar)
+  handleCancel()
+}
+const handleExpandClick = (id) => {
+var a= expanded
+  a[id]=!a[id]
+  setExpanded(a)
+};
+
+const handleJustifyClick = (value) => {
+if (value === justifyActive) {
+  return;
+}
+  setJustifyActive(value)
+};
+
+const mentorlar=(value)=>{
+  setMentors(value)
+}
+  const { Option } = Select;
         const uploadButton = (
             <div>
               <PlusOutlined />
@@ -268,44 +298,17 @@ handleExpandClick = (id) => {
                 render: (id) => <Button type="primary" onClick={() => { this.editRow(id) }}>O'zgartirish</Button>,
             },
         ];
-        const children = [];
-
-        children.push(<Option key='Dushanba'>Dushanba</Option>);
-        children.push(<Option key='Seshanba'>Seshanba</Option>);
-        children.push(<Option key='Chorshanba'>Chorshanba</Option>);
-        children.push(<Option key='Payshanba'>Payshanba</Option>);
-        children.push(<Option key='JUMA'>JUMA</Option>);
-        children.push(<Option key='Shanba'>Shanba</Option>);
-        const text = {
-            name: 'file',
-            action: '',
-            headers: {
-              authorization: 'authorization-text',
-            },
-            onChange(info) {
-                if (info.file.status !== 'uploading') {
-                  console.log(info.file, info.fileList);
-                }
-                if (info.file.status === 'done') {
-                  message.success(`${info.file.name} file uploaded successfully`);
-                } else if (info.file.status === 'error') {
-                  message.error(`${info.file.name} file upload failed.`);
-                }
-              
-              },
-            }
-        
-        return (
-            <div>
-                <input type="checkbox" id="modal" className={styles.smbox}/>
-                <label for="modal" className="modal-background" onClick={this.clform}></label>
+  return (
+    <div>
+                      <input type="checkbox" id="modal" className={styles.smbox}/>
+                <label for="modal" className="modal-background" ></label>
                 <Container fluid><br/><br/>
-                <Button onClick={this.openModal} type="primary">Gurux qo'shish</Button>
+                <Button onClick={()=>{setShow(true)}} type="primary">Gurux qo'shish</Button>
                   <Row>
                       {
-                          this.state.grlar.map((item, key)=>{
-                              return(<Col lg={4} md={6} sm={12}>
-                                   <Card className={style.root} style={{margin:'auto', marginBottom:'20px'}} data-aos="zoom-in-up">
+                          grlar.map((item, key)=>{
+                              return(<Col lg={4} md={6} sm={12} style={{marginTop:'20px'}}>
+                                   <Card className={style.root}>
            <CardHeader 
              
              title={item.name}
@@ -319,10 +322,13 @@ handleExpandClick = (id) => {
            />
            <CardContent>
              <Typography variant="body2" color="textSecondary" component="p">
-             <p> <b>Mentor: </b>{item.mentor.map(item1=>{return(item1+' ')})}</p>
+             <p> <b>Mentor: </b>{item.mentor.map((item1, key)=>{return(
+               <p>{item1} - {item.foiz[key]}%</p>
+             )})}</p>
              <p> <b>Yo'nalishi: </b>{item.yonalish.map(item1=>{return(item1+' ')})}</p>
-              <p> <b>Fanlar/Dasturlar: </b>{item.fanlar.map(item1=>{return(item1+' ')})}</p>
-              
+             <p> <b>Fanlar/Dasturlar: </b>{item.fanlar.map(item1=>{return(item1+' ')})}</p>
+             <p> <b>Kurs puli (oylik): </b>{item.tolov} so'm</p>
+             
               <p> <b>Boshlanish vaqti: </b>{item.date}</p>
              
               <p> <b>Muddati: </b>{item.muddat} oy</p>
@@ -333,13 +339,13 @@ handleExpandClick = (id) => {
            </CardContent>
            <CardActions disableSpacing style={{display:'flex', justifyContent:'space-around'}}>
            <OverlayTrigger
-          
           placement="bottom"
           overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>O'zgartirish</Tooltip>}
         >
           {({ ref, ...triggerHandler }) => (
             <Button
-           
+            onClick={()=>{editGuruh(key)}}
+          
               variant="blue"
               {...triggerHandler}
               className="d-inline-flex align-items-center"
@@ -397,10 +403,10 @@ handleExpandClick = (id) => {
         />
     <IconButton 
                className={clsx(styles.expand, {
-                 [styles.expandOpen]: this.state.expanded[key],
+                 [styles.expandOpen]: expanded[key],
                })}
-               onClick={()=>{this.handleExpandClick(key)}}
-               aria-expanded={this.state.expanded[key]}
+               onClick={()=>{handleExpandClick(key)}}
+               aria-expanded={expanded[key]}
                aria-label="show more"
                
              >
@@ -412,11 +418,12 @@ handleExpandClick = (id) => {
   </OverlayTrigger>
              
            </CardActions>
-           <Collapse in={this.state.expanded[key]} timeout="auto" unmountOnExit>
+           <Collapse in={expanded[key]} timeout="auto" unmountOnExit>
              <CardContent>
              
-               <Typography paragraph>
+               <Typography paragraph style={{fontSize:'16px'}}>
              {item.qushimcha}
+            
                </Typography>
                
              
@@ -428,40 +435,42 @@ handleExpandClick = (id) => {
                       }
                   </Row>
                 </Container>
-                <Modal title="Guruh" width="70%" visible={this.state.show} footer={false} onCancel={this.handleCancel}>
+                <Modal title="Guruh" width="70%" visible={show} footer={false} onCancel={handleCancel}>
                 <Form
       name="basic"
+      id="formGuruh"
       labelCol={{ span: 24 }}
       wrapperCol={{ span: 24 }}
-      initialValues={{ remember: true }}
-      onFinish={this.onFinish}
+     
+      onFinish={onFinish}
       
     >
         <Row>
             <Col lg={6} md={12} sm={12}>
             <Form.Item
+            
         label="Guruhni nomini kiriting"
         name="name"
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
-        <Input placeholder="Guruhning nomini kiriting"/>
+        <Input initialValue={guruh.name} placeholder="Guruhning nomini kiriting"/>
       </Form.Item>
 
-      <Form.Item         
+      <Form.Item
+      initialValue={guruh.yonalish}         
 label="Guruhning yo'nalishini tanlang"
         name="yonalish"
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
     mode="multiple"
     style={{ width: '100%' }}
     placeholder="Yo'nalishni tanlang"
-    defaultValue={[]}
     
     optionLabelProp="label"
   >
        {
-          this.state.category.map(item=>{
+          category.map(item=>{
               return(<Option value={item.name}  label={item.name}><div className="demo-option-label-item">{item.name}</div></Option>)
           })
       }
@@ -469,20 +478,20 @@ label="Guruhning yo'nalishini tanlang"
   </Select>
 </Form.Item>
 
-<Form.Item         
+<Form.Item
+initialValue={guruh.fanlar}         
 label="Guruhda o'tiladigan fanlarni/dasturlarni tanlang"
         name="fanlar"
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select 
  mode="multiple"
  style={{ width: '100%' }}
  placeholder="Yo'nalishni tanlang"
- defaultValue={[]}
  
  optionLabelProp="label">
       {
-          this.state.fanlar.map(item=>{
+          fanlar.map(item=>{
               return(<Option value={item.name}>{item.name}</Option>)
           })
       }
@@ -491,21 +500,21 @@ label="Guruhda o'tiladigan fanlarni/dasturlarni tanlang"
       
       </Select>
 </Form.Item>
-<Form.Item         
+<Form.Item
+initialValue={guruh.mentor}         
 label="Guruhning o'qituvchisini tanlang"
         name="mentor"
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
     mode="multiple"
     style={{ width: '100%' }}
     placeholder="O'qutuvchini tanlang"
-    defaultValue={[]}
-    
-    optionLabelProp="label"
+    onChange={mentors}
+        optionLabelProp="label"
   >
        {
-          this.state.mentor.map(item=>{
+          mentor.map(item=>{
               return(<Option value={item.fullname}  label={item.fullname}><div className="demo-option-label-item">{item.fullname}</div></Option>)
           })
       }
@@ -513,12 +522,20 @@ label="Guruhning o'qituvchisini tanlang"
   </Select>
 
 </Form.Item>
+<Form.Item
+initialValue={guruh.tolov}
+label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
+        name="tolov"
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}>
+          <Input type="number" min="0"/>
+        </Form.Item>
 <Row>
     <Col lg={6}>
     <Form.Item
+    initialValue={guruh.date}
         label="Ochilish sanasini kiriting"
         name="date"
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
         <DatePicker />
       </Form.Item>
@@ -527,9 +544,10 @@ label="Guruhning o'qituvchisini tanlang"
     </Col>
     <Col lg={6}>
     <Form.Item
+    initialValue={guruh.vaqt}
         label="Dars vaqtini kiriting"
         name="vaqt"
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
         <TimePicker.RangePicker />
       </Form.Item>
@@ -543,10 +561,11 @@ label="Guruhning o'qituvchisini tanlang"
 <Row>
     <Col lg={5}>
     <Form.Item
+    initialValue={guruh.muddat}
         label="Dars nechchi oy davom etishini kiriting"
         name="muddat"
         
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
         <InputNumber min="0"/>
       </Form.Item>
@@ -554,16 +573,16 @@ label="Guruhning o'qituvchisini tanlang"
     
     </Col>
     <Col lg={7}>
-    <Form.Item         
+    <Form.Item
+    initialValue={guruh.kun}         
 label="Haftani qaysi kunlari dars bo'lishini kiriting"
         name="kun"
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
     mode="multiple"
     style={{ width: '100%' }}
     placeholder="Hafta kunlarini tanglang"
-    defaultValue={[]}
     
     optionLabelProp="label"
   >
@@ -581,30 +600,44 @@ label="Haftani qaysi kunlari dars bo'lishini kiriting"
 
     </Col>
     </Row>      
-    <Form.Item         
+    <Form.Item
+    initialValue={guruh.image}         
 label="Guruh uchun qo'shimcha ma'lumot kiriting"
         name="image"
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Input type="file"/>
 </Form.Item>
-    <Form.Item         
+    <Form.Item
+    initialValue={guruh.qushimcha}         
 label="Guruh uchun qo'shimcha ma'lumot kiriting"
         name="qushimcha"
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <TextArea rows={10} cols={60}/>
 </Form.Item>
+{
+  mentors.map((item5, key)=>{
+    return(
+      <>
+  <p>{item5}ga beriladigan summa foiz miqdorda</p>
+<Input id="foiz" placeholder="100%" name={item5+key} min="0" max="100" type="number"/>
+<br/>
+</>
+)
+  })
+}
 </Col>
         </Row>
 
-      <Form.Item>
-      <Button type="danger" htmlType="submit">
+      <Form.Item
+      initialValue={guruh.qilis}>
+      <Button type="danger" onClick={()=>{resetForm()}} htmlType="button">
 Bekor qilish
         </Button>
         
 
-      <Button type="primary" htmlType="submit">
+      <Button type="primary" htmlType="submit" onClick={()=>{setShow(false)}}>
           
           Saqlash
        
@@ -612,10 +645,9 @@ Bekor qilish
       </Form.Item>
 
     </Form>
-
+{/* {document.getElementById('formGuruh').reset()} */}
       </Modal>
 
-            </div>
-        )
-    }
+    </div>
+  )
 }
