@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useForm, useEffect } from 'react'
 import { Container, Col, Row,Image, OverlayTrigger,  Tooltip } from 'react-bootstrap';
 import styles from '../css/news.module.css'
 import { Button, Input, Select, Table, Modal, Form, DatePicker, TimePicker, InputNumber, Upload, message } from 'antd';
@@ -184,18 +184,22 @@ export default function Guruhlar() {
   const [show, setShow]=useState(false)
   const [guruh, setGuruh]=useState({})
 
-
+  const [form] = Form.useForm();
 const editGuruh=(id)=>{
   // setGuruh(grlar[id])
   setShow(true)
 }
 
-const resetForm=()=>{
-document.getElementById('formGuruh').reset()
-}
+
 const handleCancel=()=>{
   setShow(false)
-  resetForm()
+  onReset()
+  var g=document.querySelectorAll('#foiz')
+
+for(let i=0; i<g.length; i++){
+g[i].value=""
+// console.log(g[i].attributes.value.nodeValue)
+}
 }
 const onFinish=(value)=>{
 var date=value.date._d.toLocaleDateString()
@@ -229,7 +233,7 @@ var config={
   guruhlar.push(config)
   setGrlar(guruhlar)
   console.log(grlar)
-  handleCancel()
+handleCancel()
 }
 const handleExpandClick = (id) => {
 var a= expanded
@@ -243,7 +247,10 @@ if (value === justifyActive) {
 }
   setJustifyActive(value)
 };
-
+const onReset = () => {
+  form.resetFields();
+  setEdit(null)
+};
 const mentorlar=(value)=>{
   setMentors(value)
 }
@@ -437,6 +444,7 @@ const mentorlar=(value)=>{
                 </Container>
                 <Modal title="Guruh" width="70%" visible={show} footer={false} onCancel={handleCancel}>
                 <Form
+                form={form} 
       name="basic"
       id="formGuruh"
       labelCol={{ span: 24 }}
@@ -510,7 +518,7 @@ label="Guruhning o'qituvchisini tanlang"
     mode="multiple"
     style={{ width: '100%' }}
     placeholder="O'qutuvchini tanlang"
-    onChange={mentors}
+    onChange={mentorlar}
         optionLabelProp="label"
   >
        {
@@ -632,12 +640,12 @@ label="Guruh uchun qo'shimcha ma'lumot kiriting"
 
       <Form.Item
       initialValue={guruh.qilis}>
-      <Button type="danger" onClick={()=>{resetForm()}} htmlType="button">
+      <Button type="danger"  htmlType="button">
 Bekor qilish
         </Button>
         
 
-      <Button type="primary" htmlType="submit" onClick={()=>{setShow(false)}}>
+      <Button type="primary" htmlType="submit">
           
           Saqlash
        
