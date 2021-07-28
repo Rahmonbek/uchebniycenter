@@ -4,7 +4,7 @@ import { Row, Col, Button } from "react-bootstrap"
 import { Modal } from "antd"
 import img1 from "../img/lgg.png"
 import img2 from "../img/lc.png"
-import Map from "./Map"
+import { YMaps, Map,Placemark } from 'react-yandex-maps';
 import EventAvailableOutlinedIcon from '@material-ui/icons/EventAvailableOutlined';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
@@ -33,13 +33,20 @@ export default class LearningCenter extends Component {
         return (
             <div className={style.mat}>
 
-                <Modal title="Basic Modal" width="1000px" bodyStyle={{ padding: "0" }} visible={this.state.isModalVisible} onOk={this.handleOk} onCancel={this.handleCancel}>
-                    <Map
-                        google={this.props.google}
-                        center={{ lat: 18.5204, lng: 73.8567 }}
-                        height='300px'
-                        zoom={15}
-                    />
+                <Modal title="Basic Modal" bodyStyle={{ padding: "0" }} visible={this.state.isModalVisible} onOk={this.handleOk} onCancel={this.handleCancel}>
+                <YMaps>
+    <div style={{width:"100%",height:"360px"}}>
+
+      <Map defaultState={{ center: [41.311211, 69.279410], zoom: 13 }} style={{width:"100%",height:"360px"}}>
+
+      <Placemark
+  geometry={[41.311211, 69.279410]}
+  modules={['geoObject.addon.balloon', 'geoObject.addon.hint']}
+/>
+      </Map>
+
+    </div>
+  </YMaps>
                 </Modal>
                 <div className={this.state.ft ? style.adPanel1 : style.adPanel}>
                     <div className={style.rasm}>
