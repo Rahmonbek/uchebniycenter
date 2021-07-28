@@ -232,14 +232,15 @@ width: max-content;
   border: 2px dashed #462c8e;
   background-image: url("../img/cam.png");
   background-position: center 0px;
-  background-size: 90% 70%;
+  background-size: 80% 70%;
   background-repeat: no-repeat;
   display: flex;
+  justify-content: center;
   align-items: flex-end;
   color: #462c8e;
   font-size: 13px;
   font-weight: bold;
-  
+ 
 }
 .subm{
   outline: none;
