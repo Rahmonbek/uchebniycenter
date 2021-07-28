@@ -1,16 +1,26 @@
 import React, { Component } from "react"
 import style from "../css/LearningCenter.module.css"
-import { Row, Col } from "react-bootstrap"
+import { Row, Col, Button } from "react-bootstrap"
+import { Modal } from "antd"
 import img1 from "../img/lgg.png"
 import img2 from "../img/lc.png"
-import { Button, Upload, Form, Select, Input } from 'antd';
+import Map from "./Map"
 import EventAvailableOutlinedIcon from '@material-ui/icons/EventAvailableOutlined';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 export default class LearningCenter extends Component {
     state = {
-        ft: false
+        ft: false,
+        isModalVisible: false
     }
-
+    handleCancel = () => {
+        this.setState({
+            isModalVisible: false
+        })
+    }
+    handleOk = () => {
+        this.handleCancel()
+    }
     render() {
 
         const normFile = (e) => {
@@ -22,6 +32,15 @@ export default class LearningCenter extends Component {
         };
         return (
             <div className={style.mat}>
+
+                <Modal title="Basic Modal" width="1000px" bodyStyle={{ padding: "0" }} visible={this.state.isModalVisible} onOk={this.handleOk} onCancel={this.handleCancel}>
+                    <Map
+                        google={this.props.google}
+                        center={{ lat: 18.5204, lng: 73.8567 }}
+                        height='300px'
+                        zoom={15}
+                    />
+                </Modal>
                 <div className={this.state.ft ? style.adPanel1 : style.adPanel}>
                     <div className={style.rasm}>
                         <div className={this.state.ft ? style.rasm11 : style.rasm1}>
@@ -51,10 +70,19 @@ export default class LearningCenter extends Component {
                                         <input placeholder=" " type="email" className={style.inputField} required />
                                         <label className={style.inputLabel}>Emaili</label>
                                     </div>
-                                    <div className={style.input}>
+                                    <Row>
+                                        <Col lg={2}>
+                                        <Button className={style.btnm} onClick={() => this.setState({ isModalVisible: true })}><LocationOnIcon/></Button>
+                                        </Col>
+                                        <Col lg={10}>
+                                        <div className={style.input}>
                                         <input placeholder=" " type="text" className={style.inputField} required />
                                         <label className={style.inputLabel}>Manzili</label>
                                     </div>
+                                        </Col>
+                                    </Row>
+
+                                    
                                 </Col>
                                 <Col lg={3} className={style.logoinp}>
                                     <br />
@@ -85,10 +113,10 @@ export default class LearningCenter extends Component {
                                     <div className={style.input}>
                                         <input placeholder=" " type="text" className={style.inputField} required />
                                         <label className={style.inputLabel}>Instagram manzili</label>
-                                        
+
                                     </div>
                                     <div className={style.input}>
-                                        
+
                                         <textarea placeholder=" " rows="4" className={style.inputField} required>
 
                                         </textarea>
@@ -97,7 +125,7 @@ export default class LearningCenter extends Component {
                                 </Col>
 
                                 <Col lg={9}></Col>
-                                <Col lg={3} style={{paddingTop:"15px"}}>
+                                <Col lg={3} style={{ paddingTop: "15px" }}>
                                     <button type="submit" value="" className={style.subm}>Tasdiqlash</button>
                                 </Col>
                             </Row>
@@ -105,6 +133,7 @@ export default class LearningCenter extends Component {
                         </form>
                     </div>
                 </div>
+                
             </div>
         )
     }

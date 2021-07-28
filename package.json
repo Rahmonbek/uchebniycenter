@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "@ckeditor/ckeditor5-react": "^3.0.2"
+    "@ckeditor/ckeditor5-react": "^3.0.2",
+    "react-geocode": "^0.2.3",
+    "react-google-autocomplete": "^2.4.0",
+    "react-google-maps": "^9.4.5"
   }
 }

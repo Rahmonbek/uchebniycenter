@@ -73,10 +73,12 @@ box-shadow: rgba(0, 0, 0, 0.35) 2px 14px 20px;
     backface-visibility: hidden;
   }
   .muqova1 {
-    background: linear-gradient(to right bottom,#08a329,#33ff00);
+    background-image: url("../img/bgcover1.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     color: white;
     transform: rotateY(180deg);
-    padding-top: 88px;
+    padding-top: 188px;
     text-align: center;
     border-radius: 23px 0px 0px 23px;
   }
@@ -86,34 +88,48 @@ box-shadow: rgba(0, 0, 0, 0.35) 2px 14px 20px;
     font-family:  Georgia, Times, 'Times New Roman', serif;
   }
   .muqova2 img{
-      width: 60%;
-      margin-top: 34px;
+      width: 49%;
+      margin: 44px;
       box-shadow:3px #462c8e;
+
   }
-  .muqova1 img{
-    box-shadow:inset 0px 1px 5px greenyellow;
-}
+
   .muqova2 {
-    background: radial-gradient(at 180px 120px,#9ea9f1,#7e89d1);;
+    background-image: url("../img/bgc.jpg");
+    background-size: 100% 120%;
+    background-repeat: no-repeat;
     color: black;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+
     border-radius: 0px 23px 23px 0px;
 
 
   }
+  .btnm{
+    transform: translateY(16px);
+    background-color: #555;
+  border: none;
+  }
+  .btnm:hover{
+    background-color: #462c8e;
+  border: none;
+  }
+.btnm:focus{
+  background-color: #462c8e;
 
+border: none;
+}
   .btn{
     font-size: 29px;
-    margin-bottom: 22px;
+    margin: 22px auto;
     padding: 2px 12px;
     color: whitesmoke;
     font-family: tahoma;
     border-radius: 8px;
     cursor: pointer;
-    box-shadow: 2px 1px 4px #333;
+width: max-content;
     transition: text-shadow 1s;
   }
 .btn:hover{
