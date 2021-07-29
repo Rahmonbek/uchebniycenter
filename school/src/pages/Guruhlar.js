@@ -188,51 +188,27 @@ export default function Guruhlar() {
 
   const [form] = Form.useForm();
 const editGuruh=(id)=>{
-  // onReset()
   var gurux=grlar[id]
   setGuruh(gurux);
-  console.log(gurux);
-  // setGuruh(()=>{return item})
-  // setGuruh(prevGuruh=>[...prevGuruh, `${grlar[id]}`])
-  // setGuruh((prev)=>[...prev, grlar[id]])
+  
   setMentors(guruh.mentor)
-  console.log(id);
-  console.log(guruh);
-  console.log(mentors);
-  // form.setFieldsValue(grlar[id])
-  // setEdit(id)
   setShow(true)
- 
-  // console.log(form.getFieldValue())
+  form.setFieldsValue({
+    ...grlar[id]
+  }); 
 }
 
 
-const handleCancel=()=>{
-  setShow(false)
-  onReset()
-  var g=document.querySelectorAll('#foiz')
 
-for(let i=0; i<g.length; i++){
-g[i].value=""
-// console.log(g[i].attributes.value.nodeValue)
-}
-}
 const onFinish=(value)=>{
-  setDate(value.date)
-  setTimes(value.vaqt)
-  console.log(date);
-  console.log(times);
-// var date=value.date._d.toLocaleDateString()
-// var time=value.vaqt[0]._d.toLocaleTimeString()+ ' - '+value.vaqt[1]._d.toLocaleTimeString()
-var foiz=[]
+  var foiz=[]
 var g=document.querySelectorAll('#foiz')
 
 for(let i=0; i<g.length; i++){
 foiz[i]=g[i].value
-// console.log(g[i].attributes.value.nodeValue)
 }
 
-console.log(foiz)
+
 
 var config={
     id: grlar[grlar.length-1].id+1,
@@ -243,17 +219,18 @@ var config={
             fanlar: value.fanlar,
             image:"https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg",
             kun: value.kun,
-            vaqt: times,
-            date: date,
+            vaqt: value.vaqt,
+            date: value.date,
             foiz: foiz,
             qushimcha: value.qushimcha, 
             tolov: value.tolov
   }
   var guruhlar=grlar
+  
   guruhlar.push(config)
-  setGrlar(guruhlar)
-  console.log(grlar)
-handleCancel()
+  setGrlar((prev)=>{return(guruhlar)})
+  
+  // handleCancel()
 }
 const handleExpandClick = (id) => {
 var a= expanded
@@ -261,12 +238,7 @@ var a= expanded
   setExpanded(a)
 };
 
-const handleJustifyClick = (value) => {
-if (value === justifyActive) {
-  return;
-}
-  setJustifyActive(value)
-};
+
 const onReset = () => {
   form.resetFields();
   setEdit(null)
@@ -277,57 +249,18 @@ const openModal = () => {
 const mentorlar=(value)=>{
   setMentors(value)
 }
-  const { Option } = Select;
-        const uploadButton = (
-            <div>
-              <PlusOutlined />
-              <div style={{ marginTop: 8 }}>Upload</div>
-            </div>
-          );
-      
-        const columns = [
-            {
-                title: '#',
-                dataIndex: 'id',
-                key: 'id',
-            },
-            {
-                title: 'Gurux nomi',
-                dataIndex: 'name',
-                key: 'name',
-            },
-            {
-                title: 'Mentor',
-                dataIndex: 'mentor',
-                key: 'mentor',
-            },
-            {
-                title: "O'quv yo'nalishi",
-                dataIndex: 'soha',
-                key: 'soha',
-            },
-            {
-                title: "Dars kun(lar)i",
-                dataIndex: 'kun',
-                key: 'kun',
-            },
-            {
-                title: "Dars vaqti",
-                dataIndex: 'vaqt',
-                key: 'vaqt',
-            },
-            {
-                title: "Qo'shimcha",
-                dataIndex: "qushimcha",
-                key: "qushimcha",
-            },
-            {
-                title: "O'zgartirish",
-                dataIndex: "id",
-                key: 'operation',
-                render: (id) => <Button type="primary" onClick={() => { this.editRow(id) }}>O'zgartirish</Button>,
-            },
-        ];
+const handleCancel=()=>{
+  form.setFieldsValue({})
+  var g=document.querySelectorAll('#foiz')
+
+for(let i=0; i<g.length; i++){
+g[i].value=""
+// 
+}
+
+  setShow((prev)=>{return(false)})
+} 
+const { Option } = Select;
   return (
     <div>
                       <input type="checkbox" id="modal" className={styles.smbox}/>
@@ -472,7 +405,7 @@ const mentorlar=(value)=>{
       id="formGuruh"
       labelCol={{ span: 24 }}
       wrapperCol={{ span: 24 }}
-      initialValues={{ remember: true, guruh }}
+      initialValues={{ remember: true,}}
       onFinish={onFinish}
       
     >
@@ -484,7 +417,7 @@ const mentorlar=(value)=>{
         name="name"
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
-        <Input defaultValue={guruh.name} placeholder="Guruhning nomini kiriting"/>
+        <Input placeholder="Guruhning nomini kiriting"/>
       </Form.Item>
 
       <Form.Item
@@ -493,7 +426,7 @@ name="yonalish"
 rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
-    defaultValue={guruh.yonalish}         
+            
     mode="multiple"
     style={{ width: '100%' }}
     placeholder="Yo'nalishni tanlang"
@@ -515,7 +448,7 @@ rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select 
-  defaultValue={guruh.fanlar}         
+          
   mode="multiple"
   style={{ width: '100%' }}
   placeholder="Yo'nalishni tanlang"
@@ -537,7 +470,7 @@ rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
     rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
-    defaultValue={guruh.mentor}         
+            
     mode="multiple"
     style={{ width: '100%' }}
     placeholder="O'qutuvchini tanlang"
@@ -557,7 +490,7 @@ rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
         name="tolov"
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}>
-          <Input defaultValue={guruh.tolov} type="number" min="0"/>
+          <Input type="number" min="0"/>
         </Form.Item>
 <Row>
     <Col lg={6}>
@@ -596,7 +529,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
         
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
-        <Input defaultValue={guruh.muddat} type="number" min="0"/>
+        <Input type="number" min="0"/>
       </Form.Item>
 
     
@@ -608,7 +541,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
-    defaultValue={guruh.kun}         
+            
     mode="multiple"
     style={{ width: '100%' }}
     placeholder="Hafta kunlarini tanglang"
@@ -642,7 +575,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
         name="qushimcha"
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
-<TextArea defaultValue={guruh.qushimcha} rows={10} cols={60}/>
+<TextArea rows={10} cols={60}/>
 </Form.Item>  
 { mentors.map((item5, key)=>{
     return(
@@ -658,7 +591,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
         </Row>
 
       <Form.Item
-      defaultValue={guruh.qilis}>
+>
       <Button type="danger" onClick={handleCancel} htmlType="button">
           Bekor qilish
         </Button>
