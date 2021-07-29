@@ -189,7 +189,9 @@ export default function Guruhlar() {
   const [form] = Form.useForm();
 const editGuruh=(id)=>{
   // onReset()
-  setGuruh(id);
+  var gurux=grlar[id]
+  setGuruh(gurux);
+  console.log(gurux);
   // setGuruh(()=>{return item})
   // setGuruh(prevGuruh=>[...prevGuruh, `${grlar[id]}`])
   // setGuruh((prev)=>[...prev, grlar[id]])
@@ -642,7 +644,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
 >
 <TextArea defaultValue={guruh.qushimcha} rows={10} cols={60}/>
 </Form.Item>  
-{ mentors==undefined ? mentors.map((item5, key)=>{
+{ mentors.map((item5, key)=>{
     return(
       <>
         <p>{item5}ga beriladigan summa foiz miqdorda</p>
@@ -650,7 +652,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
         <br/>
       </>
     )
-  }) : ''
+  }) 
 }
 </Col>
         </Row>
