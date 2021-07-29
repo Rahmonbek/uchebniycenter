@@ -37,6 +37,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import TelegramIcon from '@material-ui/icons/Telegram';
 import BorderColorIcon from '@material-ui/icons/BorderColor';
+import ImageDemo from './ImageDemo';
 
 
 const { TextArea } = Input;
@@ -119,11 +120,12 @@ export default function Guruhlar() {
                               fullname:'Ismoilov Rahmodn'}
   ])
   const [date, setDate]=useState('')
+  const [times, setTimes]=useState([])
   const [grlar, setGrlar]=useState([
     {
       id: 1,
       name: 'tower02',
-     muddat:'3', 
+      muddat:3, 
       mentor: ["allakim"],
       yonalish:['Web dasturlash', 'Android'],
       fanlar:['HTML', 'CSS', 'React'],
@@ -131,14 +133,14 @@ export default function Guruhlar() {
       kun: ['Dushanba', 'Seshanba', 'Payshanba'],
       vaqt: "12:00.00-14:00.00",
       date:"21-11-2020",
-      tolov:"500000",
-      foiz:["30"],
+      tolov:500000,
+      foiz:[30],
       qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus kina",
   },
   {
       id: 2,
       name: 'tower02 ',
-     muddat:'3', 
+      muddat: 3, 
       mentor: ["allakim",'Mentor'],
       yonalish:['Web dasturlash', 'Android'],
       fanlar:['HTML', 'CSS', 'React'],
@@ -146,14 +148,14 @@ export default function Guruhlar() {
       kun: ['Dushanba', 'Seshanba', 'Payshanba'],
       vaqt: "12:00.00-15:00.00",
       date:"21-11-2020",
-      tolov:"500000",
-      foiz:["30", '20'],
+      tolov: 500000,
+      foiz:[30, 20],
       qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus kina",
   },
   {
     id: 3,
     name: 'tower02',
-   muddat:'3', 
+    muddat:3, 
     mentor: ["allakim"],
     yonalish:['Web dasturlash', 'Android'],
     fanlar:['HTML', 'CSS', 'React'],
@@ -161,14 +163,14 @@ export default function Guruhlar() {
     kun: ['Dushanba', 'Seshanba', 'Payshanba'],
     vaqt: "12:00.00-14:00.00",
     date:"21-11-2020",
-    tolov:"500000",
-    foiz:["30"],
+    tolov: 500000,
+    foiz:[30],
     qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus kina",
 },
 {
     id: 4,
     name: 'tower02 ',
-   muddat:'3', 
+    muddat: 3, 
     mentor: ["allakim",'Mentor'],
     yonalish:['Web dasturlash', 'Android'],
     fanlar:['HTML', 'CSS', 'React'],
@@ -176,8 +178,8 @@ export default function Guruhlar() {
     kun: ['Dushanba', 'Seshanba', 'Payshanba'],
     vaqt: "12:00.00-15:00.00",
     date:"21-11-2020",
-    tolov:"500000",
-    foiz:["30", '20'],
+    tolov: 500000,
+    foiz:[30, 20],
     qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus kina",
 }
   ])
@@ -186,15 +188,20 @@ export default function Guruhlar() {
 
   const [form] = Form.useForm();
 const editGuruh=(id)=>{
-//  setGuruh({...grlar[id]})
- 
- onReset()
-
-  form.setFieldsValue(grlar[id])
-  setEdit(id)
+  // onReset()
+  setGuruh(id);
+  // setGuruh(()=>{return item})
+  // setGuruh(prevGuruh=>[...prevGuruh, `${grlar[id]}`])
+  // setGuruh((prev)=>[...prev, grlar[id]])
+  setMentors(guruh.mentor)
+  console.log(id);
+  console.log(guruh);
+  console.log(mentors);
+  // form.setFieldsValue(grlar[id])
+  // setEdit(id)
   setShow(true)
  
-  console.log(form.getFieldValue())
+  // console.log(form.getFieldValue())
 }
 
 
@@ -209,6 +216,10 @@ g[i].value=""
 }
 }
 const onFinish=(value)=>{
+  setDate(value.date)
+  setTimes(value.vaqt)
+  console.log(date);
+  console.log(times);
 // var date=value.date._d.toLocaleDateString()
 // var time=value.vaqt[0]._d.toLocaleTimeString()+ ' - '+value.vaqt[1]._d.toLocaleTimeString()
 var foiz=[]
@@ -224,17 +235,17 @@ console.log(foiz)
 var config={
     id: grlar[grlar.length-1].id+1,
             name: value.name,
-           muddat:value.muddat, 
+            muddat:value.muddat, 
             mentor: value.mentor,
             yonalish:value.yonalish,
-            fanlar:value.fanlar,
+            fanlar: value.fanlar,
             image:"https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg",
             kun: value.kun,
-            // vaqt: time,
-            // date:date,
-            foiz:foiz,
+            vaqt: times,
+            date: date,
+            foiz: foiz,
             qushimcha: value.qushimcha, 
-            tolov:value.tolov
+            tolov: value.tolov
   }
   var guruhlar=grlar
   guruhlar.push(config)
@@ -258,6 +269,9 @@ const onReset = () => {
   form.resetFields();
   setEdit(null)
 };
+const openModal = () => {
+  setShow(true)
+}
 const mentorlar=(value)=>{
   setMentors(value)
 }
@@ -317,7 +331,7 @@ const mentorlar=(value)=>{
                       <input type="checkbox" id="modal" className={styles.smbox}/>
                 <label for="modal" className="modal-background" ></label>
                 <Container fluid><br/><br/>
-                <Button onClick={()=>{setShow(true)}} type="primary">Gurux qo'shish</Button>
+                <Button onClick={()=>{openModal()}} type="primary">Gurux qo'shish</Button>
                   <Row>
                       {
                           grlar.map((item, key)=>{
@@ -358,8 +372,7 @@ const mentorlar=(value)=>{
         >
           {({ ref, ...triggerHandler }) => (
             <Button
-            onClick={()=>{editGuruh(key); 
-            setShow(true)}}
+            onClick={()=>{editGuruh(key)}}
           
               variant="blue"
               {...triggerHandler}
@@ -469,16 +482,16 @@ const mentorlar=(value)=>{
         name="name"
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
-        <Input initialValue={guruh.name} placeholder="Guruhning nomini kiriting"/>
+        <Input defaultValue={guruh.name} placeholder="Guruhning nomini kiriting"/>
       </Form.Item>
 
       <Form.Item
-      initialValue={guruh.yonalish}         
 label="Guruhning yo'nalishini tanlang"
-        name="yonalish"
-        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+name="yonalish"
+rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
+    defaultValue={guruh.yonalish}         
     mode="multiple"
     style={{ width: '100%' }}
     placeholder="Yo'nalishni tanlang"
@@ -495,17 +508,17 @@ label="Guruhning yo'nalishini tanlang"
 </Form.Item>
 
 <Form.Item
-initialValue={guruh.fanlar}         
-label="Guruhda o'tiladigan fanlarni/dasturlarni tanlang"
+        label="Guruhda o'tiladigan fanlarni/dasturlarni tanlang"
         name="fanlar"
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select 
- mode="multiple"
- style={{ width: '100%' }}
- placeholder="Yo'nalishni tanlang"
+  defaultValue={guruh.fanlar}         
+  mode="multiple"
+  style={{ width: '100%' }}
+  placeholder="Yo'nalishni tanlang"
  
- optionLabelProp="label">
+  optionLabelProp="label">
       {
           fanlar.map(item=>{
               return(<Option value={item.name}>{item.name}</Option>)
@@ -517,18 +530,18 @@ label="Guruhda o'tiladigan fanlarni/dasturlarni tanlang"
       </Select>
 </Form.Item>
 <Form.Item
-initialValue={guruh.mentor}         
-label="Guruhning o'qituvchisini tanlang"
-        name="mentor"
-        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+    label="Guruhning o'qituvchisini tanlang"
+    name="mentor"
+    rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
+    defaultValue={guruh.mentor}         
     mode="multiple"
     style={{ width: '100%' }}
     placeholder="O'qutuvchini tanlang"
     onChange={mentorlar}
-        optionLabelProp="label"
-  >
+    optionLabelProp="label"
+>
        {
           mentor.map(item=>{
               return(<Option value={item.fullname}  label={item.fullname}><div className="demo-option-label-item">{item.fullname}</div></Option>)
@@ -539,16 +552,15 @@ label="Guruhning o'qituvchisini tanlang"
 
 </Form.Item>
 <Form.Item
-initialValue={guruh.tolov}
 label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
         name="tolov"
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}>
-          <Input type="number" min="0"/>
+          <Input defaultValue={guruh.tolov} type="number" min="0"/>
         </Form.Item>
 <Row>
-    {/* <Col lg={6}>
+    <Col lg={6}>
     <Form.Item
-    initialValue={guruh.date}
+        // initialValue={guruh.date}
         label="Ochilish sanasini kiriting"
         name="date"
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
@@ -560,7 +572,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     </Col>
     <Col lg={6}>
     <Form.Item
-    initialValue={guruh.vaqt}
+        // initialValue={guruh.vaqt}
         label="Dars vaqtini kiriting"
         name="vaqt"
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
@@ -569,7 +581,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
       </Form.Item>
 
 
-    </Col> */}
+    </Col>
 </Row>
       
             </Col>
@@ -577,25 +589,24 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
 <Row>
     <Col lg={5}>
     <Form.Item
-    initialValue={guruh.muddat}
         label="Dars nechchi oy davom etishini kiriting"
         name="muddat"
         
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
-        <InputNumber min="0"/>
+        <Input defaultValue={guruh.muddat} type="number" min="0"/>
       </Form.Item>
 
     
     </Col>
     <Col lg={7}>
     <Form.Item
-    initialValue={guruh.kun}         
-label="Haftani qaysi kunlari dars bo'lishini kiriting"
+        label="Haftani qaysi kunlari dars bo'lishini kiriting"
         name="kun"
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
+    defaultValue={guruh.kun}         
     mode="multiple"
     style={{ width: '100%' }}
     placeholder="Hafta kunlarini tanglang"
@@ -616,52 +627,45 @@ label="Haftani qaysi kunlari dars bo'lishini kiriting"
 
     </Col>
     </Row>      
-    <Form.Item
-    initialValue={guruh.image}         
-label="Guruh uchun qo'shimcha ma'lumot kiriting"
+    <Form.Item         
+        label="Guruh uchun qo'shimcha ma'lumot kiriting"
         name="image"
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
-<Input type="file"/>
+        <Input type="file" style={{marginBottom:'20px'}}/>
+        {ImageDemo(guruh.image)}
 </Form.Item>
-    <Form.Item
-    initialValue={guruh.qushimcha}         
-label="Guruh uchun qo'shimcha ma'lumot kiriting"
+    <Form.Item         
+        label="Guruh uchun qo'shimcha ma'lumot kiriting"
         name="qushimcha"
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
-<TextArea rows={10} cols={60}/>
-</Form.Item>
-{
-  mentors.map((item5, key)=>{
+<TextArea defaultValue={guruh.qushimcha} rows={10} cols={60}/>
+</Form.Item>  
+{ mentors==undefined ? mentors.map((item5, key)=>{
     return(
       <>
-  <p>{item5}ga beriladigan summa foiz miqdorda</p>
-<Input id="foiz" placeholder="100%" name={item5+key} min="0" max="100" type="number"/>
-<br/>
-</>
-)
-  })
+        <p>{item5}ga beriladigan summa foiz miqdorda</p>
+        <Input id="foiz" defaultValue={()=>{return (guruh.foiz[key]==undefined)? 0: guruh.foiz[key]}} placeholder="100%" name={item5+key} min="0" max="100" type="number"/>
+        <br/>
+      </>
+    )
+  }) : ''
 }
 </Col>
         </Row>
 
       <Form.Item
-      initialValue={guruh.qilis}>
+      defaultValue={guruh.qilis}>
       <Button type="danger" onClick={handleCancel} htmlType="button">
-Bekor qilish
+          Bekor qilish
         </Button>
-        
 
       <Button type="primary" htmlType="submit">
-          
           Saqlash
-       
-     </Button>
+      </Button>
       </Form.Item>
-
-    </Form>
-{/* {document.getElementById('formGuruh').reset()} */}
+      </Form>
       </Modal>
 
     </div>

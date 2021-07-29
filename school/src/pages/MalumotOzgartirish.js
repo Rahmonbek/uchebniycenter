@@ -3,6 +3,7 @@ import TextArea from 'antd/lib/input/TextArea';
 import React, {useState} from 'react'
 import { Row } from 'react-bootstrap';
 import '../css/MalumotOzgartirish.css';
+import ImageDemo from './ImageDemo';
 const url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnPEMT1O67rK1vm-LfTOAU28Xkwdb2Vx4Ekw&usqp=CAU'
 
 export default function Malumot_ozgartirish() {
@@ -98,7 +99,7 @@ export default function Malumot_ozgartirish() {
                             />
                         </Form.Item>
                         <div className="w-100 h-100" style={{position: 'relative'}}>
-                            <img src={url} className="images" style={{width:"150px", height:"150px"}} alt="Logotip rasmi"/>
+                            {ImageDemo(url)}
                         </div>
                     </div>
                     <Form.Item
