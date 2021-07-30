@@ -119,8 +119,6 @@ export default function Guruhlar() {
                           {id:7,
                               fullname:'Ismoilov Rahmodn'}
   ])
-  const [date, setDate]=useState('')
-  const [times, setTimes]=useState([])
   const [grlar, setGrlar]=useState([
     {
       id: 1,
@@ -131,7 +129,7 @@ export default function Guruhlar() {
       fanlar:['HTML', 'CSS', 'React'],
       image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
       kun: ['Dushanba', 'Seshanba', 'Payshanba'],
-      vaqt: "12:00.00-14:00.00",
+      vaqt: ["12:00.00","14:00.00"],
       date:"21-11-2020",
       tolov:500000,
       foiz:[30],
@@ -146,7 +144,7 @@ export default function Guruhlar() {
       fanlar:['HTML', 'CSS', 'React'],
       image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
       kun: ['Dushanba', 'Seshanba', 'Payshanba'],
-      vaqt: "12:00.00-15:00.00",
+      vaqt: ["12:00.00","15:00.00"],
       date:"21-11-2020",
       tolov: 500000,
       foiz:[30, 20],
@@ -161,7 +159,7 @@ export default function Guruhlar() {
     fanlar:['HTML', 'CSS', 'React'],
     image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
     kun: ['Dushanba', 'Seshanba', 'Payshanba'],
-    vaqt: "12:00.00-14:00.00",
+    vaqt: ["12:00.00","14:00.00"],
     date:"21-11-2020",
     tolov: 500000,
     foiz:[30],
@@ -176,7 +174,7 @@ export default function Guruhlar() {
     fanlar:['HTML', 'CSS', 'React'],
     image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
     kun: ['Dushanba', 'Seshanba', 'Payshanba'],
-    vaqt: "12:00.00-15:00.00",
+    vaqt: ["12:00.00","15:00.00"],
     date:"21-11-2020",
     tolov: 500000,
     foiz:[30, 20],
@@ -185,30 +183,47 @@ export default function Guruhlar() {
   ])
   const [show, setShow]=useState(false)
   const [guruh, setGuruh]=useState({})
-
+const [date, setDate]=useState('')
+const [time, setTime]=useState('')
   const [form] = Form.useForm();
-const editGuruh=(id)=>{
-  var gurux=grlar[id]
-  setGuruh(gurux);
+
+  const chengeDate=(date, dateString)=>{
+    setDate(dateString)
+    console.log(dateString)
+  }
+  const chengeTime=(date, dateString)=>{
+    setTime(dateString)
+    console.log(dateString)
+  }
+    
+const handleCancel=()=>{
+  setMentors([])
+setEdit(null)
+setDate('')
+setTime('')
+onReset()
   
-  setMentors(guruh.mentor)
-  setShow(true)
-  form.setFieldsValue({
-    ...grlar[id]
-  }); 
+  var g=document.querySelectorAll('#foiz')
+
+for(let i=0; i<g.length; i++){
+g[i].value=""
+// console.log(g[i].attributes.value.nodeValue)
 }
-
-
-
+setShow(false)
+  
+}
 const onFinish=(value)=>{
-  var foiz=[]
+  
+  
+var foiz=[]
 var g=document.querySelectorAll('#foiz')
 
 for(let i=0; i<g.length; i++){
 foiz[i]=g[i].value
+// console.log(g[i].attributes.value.nodeValue)
 }
 
-
+console.log(foiz)
 
 var config={
     id: grlar[grlar.length-1].id+1,
@@ -219,25 +234,24 @@ var config={
             fanlar: value.fanlar,
             image:"https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg",
             kun: value.kun,
-            vaqt: value.vaqt,
-            date: value.date,
+            vaqt: time,
+            date: date,
             foiz: foiz,
             qushimcha: value.qushimcha, 
             tolov: value.tolov
   }
   var guruhlar=grlar
-  
   guruhlar.push(config)
-  setGrlar((prev)=>{return(guruhlar)})
-  
-  // handleCancel()
+  console.log(guruhlar)
+  setGrlar(guruhlar)
+  console.log(grlar)
+  handleCancel()
 }
 const handleExpandClick = (id) => {
 var a= expanded
   a[id]=!a[id]
   setExpanded(a)
 };
-
 
 const onReset = () => {
   form.resetFields();
@@ -249,18 +263,18 @@ const openModal = () => {
 const mentorlar=(value)=>{
   setMentors(value)
 }
-const handleCancel=()=>{
-  form.setFieldsValue({})
-  var g=document.querySelectorAll('#foiz')
-
-for(let i=0; i<g.length; i++){
-g[i].value=""
-// 
+  const { Option } = Select;
+      
+const editGuruh=(id)=>{
+  // setGuruh(grlar[id])
+form.setFieldsValue(grlar[id])
+setDate(grlar[id].date)
+setTime(grlar[id].vaqt)
+setShow((prev)=>{return(true)})
+setMentors([])
+openModal()
+  
 }
-
-  setShow((prev)=>{return(false)})
-} 
-const { Option } = Select;
   return (
     <div>
                       <input type="checkbox" id="modal" className={styles.smbox}/>
@@ -296,7 +310,7 @@ const { Option } = Select;
              
               <p> <b>Muddati: </b>{item.muddat} oy</p>
               <p> <b>Kunlari: </b>{item.kun.map(item1=>{return(item1+' ')})}</p>
-              <p> <b>Vaqti: </b>{item.vaqt}</p>
+              <p> <b>Vaqti: </b>{item.vaqt.map(item=>{return(item +' - '+ item)})}</p>
               
              </Typography>
            </CardContent>
@@ -405,7 +419,7 @@ const { Option } = Select;
       id="formGuruh"
       labelCol={{ span: 24 }}
       wrapperCol={{ span: 24 }}
-      initialValues={{ remember: true,}}
+      initialValues={{ remember: true, ...guruh}}
       onFinish={onFinish}
       
     >
@@ -415,7 +429,7 @@ const { Option } = Select;
             
         label="Guruhni nomini kiriting"
         name="name"
-        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
         <Input placeholder="Guruhning nomini kiriting"/>
       </Form.Item>
@@ -423,10 +437,10 @@ const { Option } = Select;
       <Form.Item
 label="Guruhning yo'nalishini tanlang"
 name="yonalish"
-rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
-            
+             
     mode="multiple"
     style={{ width: '100%' }}
     placeholder="Yo'nalishni tanlang"
@@ -445,10 +459,10 @@ rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 <Form.Item
         label="Guruhda o'tiladigan fanlarni/dasturlarni tanlang"
         name="fanlar"
-        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select 
-          
+        
   mode="multiple"
   style={{ width: '100%' }}
   placeholder="Yo'nalishni tanlang"
@@ -467,10 +481,10 @@ rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 <Form.Item
     label="Guruhning o'qituvchisini tanlang"
     name="mentor"
-    rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+    rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
-            
+        
     mode="multiple"
     style={{ width: '100%' }}
     placeholder="O'qutuvchini tanlang"
@@ -489,31 +503,31 @@ rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 <Form.Item
 label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
         name="tolov"
-        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}>
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}>
           <Input type="number" min="0"/>
         </Form.Item>
 <Row>
     <Col lg={6}>
     <Form.Item
-        // initialValue={guruh.date}
         label="Ochilish sanasini kiriting"
-        name="date"
-        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+       
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
-        <DatePicker />
+        <DatePicker defaultValue={date!==""?date:""} onChange={chengeDate}
+        />
       </Form.Item>
 
 
     </Col>
     <Col lg={6}>
     <Form.Item
-        // initialValue={guruh.vaqt}
+        //
         label="Dars vaqtini kiriting"
-        name="vaqt"
-        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
-        <TimePicker.RangePicker />
-      </Form.Item>
+        <TimePicker.RangePicker defaultValue={time!==""?time:""}  onChange={chengeTime}/>
+      </Form.Item >
 
 
     </Col>
@@ -527,7 +541,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
         label="Dars nechchi oy davom etishini kiriting"
         name="muddat"
         
-        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
         <Input type="number" min="0"/>
       </Form.Item>
@@ -538,10 +552,10 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     <Form.Item
         label="Haftani qaysi kunlari dars bo'lishini kiriting"
         name="kun"
-        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
-            
+         
     mode="multiple"
     style={{ width: '100%' }}
     placeholder="Hafta kunlarini tanglang"
@@ -567,15 +581,15 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
         name="image"
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
-        <Input type="file" style={{marginBottom:'20px'}}/>
+        <Input type="file" required={true} style={{marginBottom:'20px'}}/>
         {ImageDemo(guruh.image)}
 </Form.Item>
     <Form.Item         
         label="Guruh uchun qo'shimcha ma'lumot kiriting"
         name="qushimcha"
-        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
-<TextArea rows={10} cols={60}/>
+<TextArea  rows={10} cols={60}/>
 </Form.Item>  
 { mentors.map((item5, key)=>{
     return(
@@ -590,8 +604,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
 </Col>
         </Row>
 
-      <Form.Item
->
+      <Form.Item>
       <Button type="danger" onClick={handleCancel} htmlType="button">
           Bekor qilish
         </Button>
@@ -602,7 +615,6 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
       </Form.Item>
       </Form>
       </Modal>
-
     </div>
   )
 }
