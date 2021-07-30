@@ -60,7 +60,7 @@ export default class LearningCenter extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className={style.forf}>
+                        <div className={style.forf} style={{padding: "0xp 0px 12px 0px"}}>
                             <h3 onClick={() => this.setState({ ft: false })}>O'quv markazi haqida</h3>
                             <br />
                             <form className={style.cardForm}>

@@ -395,7 +395,7 @@ margin:0px 1%;
   height:460px ;
 
   margin-top: 30px;
-  padding: 0xp 0px 12px 0px!important;
+  
 }
 .muqova2 h1{
   font-size: 12vw;
@@ -409,7 +409,7 @@ margin:0px 1%;
   background-position: center center;
 }
 .input + .input{
-  margin: 0 0px 0px 13px;
+  margin-top: 0;
 }
 .subm{
   margin-bottom: 12px;
