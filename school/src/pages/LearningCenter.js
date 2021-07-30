@@ -50,11 +50,12 @@ export default class LearningCenter extends Component {
                             <div className={this.state.ft ? style.rasm11 : style.rasm1}>
                                 <div className={style.muqova1}>
                                     <img src={img1} />
-                                    <br /> <br />
-                                    <h5>Bu joyga qandaydir shior yozsakmikan<br /> masalan:biz bilan hammasi qulay</h5>
+                                    <br /> 
+                                    <h1>Muvoffaqiyatli<br/>O'quv Markazlari</h1>
+                                    <br />
                                 </div>
                                 <div className={style.muqova2}>
-                                    <img src={img2} />
+                                    <h1>O'quv<br/>Markazlari</h1>
                                     <p className={style.btn} onClick={() => this.setState({ ft: true })}>Royxatdan o'tish <EventAvailableOutlinedIcon /></p>
                                 </div>
                             </div>
@@ -62,10 +63,9 @@ export default class LearningCenter extends Component {
                         <div className={style.forf}>
                             <h3 onClick={() => this.setState({ ft: false })}>O'quv markazi haqida</h3>
                             <br />
-
                             <form className={style.cardForm}>
                                 <Row>
-                                    <Col xs={9}>
+                                    <Col sm={9}>
                                         <div className={style.input}>
                                             <input placeholder=" " type="text" className={style.inputField} required />
                                             <label className={style.inputLabel}>O'quv markazining nomi</label>
@@ -88,7 +88,7 @@ export default class LearningCenter extends Component {
 
 
                                     </Col>
-                                    <Col xs={3} className={style.logoinp}>
+                                    <Col sm={3} className={style.logoinp}>
                                         <br />
                                         <br />
                                         <label for="inpimg">
@@ -97,19 +97,19 @@ export default class LearningCenter extends Component {
                                         <input type="file" id="inpimg" accept="image/*" />
 
                                     </Col>
-                                    <Col xs={6}>
+                                    <Col sm={6}>
                                         <div className={style.input}>
                                             <input placeholder=" " type="text" className={style.inputField} required />
                                             <label className={style.inputLabel}>Telefon</label>
                                         </div>
                                     </Col>
-                                    <Col xs={6}>
+                                    <Col sm={6}>
                                         <div className={style.input}>
                                             <input placeholder=" " type="text" className={style.inputField} required />
                                             <label className={style.inputLabel}>Qo'shimcha telefon</label>
                                         </div>
                                     </Col>
-                                    <Col xs={12}>
+                                    <Col sm={12}>
                                         <div className={style.input}>
                                             <input placeholder=" " type="text" className={style.inputField} required />
                                             <label className={style.inputLabel}>Telegram manzili</label>
@@ -128,8 +128,8 @@ export default class LearningCenter extends Component {
                                         </div>
                                     </Col>
 
-                                    <Col xs={9}></Col>
-                                    <Col xs={3} style={{ paddingTop: "15px" }}>
+                                    <Col xs={7} sm={9}></Col>
+                                    <Col xs={5} sm={3} style={{ paddingTop: "15px" }}>
                                         <button type="submit" value="" className={style.subm}>Tasdiqlash</button>
                                     </Col>
                                 </Row>

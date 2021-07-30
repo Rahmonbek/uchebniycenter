@@ -96,16 +96,20 @@ box-shadow: rgba(0, 0, 0, 0.35) 2px 14px 20px;
     text-align: center;
     border-radius: 23px 0px 0px 23px;
   }
-  .muqova1 h5{
+  .muqova1 h1{
     
-    color: white;
-    font-family:  Georgia, Times, 'Times New Roman', serif;
+    color: #C52F2F;
+    font-family: Comic Sans MS;
   }
-  .muqova2 img{
+  .muqova2 h1{
       width: 49%;
       margin: 44px;
-      box-shadow:3px #462c8e;
-
+color: #f1f1f1;
+text-align: left;
+font-family: 'Trebuchet MS', sans-serif;
+font-size: 60px;
+font-weight: bolder;
+text-shadow: 2px 0px 10px gray;
   }
 
   .muqova2 {
@@ -160,7 +164,7 @@ width: max-content;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     width: 50%;
     height: 100%;
-    padding: 20px 20px 0px 20px;
+    padding: 20px 1.5vw 0px 1.5vw;
     border-radius:0px 23px 23px 0px ;
   text-align: center;
 }
@@ -178,17 +182,15 @@ width: max-content;
 /* ====form==== */
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
- *, *:after, *:before {
+ /* *, *:after, *:before {
 	 box-sizing: border-box;
-}
+} */
 
 .mat input {
 	 appearance: none;
 	 border-radius: 0;
 }
- .cardForm {
-	 padding: 2rem 1rem 0px 1rem;
-}
+
  .input {
 	 display: flex;
 	 flex-direction: column-reverse;
@@ -274,6 +276,9 @@ width: max-content;
   box-shadow: 2px 6px 8px #462c8e;
 
 }
+.forf textarea{
+  height: 130px;
+}
 
 /* ==media== */
 
@@ -351,5 +356,62 @@ margin:0px 1%;
 margin:0px 1%;
   transform: translateY(0px);
   transition: all 0.9s;
+}
+}
+@media screen and (max-width:580px) {
+  .adPanel,.adPanel1{
+    height: 1000px;
+  }
+  .javon{
+    height: 90vh;
+  margin:0px 1%;
+    transform: translateY(-200px) scale(0.7);
+
+    transition: all 0.9s;
+  }
+  .javon1{
+    height: max-content;
+  margin:0px 1%;
+    transform: translateY(0px) scale(1);
+
+    transition: all 0.9s;
+  }
+
+  .logoinp label{
+    width: 160px;
+  }
+.forf{
+  padding: 12px 2px;
+}
+.forf h3{
+  font-size: 18px;
+}
+.btnm{
+  padding: 8px 4px;
+  background-color: indigo;
+}
+.cardForm{
+  overflow-y: auto;
+  height:460px ;
+
+  margin-top: 30px;
+  padding: 0xp 0px 12px 0px!important;
+}
+.muqova2 h1{
+  font-size: 12vw;
+  margin-left: 6vw;
+}
+.btn{
+  font-size: 9vw;
+}
+.muqova1{
+  background-size: 568px 100%;
+  background-position: center center;
+}
+.input + .input{
+  margin: 0 0px 0px 13px;
+}
+.subm{
+  margin-bottom: 12px;
 }
 }
