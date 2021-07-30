@@ -230,7 +230,7 @@ var config={
   guruhlar.push(config)
   setGrlar((prev)=>{return(guruhlar)})
   
-  // handleCancel()
+  handleCancel()
 }
 const handleExpandClick = (id) => {
 var a= expanded
