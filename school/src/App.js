@@ -1,4 +1,3 @@
-
 import {BrowserRouter,Switch, Route } from 'react-router-dom';
 import Courses from './pages/Courses';
 import Registration from './pages/Registration';
@@ -21,7 +20,8 @@ function App() {
       
       </Switch>
       </BrowserRouter>
-  );
+
+    );
 }
 
 export default App;
