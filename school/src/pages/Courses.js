@@ -107,7 +107,7 @@ justifyActive:'tab1',
                       <div className={styles.navbar}>
                              <ul>
                              <Link to="/malumot"><li>Biz haqimizda</li></Link>
-                             <Link to='/cabinet'><li>Kirish</li></Link>
+                             <Link to='/login'><li>Kirish</li></Link>
                              <li>|</li>
                              <Link to="/lcenter"><li>Ro'yxatdan o'tish</li></Link>
                                

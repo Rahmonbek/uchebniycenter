@@ -25,13 +25,13 @@ export default class Registration extends Component {
                              <h2>Registratsiya</h2>
                              <Form>
                                   <label className="mb-2" for="cars">Ismingiz:</label><br/>
-                                  <input type='text' placeholder='Ismingizni kiriting' /><br/>
+                                  <input type='text' placeholder='Ismingizni kiriting' required/><br/>
                                   <label className="mb-2" for="cars">Familiyangiz:</label><br/>
-                                  <input type='text' placeholder='Familiyangizni kiriting' /><br/>
+                                  <input type='text' placeholder='Familiyangizni kiriting' required/><br/>
                                   <label className="mb-2" for="cars">Telefon raqamingiz:</label><br/>
-                                  <input type='text' placeholder='+9989_ ___ __ __' /><br/>
+                                  <input type='text' placeholder='+9989_ ___ __ __' required/><br/>
                                   <label className="mb-2" for="cars">Qo'shimcha telefon raqam:</label><br/>
-                                  <input type='text' placeholder="+9989_ ___ __ __" />
+                                  <input type='text' placeholder="+9989_ ___ __ __" required/>
                                   <Button className={styles.sign_up} type='submit'>Registratsiya</Button>
                                   </Form>
                          </Col>

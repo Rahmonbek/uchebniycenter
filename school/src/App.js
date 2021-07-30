@@ -4,6 +4,7 @@ import Registration from './pages/Registration';
 import Main from './Main';
 import Malumot from './pages/Malumot';
 import LearningCenter from './pages/LearningCenter'
+import Login from './pages/Login'
 function App() {
   return (
     <BrowserRouter>    
@@ -13,6 +14,7 @@ function App() {
       <Route path="/cabinet/"><Main/></Route>
       <Route path="/malumot"><Malumot/></Route>
       <Route exact path="/lcenter"> <LearningCenter/> </Route>
+      <Route exact path="/login"> <Login/> </Route>
       
 
 
