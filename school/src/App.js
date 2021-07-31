@@ -5,11 +5,13 @@ import Main from './Main';
 import Malumot from './pages/Malumot';
 import LearningCenter from './pages/LearningCenter'
 import Login from './pages/Login'
+import Xarita from './pages/Xarita';
 function App() {
   return (
     <BrowserRouter>    
       <Switch>    
       <Route exact path="/"><Courses/></Route>
+      <Route exact path="/xarita"><Xarita/></Route>
       <Route exact path="/registration/uz"><Registration/></Route>
       <Route path="/cabinet/"><Main/></Route>
       <Route path="/malumot"><Malumot/></Route>
