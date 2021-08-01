@@ -1,7 +1,8 @@
 import axios from 'axios'
-export default url="https://ews-backend.herokuapp.com/"
-export const id="1"
-export default httpsReaquest=(config)=>{
+export const url="https://ews-backend.herokuapp.com"
+export const idT="1"
+
+export const httpsRequest=(config)=>{
     return(
         axios({
             ...config

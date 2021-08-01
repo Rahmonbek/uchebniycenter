@@ -1,26 +1,17 @@
-import React, { useState, useForm, useEffect } from 'react'
+import React, { useState, } from 'react'
 import { Container, Col, Row,Image, OverlayTrigger,  Tooltip } from 'react-bootstrap';
 import styles from '../css/news.module.css'
-import { Button, Input, Select, Table, Modal, Form, DatePicker, TimePicker, InputNumber, Upload, message } from 'antd';
+import { Button, Input, Select, Modal, Form, DatePicker, TimePicker,} from 'antd';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import moment from 'moment';
 import "../css/modalStyle.css";
-import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 // import { CKEditor } from '@ckeditor/ckeditor5-react';
 // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-import {
-    MDBTabs,
-    MDBTabsItem,
-    MDBTabsLink,
-    MDBTabsContent,
-    MDBTabsPane
-  } from 'mdb-react-ui-kit';  
 import style from '../css/courses.module.css';
 import '../App.css'
+import {createGroup} from '../host/Config'
 import Aos from 'aos';
 import 'aos/dist/aos.css';
-import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -28,16 +19,13 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import TelegramIcon from '@material-ui/icons/Telegram';
 import BorderColorIcon from '@material-ui/icons/BorderColor';
 import ImageDemo from './ImageDemo';
+import { idT } from '../host/Host';
 
 
 const { TextArea } = Input;
@@ -47,7 +35,7 @@ const { TextArea } = Input;
 export default function Guruhlar() {
   const[expanded, setExpanded]=useState([])
   const [justifyActive, setJustifyActive]=useState('tab1')
-  const [mentors, setMentors]=useState([])
+  const [teachers, setteachers]=useState([])
   const [son, setSon]=useState(0)
   const [edit, setEdit]=useState(null)
   const [category, setCategory]=useState([
@@ -65,7 +53,7 @@ export default function Guruhlar() {
   },
   {
       id:'4',
-      name:'Fanlar'
+      name:'subject'
   },
   {
       id:'5',
@@ -76,7 +64,7 @@ export default function Guruhlar() {
       name:'Bugalterlik'
   }
   ])
-  const [fanlar, setFanlar]=useState([
+  const [subject, setsubject]=useState([
     {
       id:'1',
       name:'HTML'
@@ -103,7 +91,7 @@ export default function Guruhlar() {
   }
   ])
   const [previewVisible, setPreviewVisible]=useState(false)
-  const [mentor, setMentor]=useState([
+  const [teacher, setteacher]=useState([
     {id:1,
       fullname:'Isdmoilov Rahmon'},
       {id:2,
@@ -123,61 +111,61 @@ export default function Guruhlar() {
     {
       id: 1,
       name: 'tower02',
-      muddat:3, 
-      mentor: ["allakim"],
-      yonalish:['Web dasturlash', 'Android'],
-      fanlar:['HTML', 'CSS', 'React'],
+      duration:3, 
+      teacher: ["allakim"],
+      category:['Web dasturlash', 'Android'],
+      subject:['HTML', 'CSS', 'React'],
       image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
-      kun: ['Dushanba', 'Seshanba', 'Payshanba'],
+      days: ['Dushanba', 'Seshanba', 'Payshanba'],
       vaqt: ["12:00.00","14:00.00"],
       date:"21-11-2020",
-      tolov:500000,
-      foiz:[30],
+      money:500000,
+      percent:[30],
       qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus kina",
   },
   {
       id: 2,
       name: 'tower02 ',
-      muddat: 3, 
-      mentor: ["allakim",'Mentor'],
-      yonalish:['Web dasturlash', 'Android'],
-      fanlar:['HTML', 'CSS', 'React'],
+      duration: 3, 
+      teacher: ["allakim",'teacher'],
+      category:['Web dasturlash', 'Android'],
+      subject:['HTML', 'CSS', 'React'],
       image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
-      kun: ['Dushanba', 'Seshanba', 'Payshanba'],
+      days: ['Dushanba', 'Seshanba', 'Payshanba'],
       vaqt: ["12:00.00","15:00.00"],
       date:"21-11-2020",
-      tolov: 500000,
-      foiz:[30, 20],
+      money: 500000,
+      percent:[30, 20],
       qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus kina",
   },
   {
     id: 3,
     name: 'tower02',
-    muddat:3, 
-    mentor: ["allakim"],
-    yonalish:['Web dasturlash', 'Android'],
-    fanlar:['HTML', 'CSS', 'React'],
+    duration:3, 
+    teacher: ["allakim"],
+    category:['Web dasturlash', 'Android'],
+    subject:['HTML', 'CSS', 'React'],
     image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
-    kun: ['Dushanba', 'Seshanba', 'Payshanba'],
+    days: ['Dushanba', 'Seshanba', 'Payshanba'],
     vaqt: ["12:00.00","14:00.00"],
     date:"21-11-2020",
-    tolov: 500000,
-    foiz:[30],
+    money: 500000,
+    percent:[30],
     qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus kina",
 },
 {
     id: 4,
     name: 'tower02 ',
-    muddat: 3, 
-    mentor: ["allakim",'Mentor'],
-    yonalish:['Web dasturlash', 'Android'],
-    fanlar:['HTML', 'CSS', 'React'],
+    duration: 3, 
+    teacher: ["allakim",'teacher'],
+    category:['Web dasturlash', 'Android'],
+    subject:['HTML', 'CSS', 'React'],
     image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
-    kun: ['Dushanba', 'Seshanba', 'Payshanba'],
+    days: ['Dushanba', 'Seshanba', 'Payshanba'],
     vaqt: ["12:00.00","15:00.00"],
     date:"21-11-2020",
-    tolov: 500000,
-    foiz:[30, 20],
+    money: 500000,
+    percent:[30, 20],
     qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus kina",
 }
   ])
@@ -197,13 +185,13 @@ const [time, setTime]=useState('')
   }
     
 const handleCancel=()=>{
-  setMentors([])
+  setteachers([])
 setEdit(null)
 setDate('')
 setTime('')
 onReset()
   
-  var g=document.querySelectorAll('#foiz')
+  var g=document.querySelectorAll('#percent')
 
 for(let i=0; i<g.length; i++){
 g[i].value=""
@@ -215,36 +203,38 @@ setShow(false)
 const onFinish=(value)=>{
   
   
-var foiz=[]
-var g=document.querySelectorAll('#foiz')
+var percent=[]
+var g=document.querySelectorAll('#percent')
 
 for(let i=0; i<g.length; i++){
-foiz[i]=g[i].value
+percent[i]=g[i].value
 // console.log(g[i].attributes.value.nodeValue)
 }
 
-console.log(foiz)
+console.log(percent)
 
 var config={
-    id: grlar[grlar.length-1].id+1,
+    // id: grlar[grlar.length-1].id+1,
             name: value.name,
-            muddat:value.muddat, 
-            mentor: value.mentor,
-            yonalish:value.yonalish,
-            fanlar: value.fanlar,
-            image:"https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg",
-            kun: value.kun,
-            vaqt: time,
-            date: date,
-            foiz: foiz,
-            qushimcha: value.qushimcha, 
-            tolov: value.tolov
+            duration:value.duration, 
+            teacher: value.teacher,
+            category:value.category,
+            subject: value.subject,
+            image:value.image,
+            days: value.days,
+            time: time,
+            start_date: date,
+            percent: percent,
+            // qushimcha: value.qushimcha, 
+            money: value.money,
+            training_center:idT
+           
+           
+            
+            
   }
-  var guruhlar=grlar
-  guruhlar.push(config)
-  console.log(guruhlar)
-  setGrlar(guruhlar)
-  console.log(grlar)
+  
+  createGroup(config).then(res=>{console.log(res)}).catch(err=>{console.log(err)})
   handleCancel()
 }
 const handleExpandClick = (id) => {
@@ -260,8 +250,8 @@ const onReset = () => {
 const openModal = () => {
   setShow(true)
 }
-const mentorlar=(value)=>{
-  setMentors(value)
+const teacherlar=(value)=>{
+  setteachers(value)
 }
   const { Option } = Select;
       
@@ -271,7 +261,7 @@ form.setFieldsValue(grlar[id])
 setDate(grlar[id].date)
 setTime(grlar[id].vaqt)
 setShow((prev)=>{return(true)})
-setMentors([])
+setteachers([])
 openModal()
   
 }
@@ -299,17 +289,17 @@ openModal()
            />
            <CardContent>
              <Typography variant="body2" color="textSecondary" component="p">
-             <p> <b>Mentor: </b>{item.mentor.map((item1, key)=>{return(
-               <p>{item1} - {item.foiz[key]}%</p>
+             <p> <b>teacher: </b>{item.teacher.map((item1, key)=>{return(
+               <p>{item1} - {item.percent[key]}%</p>
              )})}</p>
-             <p> <b>Yo'nalishi: </b>{item.yonalish.map(item1=>{return(item1+' ')})}</p>
-             <p> <b>Fanlar/Dasturlar: </b>{item.fanlar.map(item1=>{return(item1+' ')})}</p>
-             <p> <b>Kurs puli (oylik): </b>{item.tolov} so'm</p>
+             <p> <b>Yo'nalishi: </b>{item.category.map(item1=>{return(item1+' ')})}</p>
+             <p> <b>subject/Dasturlar: </b>{item.subject.map(item1=>{return(item1+' ')})}</p>
+             <p> <b>Kurs puli (oylik): </b>{item.money} so'm</p>
              
               <p> <b>Boshlanish vaqti: </b>{item.date}</p>
              
-              <p> <b>Muddati: </b>{item.muddat} oy</p>
-              <p> <b>Kunlari: </b>{item.kun.map(item1=>{return(item1+' ')})}</p>
+              <p> <b>durationi: </b>{item.duration} oy</p>
+              <p> <b>dayslari: </b>{item.days.map(item1=>{return(item1+' ')})}</p>
               <p> <b>Vaqti: </b>{item.vaqt.map(item=>{return(item +' - '+ item)})}</p>
               
              </Typography>
@@ -436,7 +426,7 @@ openModal()
 
       <Form.Item
 label="Guruhning yo'nalishini tanlang"
-name="yonalish"
+name="category"
 rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
@@ -457,8 +447,8 @@ rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 </Form.Item>
 
 <Form.Item
-        label="Guruhda o'tiladigan fanlarni/dasturlarni tanlang"
-        name="fanlar"
+        label="Guruhda o'tiladigan subjectni/dasturlarni tanlang"
+        name="subject"
         rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select 
@@ -469,7 +459,7 @@ rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
  
   optionLabelProp="label">
       {
-          fanlar.map(item=>{
+          subject.map(item=>{
               return(<Option value={item.name}>{item.name}</Option>)
           })
       }
@@ -480,7 +470,7 @@ rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 </Form.Item>
 <Form.Item
     label="Guruhning o'qituvchisini tanlang"
-    name="mentor"
+    name="teacher"
     rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
@@ -488,11 +478,11 @@ rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
     mode="multiple"
     style={{ width: '100%' }}
     placeholder="O'qutuvchini tanlang"
-    onChange={mentorlar}
+    onChange={teacherlar}
     optionLabelProp="label"
 >
        {
-          mentor.map(item=>{
+          teacher.map(item=>{
               return(<Option value={item.fullname}  label={item.fullname}><div className="demo-option-label-item">{item.fullname}</div></Option>)
           })
       }
@@ -502,7 +492,7 @@ rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 </Form.Item>
 <Form.Item
 label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
-        name="tolov"
+        name="money"
         rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}>
           <Input type="number" min="0"/>
         </Form.Item>
@@ -539,7 +529,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     <Col lg={5}>
     <Form.Item
         label="Dars nechchi oy davom etishini kiriting"
-        name="muddat"
+        name="duration"
         
         rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
@@ -550,15 +540,15 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     </Col>
     <Col lg={7}>
     <Form.Item
-        label="Haftani qaysi kunlari dars bo'lishini kiriting"
-        name="kun"
+        label="Haftani qaysi dayslari dars bo'lishini kiriting"
+        name="days"
         rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
          
     mode="multiple"
     style={{ width: '100%' }}
-    placeholder="Hafta kunlarini tanglang"
+    placeholder="Hafta dayslarini tanglang"
     
     optionLabelProp="label"
   >
@@ -591,11 +581,11 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
 >
 <TextArea  rows={10} cols={60}/>
 </Form.Item>  
-{ mentors.map((item5, key)=>{
+{ teachers.map((item5, key)=>{
     return(
       <>
-        <p>{item5}ga beriladigan summa foiz miqdorda</p>
-        <Input id="foiz" defaultValue={()=>{return (guruh.foiz[key]==undefined)? 0: guruh.foiz[key]}} placeholder="100%" name={item5+key} min="0" max="100" type="number"/>
+        <p>{item5}ga beriladigan summa percent miqdorda</p>
+        <Input id="percent" defaultValue={()=>{return (guruh.percent[key]==undefined)? 0: guruh.percent[key]}} placeholder="100%" name={item5+key} min="0" max="100" type="number"/>
         <br/>
       </>
     )
