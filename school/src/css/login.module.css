@@ -12,6 +12,7 @@ background-image: url(../img/bg-01.webp);
   font-family: poppins;
   background-repeat: no-repeat;
   background-size: cover;
+  
 } 
 
 .formLogin{
@@ -22,6 +23,7 @@ background-image: url(../img/bg-01.webp);
     padding: 40px;
     box-sizing: border-box;
     background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
     /* box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white; */
 }
 .formLogin h1{
