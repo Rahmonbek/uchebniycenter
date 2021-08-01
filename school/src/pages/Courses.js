@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../css/courses.module.css';
-import '../App.css'
+import  '../css/scroll.module.css';
+import '../App.css';
 import { Button, Col, Container, Image, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
 import logo from '../img/logo1.png'
 import frontend from '../img/frontend.jpg'
