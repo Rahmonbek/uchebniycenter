@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { Modal, Button, Cascader, DatePicker, Upload } from 'antd';
 import styles from '../css/davomat.module.css'
 import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
@@ -7,23 +7,12 @@ import { Form, Input, Select } from 'antd';
 import {AiFillEdit,AiOutlineDelete} from 'react-icons/ai'
 import {Table} from 'react-bootstrap'
 import moment from 'moment';
+import { url } from '../host/Host'
+import { getTeachers } from '../host/Config';
 import rasm1 from '../img/frontend.jpg'
 export default function Oqituvchiqoshish() {
     const [edit,setEdit]=useState(null)
-    const [oqituvchi,setOqituvchi]=useState([
-        {
-            name:'Abdulbosit Xayitov',
-            tugilgansana:'2021-06-30',
-            telefon:'+87647568775',
-            email:'xayitov@gmail.com',
-            rasm: <img style={{width:'100px', height: '100px'}} src={rasm1}/>,
-            yonalish:'front-end developer',
-            texnologiyalar:['html','css','bootstrap','js','ajax','react','redux','android'],
-            malumot:'bhgberu hgbuhurh uyhvyuvbyuhyu hguyh2uqhf2 yh2u3gh2uyhg yuhgyuhryurfhfyqfb quyfhqyugbq hbqhybfhqbf',
-            ishsana:"2021-06-30" 
-            
-        }
-    ])
+    const [oqituvchi,setOqituvchi]=useState([])
     const dateFormat = 'YYYY/MM/DD'
     const [visible,setVisible]=useState(false)
     const showModal = () => {
@@ -130,6 +119,22 @@ const normFile = (e) => {
         children.push(<Option key='ajax'>ajax</Option>);
         children.push(<Option key='react'>react</Option>);
         children.push(<Option key='redux'>redux</Option>);
+
+
+
+   const getTeacher=()=>{
+          getTeachers().then(res=>{
+              setOqituvchi(res.data)
+              console.log(res.data)
+          }).catch(err=>{
+            console.log(err)
+          })
+    }
+      useEffect(()=>[
+        getTeacher(),
+        console.log(oqituvchi)
+
+      ],[oqituvchi])
 return (
     <div  style={{padding:'5%'}}>
             <div>
@@ -142,14 +147,14 @@ return (
                             <tr>
                             <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>#</th>
                             <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>F.I.O</th>
-                            <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>Tug'ilgan sana</th>
+                            {/* <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>Tug'ilgan sana</th> */}
                             <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>Telefon</th>
-                            <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>E-mail</th>
+                            {/* <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>E-mail</th> */}
                             <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>Rasm</th>
-                            <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>Yo'nalish</th>
-                            <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>Texnologiyalar</th>
+                            {/* <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>Yo'nalish</th>
+                            <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>Texnologiyalar</th> */}
                             <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>Ma'lumot</th>
-                            <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>Sana</th>
+                            {/* <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>Sana</th> */}
                             <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>O'zgartirish/O'chirish</th>
                             </tr>
                         </thead>
@@ -159,13 +164,13 @@ return (
                                 <tbody>
                                 <tr>
                                 <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{key+1}</td>
-                                <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.name}</td>
-                                <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}><p style={{width: 100}}>{item.tugilgansana}</p></td>
-                                <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.telefon}</td>
-                                <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.email}</td>
-                                <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.rasm}</td>
-                                <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.yonalish}</td>
-                                <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>
+                                <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.full_name}</td>
+                                {/* <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}><p style={{width: 100}}>{item.tugilgansana}</p></td> */}
+                                <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.phone_number}</td>
+                                {/* <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.email}</td> */}
+                                <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.photo}</td>
+                                {/* <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.yonalish}</td> */}
+                                {/* <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>
                                   <ul className={styles.tecnoUl}>
                                   {
                                 item.texnologiyalar && Array.isArray(item.texnologiyalar)?item.texnologiyalar.map(item=>{
@@ -176,9 +181,9 @@ return (
                                           
                                         } 
                                   </ul>
-                                </td>
+                                </td> */}
                                 <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>
-                                    <p style={{width:'250px'}}>{item.malumot}</p>
+                                    <p style={{width:'250px'}}>{item.text}</p>
                                 </td>
                                 <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}><p style={{width: 100}}>{item.ishsana}</p></td>
                                 <td style={{border:' 1px solid #3F6AD8'}}><AiFillEdit onClick={()=> onFill(`${key}`)} style={{fontSize:'20px',color:'green',marginLeft:'10px',marginTop:'5px', cursor: 'pointer', marginRight: '10px'}}/> <AiOutlineDelete style={{fontSize:'20px',color:'red',marginLeft:'10px',marginTop:'5px', cursor: 'pointer', marginRight: '10px', float: 'right'}}/> </td>

@@ -17,3 +17,11 @@ export const createGroup=(data)=>{
 
     return(httpsRequest(config))
 }
+export const getTeachers=()=>{
+    var config={
+        url:`${url}/api/teacher/`,
+        method:'get'
+    }
+
+    return(httpsRequest(config))
+}
