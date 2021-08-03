@@ -574,10 +574,12 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     </Row>      
     <Form.Item         
         label="Guruh uchun qo'shimcha ma'lumot kiriting"
-       
+        name="image"
+        onChange={customRequest}
+        
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
-        <Input type="file" onChange={customRequest}  name="image" required={false} style={{marginBottom:'20px'}}/>
+        <Input type="file"   id="rasmlar" required={false} style={{marginBottom:'20px'}}/>
         {ImageDemo(guruh.image)}
 </Form.Item>
     <Form.Item         
