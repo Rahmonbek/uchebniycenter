@@ -173,6 +173,7 @@ export default function Guruhlar() {
   const [guruh, setGuruh]=useState({})
 const [date, setDate]=useState('')
 const [time, setTime]=useState('')
+const [image, setImage]=useState('')
   const [form] = Form.useForm();
 
   const chengeDate=(date, dateString)=>{
@@ -200,9 +201,15 @@ g[i].value=""
 setShow(false)
   
 }
+ const customRequest = (e) => {
+  let imageT = e.target.files[0];
+ 
+  setImage(imageT)
+  console.log(imageT)
+};
 const onFinish=(value)=>{
   
-  
+  console.log(value)
 var percent=[]
 var g=document.querySelectorAll('#percent')
 
@@ -211,7 +218,6 @@ percent[i]=g[i].value
 // console.log(g[i].attributes.value.nodeValue)
 }
 
-console.log(percent)
 
 var config={
     // id: grlar[grlar.length-1].id+1,
@@ -220,7 +226,7 @@ var config={
             teacher: value.teacher,
             category:value.category,
             subject: value.subject,
-            image:value.image,
+            image:image,
             days: value.days,
             time: time,
             start_date: date,
@@ -419,7 +425,7 @@ openModal()
             
         label="Guruhni nomini kiriting"
         name="name"
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
         <Input placeholder="Guruhning nomini kiriting"/>
       </Form.Item>
@@ -427,7 +433,7 @@ openModal()
       <Form.Item
 label="Guruhning yo'nalishini tanlang"
 name="category"
-rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
              
@@ -449,7 +455,7 @@ rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 <Form.Item
         label="Guruhda o'tiladigan subjectni/dasturlarni tanlang"
         name="subject"
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select 
         
@@ -471,7 +477,7 @@ rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 <Form.Item
     label="Guruhning o'qituvchisini tanlang"
     name="teacher"
-    rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+    rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
         
@@ -493,7 +499,7 @@ rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 <Form.Item
 label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
         name="money"
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}>
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}>
           <Input type="number" min="0"/>
         </Form.Item>
 <Row>
@@ -501,7 +507,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     <Form.Item
         label="Ochilish sanasini kiriting"
        name="start_date"
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
         <DatePicker onChange={chengeDate}
         />
@@ -514,7 +520,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
         //
         label="Dars vaqtini kiriting"
         name="time"
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
         <TimePicker.RangePicker  onChange={chengeTime}/>
       </Form.Item >
@@ -531,7 +537,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
         label="Dars nechchi oy davom etishini kiriting"
         name="duration"
         
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
         <Input type="number" min="0"/>
       </Form.Item>
@@ -542,7 +548,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     <Form.Item
         label="Haftani qaysi dayslari dars bo'lishini kiriting"
         name="days"
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
          
@@ -568,16 +574,16 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     </Row>      
     <Form.Item         
         label="Guruh uchun qo'shimcha ma'lumot kiriting"
-        name="image"
+       
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
-        <Input type="file" required={true} style={{marginBottom:'20px'}}/>
+        <Input type="file" onChange={customRequest}  name="image" required={false} style={{marginBottom:'20px'}}/>
         {ImageDemo(guruh.image)}
 </Form.Item>
     <Form.Item         
         label="Guruh uchun qo'shimcha ma'lumot kiriting"
         name="qushimcha"
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <TextArea  rows={10} cols={60}/>
 </Form.Item>  
