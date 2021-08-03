@@ -500,10 +500,10 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     <Col lg={6}>
     <Form.Item
         label="Ochilish sanasini kiriting"
-       
+       name="start_date"
         rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
-        <DatePicker defaultValue={date!==""?date:""} onChange={chengeDate}
+        <DatePicker onChange={chengeDate}
         />
       </Form.Item>
 
@@ -513,10 +513,10 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     <Form.Item
         //
         label="Dars vaqtini kiriting"
-        
+        name="time"
         rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
-        <TimePicker.RangePicker defaultValue={time!==""?time:""}  onChange={chengeTime}/>
+        <TimePicker.RangePicker  onChange={chengeTime}/>
       </Form.Item >
 
 
