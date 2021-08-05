@@ -66,46 +66,15 @@ export default function Guruhlar() {
   ])
   const [subject, setsubject]=useState([
     {
-      id:'1',
+      id:1,
       name:'HTML'
   },
-  {
-      id:'2',
-      name:'CSS',
-  },
-  {
-      id:'3',
-      name:'React'
-  },
-  {
-      id:'4',
-      name:'Ingliz tili'
-  },
-  {
-      id:'5',
-      name:'Python'
-  },
-  {
-      id:'6',
-      name:'Django'
-  }
   ])
   const [previewVisible, setPreviewVisible]=useState(false)
   const [teacher, setteacher]=useState([
     {id:1,
       fullname:'Isdmoilov Rahmon'},
-      {id:2,
-          fullname:'Ismodilov Rahmon'},
-          {id:3,
-              fullname:'Ismoilov Radhmon'},
-              {id:4,
-                  fullname:'Ismodfilov Rahmon'},
-                  {id:5,
-                      fullname:'Ismoilov Rahmdon'},
-                      {id:6,
-                          fullname:'Idsmoilov Rahmon'},
-                          {id:7,
-                              fullname:'Ismoilov Rahmodn'}
+     
   ])
   const [grlar, setGrlar]=useState([
     {
@@ -121,7 +90,7 @@ export default function Guruhlar() {
       date:"21-11-2020",
       money:500000,
       percent:[30],
-      qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus kina",
+      description: "Lorem ipsum doler amet ui oxar darbi qorfus kina",
   },
   {
       id: 2,
@@ -136,7 +105,7 @@ export default function Guruhlar() {
       date:"21-11-2020",
       money: 500000,
       percent:[30, 20],
-      qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus kina",
+      description: "Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus kina",
   },
   {
     id: 3,
@@ -151,7 +120,7 @@ export default function Guruhlar() {
     date:"21-11-2020",
     money: 500000,
     percent:[30],
-    qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus kina",
+    description: "Lorem ipsum doler amet ui oxar darbi qorfus kina",
 },
 {
     id: 4,
@@ -166,7 +135,7 @@ export default function Guruhlar() {
     date:"21-11-2020",
     money: 500000,
     percent:[30, 20],
-    qushimcha: "Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus kina",
+    description: "Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus kina",
 }
   ])
   const [show, setShow]=useState(false)
@@ -217,30 +186,95 @@ for(let i=0; i<g.length; i++){
 percent[i]=g[i].value
 // console.log(g[i].attributes.value.nodeValue)
 }
+let formData = new FormData();
+
+formData.append(
+  "name",
+   value.name ?? ""
+);
 
 
-var config={
-    // id: grlar[grlar.length-1].id+1,
-            name: value.name,
-            duration:value.duration, 
-            teacher: value.teacher,
-            category:value.category,
-            subject: value.subject,
-            image:image,
-            days: value.days,
-            time: time,
-            start_date: date,
-            percent: percent,
-            // qushimcha: value.qushimcha, 
-            money: value.money,
-            training_center:idT
+formData.append(
+  "duration",
+ value.duration ?? null
+);
+
+formData.append(
+  "teacher",
+  value.teacher ?? []
+);
+
+formData.append(
+  "category",
+ value.category ?? null
+);
+
+formData.append(
+  "subject",
+  value.subject ?? []
+);
+formData.append(
+  "image",
+ image ?? null
+);
+
+formData.append(
+  "days",
+  value.days ?? null
+);
+
+formData.append(
+  "time",
+  time ?? null
+);
+
+formData.append(
+  "start_date",
+  date ?? ""
+);
+formData.append(
+  "percent",
+  percent ?? null
+);
+
+formData.append(
+  "description",
+  value.description ?? '',
+);
+
+formData.append(
+  "money",
+  value.money ?? ''
+);
+
+formData.append(
+  "training_center",
+ idT
+);
+
+
+// var config={
+//     // id: grlar[grlar.length-1].id+1,
+//             name:  value.name ?? "",
+//             duration:value.duration ?? null,
+//             teacher: value.teacher ?? [],
+//             category:value.category ?? null,
+//             subject: value.subject ?? [],
+//             image:image ?? null,
+//             days: value.days ?? null,
+//             time: time ?? null,
+//             start_date: date ?? "",
+//             percent: percent ?? null,
+//             description: value.description ?? '', 
+//             money: value.money ?? '',
+//             training_center:idT
            
            
             
             
-  }
+//   }
   
-  createGroup(config).then(res=>{console.log(res)}).catch(err=>{console.log(err)})
+  createGroup(formData).then(res=>{console.log(res)}).catch(err=>{console.log(err)})
   handleCancel()
 }
 const handleExpandClick = (id) => {
@@ -395,7 +429,7 @@ openModal()
              <CardContent>
              
                <Typography paragraph style={{fontSize:'16px'}}>
-             {item.qushimcha}
+             {item.description}
             
                </Typography>
                
@@ -466,7 +500,7 @@ rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
   optionLabelProp="label">
       {
           subject.map(item=>{
-              return(<Option value={item.name}>{item.name}</Option>)
+              return(<Option value={item.id}>{item.name}</Option>)
           })
       }
       
@@ -489,7 +523,7 @@ rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
        {
           teacher.map(item=>{
-              return(<Option value={item.fullname}  label={item.fullname}><div className="demo-option-label-item">{item.fullname}</div></Option>)
+              return(<Option value={item.id}  label={item.fullname}><div className="demo-option-label-item">{item.fullname}</div></Option>)
           })
       }
      
@@ -573,7 +607,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     </Col>
     </Row>      
     <Form.Item         
-        label="Guruh uchun qo'shimcha ma'lumot kiriting"
+        label="Guruh uchun rasm tanlang"
         name="image"
         onChange={customRequest}
         
@@ -584,7 +618,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
 </Form.Item>
     <Form.Item         
         label="Guruh uchun qo'shimcha ma'lumot kiriting"
-        name="qushimcha"
+        name="description"
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <TextArea  rows={10} cols={60}/>
