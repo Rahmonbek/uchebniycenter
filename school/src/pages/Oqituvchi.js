@@ -88,7 +88,10 @@ const onGenderChange = (value) => {
           console.log(value)
        
         let formData = new FormData();
-        
+        formData.append(
+          "id",
+           2
+        );
         formData.append(
           "full_name",
            value.full_name ?? ""
@@ -99,11 +102,11 @@ const onGenderChange = (value) => {
         ); 
         formData.append(
           "photo",
-         image ?? null
+         null
         );        
         formData.append(
           "text",
-          value.text ?? '',
+          value.text ?? "",
         );
         formData.append(
           "training_center",
