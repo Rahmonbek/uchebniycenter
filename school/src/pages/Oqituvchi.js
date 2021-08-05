@@ -98,7 +98,7 @@ const onGenderChange = (value) => {
         );
         formData.append(
           "phone_number",
-        value.phone_number ?? null
+        value.phone_number ?? ""
         ); 
         formData.append(
           "photo",
