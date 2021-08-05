@@ -1,3 +1,4 @@
+import {useEffect} from 'react'
 import {BrowserRouter,Switch, Route } from 'react-router-dom';
 import Courses from './pages/Courses';
 import Registration from './pages/Registration';
@@ -9,10 +10,10 @@ import Xarita from './pages/Xarita';
 import {useDispatch} from 'react-redux'
 import { getTraining } from './redux/action/action';
 function App() {
-  const dispatch=useDispatch()
-  useEffect(()=>{
-dispatch(()=>{getTraining()})
-  }, [])
+//   const dispatch=useDispatch()
+//   useEffect(()=>{
+// dispatch(()=>{getTraining()})
+//   }, [])
   return (
     <BrowserRouter>    
       <Switch>    

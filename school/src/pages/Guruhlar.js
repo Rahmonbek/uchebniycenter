@@ -174,8 +174,11 @@ setShow(false)
   let imageT = e.target.files[0];
  
   setImage(imageT)
+
   console.log(imageT)
+
 };
+
 const onFinish=(value)=>{
   
   console.log(value)
@@ -186,6 +189,8 @@ for(let i=0; i<g.length; i++){
 percent[i]=g[i].value
 // console.log(g[i].attributes.value.nodeValue)
 }
+
+
 let formData = new FormData();
 
 formData.append(
@@ -206,7 +211,7 @@ formData.append(
 
 formData.append(
   "category",
- value.category ?? null
+ value.category ?? []
 );
 
 formData.append(

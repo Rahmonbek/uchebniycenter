@@ -97,13 +97,7 @@ justifyActive:'tab1',
    
             <div className={styles.bg}>
            
-        
-       
-      
-
-
-           
-                       <header className={styles.header}>
+      <header className={styles.header}>
 
                       <div className={styles.navbar}>
                              <ul>

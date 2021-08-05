@@ -1,5 +1,5 @@
 import { trainingReducer } from "./training";
-import {combineReducers} from 'react-redux'
+import {combineReducers} from 'redux'
 export const allReducers=combineReducers({
     training:trainingReducer
 })
