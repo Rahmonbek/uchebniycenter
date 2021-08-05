@@ -1,8 +1,8 @@
-import {httpsRequest, url} from './Host'
+import {httpsRequest, idT, url} from './Host'
 
-export const getGroups=()=>{
+export const getTraining=()=>{
     var config={
-        url:`${url}/api/group`,
+        url:`${url}/api/training/${idT}/`,
         method:'get'
     }
 

@@ -1,4 +1,4 @@
-import React, { useState, } from 'react'
+import React, { useEffect, useState, } from 'react'
 import { Container, Col, Row,Image, OverlayTrigger,  Tooltip } from 'react-bootstrap';
 import styles from '../css/news.module.css'
 import { Button, Input, Select, Modal, Form, DatePicker, TimePicker,} from 'antd';
@@ -9,7 +9,7 @@ import "../css/modalStyle.css";
 
 import style from '../css/courses.module.css';
 import '../App.css'
-import {createGroup} from '../host/Config'
+import {createGroup, getTraining} from '../host/Config'
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 import clsx from 'clsx';
@@ -64,88 +64,26 @@ export default function Guruhlar() {
       name:'Bugalterlik'
   }
   ])
-  const [subject, setsubject]=useState([
-    {
-      id:1,
-      name:'HTML'
-  },
-  ])
+  
   const [previewVisible, setPreviewVisible]=useState(false)
-  const [teacher, setteacher]=useState([
-    {id:1,
-      fullname:'Isdmoilov Rahmon'},
-     
-  ])
-  const [grlar, setGrlar]=useState([
-    {
-      id: 1,
-      name: 'tower02',
-      duration:3, 
-      teacher: ["allakim"],
-      category:['Web dasturlash', 'Android'],
-      subject:['HTML', 'CSS', 'React'],
-      image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
-      days: ['Dushanba', 'Seshanba', 'Payshanba'],
-      vaqt: ["12:00.00","14:00.00"],
-      date:"21-11-2020",
-      money:500000,
-      percent:[30],
-      description: "Lorem ipsum doler amet ui oxar darbi qorfus kina",
-  },
-  {
-      id: 2,
-      name: 'tower02 ',
-      duration: 3, 
-      teacher: ["allakim",'teacher'],
-      category:['Web dasturlash', 'Android'],
-      subject:['HTML', 'CSS', 'React'],
-      image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
-      days: ['Dushanba', 'Seshanba', 'Payshanba'],
-      vaqt: ["12:00.00","15:00.00"],
-      date:"21-11-2020",
-      money: 500000,
-      percent:[30, 20],
-      description: "Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus kina",
-  },
-  {
-    id: 3,
-    name: 'tower02',
-    duration:3, 
-    teacher: ["allakim"],
-    category:['Web dasturlash', 'Android'],
-    subject:['HTML', 'CSS', 'React'],
-    image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
-    days: ['Dushanba', 'Seshanba', 'Payshanba'],
-    vaqt: ["12:00.00","14:00.00"],
-    date:"21-11-2020",
-    money: 500000,
-    percent:[30],
-    description: "Lorem ipsum doler amet ui oxar darbi qorfus kina",
-},
-{
-    id: 4,
-    name: 'tower02 ',
-    duration: 3, 
-    teacher: ["allakim",'teacher'],
-    category:['Web dasturlash', 'Android'],
-    subject:['HTML', 'CSS', 'React'],
-    image:'https://dpo.online/wp-content/uploads/2016/03/web-1045994_960_720.jpg',
-    days: ['Dushanba', 'Seshanba', 'Payshanba'],
-    vaqt: ["12:00.00","15:00.00"],
-    date:"21-11-2020",
-    money: 500000,
-    percent:[30, 20],
-    description: "Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus Lorem ipsum doler amet ui oxar darbi qorfus kina",
-}
-  ])
+  const [teacher, setteacher]=useState([])
+  const [grlar, setGrlar]=useState([])
   const [show, setShow]=useState(false)
   const [guruh, setGuruh]=useState({})
 const [date, setDate]=useState('')
 const [time, setTime]=useState('')
 const [image, setImage]=useState('')
   const [form] = Form.useForm();
+const [subjects, setSubjects]=useState([])
+const getTrainingS=()=>{
+  getTraining().then(res=>{
+    console.log(res.data)
+    setGrlar(res.data.groups)
+    setSubjects(res.data.subjects)
+  }).catch(err=>{console.log(err)})
+}  
 
-  const chengeDate=(date, dateString)=>{
+const chengeDate=(date, dateString)=>{
     setDate(dateString)
     console.log(dateString)
   }
@@ -178,6 +116,12 @@ setShow(false)
   console.log(imageT)
 
 };
+
+
+
+useEffect(()=>{
+getTrainingS()
+}, [])
 
 const onFinish=(value)=>{
   
@@ -258,26 +202,6 @@ formData.append(
 );
 
 
-// var config={
-//     // id: grlar[grlar.length-1].id+1,
-//             name:  value.name ?? "",
-//             duration:value.duration ?? null,
-//             teacher: value.teacher ?? [],
-//             category:value.category ?? null,
-//             subject: value.subject ?? [],
-//             image:image ?? null,
-//             days: value.days ?? null,
-//             time: time ?? null,
-//             start_date: date ?? "",
-//             percent: percent ?? null,
-//             description: value.description ?? '', 
-//             money: value.money ?? '',
-//             training_center:idT
-           
-           
-            
-            
-//   }
   
   createGroup(formData).then(res=>{console.log(res)}).catch(err=>{console.log(err)})
   handleCancel()
@@ -316,7 +240,7 @@ openModal()
                 <label for="modal" className="modal-background" ></label>
                 <Container fluid><br/><br/>
                 <Button onClick={()=>{openModal()}} type="primary">Gurux qo'shish</Button>
-                  <Row>
+                  {/* <Row>
                       {
                           grlar.map((item, key)=>{
                               return(<Col lg={4} md={6} sm={12} style={{marginTop:'20px'}}>
@@ -445,7 +369,7 @@ openModal()
                               </Col>)
                           })
                       }
-                  </Row>
+                  </Row> */}
                 </Container>
                 <Modal title="Guruh" width="70%" visible={show} footer={false} onCancel={handleCancel}>
                 <Form
@@ -504,8 +428,8 @@ rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
  
   optionLabelProp="label">
       {
-          subject.map(item=>{
-              return(<Option value={item.id}>{item.name}</Option>)
+          subjects.map(item=>{
+              return(<Option value={item.id} label={item.name}>{item.name}</Option>)
           })
       }
       
