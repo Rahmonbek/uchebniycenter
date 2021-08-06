@@ -9,7 +9,7 @@ import "../css/modalStyle.css";
 
 import style from '../css/courses.module.css';
 import '../App.css'
-import {createGroup, deleteGroupC, getCategory, getTraining} from '../host/Config'
+import {createGroup, deleteGroupC, editGroup, getCategory, getTraining} from '../host/Config'
 import 'aos/dist/aos.css';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -156,17 +156,17 @@ formData.append(
  value.duration ?? null
 );
 
-formData.append(
-  "teacher",
-  value.teacher ?? []
-);
-formData.append(
-  "category", value.category ?? []
-)
-formData.append(
-  "subject",
-  value.subject ?? []
-);
+// formData.append(
+//   "teacher",
+//   value.teacher ?? []
+// );
+// formData.append(
+//   "category", value.category ?? []
+// )
+// formData.append(
+//   "subject",
+//   value.subject ?? []
+// );
 formData.append(
   "image",
  image ?? null
@@ -208,7 +208,29 @@ formData.append(
 
 
   
-  createGroup(formData).then(res=>{getTrainingS()}).catch(err=>{console.log(err)})
+  createGroup(formData).then(res=>{
+    var config={
+      name:res.data.name ?? "",
+      duration:res.data.duration ?? null,
+      teacher:value.teacher ?? [],
+      category:value.category ?? [],
+      subject:value.subject ?? [],
+      image:res.data.image ?? null,
+      days:res.data.days ?? null,
+      time:res.data.time ?? null,
+      start_date:res.data.date ?? "",
+      percent:res.data.percent ?? null,
+      description:res.data.description ?? '',
+      money:res.data.money ?? '',
+      training_center:idT,
+    }
+    
+console.log(config)
+    editGroup(config, res.data.id).then(res1=>{
+      getTrainingS()
+
+    }).catch(err1=>{console.log(err1)})
+    }).catch(err=>{console.log(err)})
   handleCancel()
 }
 const handleExpandClick = (id) => {
