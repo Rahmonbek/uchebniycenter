@@ -45,15 +45,10 @@ const onGenderChange = (value) => {
   };
   const [teacher,setTeacher]=useState([])
   const onFill = (id) => { 
-    getTeacher(id).then(res=>{setTeacher(res.data)}).catch(err=>{console.log(err)})
-    console.log(teacher)
-    form.setFieldsValue({
-      full_name: teacher.full_name,
-      phone_number:teacher.phone_number,
-      text:teacher.text,
-      photo:teacher.photo
-    });
+    // getTeacher(id).then(res=>{setTeacher(res.data)}).catch(err=>{console.log(err)})
+    form.setFieldsValue(teachers[id]);
       showModal()
+      console.log(teachers[id])
   };
   const [image, setImage]=useState('')
 
@@ -167,7 +162,7 @@ return (
                                 <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>
                                     <p style={{width:'250px'}}>{item.text}</p>
                                 </td>
-                                <td style={{border:' 1px solid #3F6AD8'}}><AiFillEdit onClick={()=> onFill(`${item.id}`)} style={{fontSize:'20px',color:'green',marginLeft:'10px',marginTop:'5px', cursor: 'pointer', marginRight: '10px'}}/> <AiOutlineDelete onClick={()=> deleteTeachers(`${item.id}`)} style={{fontSize:'20px',color:'red',marginLeft:'10px',marginTop:'5px', cursor: 'pointer', marginRight: '10px', float: 'right'}}/> </td>
+                                <td style={{border:' 1px solid #3F6AD8'}}><AiFillEdit onClick={()=> onFill(key)} style={{fontSize:'20px',color:'green',marginLeft:'10px',marginTop:'5px', cursor: 'pointer', marginRight: '10px'}}/> <AiOutlineDelete onClick={()=> deleteTeachers(`${item.id}`)} style={{fontSize:'20px',color:'red',marginLeft:'10px',marginTop:'5px', cursor: 'pointer', marginRight: '10px', float: 'right'}}/> </td>
                                 </tr>
                             </tbody>
                               )
