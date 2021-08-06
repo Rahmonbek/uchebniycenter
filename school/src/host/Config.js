@@ -18,6 +18,16 @@ export const createGroup=(data)=>{
 
     return(httpsRequest(config))
 }
+export const deleteGroupC=(id)=>{
+   
+    var config={
+        url:`${url}/api/group/${id}/`,
+        method:'delete',
+        
+    }
+
+    return(httpsRequest(config))
+}
 export const createStudent=(data)=>{
     console.log(data)
     var config={

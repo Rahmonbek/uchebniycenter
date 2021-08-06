@@ -9,8 +9,7 @@ import "../css/modalStyle.css";
 
 import style from '../css/courses.module.css';
 import '../App.css'
-import {createGroup, getTraining} from '../host/Config'
-import Aos from 'aos';
+import {createGroup, deleteGroupC, getTraining} from '../host/Config'
 import 'aos/dist/aos.css';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -34,9 +33,7 @@ const { TextArea } = Input;
 
 export default function Guruhlar() {
   const[expanded, setExpanded]=useState([])
-  const [justifyActive, setJustifyActive]=useState('tab1')
   const [teachers, setteachers]=useState([])
-  const [son, setSon]=useState(0)
   const [edit, setEdit]=useState(null)
   const [category, setCategory]=useState([
     {
@@ -65,7 +62,6 @@ export default function Guruhlar() {
   }
   ])
   
-  const [previewVisible, setPreviewVisible]=useState(false)
   const [teacher, setTeacher]=useState([])
   const [grlar, setGrlar]=useState([])
   const [show, setShow]=useState(false)
@@ -115,7 +111,7 @@ setShow(false)
  
   setImage(imageT)
 
-  
+  console.log(imageT) 
 
 };
 
@@ -132,6 +128,18 @@ setExpanded(fer)
 
 }, [])
 
+
+const echoTeacher=(a)=>{
+  var te=""
+  for(let i=0; i<teacher.length; i++){
+    if(teacher[i].id===a){
+      te=teacher[i].full_name
+    }
+  }
+  return(te)
+}
+
+
 const onFinish=(value)=>{
   
   
@@ -142,10 +150,26 @@ for(let i=0; i<g.length; i++){
 percent[i]=g[i].value
 
 }
-
+console.log(value)
 
 let formData = new FormData();
+var config={
+  name:value.name ?? "",
+  duration:value.duration ?? null,
+  teacher:value.teacher ?? [],
+  category:value.category ?? [],
+  subject:value.subject ?? [],
+  image:image ?? null,
+  days:value.days ?? null,
+  time:time ?? null,
+  start_date:date ?? "",
+  percent:percent ?? null,
+  description:value.description ?? '',
+  money:value.money ?? '',
+  training_center:idT,
+}
 
+console.log(config)
 formData.append(
   "name",
    value.name ?? ""
@@ -212,7 +236,7 @@ formData.append(
 
 
   
-  createGroup(formData).then(res=>{console.log(res)}).catch(err=>{console.log(err)})
+  createGroup(formData).then(res=>{getTrainingS()}).catch(err=>{console.log(err)})
   handleCancel()
 }
 const handleExpandClick = (id) => {
@@ -241,7 +265,12 @@ const teacherlar=(value)=>{
  setteachers(te)
 }
   const { Option } = Select;
-      
+ 
+  const deleteGroup=(id)=>{
+ 
+    deleteGroupC(id).then(res=>{console.log(res); getTrainingS()}).catch(err=>{console.log(err)})
+  }
+
 const editGuruh=(id)=>{
   // setGuruh(grlar[id])
 form.setFieldsValue(grlar[id])
@@ -277,7 +306,7 @@ openModal()
            <CardContent>
              <Typography variant="body2" color="textSecondary" component="p">
              <p> <b>O'qituvchilar: </b>{item.teacher.map((item1, key)=>{return(
-               <p>{item1} - {item.percent[key]}%</p>
+               <p>{echoTeacher(item1)} - {item.percent[key]}%</p>
              )})}</p>
              <p> <b>Yo'nalishi: </b>{item.category.map(item1=>{return(item1+' ')})}</p>
              <p> <b>Fanlar/Dasturlar: </b>{item.subject.map(item1=>{return(item1+' ')})}</p>
@@ -323,8 +352,8 @@ openModal()
         >
           {({ ref, ...triggerHandler }) => (
             <Button
-           
-              variant="#f70707d9"
+           onClick={()=>{deleteGroup(item.id)}}
+              variant="#f30838"
               {...triggerHandler}
               className="d-inline-flex align-items-center"
             >
@@ -406,7 +435,7 @@ openModal()
             
         label="Guruhni nomini kiriting"
         name="name"
-        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
         <Input placeholder="Guruhning nomini kiriting"/>
       </Form.Item>
@@ -414,7 +443,7 @@ openModal()
       <Form.Item
 label="Guruhning yo'nalishini tanlang"
 name="category"
-rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
              
@@ -436,7 +465,7 @@ rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 <Form.Item
         label="Guruhda o'tiladigan fanlarni/dasturlarni tanlang"
         name="subject"
-        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select 
         
@@ -458,7 +487,7 @@ rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 <Form.Item
     label="Guruhning o'qituvchisini tanlang"
     name="teacher"
-    rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+    rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
         
@@ -480,7 +509,7 @@ rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 <Form.Item
 label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
         name="money"
-        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}>
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}>
           <Input type="number" min="0"/>
         </Form.Item>
 <Row>
@@ -488,7 +517,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     <Form.Item
         label="Ochilish sanasini kiriting"
        name="start_date"
-        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
         <DatePicker onChange={chengeDate}
         />
@@ -501,7 +530,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
    
         label="Dars vaqtini kiriting"
         name="time"
-        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
         <TimePicker.RangePicker  onChange={chengeTime}/>
       </Form.Item >
@@ -518,7 +547,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
         label="Dars nechchi oy davom etishini kiriting"
         name="duration"
         
-        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
         <Input type="number" min="0"/>
       </Form.Item>
@@ -529,7 +558,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     <Form.Item
         label="Haftani qaysi kunlari dars bo'lishini kiriting"
         name="days"
-        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
          
@@ -560,13 +589,13 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
         
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
-        <Input type="file"   id="rasmlar" required={false} style={{marginBottom:'20px'}}/>
+        <Input type="file"   id="rasmlar" required={true} style={{marginBottom:'20px'}}/>
         {ImageDemo(guruh.image)}
 </Form.Item>
     <Form.Item         
         label="Guruh uchun qo'shimcha ma'lumot kiriting"
         name="description"
-        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <TextArea  rows={10} cols={60}/>
 </Form.Item>  
