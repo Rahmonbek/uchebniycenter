@@ -30,10 +30,29 @@ export const deleteGroupC=(id)=>{
 
     return(httpsRequest(config))
 }
+export const deleteTeacher=(id)=>{
+   
+    var config={
+        url:`${url}/api/teacher/${id}/`,
+        method:'delete',
+        
+    }
+
+    return(httpsRequest(config))
+}
 export const createStudent=(data)=>{
     console.log(data)
     var config={
         url:`${url}/api/student/`,
+        method:'post',
+        data:data
+    }
+
+    return(httpsRequest(config))
+}
+export const createTeacher=(data)=>{
+    var config={
+        url:`${url}/api/teacher/`,
         method:'post',
         data:data
     }

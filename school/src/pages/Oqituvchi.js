@@ -1,15 +1,13 @@
 import React,{useState,useEffect} from 'react'
-import { Modal, Button, Cascader, DatePicker, Upload } from 'antd';
+import { Modal, Button} from 'antd';
 import styles from '../css/davomat.module.css'
-import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
 import {BsPersonPlusFill} from 'react-icons/bs'
 import { Form, Input, Select } from 'antd';
 import {AiFillEdit,AiOutlineDelete} from 'react-icons/ai'
 import {Table} from 'react-bootstrap'
 import { idT } from '../host/Host';
-import {createGroup,createTeacher,getTraining} from '../host/Config'
-import {allReducers} from '../redux/reducer/index'
-import {trainingReducer} from '../redux/reducer/training'
+import {getTraining,deleteTeacher} from '../host/Config'
+import {createTeacher} from '../host/Config'
 export default function Oqituvchiqoshish() {
     const [edit,setEdit]=useState(null)
     const [visible,setVisible]=useState(false)
@@ -119,6 +117,10 @@ const onGenderChange = (value) => {
             setTeachers(res.data.teachers)
           }).catch(err=>{console.log(err)})
         }
+        const deleteTeachers=(id)=>{
+ 
+          deleteTeacher(id).then(res=>{getTrainingS()}).catch(err=>{console.log(err)})
+        }
         useEffect(()=>{
           getTrainingS()
           }, [])
@@ -172,7 +174,7 @@ return (
                                 <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>
                                     <p style={{width:'250px'}}>{item.text}</p>
                                 </td>
-                                <td style={{border:' 1px solid #3F6AD8'}}><AiFillEdit onClick={()=> onFill(`${key}`)} style={{fontSize:'20px',color:'green',marginLeft:'10px',marginTop:'5px', cursor: 'pointer', marginRight: '10px'}}/> <AiOutlineDelete style={{fontSize:'20px',color:'red',marginLeft:'10px',marginTop:'5px', cursor: 'pointer', marginRight: '10px', float: 'right'}}/> </td>
+                                <td style={{border:' 1px solid #3F6AD8'}}><AiFillEdit onClick={()=> onFill(`${key}`)} style={{fontSize:'20px',color:'green',marginLeft:'10px',marginTop:'5px', cursor: 'pointer', marginRight: '10px'}}/> <AiOutlineDelete onClick={()=> deleteTeachers(`${item.id}`)} style={{fontSize:'20px',color:'red',marginLeft:'10px',marginTop:'5px', cursor: 'pointer', marginRight: '10px', float: 'right'}}/> </td>
                                 </tr>
                             </tbody>
                               )
