@@ -7,7 +7,7 @@ import { Form, Input, Select } from 'antd';
 import {AiFillEdit,AiOutlineDelete} from 'react-icons/ai'
 import {Table} from 'react-bootstrap'
 import { idT } from '../host/Host';
-import {createGroup,getTraining} from '../host/Config'
+import {createGroup,createTeacher,getTraining} from '../host/Config'
 import {allReducers} from '../redux/reducer/index'
 import {trainingReducer} from '../redux/reducer/training'
 export default function Oqituvchiqoshish() {
@@ -88,10 +88,7 @@ const onGenderChange = (value) => {
           console.log(value)
        
         let formData = new FormData();
-        formData.append(
-          "id",
-           2
-        );
+        
         formData.append(
           "full_name",
            value.full_name ?? ""
@@ -102,7 +99,7 @@ const onGenderChange = (value) => {
         ); 
         formData.append(
           "photo",
-         null
+         image?? null
         );        
         formData.append(
           "text",
@@ -112,7 +109,7 @@ const onGenderChange = (value) => {
           "training_center",
         idT   
         );  
-          createGroup(formData).then(res=>{console.log(res)}).catch(err=>{console.log(err)})
+          createTeacher(formData).then(res=>getTrainingS()).catch(err=>{console.log(err)})
           hideModal()
         }
         const [teachers,setTeachers]=useState([])
@@ -158,7 +155,7 @@ return (
                                 {/* <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}><p style={{width: 100}}>{item.tugilgansana}</p></td> */}
                                 <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.phone_number}</td>
                                 {/* <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.email}</td> */}
-                                <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.photo}</td>
+                                <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}><img src={item.photo}/></td>
                                 {/* <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.yonalish}</td> */}
                                 {/* <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>
                                   <ul className={styles.tecnoUl}>
