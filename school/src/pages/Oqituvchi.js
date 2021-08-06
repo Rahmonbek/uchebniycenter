@@ -145,7 +145,7 @@ return (
                                 {/* <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}><p style={{width: 100}}>{item.tugilgansana}</p></td> */}
                                 <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.phone_number}</td>
                                 {/* <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.email}</td> */}
-                                <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}><img src={item.photo}/></td>
+                                <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}><img style={{width:'200px'}} src={item.photo}/></td>
                                 {/* <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.yonalish}</td> */}
                                 {/* <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>
                                   <ul className={styles.tecnoUl}>
