@@ -66,30 +66,32 @@ export default function Guruhlar() {
   ])
   
   const [previewVisible, setPreviewVisible]=useState(false)
-  const [teacher, setteacher]=useState([])
+  const [teacher, setTeacher]=useState([])
   const [grlar, setGrlar]=useState([])
   const [show, setShow]=useState(false)
   const [guruh, setGuruh]=useState({})
-const [date, setDate]=useState('')
-const [time, setTime]=useState('')
-const [image, setImage]=useState('')
+  const [date, setDate]=useState('')
+  const [time, setTime]=useState('')
+  const [image, setImage]=useState('')
   const [form] = Form.useForm();
-const [subjects, setSubjects]=useState([])
-const getTrainingS=()=>{
+  const [subjects, setSubjects]=useState([])
+  const getTrainingS=()=>{
   getTraining().then(res=>{
-    console.log(res.data)
+    
     setGrlar(res.data.groups)
     setSubjects(res.data.subjects)
+    setTeacher(res.data.teachers)
+
   }).catch(err=>{console.log(err)})
 }  
 
 const chengeDate=(date, dateString)=>{
     setDate(dateString)
-    console.log(dateString)
+    
   }
   const chengeTime=(date, dateString)=>{
     setTime(dateString)
-    console.log(dateString)
+    
   }
     
 const handleCancel=()=>{
@@ -113,7 +115,7 @@ setShow(false)
  
   setImage(imageT)
 
-  console.log(imageT)
+  
 
 };
 
@@ -121,17 +123,24 @@ setShow(false)
 
 useEffect(()=>{
 getTrainingS()
+var fer=[]
+for(let i=0; i<grlar.length; i++){
+fer.push(false)
+
+}
+setExpanded(fer)
+
 }, [])
 
 const onFinish=(value)=>{
   
-  console.log(value)
+  
 var percent=[]
 var g=document.querySelectorAll('#percent')
 
 for(let i=0; i<g.length; i++){
 percent[i]=g[i].value
-// console.log(g[i].attributes.value.nodeValue)
+
 }
 
 
@@ -207,8 +216,9 @@ formData.append(
   handleCancel()
 }
 const handleExpandClick = (id) => {
-var a= expanded
-  a[id]=!a[id]
+var a=expanded
+
+a[id]=!a[id]
   setExpanded(a)
 };
 
@@ -220,7 +230,15 @@ const openModal = () => {
   setShow(true)
 }
 const teacherlar=(value)=>{
-  setteachers(value)
+ var te=[]
+  for(let i=0; i<value.length; i++){
+   for(let j=0; j<teacher.length; j++){
+     if(value[i]===teacher[j].id){
+       te.push(teacher[j].full_name)
+     }
+   }
+ }
+ setteachers(te)
 }
   const { Option } = Select;
       
@@ -239,8 +257,8 @@ openModal()
                       <input type="checkbox" id="modal" className={styles.smbox}/>
                 <label for="modal" className="modal-background" ></label>
                 <Container fluid><br/><br/>
-                <Button onClick={()=>{openModal()}} type="primary">Gurux qo'shish</Button>
-                  {/* <Row>
+                <Button onClick={()=>{openModal()}} type="primary">Guruh qo'shish</Button>
+                  <Row>
                       {
                           grlar.map((item, key)=>{
                               return(<Col lg={4} md={6} sm={12} style={{marginTop:'20px'}}>
@@ -258,18 +276,18 @@ openModal()
            />
            <CardContent>
              <Typography variant="body2" color="textSecondary" component="p">
-             <p> <b>teacher: </b>{item.teacher.map((item1, key)=>{return(
+             <p> <b>O'qituvchilar: </b>{item.teacher.map((item1, key)=>{return(
                <p>{item1} - {item.percent[key]}%</p>
              )})}</p>
              <p> <b>Yo'nalishi: </b>{item.category.map(item1=>{return(item1+' ')})}</p>
-             <p> <b>subject/Dasturlar: </b>{item.subject.map(item1=>{return(item1+' ')})}</p>
+             <p> <b>Fanlar/Dasturlar: </b>{item.subject.map(item1=>{return(item1+' ')})}</p>
              <p> <b>Kurs puli (oylik): </b>{item.money} so'm</p>
              
               <p> <b>Boshlanish vaqti: </b>{item.date}</p>
              
-              <p> <b>durationi: </b>{item.duration} oy</p>
-              <p> <b>dayslari: </b>{item.days.map(item1=>{return(item1+' ')})}</p>
-              <p> <b>Vaqti: </b>{item.vaqt.map(item=>{return(item +' - '+ item)})}</p>
+              <p> <b>Davomiyligi: </b>{item.duration} oy</p>
+              <p> <b>Kunlari: </b>{item.days.map(item1=>{return(item1+' ')})}</p>
+              <p> <b>Vaqti: </b>{item.time!==null?item.time[0]:''} - {item.time!==null?item.time[1]:''}</p>
               
              </Typography>
            </CardContent>
@@ -343,7 +361,7 @@ openModal()
                })}
                onClick={()=>{handleExpandClick(key)}}
                aria-expanded={expanded[key]}
-               aria-label="show more"
+               aria-label="Ko'proq ma'lumotni ko'rish"
                
              >
                <ExpandMoreIcon />
@@ -369,7 +387,7 @@ openModal()
                               </Col>)
                           })
                       }
-                  </Row> */}
+                  </Row>
                 </Container>
                 <Modal title="Guruh" width="70%" visible={show} footer={false} onCancel={handleCancel}>
                 <Form
@@ -416,7 +434,7 @@ rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 </Form.Item>
 
 <Form.Item
-        label="Guruhda o'tiladigan subjectni/dasturlarni tanlang"
+        label="Guruhda o'tiladigan fanlarni/dasturlarni tanlang"
         name="subject"
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
@@ -424,7 +442,7 @@ rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
         
   mode="multiple"
   style={{ width: '100%' }}
-  placeholder="Yo'nalishni tanlang"
+  placeholder="Fan yoki dasturni tanlang"
  
   optionLabelProp="label">
       {
@@ -446,13 +464,13 @@ rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
         
     mode="multiple"
     style={{ width: '100%' }}
-    placeholder="O'qutuvchini tanlang"
+    placeholder="O'qituvchini tanlang"
     onChange={teacherlar}
     optionLabelProp="label"
 >
        {
           teacher.map(item=>{
-              return(<Option value={item.id}  label={item.fullname}><div className="demo-option-label-item">{item.fullname}</div></Option>)
+              return(<Option value={item.id}  label={item.full_name}><div className="demo-option-label-item">{item.full_name}</div></Option>)
           })
       }
      
@@ -480,7 +498,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     </Col>
     <Col lg={6}>
     <Form.Item
-        //
+   
         label="Dars vaqtini kiriting"
         name="time"
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
@@ -509,7 +527,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     </Col>
     <Col lg={7}>
     <Form.Item
-        label="Haftani qaysi dayslari dars bo'lishini kiriting"
+        label="Haftani qaysi kunlari dars bo'lishini kiriting"
         name="days"
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
@@ -517,7 +535,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
          
     mode="multiple"
     style={{ width: '100%' }}
-    placeholder="Hafta dayslarini tanglang"
+    placeholder="Hafta kunlarini tanglang"
     
     optionLabelProp="label"
   >
@@ -555,7 +573,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
 { teachers.map((item5, key)=>{
     return(
       <>
-        <p>{item5}ga beriladigan summa percent miqdorda</p>
+        <p>{item5}ga beriladigan summa foiz miqdorda</p>
         <Input id="percent" defaultValue={()=>{return (guruh.percent[key]==undefined)? 0: guruh.percent[key]}} placeholder="100%" name={item5+key} min="0" max="100" type="number"/>
         <br/>
       </>
