@@ -9,7 +9,7 @@ import "../css/modalStyle.css";
 
 import style from '../css/courses.module.css';
 import '../App.css'
-import {createGroup, deleteGroupC, getTraining} from '../host/Config'
+import {createGroup, deleteGroupC, getCategory, getTraining} from '../host/Config'
 import 'aos/dist/aos.css';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -35,32 +35,7 @@ export default function Guruhlar() {
   const[expanded, setExpanded]=useState([])
   const [teachers, setteachers]=useState([])
   const [edit, setEdit]=useState(null)
-  const [category, setCategory]=useState([
-    {
-      id:'1',
-      name:'Web dasturshlash'
-  },
-  {
-      id:'2',
-      name:'Android',
-  },
-  {
-      id:'3',
-      name:'SMM'
-  },
-  {
-      id:'4',
-      name:'subject'
-  },
-  {
-      id:'5',
-      name:'Grafik dizaynerlik'
-  },
-  {
-      id:'6',
-      name:'Bugalterlik'
-  }
-  ])
+  const [category, setCategory]=useState([])
   
   const [teacher, setTeacher]=useState([])
   const [grlar, setGrlar]=useState([])
@@ -73,7 +48,7 @@ export default function Guruhlar() {
   const [subjects, setSubjects]=useState([])
   const getTrainingS=()=>{
   getTraining().then(res=>{
-    
+    console.log(res)
     setGrlar(res.data.groups)
     setSubjects(res.data.subjects)
     setTeacher(res.data.teachers)
@@ -124,6 +99,7 @@ for(let i=0; i<grlar.length; i++){
 fer.push(false)
 
 }
+getCategory().then(res=>{setCategory(res.data); console.log(res.data)}).catch(err=>{console.log(err)})
 setExpanded(fer)
 
 }, [])
@@ -168,8 +144,10 @@ var config={
   money:value.money ?? '',
   training_center:idT,
 }
+var cat=value.category
 
-console.log(config)
+console.log(cat)
+
 formData.append(
   "name",
    value.name ?? ""
@@ -185,10 +163,11 @@ formData.append(
   "teacher",
   value.teacher ?? []
 );
-
+var cat=value.category
+console.log(typeof(cat[1]))
 formData.append(
   "category",
- value.category ?? []
+ cat ?? []
 );
 
 formData.append(
@@ -289,7 +268,7 @@ openModal()
                 <Button onClick={()=>{openModal()}} type="primary">Guruh qo'shish</Button>
                   <Row>
                       {
-                          grlar.map((item, key)=>{
+                         grlar!==[]? grlar.map((item, key)=>{
                               return(<Col lg={4} md={6} sm={12} style={{marginTop:'20px'}}>
                                    <Card className={style.root}>
            <CardHeader 
@@ -414,7 +393,7 @@ openModal()
            </Collapse>
          </Card>
                               </Col>)
-                          })
+                          }):''
                       }
                   </Row>
                 </Container>
@@ -443,7 +422,7 @@ openModal()
       <Form.Item
 label="Guruhning yo'nalishini tanlang"
 name="category"
-rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
              
@@ -455,7 +434,7 @@ rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
   >
        {
           category.map(item=>{
-              return(<Option value={item.name}  label={item.name}><div className="demo-option-label-item">{item.name}</div></Option>)
+              return(<Option value={item.id}  label={item.name_uz}><div className="demo-option-label-item">{item.name_uz}</div></Option>)
           })
       }
      

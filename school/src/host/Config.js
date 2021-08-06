@@ -8,10 +8,28 @@ export const getTraining=()=>{
 
     return(httpsRequest(config))
 }
+export const getCategory=()=>{
+    var config={
+        url:`${url}/api/category/`,
+        method:'get'
+    }
+
+    return(httpsRequest(config))
+}
 export const createGroup=(data)=>{
     console.log(data)
     var config={
         url:`${url}/api/group/`,
+        method:'post',
+        data:data
+    }
+
+    return(httpsRequest(config))
+}
+export const createTeacher=(data)=>{
+    console.log(data)
+    var config={
+        url:`${url}/api/teacher/`,
         method:'post',
         data:data
     }
