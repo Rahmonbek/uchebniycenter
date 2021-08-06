@@ -6,7 +6,7 @@ import { Form, Input, Select } from 'antd';
 import {AiFillEdit,AiOutlineDelete} from 'react-icons/ai'
 import {Table} from 'react-bootstrap'
 import { idT } from '../host/Host';
-import {getTraining,deleteTeacher} from '../host/Config'
+import {getTraining,deleteTeacher,getTeacher} from '../host/Config'
 import {createTeacher} from '../host/Config'
 export default function Oqituvchiqoshish() {
     const [edit,setEdit]=useState(null)
@@ -43,24 +43,17 @@ const onGenderChange = (value) => {
       form.resetFields();
       setEdit(null)
   };
-
+  const [teacher,setTeacher]=useState([])
   const onFill = (id) => { 
-      // var newoqituvchilar=oqituvchi[id]
-      // console.log(newoqituvchilar)
-      // form.setFieldsValue({
-      //   name:newoqituvchilar.name,
-      //   tugilgansana:newoqituvchilar.tugilgansana,
-      //   telefon:newoqituvchilar.telefon,  
-      //   email:newoqituvchilar.email,  
-      // //   rasm:newoqituvchilar.rasm,  
-      //   yonalish:newoqituvchilar.yonalish,
-      //   texnologiyalar:newoqituvchilar.texnologiyalar,
-      //   malumot:newoqituvchilar.malumot,
-      //   ishsana:newoqituvchilar.ishsana
-      // });
-      // console.log(id)
-      // setEdit(id)
-      // showModal()
+    getTeacher(id).then(res=>{setTeacher(res.data)}).catch(err=>{console.log(err)})
+    console.log(teacher)
+    form.setFieldsValue({
+      full_name: teacher.full_name,
+      phone_number:teacher.phone_number,
+      text:teacher.text,
+      photo:teacher.photo
+    });
+      showModal()
   };
   const [image, setImage]=useState('')
 
@@ -174,7 +167,7 @@ return (
                                 <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>
                                     <p style={{width:'250px'}}>{item.text}</p>
                                 </td>
-                                <td style={{border:' 1px solid #3F6AD8'}}><AiFillEdit onClick={()=> onFill(`${key}`)} style={{fontSize:'20px',color:'green',marginLeft:'10px',marginTop:'5px', cursor: 'pointer', marginRight: '10px'}}/> <AiOutlineDelete onClick={()=> deleteTeachers(`${item.id}`)} style={{fontSize:'20px',color:'red',marginLeft:'10px',marginTop:'5px', cursor: 'pointer', marginRight: '10px', float: 'right'}}/> </td>
+                                <td style={{border:' 1px solid #3F6AD8'}}><AiFillEdit onClick={()=> onFill(`${item.id}`)} style={{fontSize:'20px',color:'green',marginLeft:'10px',marginTop:'5px', cursor: 'pointer', marginRight: '10px'}}/> <AiOutlineDelete onClick={()=> deleteTeachers(`${item.id}`)} style={{fontSize:'20px',color:'red',marginLeft:'10px',marginTop:'5px', cursor: 'pointer', marginRight: '10px', float: 'right'}}/> </td>
                                 </tr>
                             </tbody>
                               )

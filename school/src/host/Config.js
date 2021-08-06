@@ -67,6 +67,14 @@ export const getTeachers=()=>{
 
     return(httpsRequest(config))
 }
+export const getTeacher=(id)=>{
+    var config={
+        url:`${url}/api/teacher/${id}/`,
+        method:'get'
+    }
+
+    return(httpsRequest(config))
+}
 export const getStudents=()=>{
     var config={
         url:`${url}/api/student/`,
