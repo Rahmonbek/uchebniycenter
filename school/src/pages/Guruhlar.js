@@ -144,9 +144,6 @@ var config={
   money:value.money ?? '',
   training_center:idT,
 }
-var cat=value.category
-
-console.log(cat)
 
 formData.append(
   "name",
@@ -163,13 +160,9 @@ formData.append(
   "teacher",
   value.teacher ?? []
 );
-var cat=value.category
-console.log(typeof(cat[1]))
 formData.append(
-  "category",
- cat ?? []
-);
-
+  "category", value.category ?? []
+)
 formData.append(
   "subject",
   value.subject ?? []

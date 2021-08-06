@@ -6,8 +6,8 @@ import { Form, Input, Select } from 'antd';
 import {AiFillEdit,AiOutlineDelete} from 'react-icons/ai'
 import {Table} from 'react-bootstrap'
 import { idT } from '../host/Host';
-import {getTraining,deleteTeacher,getTeacher} from '../host/Config'
-import {createTeacher} from '../host/Config'
+import {getTraining,deleteTeacher,getTeacher, createTeacher} from '../host/Config'
+
 export default function Oqituvchiqoshish() {
     const [edit,setEdit]=useState(null)
     const [visible,setVisible]=useState(false)
