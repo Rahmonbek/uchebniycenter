@@ -6,14 +6,12 @@ import {BsPersonPlusFill} from 'react-icons/bs'
 import { Form, Input, Select } from 'antd';
 import {AiFillEdit,AiOutlineDelete} from 'react-icons/ai'
 import {Table} from 'react-bootstrap'
-import moment from 'moment';
-import { url } from '../host/Host'
-import { getTeachers } from '../host/Config';
-import rasm1 from '../img/frontend.jpg'
+import { idT } from '../host/Host';
+import {createGroup,getTraining} from '../host/Config'
+import {allReducers} from '../redux/reducer/index'
+import {trainingReducer} from '../redux/reducer/training'
 export default function Oqituvchiqoshish() {
     const [edit,setEdit]=useState(null)
-    const [oqituvchi,setOqituvchi]=useState([])
-    const dateFormat = 'YYYY/MM/DD'
     const [visible,setVisible]=useState(false)
     const showModal = () => {
         setVisible(true)
@@ -43,73 +41,31 @@ const onGenderChange = (value) => {
   setGender([])
   setGender(value)
 };
-const [data,setDate]=useState([])
-const [data1,setDate1]=useState([])
-  const onFinish = (values) => {
-      console.log(values)
-      var newoquvchi = {
-          name:values.name,
-          tugilgansana:data1,
-          telefon:values.telefon,  
-          email:values.email,  
-        //   rasm:values.rasm,  
-          yonalish:values.yonalish,
-          texnologiyalar:values.texnologiyalar,
-          malumot:values.malumot,
-          ishsana:data
-      }
-      console.log(newoquvchi)
-      var newoqituvchilar=oqituvchi
-      if(edit===null){
-          newoqituvchilar.push(newoquvchi)
-      setOqituvchi(newoqituvchilar)
-      }else{
-          newoqituvchilar[edit]=newoquvchi
-          setEdit(null)
-      }
-      hideModal()
-      onReset()
-  }
-  const dates=(date,dateString)=>{
-      setDate(dateString)
-      console.log(data)
-  }
-  const dates1=(date,dateString)=>{
-    setDate1(dateString)
-    console.log(data1)
-}
   const onReset = () => {
       form.resetFields();
       setEdit(null)
   };
 
   const onFill = (id) => { 
-      var newoqituvchilar=oqituvchi[id]
-      console.log(newoqituvchilar)
-      form.setFieldsValue({
-        name:newoqituvchilar.name,
-        tugilgansana:newoqituvchilar.tugilgansana,
-        telefon:newoqituvchilar.telefon,  
-        email:newoqituvchilar.email,  
-      //   rasm:newoqituvchilar.rasm,  
-        yonalish:newoqituvchilar.yonalish,
-        texnologiyalar:newoqituvchilar.texnologiyalar,
-        malumot:newoqituvchilar.malumot,
-        ishsana:newoqituvchilar.ishsana
-      });
-      console.log(id)
-      setEdit(id)
-      showModal()
+      // var newoqituvchilar=oqituvchi[id]
+      // console.log(newoqituvchilar)
+      // form.setFieldsValue({
+      //   name:newoqituvchilar.name,
+      //   tugilgansana:newoqituvchilar.tugilgansana,
+      //   telefon:newoqituvchilar.telefon,  
+      //   email:newoqituvchilar.email,  
+      // //   rasm:newoqituvchilar.rasm,  
+      //   yonalish:newoqituvchilar.yonalish,
+      //   texnologiyalar:newoqituvchilar.texnologiyalar,
+      //   malumot:newoqituvchilar.malumot,
+      //   ishsana:newoqituvchilar.ishsana
+      // });
+      // console.log(id)
+      // setEdit(id)
+      // showModal()
   };
-const normFile = (e) => {
-    console.log('Upload event:', e);
-  
-    if (Array.isArray(e)) {
-      return e;
-    }
-  
-    return e && e.fileList;
-  };
+  const [image, setImage]=useState('')
+
   const children = [];
 
         children.push(<Option key='html'>html</Option>);
@@ -119,22 +75,56 @@ const normFile = (e) => {
         children.push(<Option key='ajax'>ajax</Option>);
         children.push(<Option key='react'>react</Option>);
         children.push(<Option key='redux'>redux</Option>);
-
-
-
-   const getTeacher=()=>{
-          getTeachers().then(res=>{
-              setOqituvchi(res.data)
-              console.log(res.data)
-          }).catch(err=>{
-            console.log(err)
-          })
-    }
-      useEffect(()=>[
-        getTeacher(),
-        console.log(oqituvchi)
-
-      ],[oqituvchi])
+        const customRequest = (e) => {
+          let imageT = e.target.files[0];
+         
+          setImage(imageT)
+        
+          console.log(imageT)
+        
+        };
+        
+        const onFinish=(value)=>{         
+          console.log(value)
+       
+        let formData = new FormData();
+        formData.append(
+          "id",
+           2
+        );
+        formData.append(
+          "full_name",
+           value.full_name ?? ""
+        );
+        formData.append(
+          "phone_number",
+        value.phone_number ?? ""
+        ); 
+        formData.append(
+          "photo",
+         null
+        );        
+        formData.append(
+          "text",
+          value.text ?? "",
+        );
+        formData.append(
+          "training_center",
+        idT   
+        );  
+          createGroup(formData).then(res=>{console.log(res)}).catch(err=>{console.log(err)})
+          hideModal()
+        }
+        const [teachers,setTeachers]=useState([])
+        const getTrainingS=()=>{
+          getTraining().then(res=>{
+            console.log(res.data)
+            setTeachers(res.data.teachers)
+          }).catch(err=>{console.log(err)})
+        }
+        useEffect(()=>{
+          getTrainingS()
+          }, [])
 return (
     <div  style={{padding:'5%'}}>
             <div>
@@ -159,7 +149,7 @@ return (
                             </tr>
                         </thead>
                         {
-                          oqituvchi && Array.isArray(oqituvchi)? oqituvchi.map((item,key)=>{
+                         teachers && Array.isArray(teachers)? teachers.map((item,key)=>{
                               return(
                                 <tbody>
                                 <tr>
@@ -185,7 +175,6 @@ return (
                                 <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>
                                     <p style={{width:'250px'}}>{item.text}</p>
                                 </td>
-                                <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}><p style={{width: 100}}>{item.ishsana}</p></td>
                                 <td style={{border:' 1px solid #3F6AD8'}}><AiFillEdit onClick={()=> onFill(`${key}`)} style={{fontSize:'20px',color:'green',marginLeft:'10px',marginTop:'5px', cursor: 'pointer', marginRight: '10px'}}/> <AiOutlineDelete style={{fontSize:'20px',color:'red',marginLeft:'10px',marginTop:'5px', cursor: 'pointer', marginRight: '10px', float: 'right'}}/> </td>
                                 </tr>
                             </tbody>
@@ -204,7 +193,7 @@ return (
            >
              <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
          <Form.Item
-           name="name"
+           name="full_name"
            label="F.I.O"
            rules={[
              { 
@@ -215,11 +204,8 @@ return (
          >
            <Input />
          </Form.Item>
-         <Form.Item  name="bfhbf" label="Tug'ilgan sana:">
-        <DatePicker type="object" name="tugilgansana"/>
-      </Form.Item>
          <Form.Item
-           name="telefon"
+           name="phone_number"
            label="Telefon raqami:"
            rules={[
              {
@@ -229,56 +215,16 @@ return (
          >
            <Input />
          </Form.Item>
-         <Form.Item
-           name="email"
-           label="E-mail"
-           rules={[
-             {
-               required: true,
-             },
-           ]}
-         >
-           <Input />
-         </Form.Item>
-         <Form.Item
-        name="rasm"
+         <Form.Item         
         label="Rasm"
-        valuePropName="fileList"
-        getValueFromEvent={normFile}
-      >
-        <Upload name="logo" action="/upload.do" listType="picture">
-          <Button icon={<UploadOutlined />}>Rasm jo'natish</Button>
-        </Upload>
-      </Form.Item>
-      <Form.Item
-        name="yonalish"
-        label="Yo'nalishni tanlang"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Select
-          onChange={onGenderChange}
-          allowClear
-        >
-          <Option value="Front-end">Front-end</Option>
-          <Option value="Backend (Python+Jango)">Backend (Python+Jango)</Option>
-          <Option value="Unity">Unity</Option>
-        </Select>
-      </Form.Item>
-      <Form.Item name="texnologiyalar" label="Texnologiyalar:" rules={[{ required: true }]}>
-                            <Select
-                                mode="multiple"
-                                allowClear
-                                style={{ width: '100%' }}
-                                placeholder="Iltimos tanlang!"
-                            >
-                                {children}
-                            </Select>
-                        </Form.Item>
-                        <Form.Item name="malumot"
+        name="photo"
+        onChange={customRequest}
+        
+        rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+>
+        <Input type="file"   id="rasmlar" required={false} style={{marginBottom:'20px'}}/>
+</Form.Item>
+                        <Form.Item name="text"
                         label="Ma'lumot kiriting:"
                             rules={[
                                 {
@@ -288,9 +234,6 @@ return (
                         >
                             <Input.TextArea rows="3" placeholder="Qo'shimcha ma'lumot..." />
                         </Form.Item>
-         <Form.Item className={edit===null?'':styles.date2}  label="Ish boshlagan sana:">
-         <DatePicker name="ishsana"   onChange={dates} placeholder="Sanani tanlang"/>
-       </Form.Item>
          <Form.Item {...tailLayout}>
            <Button type="primary" htmlType="submit">
            Saqlamoq
@@ -303,4 +246,4 @@ return (
            </Modal>
            </div>
        )
-   }
+  } 
