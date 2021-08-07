@@ -30,8 +30,8 @@ export const createGroup=(data)=>{
 export const editGroup=(data, id)=>{
     console.log(data)
     var config={
-        url:`${url}/api/group/${id}`,
-        method:'put',
+        url:`${url}/api/group/${id}/`,
+        method:'patch',
         data:data
     }
 

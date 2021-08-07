@@ -70,6 +70,7 @@ const handleCancel=()=>{
 setEdit(null)
 setDate('')
 setTime('')
+setImage({})
 onReset()
   
   var g=document.querySelectorAll('#percent')
@@ -110,6 +111,28 @@ const echoTeacher=(a)=>{
   for(let i=0; i<teacher.length; i++){
     if(teacher[i].id===a){
       te=teacher[i].full_name
+    }
+  }
+  return(te)
+}
+
+const echoCategory=(a)=>{
+  console.log(category)
+  var te=""
+  for(let i=0; i<category.length; i++){
+    if(category[i].id===a){
+      te=category[i].name_uz
+    }
+  }
+  return(te)
+}
+
+
+const echoSubjects=(a)=>{
+  var te=""
+  for(let i=0; i<subjects.length; i++){
+    if(subjects[i].id===a){
+      te=subjects[i].name
     }
   }
   return(te)
@@ -210,19 +233,19 @@ formData.append(
   
   createGroup(formData).then(res=>{
     var config={
-      name:res.data.name ?? "",
-      duration:res.data.duration ?? null,
+      // name:res.data.name ?? "",
+      // duration:res.data.duration ?? null,
       teacher:value.teacher ?? [],
       category:value.category ?? [],
       subject:value.subject ?? [],
-      image:res.data.image ?? null,
-      days:res.data.days ?? null,
-      time:res.data.time ?? null,
-      start_date:res.data.date ?? "",
-      percent:res.data.percent ?? null,
-      description:res.data.description ?? '',
-      money:res.data.money ?? '',
-      training_center:idT,
+      // image:res.data.image ?? null,
+      // days:res.data.days ?? null,
+      // time:res.data.time ?? null,
+      // start_date:res.data.date ?? "",
+      // percent:res.data.percent ?? null,
+      // description:res.data.description ?? '',
+      // money:res.data.money ?? '',
+      // training_center:idT,
     }
     
 console.log(config)
@@ -266,13 +289,13 @@ const teacherlar=(value)=>{
   }
 
 const editGuruh=(id)=>{
-  // setGuruh(grlar[id])
-form.setFieldsValue(grlar[id])
-setDate(grlar[id].date)
-setTime(grlar[id].vaqt)
-setShow((prev)=>{return(true)})
-setteachers([])
-openModal()
+//  console.log(grlar[id])
+// form.setFieldsValue(grlar[id])
+// // setDate(grlar[id].date)
+// // setTime(grlar[id].vaqt)
+// // setShow((prev)=>{return(true)})
+// setteachers([])
+// openModal()
   
 }
   return (
@@ -302,8 +325,8 @@ openModal()
              <p> <b>O'qituvchilar: </b>{item.teacher.map((item1, key)=>{return(
                <p>{echoTeacher(item1)} - {item.percent[key]}%</p>
              )})}</p>
-             <p> <b>Yo'nalishi: </b>{item.category.map(item1=>{return(item1+' ')})}</p>
-             <p> <b>Fanlar/Dasturlar: </b>{item.subject.map(item1=>{return(item1+' ')})}</p>
+             <p> <b>Yo'nalishi: </b>{item.category.map(item1=>{return(echoCategory(item1)+' / ')})}</p>
+             <p> <b>Fanlar/Dasturlar: </b>{item.subject.map(item1=>{return(echoSubjects(item1)+' / ')})}</p>
              <p> <b>Kurs puli (oylik): </b>{item.money} so'm</p>
              
               <p> <b>Boshlanish vaqti: </b>{item.date}</p>
