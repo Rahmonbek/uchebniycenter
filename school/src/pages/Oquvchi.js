@@ -5,7 +5,7 @@ import { BsPersonPlusFill } from 'react-icons/bs'
 import { Form, Input, Select } from 'antd';
 import { AiFillEdit, AiOutlineDelete } from 'react-icons/ai'
 import { Table } from 'react-bootstrap'
-import { createStudent, getStudents, getGroups,deleteStudent, editStudent } from '../host/Config'
+import { createStudent, getStudents, getGroups, deleteStudent, editStudent } from '../host/Config'
 import { idT } from '../host/Host';
 
 export default function Oquvchiqoshish() {
@@ -49,9 +49,9 @@ export default function Oquvchiqoshish() {
   }
   const [form] = Form.useForm();
 
-  const deleteStudents=(id)=>{
- 
-    deleteStudent(id).then(res=>{getSS()}).catch(err=>{console.log(err)})
+  const deleteStudents = (id) => {
+
+    deleteStudent(id).then(res => { getSS() }).catch(err => { console.log(err) })
   }
 
   const onFinish = (value) => {
@@ -83,14 +83,15 @@ export default function Oquvchiqoshish() {
       idT
     );
 
-    if(edit===null){
+    if (edit === null) {
       createStudent(formData).then(res => { console.log(res) }).catch(err => { console.log("err") })
     }
-    else{
-      editStudent(formData,edit).then(res=>{console.log("succes")}).catch(err=>{console.log("err");})
+    else {
+      editStudent(formData, edit).then(res => { console.log("succes") }).catch(err => { console.log(err); console.log(edit); })
     }
-    hideModal()
     getSS()
+    hideModal()
+
     getSS()
   }
 
@@ -99,18 +100,18 @@ export default function Oquvchiqoshish() {
     setEdit(null)
   };
 
-  const onFill = (x) => { 
-    var newoquvchi=oquvchi[x]
+  const onFill = (x) => {
+    var newoquvchi = oquvchi[x]
     form.setFieldsValue({
-      full_name:newoquvchi.full_name,
-      phone_number:newoquvchi.phone_number,
-      home_phone_number:newoquvchi.home_phone_number,  
-      group:newoquvchi.group,  
+      full_name: newoquvchi.full_name,
+      phone_number: newoquvchi.phone_number,
+      home_phone_number: newoquvchi.home_phone_number,
+      group: newoquvchi.group,
     });
     setEdit(newoquvchi.id)
 
     showModal()
-};
+  };
 
   useEffect(() => {
     getSS()
@@ -149,11 +150,18 @@ export default function Oquvchiqoshish() {
                     {/* <td style={{ borderBottom: ' 1px solid #3F6AD8', padding: '10px' }}>
                       {item.training_center}
                     </td> */}
-                    <td style={{ borderBottom: ' 1px solid #3F6AD8', padding: '10px' }}>{item.group}</td>
+                    <td style={{ borderBottom: ' 1px solid #3F6AD8', padding: '10px' }}>
+                      
+{
+  group?group.map(res=>{
+    if(item.group===res.id){ return(res.name)}
+  }):""
+}
+                    </td>
                     <td style={{ borderBottom: ' 1px solid #3F6AD8' }}>
-                      <AiFillEdit style={{ fontSize: '16px', color: 'green', marginLeft: '5px', marginTop: '-5px' }} onClick={()=>{onFill(`${key}`)}}/>
+                      <AiFillEdit style={{ fontSize: '16px', color: 'green', marginLeft: '5px', marginTop: '-5px' }} onClick={() => { onFill(`${key}`) }} />
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <AiOutlineDelete style={{ fontSize: '16px', color: 'red', marginLeft: '5px', marginTop: '-5px' }} onClick={()=>{deleteStudents(`${item.id}`)}}/>
+                      <AiOutlineDelete style={{ fontSize: '16px', color: 'red', marginLeft: '5px', marginTop: '-5px' }} onClick={() => { deleteStudents(`${item.id}`) }} />
                     </td>
                   </tr>
 
