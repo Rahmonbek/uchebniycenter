@@ -39,9 +39,8 @@ export const editGroup=(data, id)=>{
 }
 
 export const editTeacher=(data, id)=>{
-    console.log(data)
     var config={
-        url:`${url}/api/teacher/${id}`,
+        url:`${url}/api/teacher/${id}/`,
         method:'put',
         data:data
     }

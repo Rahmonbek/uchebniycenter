@@ -6,6 +6,9 @@ import { Form, Input, Select } from 'antd';
 import {AiFillEdit,AiOutlineDelete} from 'react-icons/ai'
 import {Table} from 'react-bootstrap'
 import { idT } from '../host/Host';
+import DataTable from "react-data-table-component";
+import DataTableExtensions from "react-data-table-component-extensions";
+import "react-data-table-component-extensions/dist/index.css";
 import {getTraining,deleteTeacher,createTeacher,editTeacher} from '../host/Config'
 
 export default function Oqituvchiqoshish() {
@@ -129,6 +132,10 @@ export default function Oqituvchiqoshish() {
         useEffect(()=>{
           getTrainingS()
           }, [])
+          const tableData = {
+            columns,
+            teachers
+          };
 return (
     <div  style={{padding:'5%'}}>
             <div>
