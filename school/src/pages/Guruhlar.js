@@ -43,12 +43,14 @@ export default function Guruhlar() {
   const [guruh, setGuruh]=useState({})
   const [date, setDate]=useState('')
   const [time, setTime]=useState('')
+  const [datef, setDatef]=useState('')
+  const [timef, setTimef]=useState('')
   const [image, setImage]=useState('')
   const [form] = Form.useForm();
   const [subjects, setSubjects]=useState([])
   const getTrainingS=()=>{
   getTraining().then(res=>{
-    console.log(res)
+    
     setGrlar(res.data.groups)
     setSubjects(res.data.subjects)
     setTeacher(res.data.teachers)
@@ -57,12 +59,14 @@ export default function Guruhlar() {
 }  
 
 const chengeDate=(date, dateString)=>{
-    setDate(dateString)
-    
+  setDate(dateString)
+  setDatef(date)
+   
   }
   const chengeTime=(date, dateString)=>{
-    setTime(dateString)
-    
+    setTimef(date)
+    setTime(date)
+   
   }
     
 const handleCancel=()=>{
@@ -70,6 +74,8 @@ const handleCancel=()=>{
 setEdit(null)
 setDate('')
 setTime('')
+setDatef('')
+setTimef('')
 setImage({})
 onReset()
   
@@ -100,7 +106,7 @@ for(let i=0; i<grlar.length; i++){
 fer.push(false)
 
 }
-getCategory().then(res=>{setCategory(res.data); console.log(res.data)}).catch(err=>{console.log(err)})
+getCategory().then(res=>{setCategory(res.data);}).catch(err=>{console.log(err)})
 setExpanded(fer)
 
 }, [])
@@ -117,7 +123,7 @@ const echoTeacher=(a)=>{
 }
 
 const echoCategory=(a)=>{
-  console.log(category)
+  
   var te=""
   for(let i=0; i<category.length; i++){
     if(category[i].id===a){
@@ -195,15 +201,15 @@ formData.append(
  image ?? null
 );
 
-formData.append(
-  "days",
-  value.days ?? null
-);
+// formData.append(
+//   "days",
+//   value.days ?? null
+// );
 
-formData.append(
-  "time",
-  time ?? null
-);
+// formData.append(
+//   "time",
+//   time ?? null
+// );
 
 formData.append(
   "start_date",
@@ -239,8 +245,8 @@ formData.append(
       category:value.category ?? [],
       subject:value.subject ?? [],
       // image:res.data.image ?? null,
-      // days:res.data.days ?? null,
-      // time:res.data.time ?? null,
+      days:value.days ?? null,
+      time:time ?? null,
       // start_date:res.data.date ?? "",
       // percent:res.data.percent ?? null,
       // description:res.data.description ?? '',
@@ -285,7 +291,7 @@ const teacherlar=(value)=>{
  
   const deleteGroup=(id)=>{
  
-    deleteGroupC(id).then(res=>{console.log(res); getTrainingS()}).catch(err=>{console.log(err)})
+    deleteGroupC(id).then(res=>{ getTrainingS()}).catch(err=>{console.log(err)})
   }
 
 const editGuruh=(id)=>{
@@ -295,7 +301,14 @@ const editGuruh=(id)=>{
 // // setTime(grlar[id].vaqt)
 // // setShow((prev)=>{return(true)})
 // setteachers([])
-// openModal()
+console.log(grlar[id])
+setTime(grlar[id].time)
+setDate(grlar[id].date)
+setTimeout(function () {
+form.setFieldsValue(grlar[id])
+},0); 
+teacherlar(grlar[id].teacher)
+openModal()
   
 }
   return (
@@ -322,14 +335,14 @@ const editGuruh=(id)=>{
            />
            <CardContent>
              <Typography variant="body2" color="textSecondary" component="p">
-             <p> <b>O'qituvchilar: </b>{item.teacher.map((item1, key)=>{return(
+             <p> <b>O'qituvchilar: </b>{item.teacher.map((item1, key)=>{console.log(item);return(
                <p>{echoTeacher(item1)} - {item.percent[key]}%</p>
              )})}</p>
              <p> <b>Yo'nalishi: </b>{item.category.map(item1=>{return(echoCategory(item1)+' / ')})}</p>
              <p> <b>Fanlar/Dasturlar: </b>{item.subject.map(item1=>{return(echoSubjects(item1)+' / ')})}</p>
              <p> <b>Kurs puli (oylik): </b>{item.money} so'm</p>
              
-              <p> <b>Boshlanish vaqti: </b>{item.date}</p>
+              <p> <b>Boshlanish vaqti: </b>{item.start_date}</p>
              
               <p> <b>Davomiyligi: </b>{item.duration} oy</p>
               <p> <b>Kunlari: </b>{item.days.map(item1=>{return(item1+' ')})}</p>
@@ -460,7 +473,7 @@ const editGuruh=(id)=>{
       <Form.Item
 label="Guruhning yo'nalishini tanlang"
 name="category"
-rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
+rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
 <Select
              
@@ -533,10 +546,10 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     <Col lg={6}>
     <Form.Item
         label="Ochilish sanasini kiriting"
-       name="start_date"
+       name="start_dateD"
         rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
-        <DatePicker onChange={chengeDate}
+        <DatePicker  value={datef} onChange={chengeDate}
         />
       </Form.Item>
 
@@ -546,10 +559,10 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     <Form.Item
    
         label="Dars vaqtini kiriting"
-        name="time"
+        name="timeD"
         rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
-        <TimePicker.RangePicker  onChange={chengeTime}/>
+        <TimePicker.RangePicker value={timef}  onChange={chengeTime}/>
       </Form.Item >
 
 
@@ -601,7 +614,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     </Row>      
     <Form.Item         
         label="Guruh uchun rasm tanlang"
-        name="image"
+       
         onChange={customRequest}
         
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
@@ -620,7 +633,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     return(
       <>
         <p>{item5}ga beriladigan summa foiz miqdorda</p>
-        <Input id="percent" defaultValue={()=>{return (guruh.percent[key]==undefined)? 0: guruh.percent[key]}} placeholder="100%" name={item5+key} min="0" max="100" type="number"/>
+        <Input required id="percent" defaultValue={()=>{return (guruh.percent[key]==undefined)? 0: guruh.percent[key]}} placeholder="100%" name={item5+key} min="0" max="100" type="number"/>
         <br/>
       </>
     )
