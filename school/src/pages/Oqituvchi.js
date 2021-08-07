@@ -6,7 +6,7 @@ import { Form, Input, Select } from 'antd';
 import {AiFillEdit,AiOutlineDelete} from 'react-icons/ai'
 import {Table} from 'react-bootstrap'
 import { idT } from '../host/Host';
-import {getTraining,deleteTeacher,getTeacher, createTeacher,editTeacher} from '../host/Config'
+import {getTraining,deleteTeacher,createTeacher,editTeacher} from '../host/Config'
 
 export default function Oqituvchiqoshish() {
     const [edit,setEdit]=useState(null)
@@ -26,43 +26,29 @@ export default function Oqituvchiqoshish() {
        wrapperCol: {
         span: 16,
     },
-};
-const tailLayout = {
-wrapperCol: {
-    offset: 8,
-    span: 16,
-},
-} 
-const [form] = Form.useForm();
-const [gender,setGender]=useState([])
-const onGenderChange = (value) => {
-  setGender([])
-  setGender(value)
-};
+    };
+    const tailLayout = {
+    wrapperCol: {
+        offset: 8,
+        span: 16,
+    },
+    } 
+  const [form] = Form.useForm();
   const onReset = () => {
       form.resetFields();
       setEdit(null)
   };
-  const [teacher,setTeacher]=useState([])
   const [image, setImage]=useState('')
-  const onFill = (id) => { 
-
-      // form.setFieldsValue({
-      //   full_name:teachers[id].full_name,
-      //   phone_number:teachers[id].phone_number,
-      //   photo:teachers[id].photo,
-      //   text:teachers[id].text
-      // })
-      setImage('')
+  const onFill = (key) => {
+      setEdit(teachers[key].id)
       setTimeout(function(){
         form.setFieldsValue({
-          full_name:teachers[id].full_name,
-        phone_number:teachers[id].phone_number,
+          full_name:teachers[key].full_name,
+        phone_number:teachers[key].phone_number,
         photo:'',
-        text:teachers[id].text
+        text:teachers[key].text
         })
       },0);
-      console.log(teachers[id])
       showModal()
   };
   const children = [];
@@ -74,19 +60,16 @@ const onGenderChange = (value) => {
         children.push(<Option key='ajax'>ajax</Option>);
         children.push(<Option key='react'>react</Option>);
         children.push(<Option key='redux'>redux</Option>);
+        
         const customRequest = (e) => {
-          let imageT = e.target.files[0];
-         
-          setImage(imageT)
-        
-          console.log(imageT)
-        
+          let imageT = e.target.files[0];        
+          setImage(imageT)      
+          console.log(imageT)      
         };
         
 
         const onFinish=(value)=>{         
-          console.log(value)
-       
+          console.log(value)  
         let formData = new FormData();
         
         formData.append(
@@ -109,20 +92,27 @@ const onGenderChange = (value) => {
           "training_center",
         idT   
         );  
-          createTeacher(formData).then(res=>
-            {
-              var config={
-                full_name:value.full_name ?? "",
-                phone_number:value.phone_number ?? "",
-                photo:image ?? null,
-                text:value.text ?? "",
-              }
-              editTeacher(config, res.data.id).then(res1=>{
-                console.log(config)
-                getTrainingS()    
-                }).catch(err1=>{console.log(err1,config)})
-            }         
-          ).catch(err=>{console.log(err)})
+        if (edit === null) {
+          createTeacher(formData).then(res => { getTrainingS() }).catch(err => { console.log("err") })
+        }
+        else {
+          editTeacher(formData, edit).then(res => { getTrainingS() }).catch(err => { console.log(err); console.log(edit); })
+        }
+
+          // createTeacher(formData).then(res=>
+          //   {
+          //     var config={
+          //       full_name:value.full_name ?? "",
+          //       phone_number:value.phone_number ?? "",
+          //       photo:image ?? null,
+          //       text:value.text ?? "",
+          //     }
+          //     editTeacher(config, res.data.id).then(res1=>{
+          //       console.log(config)
+          //       getTrainingS()    
+          //       }).catch(err1=>{console.log(err1,config)})
+          //   }         
+          // ).catch(err=>{console.log(err)})
           hideModal()
         }
         const [teachers,setTeachers]=useState([])
