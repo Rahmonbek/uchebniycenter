@@ -6,7 +6,7 @@ import { Form, Input, Select } from 'antd';
 import { AiFillEdit, AiOutlineDelete } from 'react-icons/ai'
 import { Table } from 'react-bootstrap'
 import moment from 'moment';
-import { createStudent, getStudents, getGroups,deleteStudent } from '../host/Config'
+import { createStudent, getStudents, getGroups } from '../host/Config'
 import { idT } from '../host/Host';
 
 export default function Oquvchiqoshish() {
@@ -159,7 +159,7 @@ console.log(id);
                     <td style={{ borderBottom: ' 1px solid #3F6AD8' }}>
                       <AiFillEdit style={{ fontSize: '16px', color: 'green', marginLeft: '5px', marginTop: '-5px' }} />
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <AiOutlineDelete style={{ fontSize: '16px', color: 'red', marginLeft: '5px', marginTop: '-5px' }} onClick={(kay)=>{deleteStudent(key)}}/>
+                      <AiOutlineDelete style={{ fontSize: '16px', color: 'red', marginLeft: '5px', marginTop: '-5px' }} />
                     </td>
                   </tr>
 

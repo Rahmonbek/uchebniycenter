@@ -111,3 +111,11 @@ export const getStudents=()=>{
 
     return(httpsRequest(config))
 }
+export const getGroups=()=>{
+    var config={
+        url:`${url}/api/group/`,
+        method:'get'
+    }
+
+    return(httpsRequest(config))
+}
