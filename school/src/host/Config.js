@@ -38,7 +38,25 @@ export const editGroup=(data, id)=>{
     return(httpsRequest(config))
 }
 
+export const editTeacher=(data, id)=>{
+    console.log(data)
+    var config={
+        url:`${url}/api/teacher/${id}`,
+        method:'put',
+        data:data
+    }
 
+    return(httpsRequest(config))
+}
+export const editStudent=(data, id)=>{
+    var config={
+        url:`${url}/api/student/${id}`,
+        method:'put',
+        data:data
+    }
+
+    return(httpsRequest(config))
+}
 export const deleteGroupC=(id)=>{
    
     var config={
@@ -53,6 +71,16 @@ export const deleteTeacher=(id)=>{
    
     var config={
         url:`${url}/api/teacher/${id}/`,
+        method:'delete',
+        
+    }
+
+    return(httpsRequest(config))
+}
+export const deleteStudent=(id)=>{
+   
+    var config={
+        url:`${url}/api/student/${id}/`,
         method:'delete',
         
     }
@@ -97,6 +125,14 @@ export const getTeacher=(id)=>{
 export const getStudents=()=>{
     var config={
         url:`${url}/api/student/`,
+        method:'get'
+    }
+
+    return(httpsRequest(config))
+}
+export const getGroups=()=>{
+    var config={
+        url:`${url}/api/group/`,
         method:'get'
     }
 
