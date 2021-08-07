@@ -48,6 +48,15 @@ export const editTeacher=(data, id)=>{
 
     return(httpsRequest(config))
 }
+export const editStudent=(data, id)=>{
+    var config={
+        url:`${url}/api/student/${id}`,
+        method:'put',
+        data:data
+    }
+
+    return(httpsRequest(config))
+}
 export const deleteGroupC=(id)=>{
    
     var config={
@@ -62,6 +71,16 @@ export const deleteTeacher=(id)=>{
    
     var config={
         url:`${url}/api/teacher/${id}/`,
+        method:'delete',
+        
+    }
+
+    return(httpsRequest(config))
+}
+export const deleteStudent=(id)=>{
+   
+    var config={
+        url:`${url}/api/student/${id}/`,
         method:'delete',
         
     }

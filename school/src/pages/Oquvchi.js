@@ -5,8 +5,7 @@ import { BsPersonPlusFill } from 'react-icons/bs'
 import { Form, Input, Select } from 'antd';
 import { AiFillEdit, AiOutlineDelete } from 'react-icons/ai'
 import { Table } from 'react-bootstrap'
-import moment from 'moment';
-import { createStudent, getStudents, getGroups } from '../host/Config'
+import { createStudent, getStudents, getGroups,deleteStudent, editStudent } from '../host/Config'
 import { idT } from '../host/Host';
 
 export default function Oquvchiqoshish() {
@@ -24,14 +23,7 @@ export default function Oquvchiqoshish() {
       setGroup(res.data)
     }).catch(err => { console.log(err) })
   }
-  const deleteSS=(id)=>{
-console.log(id);
-    // deleteStudent(id).then(res=>{
-    //   getSS()
-    // }).catch(err=>{
-    //   console.log("err");
-    // })
-  }
+
   const [visible, setVisible] = useState(false)
   const showModal = () => {
     setVisible(true)
@@ -57,7 +49,10 @@ console.log(id);
   }
   const [form] = Form.useForm();
 
-
+  const deleteStudents=(id)=>{
+ 
+    deleteStudent(id).then(res=>{getSS()}).catch(err=>{console.log(err)})
+  }
 
   const onFinish = (value) => {
     let formData = new FormData();
@@ -88,7 +83,12 @@ console.log(id);
       idT
     );
 
-    createStudent(formData).then(res => { console.log(res) }).catch(err => { console.log(err) })
+    if(edit===null){
+      createStudent(formData).then(res => { console.log(res) }).catch(err => { console.log("err") })
+    }
+    else{
+      editStudent(formData,edit).then(res=>{console.log("succes")}).catch(err=>{console.log("err");})
+    }
     hideModal()
     getSS()
     getSS()
@@ -99,24 +99,18 @@ console.log(id);
     setEdit(null)
   };
 
-//   const onFill = (id) => { 
-//     var newoqituvchilar=oqituvchi[id]
-//     console.log(newoqituvchilar)
-//     form.setFieldsValue({
-//       name:newoqituvchilar.name,
-//       tugilgansana:newoqituvchilar.tugilgansana,
-//       telefon:newoqituvchilar.telefon,  
-//       email:newoqituvchilar.email,  
-//       rasm:newoqituvchilar.rasm,  
-//       yonalish:newoqituvchilar.yonalish,
-//       texnologiyalar:newoqituvchilar.texnologiyalar,
-//       malumot:newoqituvchilar.malumot,
-//       ishsana:newoqituvchilar.ishsana
-//     });
-//     console.log(id)
-//     setEdit(id)
-//     showModal()
-// };
+  const onFill = (x) => { 
+    var newoquvchi=oquvchi[x]
+    form.setFieldsValue({
+      full_name:newoquvchi.full_name,
+      phone_number:newoquvchi.phone_number,
+      home_phone_number:newoquvchi.home_phone_number,  
+      group:newoquvchi.group,  
+    });
+    setEdit(newoquvchi.id)
+
+    showModal()
+};
 
   useEffect(() => {
     getSS()
@@ -157,9 +151,9 @@ console.log(id);
                     </td> */}
                     <td style={{ borderBottom: ' 1px solid #3F6AD8', padding: '10px' }}>{item.group}</td>
                     <td style={{ borderBottom: ' 1px solid #3F6AD8' }}>
-                      <AiFillEdit style={{ fontSize: '16px', color: 'green', marginLeft: '5px', marginTop: '-5px' }} />
+                      <AiFillEdit style={{ fontSize: '16px', color: 'green', marginLeft: '5px', marginTop: '-5px' }} onClick={()=>{onFill(`${key}`)}}/>
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <AiOutlineDelete style={{ fontSize: '16px', color: 'red', marginLeft: '5px', marginTop: '-5px' }} />
+                      <AiOutlineDelete style={{ fontSize: '16px', color: 'red', marginLeft: '5px', marginTop: '-5px' }} onClick={()=>{deleteStudents(`${item.id}`)}}/>
                     </td>
                   </tr>
 
