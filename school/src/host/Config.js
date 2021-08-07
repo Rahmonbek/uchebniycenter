@@ -50,7 +50,7 @@ export const editTeacher=(data, id)=>{
 }
 export const editStudent=(data, id)=>{
     var config={
-        url:`${url}/api/student/${id}`,
+        url:`${url}/api/student/${id}/`,
         method:'put',
         data:data
     }
