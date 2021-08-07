@@ -6,7 +6,7 @@ import { Form, Input, Select } from 'antd';
 import {AiFillEdit,AiOutlineDelete} from 'react-icons/ai'
 import {Table} from 'react-bootstrap'
 import { idT } from '../host/Host';
-import {getTraining,deleteTeacher,getTeacher, createTeacher} from '../host/Config'
+import {getTraining,deleteTeacher,getTeacher, createTeacher,editTeacher} from '../host/Config'
 
 export default function Oqituvchiqoshish() {
     const [edit,setEdit]=useState(null)
@@ -44,14 +44,27 @@ const onGenderChange = (value) => {
       setEdit(null)
   };
   const [teacher,setTeacher]=useState([])
-  const onFill = (id) => { 
-    // getTeacher(id).then(res=>{setTeacher(res.data)}).catch(err=>{console.log(err)})
-    form.setFieldsValue(teachers[id]);
-      showModal()
-      console.log(teachers[id])
-  };
   const [image, setImage]=useState('')
+  const onFill = (id) => { 
 
+      // form.setFieldsValue({
+      //   full_name:teachers[id].full_name,
+      //   phone_number:teachers[id].phone_number,
+      //   photo:teachers[id].photo,
+      //   text:teachers[id].text
+      // })
+      setImage('')
+      setTimeout(function(){
+        form.setFieldsValue({
+          full_name:teachers[id].full_name,
+        phone_number:teachers[id].phone_number,
+        photo:'',
+        text:teachers[id].text
+        })
+      },0);
+      console.log(teachers[id])
+      showModal()
+  };
   const children = [];
 
         children.push(<Option key='html'>html</Option>);
@@ -70,6 +83,7 @@ const onGenderChange = (value) => {
         
         };
         
+
         const onFinish=(value)=>{         
           console.log(value)
        
@@ -95,7 +109,20 @@ const onGenderChange = (value) => {
           "training_center",
         idT   
         );  
-          createTeacher(formData).then(res=>getTrainingS()).catch(err=>{console.log(err)})
+          createTeacher(formData).then(res=>
+            {
+              var config={
+                full_name:value.full_name ?? "",
+                phone_number:value.phone_number ?? "",
+                photo:image ?? null,
+                text:value.text ?? "",
+              }
+              editTeacher(config, res.data.id).then(res1=>{
+                console.log(config)
+                getTrainingS()    
+                }).catch(err1=>{console.log(err1,config)})
+            }         
+          ).catch(err=>{console.log(err)})
           hideModal()
         }
         const [teachers,setTeachers]=useState([])
