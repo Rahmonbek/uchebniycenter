@@ -6,21 +6,18 @@ import { Form, Input, Select } from 'antd';
 import {AiFillEdit,AiOutlineDelete} from 'react-icons/ai'
 import {Table} from 'react-bootstrap'
 import { idT } from '../host/Host';
-import DataTable from "react-data-table-component";
-import DataTableExtensions from "react-data-table-component-extensions";
-import "react-data-table-component-extensions/dist/index.css";
 import {getTraining,deleteTeacher,createTeacher,editTeacher} from '../host/Config'
 
 export default function Oqituvchiqoshish() {
     const [edit,setEdit]=useState(null)
     const [visible,setVisible]=useState(false)
-    const showModal = () => {
-        setVisible(true)
-    }
+    const [teachers,setTeachers]=useState([])
+    const [image, setImage]=useState('')
+
+    const showModal = () => {setVisible(true)}
     const  hideModal = () => {
-        onReset()
-        setVisible(false)
-     }
+      onReset()
+      setVisible(false)}
      const { Option } = Select;
      const layout = {
        labelCol: {
@@ -41,12 +38,11 @@ export default function Oqituvchiqoshish() {
       form.resetFields();
       setEdit(null)
   };
-  const [image, setImage]=useState('')
   const onFill = (key) => {
       setEdit(teachers[key].id)
       setTimeout(function(){
         form.setFieldsValue({
-          full_name:teachers[key].full_name,
+        full_name:teachers[key].full_name,
         phone_number:teachers[key].phone_number,
         photo:'',
         text:teachers[key].text
@@ -96,46 +92,28 @@ export default function Oqituvchiqoshish() {
         idT   
         );  
         if (edit === null) {
-          createTeacher(formData).then(res => { getTrainingS() }).catch(err => { console.log("err") })
+          createTeacher(formData).then(res => { getTrainingS() }).catch(err => { console.log(err) })
         }
         else {
-          editTeacher(formData, edit).then(res => { getTrainingS() }).catch(err => { console.log(err); console.log(edit); })
+          editTeacher(formData, edit).then(res => { getTrainingS() }).catch(err => { console.log(err)})
         }
-
-          // createTeacher(formData).then(res=>
-          //   {
-          //     var config={
-          //       full_name:value.full_name ?? "",
-          //       phone_number:value.phone_number ?? "",
-          //       photo:image ?? null,
-          //       text:value.text ?? "",
-          //     }
-          //     editTeacher(config, res.data.id).then(res1=>{
-          //       console.log(config)
-          //       getTrainingS()    
-          //       }).catch(err1=>{console.log(err1,config)})
-          //   }         
-          // ).catch(err=>{console.log(err)})
-          hideModal()
-        }
-        const [teachers,setTeachers]=useState([])
+        hideModal()
+      }
         const getTrainingS=()=>{
           getTraining().then(res=>{
             console.log(res.data)
             setTeachers(res.data.teachers)
           }).catch(err=>{console.log(err)})
         }
+
         const deleteTeachers=(id)=>{
  
           deleteTeacher(id).then(res=>{getTrainingS()}).catch(err=>{console.log(err)})
         }
+
         useEffect(()=>{
           getTrainingS()
-          }, [])
-          const tableData = {
-            columns,
-            teachers
-          };
+        }, [])
 return (
     <div  style={{padding:'5%'}}>
             <div>
@@ -257,4 +235,4 @@ return (
            </Modal>
            </div>
        )
-  } 
+      }
