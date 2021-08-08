@@ -27,6 +27,7 @@ import Oqituvchi from './pages/Oqituvchi';
 import { Col, Row } from 'react-bootstrap';
 import Malumot from './pages/Malumot'
 import LearningCenter from './pages/LearningCenter';
+import OqituvchiTable from './pages/OqituvchiTable'
 export default class Main extends Component {
 state = {
     collapsed: false,
@@ -183,7 +184,7 @@ state = {
           <Oqituvchi/>
         </Route>
         <Route exact path="/cabinet/kurslar">
-          <Malumot/>
+          <OqituvchiTable/>
         </Route>
 
       </Switch>
