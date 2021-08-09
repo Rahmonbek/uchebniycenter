@@ -4,6 +4,7 @@ import styles from '../css/news.module.css'
 import { Button, Input, Select, Modal, Form, DatePicker, TimePicker,} from 'antd';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../css/modalStyle.css";
+
 // import { CKEditor } from '@ckeditor/ckeditor5-react';
 // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
