@@ -13,7 +13,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    padding: 10px 0px 0px 0px;
+    padding: 20px 0px 0px 0px;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     margin-bottom: 50px;
 
@@ -106,7 +106,7 @@
     margin: auto;
 }
 .MuiCardHeader-content span{
-    font-size: 18px;
+  font-size: 18px !important;
 }
 .section ul{
     display: flex;
@@ -133,11 +133,13 @@
     visibility: visible;
 } */
 .root {
-    max-width: 345
+    max-width: 345;
+   
   }
   .media {
     height: 0;
     padding-top: 56.25%;
+   
   }
   .expand {
     transform: rotate(0 deg);

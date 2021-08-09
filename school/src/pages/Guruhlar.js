@@ -5,7 +5,12 @@ import { Button, Input, Select, Modal, Form, DatePicker, TimePicker,} from 'antd
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../css/modalStyle.css";
 
+<<<<<<< HEAD
 
+=======
+// import { CKEditor } from '@ckeditor/ckeditor5-react';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+>>>>>>> f7072e6f5d7dd56e2371058694f405944d67e38b
 
 import style from '../css/courses.module.css';
 import '../App.css'
