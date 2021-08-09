@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
 import {Form ,Button} from 'react-bootstrap'
 import {useHistory} from 'react-router-dom'
 import styles from '../css/login.module.css'
@@ -37,6 +38,8 @@ function Login() {
 <Button  variant="primary" type="submit" onClick={saveData} style={{backgroundColor:'#1A86D0'}} className={styles.btnInput} >
 Kirish
 </Button>
+
+<Link to="/lcenter"><p style={{textAlign:'center', marginTop:'30px', fontSize:'18px', fontWeight:'500'}}>Ro'yxatdan o'tish</p></Link>
 </Form>
                      </div>
                      </div>
