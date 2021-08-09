@@ -200,63 +200,64 @@ traning:[]
                       <Card className={styles.root} style={{margin:'auto', marginBottom:'20px'}} data-aos="zoom-in-up">
                       {
                         traning && Array.isArray(traning)?traning.map((element,kalit)=>{
-                         
-                           (traning.id==item.traning_center)?
-                          return(
-                            <CardHeader 
-                        avatar={
-                          <Avatar aria-label="recipe" className={styles.avatar} style={{backgroundColor:'white'}}>
-                            <img src={element.photo} style={{width:'30px', height:'30px'}}/>
-                          </Avatar>
-                        }
+                         return(
+                           (traning.id==group.traning_center)?
+                             (
+                               <h1>{element.name}</h1>
+            //                 <CardHeader 
+            //             avatar={
+            //               <Avatar aria-label="recipe" className={styles.avatar} style={{backgroundColor:'white'}}>
+            //                 <img src={element.photo} style={{width:'30px', height:'30px'}}/>
+            //               </Avatar>
+            //             }
                         
-                        action={
+            //             action={
                             
-                        <Link to='/registration/uz'>
-                        <div className={styles.singup}>
+            //             <Link to='/registration/uz'>
+            //             <div className={styles.singup}>
                            
-                        <OverlayTrigger
+            //             <OverlayTrigger
                      
-               placement="bottom"
-               overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Registratsiya</Tooltip>}
-             >
-               {({ ref, ...triggerHandler }) => (
-                 <Button
-                   variant="#F2F2F2"
-                   {...triggerHandler}
-                   className="d-inline-flex align-items-center"
-                 >
-                   <Image
-                     ref={ref}
+            //    placement="bottom"
+            //    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Registratsiya</Tooltip>}
+            //  >
+            //    {({ ref, ...triggerHandler }) => (
+            //      <Button
+            //        variant="#F2F2F2"
+            //        {...triggerHandler}
+            //        className="d-inline-flex align-items-center"
+            //      >
+            //        <Image
+            //          ref={ref}
                      
-                   />
-                    <IconButton  >
-                            <PersonAddIcon color="primary"/>
-                          </IconButton>
+            //        />
+            //         <IconButton  >
+            //                 <PersonAddIcon color="primary"/>
+            //               </IconButton>
                    
-                 </Button>
-               )}
-             </OverlayTrigger>
-                            {/* <IconButton  >
-                            <PersonAddIcon color="primary"/>
-                          </IconButton> */}
+            //      </Button>
+            //    )}
+            //  </OverlayTrigger>
+            //                 <IconButton  >
+            //                 <PersonAddIcon color="primary"/>
+            //               </IconButton>
                           
-                          </div>
-                        </Link>
+            //               </div>
+            //             </Link>
                           
                           
-                        }
-                        title={item.name}
+            //             }
+            //             title={item.name}
                         
-                        // subheader="01.08.2021"
-                      />
-                      ):''
+            //             subheader="01.08.2021"
+            //           />
+                      ):'')
                         }):''
                       }
                       <CardMedia
                         className={styles.media}
                         image={item.image}
-                      //   title="Paella dish"
+                        title="Paella dish"
                       />
                       <CardContent>
                         <Typography variant="body2" color="textSecondary" component="p">
