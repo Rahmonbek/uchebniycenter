@@ -147,7 +147,8 @@ element.style {
 }
 
 .d-inline-flex{
-  padding: 8px !important;
+  padding: 1px !important;
+  
 }
 .nav-tabs, .nav-link{
  border: none !important;

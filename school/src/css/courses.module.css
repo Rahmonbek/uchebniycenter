@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@300&family=Noto+Sans+TC&display=swap');
 
 *{
     margin: 0;
@@ -12,9 +13,10 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    padding: 50px 20px 0px 20px;
+    padding: 10px 0px 0px 0px;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     margin-bottom: 50px;
+
    
     /* background-image: linear-gradient(to left, rgb(149,153,226) 0%, rgb(139,198,236) 100%); */
     /* background-color: #9195a0; */
@@ -24,33 +26,54 @@
     background-color: #fff;
     padding-bottom: 30px;
 }
-.header h1{
-    font-size: 70px;
+.section h1{
+    font-size: 50px;
     font-weight: 400;
-    color: #fff;
-    font-family: 'Lobster', cursive;
+    width: 500px;
+    color: rgb(0, 68, 255);
+    font-family: 'Mukta', sans-serif;
+    font-family: 'Noto Sans TC', sans-serif;
     text-align: center;
-    padding-top: 55px;
+    padding-bottom: 20px;
+    margin: auto;
+    margin-bottom: 50px;
+    border-bottom: 1px solid blue;
+
+    
 }
 .navbar{
+  /* border:  2px solid red; */
+  /* background-color: #fff; */
+  
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 50px;
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 600;
+    width: 60%;
+    margin: auto;
+    margin-bottom: 100px;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
 }
 .navbar li{
     display: inline;
-    margin: 10px;
+    margin: 10px 30px;
    cursor: pointer;
-   color: #000;
+   color: #fff;
+   transition: 0.5s;
+   padding-bottom: 5px;
 }
 .navbar li:hover{
-    color: red;
+    color: rgba(255, 0, 0, 0.863);
+    border-bottom: 1px solid rgba(255, 0, 0, 0.863);
+   
 }
 .navbar ul{
-   
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 0px;
+   padding: 10px;
 }
 .bottom{
     width: 35px;
@@ -59,23 +82,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-   
     background-color: #fff;
     cursor: pointer;
     color: blue;
-   
     animation-name: example;
   animation: example 2.5s infinite;
   position: absolute;
-  top: 90vh;
-  left: 100vh;
+ 
+  
 }
 @keyframes example {
-    0%   { left:100vh; top:90vh;}
+    0%   { left:50%; top:85vh;}
     
-    50%  { left:100vh; top:92vh;}
+    50%  { left:50%; top:87vh;}
    
-    100% { left:100vh; top:90vh;}
+    100% { left:50%; top:85vh;}
   }
 .section{
     margin-bottom: 100px;

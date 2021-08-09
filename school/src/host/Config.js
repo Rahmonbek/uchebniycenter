@@ -129,11 +129,20 @@ export const getStudents=()=>{
 
     return(httpsRequest(config))
 }
+<<<<<<< Updated upstream
 export const getGroups=()=>{
+=======
+export const getGroup=()=>{
+>>>>>>> Stashed changes
     var config={
         url:`${url}/api/group/`,
         method:'get'
     }
+<<<<<<< Updated upstream
 
     return(httpsRequest(config))
 }
+=======
+    return(httpsRequest(config))
+}
+>>>>>>> Stashed changes

@@ -4,6 +4,7 @@ import Courses from './pages/Courses';
 import Registration from './pages/Registration';
 import Main from './Main';
 import Malumot from './pages/Malumot';
+import Category from './pages/Category';
 import LearningCenter from './pages/LearningCenter'
 import Login from './pages/Login'
 import Xarita from './pages/Xarita';
@@ -24,6 +25,7 @@ function App() {
       <Route path="/malumot"><Malumot/></Route>
       <Route exact path="/lcenter"> <LearningCenter/> </Route>
       <Route exact path="/login"> <Login/> </Route>
+      {/* <Route exact path="/"> <Category/> </Route> */}
       
 
 
