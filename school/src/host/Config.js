@@ -8,6 +8,14 @@ export const getTraining=()=>{
 
     return(httpsRequest(config))
 }
+export const getTrainingS=()=>{
+    var config={
+        url:`${url}/api/training/`,
+        method:'get'
+    }
+
+    return(httpsRequest(config))
+}
 export const getCategory=()=>{
     var config={
         url:`${url}/api/category/`,

@@ -47,7 +47,7 @@ import {
 
 import {Carousel} from '3d-react-carousal';
 import { getGroups } from '../host/Config';
-import { getTraining } from '../host/Config';
+import { getTrainingS } from '../host/Config';
 
   export default class Courses extends Component {
    
@@ -72,22 +72,37 @@ traning:[]
   
   
     getTraningS=()=>{
-      getTraining().then(res=>{
+      getTrainingS().then(res=>{
         console.log(res.data)
         this.setState({
-          tarning:res.data
+          traning:res.data
         })
         
       }).catch(err=>{console.log(err)})
+     
     }
+echoTraining=(id)=>{
+  var t={}
+  console.log(this.state.traning)
+  for(let i=0; i<this.state.traning.length; i++){
+   console.log(this.state.traning[i])
+    if(id===this.state.traning[i].id){
+t=this.state.traning[i]
 
+    }
+  }
+  console.log(t)
+  return(t)
+}
     componentDidMount(){
       Aos.init({
         duration:2000
     
       });
       this.getGroupS();
-    this.setState({expanded:[false, false, false]})
+    this.setState({expanded:[false, false, false]});
+
+    this.getTraningS();
     }
     
   
@@ -107,8 +122,9 @@ traning:[]
     };
 
 
-  
+ 
     render(){
+      
       let slides = [
         <img  src="https://picsum.photos/800/300/?random" alt="1" />, 
       <img  src="https://picsum.photos/800/301/?random" alt="2" />  ,
@@ -198,61 +214,60 @@ traning:[]
      <Col lg={12}>
                     
                       <Card className={styles.root} style={{margin:'auto', marginBottom:'20px'}} data-aos="zoom-in-up">
+                      
                       {
-                        traning && Array.isArray(traning)?traning.map((element,kalit)=>{
-                         return(
-                           (traning.id==group.traning_center)?
-                             (
-                               <h1>{element.name}</h1>
-            //                 <CardHeader 
-            //             avatar={
-            //               <Avatar aria-label="recipe" className={styles.avatar} style={{backgroundColor:'white'}}>
-            //                 <img src={element.photo} style={{width:'30px', height:'30px'}}/>
-            //               </Avatar>
-            //             }
-                        
-            //             action={
-                            
-            //             <Link to='/registration/uz'>
-            //             <div className={styles.singup}>
-                           
-            //             <OverlayTrigger
-                     
-            //    placement="bottom"
-            //    overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Registratsiya</Tooltip>}
-            //  >
-            //    {({ ref, ...triggerHandler }) => (
-            //      <Button
-            //        variant="#F2F2F2"
-            //        {...triggerHandler}
-            //        className="d-inline-flex align-items-center"
-            //      >
-            //        <Image
-            //          ref={ref}
-                     
-            //        />
-            //         <IconButton  >
-            //                 <PersonAddIcon color="primary"/>
-            //               </IconButton>
-                   
-            //      </Button>
-            //    )}
-            //  </OverlayTrigger>
-            //                 <IconButton  >
-            //                 <PersonAddIcon color="primary"/>
-            //               </IconButton>
+
+                        traning &&(Array.isArray(traning))?
+                          <CardHeader 
+
                           
-            //               </div>
-            //             </Link>
-                          
-                          
-            //             }
-            //             title={item.name}
-                        
-            //             subheader="01.08.2021"
-            //           />
-                      ):'')
-                        }):''
+                avatar={
+                  <Avatar aria-label="recipe" className={styles.avatar} style={{backgroundColor:'white'}}>
+                 
+                <img src={this.echoTraining(item.training_center).photo} style={{width:'30px', height:'30px'}}/>
+              
+                  
+                    
+                  </Avatar>
+                }
+                
+                action={
+                    
+                <Link to='/registration/uz'>
+                <div className={styles.singup}>
+                   <OverlayTrigger
+             
+       placement="bottom"
+       overlay={<Tooltip id="button-tooltip-2"    style={{marginTop:'15px'}}>Registratsiya</Tooltip>}
+     >
+       {({ ref, ...triggerHandler }) => (
+         <Button
+           variant="#F2F2F2"
+           {...triggerHandler}
+           className="d-inline-flex align-items-center"
+         >
+           <Image
+             ref={ref}
+             
+           />
+            <IconButton  >
+                    <PersonAddIcon color="primary"/>
+                  </IconButton>
+           
+         </Button>
+       )}
+     </OverlayTrigger>
+                    
+                  </div>
+                </Link>
+                  
+                  
+                }
+                title={this.echoTraining(item.training_center).name}
+                
+                subheader={item.name}
+              />
+                        :''
                       }
                       <CardMedia
                         className={styles.media}
@@ -335,7 +350,7 @@ traning:[]
                      ref={ref}
                      
                    />
-                    <a href='http://t.me/ItTower'>
+                    <a href={this.echoTraining(item.training_center).telegram}>
                           <IconButton >
                           <TelegramIcon />
                         </IconButton>
@@ -361,7 +376,7 @@ traning:[]
                      ref={ref}
                      
                    />
-                   <a href='http://instagram.com/ItTower'>
+                   <a href={this.echoTraining(item.training_center).instagram}>
                           <IconButton >
                           <InstagramIcon />
                         </IconButton>
@@ -385,7 +400,7 @@ traning:[]
                      ref={ref}
                      
                    />
-                    <a href='tel:+998935555555'>
+                    <a href={`tel:${this.echoTraining(item.training_center).phone_number}`}>
                           <IconButton >
                           <CallIcon />
                         </IconButton>
@@ -410,7 +425,7 @@ traning:[]
                      ref={ref}
                      
                    />
-                   <a href='mailto:ItTower@gmail.com'>
+                   <a href={`mailto:${this.echoTraining(item.training_center).email}`}>
                           <IconButton >
                           <MailOutlineIcon />
                         </IconButton>
