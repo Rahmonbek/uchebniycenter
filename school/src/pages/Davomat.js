@@ -7,6 +7,15 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import { Card, Button,Fab ,IconButton,Divider} from 'ui-neumorphism'
 export default function Davomat() {
     const [groups,setGroups]=useState([])
+    const [numberGroup,getNumberGroup]=useState(0)
+    const [students,setStudents]=useState([])
+    const getStudents=()=>{
+      getGroups().then(res=>{
+        console.log(res.data)
+        setGroups(res.data)
+        
+      }).catch(err=>{console.log(err)})
+    }
     const getGroupS=()=>{
         getGroups().then(res=>{
           console.log(res.data)
@@ -17,19 +26,6 @@ export default function Davomat() {
       useEffect(()=>{
        getGroupS()
       },[])
-      toggleInStock = () => {
-        let newProducts = [...this.state.products];
-        newProducts = newProducts.map((d) => {
-          if (d.id === 13) {
-            return {
-              ...d,
-              inStock: !d.inStock
-            };
-          }
-          return d;
-        });
-        this.setState(curr => ({ ...curr, products: newProducts }));
-      };
         const columns = [
           {
             dataField: 'id',
@@ -110,10 +106,10 @@ export default function Davomat() {
                     <Col lg={4} md={6} sm={12}>
                         <Row>
                             {
-                              groups && Array.isArray(groups)?groups.map(item=>{
+                              groups && Array.isArray(groups)?groups.map((item,key)=>{
                                   return(
                                       <Col lg={3} style={{marginLeft:'20px'}}>
-                                         <Button> {item.name}</Button>
+                                         <Button onClick={()=>getNumberGroup(key)}> {item.name}</Button>
                                       </Col>
                                   )
                               }):''
@@ -124,7 +120,7 @@ export default function Davomat() {
                     <Col lg={12} >
                     <BootstrapTable
                         keyField="id"
-                        data={ this.state.products }
+                        data={groups}
                         columns={ columns }
                         />
                     </Col>
