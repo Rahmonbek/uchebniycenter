@@ -46,7 +46,7 @@ import {
 } from 'mdb-react-ui-kit';
 
 import {Carousel} from '3d-react-carousal';
-import { getGroup } from '../host/Config';
+import { getGroups } from '../host/Config';
 import { getTraining } from '../host/Config';
 
   export default class Courses extends Component {
@@ -61,7 +61,7 @@ traning:[]
     }
   
     getGroupS=()=>{
-      getGroup().then(res=>{
+      getGroups().then(res=>{
         console.log(res.data)
         this.setState({
           group:res.data
