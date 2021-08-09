@@ -105,6 +105,9 @@ traning:[]
   
       this.setState({justifyActive:value});
     };
+
+
+  
     render(){
       let slides = [
         <img  src="https://picsum.photos/800/300/?random" alt="1" />, 
@@ -187,16 +190,18 @@ traning:[]
       <Row>    
             {
               group && Array.isArray(group)?group.map((item,key)=>{
+
                return(
-                
+               
                 <Col lg={4} md={6} sm={12}>
                   <Row>
      <Col lg={12}>
                     
                       <Card className={styles.root} style={{margin:'auto', marginBottom:'20px'}} data-aos="zoom-in-up">
                       {
-                        traning && Array.isArray(traning) && (traning.id==item.traning_center)?traning.map((element,kalit)=>{
-                          // ?
+                        traning && Array.isArray(traning)?traning.map((element,kalit)=>{
+                         
+                           (traning.id==item.traning_center)?
                           return(
                             <CardHeader 
                         avatar={
@@ -245,7 +250,7 @@ traning:[]
                         
                         // subheader="01.08.2021"
                       />
-                      )
+                      ):''
                         }):''
                       }
                       <CardMedia
@@ -256,12 +261,12 @@ traning:[]
                       <CardContent>
                         <Typography variant="body2" color="textSecondary" component="p">
                           
-                         <p> <b>Boshlanish vaqti: </b>{item.start_date}</p>
-                         <p> <b>Mentor: </b>{item.teacher}</p>
-                         <p> <b>Kurs muddati: </b>{item.duration} oy</p>
-                         <p> <b>Kurs kunlari: </b>{item.days}</p>
-                         <p> <b>Kurs vaqti: </b>{item.time}</p>
-                          <p> <b>Kategoriya: </b>{item.category}</p>
+                         <p style={{fontSize:'15px'}}> <b>Boshlanish vaqti: </b>{item.start_date}</p>
+                         <p style={{fontSize:'15px'}}> <b>Mentor: </b>{item.teacher}</p>
+                         <p style={{fontSize:'15px'}}> <b>Kurs muddati: </b>{item.duration} oy</p>
+                         <p style={{fontSize:'15px'}}> <b>Kurs kunlari: </b>{item.days}</p>
+                         <p style={{fontSize:'15px'}}> <b>Kurs vaqti: </b>{item.time}</p>
+                          <p style={{fontSize:'15px'}}> <b>Kategoriya: </b>{item.category}</p>
                         
                         
                         </Typography>
