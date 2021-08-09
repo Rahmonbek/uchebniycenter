@@ -33,6 +33,7 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import WebIcon from '@material-ui/icons/Web';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {FaChevronDown} from 'react-icons/fa'
+
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 import { Menu, Switch } from 'antd'
@@ -44,7 +45,8 @@ import {
   MDBTabsContent,
   MDBTabsPane
 } from 'mdb-react-ui-kit';
-
+import {YMaps, Map, Clusterer, Placemark, 
+  TypeSelector, ZoomControl, GeolocationControl, RouteButton, TrafficControl } from 'react-yandex-maps'
 import {Carousel} from '3d-react-carousal';
 import { getGroups } from '../host/Config';
 import { getTrainingS } from '../host/Config';
@@ -55,8 +57,13 @@ import { getTrainingS } from '../host/Config';
 expanded:[],
 justifyActive:'tab1',
 group:[],
-traning:[]
-
+traning:[],
+points:[
+    {
+      name: "IT Tower",
+      param: [41.317648, 69.230585], 
+    }, 
+]
 
     }
   
@@ -147,7 +154,7 @@ t=this.state.traning[i]
                              <Link to="/malumot"><li>Biz haqimizda</li></Link>
                              <Link to="/xarita"><li>Xarita</li></Link>
                              
-                             <Link to='/login'><li style={{marginRight:'10px'}}>Kirish</li></Link>
+                             <Link to='/login'><li >Kirish</li></Link>
                              {/* <li style={{margin:'10px 0px'}}>|</li>
                              <Link to="/lcenter"><li style={{marginLeft:'10px'}}>Ro'yxatdan o'tish</li></Link> */}
                                
@@ -452,7 +459,7 @@ t=this.state.traning[i]
                    />
                <IconButton 
                           className={clsx(styles.expand, {
-                            [styles.expandOpen]: this.state.expanded[0],
+                            [styles.expandOpen]: this.state.expanded[key],
                           })}
                           onClick={()=>{this.handleExpandClick(0)}}
                           aria-expanded={this.state.expanded[0]}
@@ -1700,14 +1707,95 @@ t=this.state.traning[i]
             }
    </Row>
              
+           
+             
          </Container>
-         <BrowserRouter>
-         <Route exact path="/malumot">
-           <Malumot/>
-         </Route>
-         </BrowserRouter>
+
+        
+      
          </div>   
+         <footer >
+         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c91fa" fill-opacity="1" d="M0,192L720,256L1440,224L1440,320L720,320L0,320Z"></path></svg>
+             <div className={styles.footer}>
+               <Container>
+                 <Row>
+                   <Col lg={6} md={6} sm={12}  className={styles.col}>
+                   <YMaps >
+        <Map
+          width='90%'
+          height='280px'
+          defaultState={{
+            center: [41.311151, 69.279716],
+            zoom: 8
+          }}
+        >
+          <Clusterer options={{  preset: 'islands#invertedVioletClusterIcons',  groupByCoordinates: false, }}  >
+            {this.state.points.map((coordinates, index) => (
+              
+              <Placemark  balloonContent= '<img src="http://img-fotki.yandex.ru/get/6114/82599242.2d6/0_88b97_ec425cf5_M" />'
+              iconContent= {coordinates.name}   key={index}
+               geometry={coordinates.param} 
+               options={{preset: "islands#blueStretchyIcon",
+               // Отключаем кнопку закрытия балуна.
+               balloonCloseButton: false,
+                // Балун будем открывать и закрывать кликом по иконке метки.
+               hideIconOnBalloonOpen: false,
+               openBalloonOnClick:true}}/>
+            ))}
+          </Clusterer> 
+          <GeolocationControl options={{ float: 'left' }} />
+          <TypeSelector options={{ float: 'right' }} />
+          <TrafficControl options={{ float: 'right' }} />
+          <RouteButton options={{ float: 'right' }} />
+          <ZoomControl options={{ float: 'left' }} />
+  
+        </Map>
+    </YMaps>
+                   </Col>
+                   <Col lg={6} md={6} sm={12} >
+                     <div className={styles.logo}>
+                         <img src={logo} /> 
+                     </div>
+                     <h4 style={{color:'#fff', fontSize:'20px', textAlign:'center', marginBottom:'30px'}}>IT Tower</h4>
+
+                     <div>
+                       <Row>
+                         <Col> 
+                         <p style={{textAlign:'center'}}>Biz haqimizda</p>
+                         <div className={styles.connection}>
+                           
+                         <IconButton ><InfoOutlinedIcon color="primary" style={{fontSize:'45px'}}/></IconButton>
+                         </div></Col>
+                         <Col>
+                         <p style={{textAlign:'center'}}>Aloqa</p>
+                         <div style={{display:'flex'}}>
+                         <div className={styles.connection}>
+                         <IconButton ><TelegramIcon color="primary" style={{fontSize:'23px'}}/></IconButton>
+                         </div>
+                         <div className={styles.connection}>
+                         <IconButton ><CallIcon color="primary" style={{fontSize:'23px'}}/></IconButton>
+                         </div>
+                         <div className={styles.connection}>
+                         <IconButton ><InstagramIcon color="primary" style={{fontSize:'23px'}}/></IconButton>
+                         </div>
+                         <div className={styles.connection}>
+                         <IconButton ><MailOutlineIcon color="primary" style={{fontSize:'23px'}}/></IconButton>
+                         </div>
+                           </div>
+                       </Col>
+                       </Row>
+                     </div>
+                    
+
+
+                   </Col>
+                 </Row>
+               </Container>
+               </div>
+             </footer>
+            
          </div>
+         
         </div>
        );
     }
