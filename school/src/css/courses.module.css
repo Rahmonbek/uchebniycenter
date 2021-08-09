@@ -24,7 +24,7 @@
 }
 .bg{
     background-color: #fff;
-    padding-bottom: 30px;
+    /* padding-bottom: 30px; */
 }
 .section h1{
     font-size: 50px;
@@ -150,4 +150,48 @@
   }
   .avatar {
     background-color: red;
+  }
+
+  .footer{
+    width: 100%;
+    height: 340px;
+    background-color: #3C91FA;
+  }
+  .col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .logo{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+  .logo img{
+    width: 70px;
+    height: 70px;
+  }
+  .footer p{
+     
+     color: #fff;
+     font-size: 18px;
+     
+  }
+  .connection{
+   margin: auto;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
   }
