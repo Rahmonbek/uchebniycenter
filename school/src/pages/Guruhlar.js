@@ -5,8 +5,6 @@ import { Button, Input, Select, Modal, Form, DatePicker, TimePicker,} from 'antd
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../css/modalStyle.css";
 
-// import { CKEditor } from '@ckeditor/ckeditor5-react';
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import style from '../css/courses.module.css';
 import '../App.css'
@@ -84,7 +82,7 @@ onReset()
 
 for(let i=0; i<g.length; i++){
 g[i].value=""
-// console.log(g[i].attributes.value.nodeValue)
+
 }
 setShow(false)
   
@@ -185,33 +183,10 @@ formData.append(
   "duration",
  value.duration ?? null
 );
-
-// formData.append(
-//   "teacher",
-//   value.teacher ?? []
-// );
-// formData.append(
-//   "category", value.category ?? []
-// )
-// formData.append(
-//   "subject",
-//   value.subject ?? []
-// );
 formData.append(
   "image",
  image ?? null
 );
-
-// formData.append(
-//   "days",
-//   value.days ?? null
-// );
-
-// formData.append(
-//   "time",
-//   time ?? null
-// );
-
 formData.append(
   "start_date",
   date ?? ""
@@ -240,22 +215,19 @@ formData.append(
   
   createGroup(formData).then(res=>{
     var config={
-      // name:res.data.name ?? "",
-      // duration:res.data.duration ?? null,
+      
+      
       teacher:value.teacher ?? [],
       category:value.category ?? [],
       subject:value.subject ?? [],
-      // image:res.data.image ?? null,
+      
       days:value.days ?? null,
       time:time ?? null,
-      // start_date:res.data.date ?? "",
-      // percent:res.data.percent ?? null,
-      // description:res.data.description ?? '',
-      // money:res.data.money ?? '',
-      // training_center:idT,
-    }
-    
-console.log(config)
+      dayf:datef,
+      timef:timef
+}
+    console.log(config)
+
     editGroup(config, res.data.id).then(res1=>{
       getTrainingS()
 
@@ -296,16 +268,13 @@ const teacherlar=(value)=>{
   }
 
 const editGuruh=(id)=>{
-//  console.log(grlar[id])
-// form.setFieldsValue(grlar[id])
-// // setDate(grlar[id].date)
-// // setTime(grlar[id].vaqt)
-// // setShow((prev)=>{return(true)})
-// setteachers([])
-console.log(grlar[id])
-setTime(grlar[id].time)
-setDate(grlar[id].date)
-setTimeout(function () {
+  setTime(grlar[id].time)
+  setDate(grlar[id].date)
+  setTimef(grlar[id].timef)
+  setDatef(grlar[id].dayf)
+console.log(grlar[id].timef,
+  grlar[id].dayf)
+  setTimeout(function () {
 form.setFieldsValue(grlar[id])
 },0); 
 teacherlar(grlar[id].teacher)
@@ -327,16 +296,16 @@ openModal()
              
              title={item.name}
              
-             // subheader="01.08.2021"
+             
            />
            <CardMedia
              className={style.media}
              image={item.image}
-           //   title="Paella dish"
+           
            />
            <CardContent>
              <Typography variant="body2" color="textSecondary" component="p">
-             <p> <b>O'qituvchilar: </b>{item.teacher.map((item1, key)=>{console.log(item);return(
+             <p> <b>O'qituvchilar: </b>{item.teacher.map((item1, key)=>{return(
                <p>{echoTeacher(item1)} - {item.percent[key]}%</p>
              )})}</p>
              <p> <b>Yo'nalishi: </b>{item.category.map(item1=>{return(echoCategory(item1)+' / ')})}</p>
