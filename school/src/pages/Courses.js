@@ -132,8 +132,8 @@ traning:[]
                              <Link to="/xarita"><li>Xarita</li></Link>
                              
                              <Link to='/login'><li style={{marginRight:'10px'}}>Kirish</li></Link>
-                             <li style={{margin:'10px 0px'}}>|</li>
-                             <Link to="/lcenter"><li style={{marginLeft:'10px'}}>Ro'yxatdan o'tish</li></Link>
+                             {/* <li style={{margin:'10px 0px'}}>|</li>
+                             <Link to="/lcenter"><li style={{marginLeft:'10px'}}>Ro'yxatdan o'tish</li></Link> */}
                                
                                
                                </ul>
