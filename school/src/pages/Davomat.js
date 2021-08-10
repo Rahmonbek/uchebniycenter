@@ -75,15 +75,15 @@ export default function Davomat() {
         </div>
       ),
       footer: "Jo'natish",
-      // footerStyle:{
-      //   display:'inline-block',
-      //   backgroundColor:'#E4EBF5',
-      //   margin:'10px',
-      //   borderRadius: '50px',
-      //   background: '#E4EBF5',
-      //    boxShadow:  '5px 5px 10px #c2c8d0,-5px -5px 10px #ffffff',
-      //    border:'none'
-      // }
+      footerStyle:{
+        width:'200px',
+        backgroundColor:'#E4EBF5',
+        margin:'20px',
+        borderRadius: '50px',
+        background: '#E4EBF5',
+         boxShadow:  '5px 5px 10px #c2c8d0,-5px -5px 10px #ffffff',
+         border:'none'
+      }
     }])
     var column2=column
     const getColumn=()=>{
@@ -99,15 +99,15 @@ export default function Davomat() {
           </div>
         ),
         footer: "Jo'natish",
-        // footerStyle:{
-        //   display:'inline-block',
-        //   backgroundColor:'#E4EBF5',
-        //   margin:'10px',
-        //   borderRadius: '50px',
-        //   background: '#E4EBF5',
-        //    boxShadow:  '5px 5px 10px #c2c8d0,-5px -5px 10px #ffffff',
-        //    border:'none'
-        // }
+        footerStyle:{
+          width:'200px',
+          backgroundColor:'#E4EBF5',
+          margin:'20px',
+          borderRadius: '50px',
+          background: '#E4EBF5',
+           boxShadow:  '5px 5px 10px #c2c8d0,-5px -5px 10px #ffffff',
+           border:'none'
+        }
       },]
       var column3=column2.concat(newColumn)     
       setColumn(column3)
@@ -155,6 +155,7 @@ export default function Davomat() {
                 <Row>
                 <Col lg={12}  style={{marginTop:'100px'}}>
                     <BootstrapTable
+                          style={{backgroundColor:'white'}}
                           keyField="id"
                           data={students}
                           columns={column}
