@@ -9,31 +9,18 @@ import { Card, Button,Fab ,IconButton,Divider} from 'ui-neumorphism'
 import {AiOutlinePlus} from 'react-icons/ai'
 import {MdDateRange} from 'react-icons/md'
 import "react-datepicker/dist/react-datepicker.css";
-import DatePicker from "react-datepicker";
+import {DatePicker} from 'antd'
 export default function Davomat() {
   const [count, setCount] = useState(0);
     const today = new Date();
-    const [date,setDate]=useState('')
     const [groups,setGroups]=useState([])
-    const [numberGroup,getNumberGroup]=useState(4)
-    const [students,setStudents]=useState([
-      {
-        id:1,
-        full_name:'hbgyerg  gyegvwty',
-        group:'group1'
-      },
-      {
-        id:2,
-        full_name:' gyegvwty',
-        group:'group1'
-      },
-      {
-        id:3,
-        full_name:'hbg  gyegvwty',
-        group:'group1'
-      }
-    ])
+    const [numberGroup,getNumberGroup]=useState(1)
+    const [students,setStudents]=useState([])
     const [visible,setVisible]=useState(false)
+    const [date, setDate]=useState('')
+  const [datef, setDatef]=useState('')
+
+
     const  showModal = () => {
        setVisible(true) 
     };
@@ -41,17 +28,23 @@ export default function Davomat() {
     const hideModal = () => {
       setVisible(false) 
     }
-    const getDate=()=>{
+    const getDate=(cell)=>{
+      console.log(cell)
       showModal()
     }
     const sanaGenerate=(cell, row, rowIndex, formatExtraData)=>{
       return(
         <div>
-        <IconButton onClick={()=>getDate()} rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><MdDateRange/></IconButton>
+          
+        <IconButton onClick={()=>getDate(cell)} rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><MdDateRange/></IconButton>
         <IconButton onClick={()=> getColumn()} rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><AiOutlinePlus/></IconButton>
         </div>
       )
     }
+    const chengeDate=(date, dateString)=>{
+      setDate(dateString)
+      setDatef(date)
+      }
     const [column,setColumn]=useState([
       {
             dataField: 'id',
@@ -67,13 +60,14 @@ export default function Davomat() {
       dataField: 'inStock',
       text: 'Sana',
       headerFormatter:sanaGenerate,
-      formatter: (cellContent, row) => (
+      formatter: (cellContent, rowIndex) => (
         <div className="checkbox disabled">
           <label>
-            <input type="checkbox"  onClick={()=>console.log(row)}/*checked={ row.inStock }*//>
+            <input type="checkbox"  onClick={()=>console.log(rowIndex)}/*checked={ row.inStock }*//>
           </label>
         </div>
       ),
+      classes: 'id-custom-cell',
       footer: "Jo'natish",
       footerStyle:{
         width:'200px',
@@ -110,28 +104,55 @@ export default function Davomat() {
         }
       },]
       var column3=column2.concat(newColumn)     
-      setColumn(column3)
-      console.log(column2,column3,column)
-      
+      setColumn(column3)     
     }
-    // const getStudentS=()=>{
-    //   getStudents().then(res=>{
-    //     console.log(res.data)
-    //     setStudents(res.data)
-    //     console.log(students,numberGroup)
-    //   }).catch(err=>{console.log(err)})
-    // }
+    const getStudentS=()=>{
+      getStudents().then(res=>{
+        setStudents(res.data)
+      }).catch(err=>{console.log(err)})
+    }
     const getGroupS=()=>{
-      console.log(column)
-      console.log(count)
         getGroups().then(res=>{
           console.log(res.data)
           setGroups(res.data)
           
         }).catch(err=>{console.log(err)})
       }
+
+    //   const onFinish=()=>{         
+    //   let formData = new FormData();
+      
+    //   formData.append(
+    //     "dat",
+    //     date ?? ""
+    //   );
+    //   formData.append(
+    //     "group",
+    //   value.phone_number ?? ""
+    //   ); 
+    //   formData.append(
+    //     "photo",
+    //    image?? null
+    //   );        
+    //   formData.append(
+    //     "text",
+    //     value.text ?? "",
+    //   );
+    //   formData.append(
+    //     "training_center",
+    //   idT   
+    //   );  
+    //   if (edit === null) {
+    //     createTeacher(formData).then(res => { getTrainingS() }).catch(err => { console.log(err) })
+    //   }
+    //   else {
+    //     editTeacher(formData, edit).then(res => { getTrainingS() }).catch(err => { console.log(err)})
+    //   }
+    //   hideModal()
+    // }
       useEffect(()=>{
        getGroupS()
+       getStudentS()
       },[count])
     return (
         
@@ -172,22 +193,7 @@ export default function Davomat() {
           okText= "Saqlash"
           cancelText= "O'chirish"
         >
-         <DatePicker
-         selected={date}
-            onChange={(e) => {
-             setDate(e)
-              }}
-            className="form-control"
-            minDate={today}
-            customInput={
-              <input
-                type="text"
-                id="validationCustom01"
-                placeholder="First name"
-                defaultValue="08/19/2021"
-              />
-            }
-          />
+        <DatePicker  value={datef} onChange={chengeDate}/>
         </Modal>
         </div>
         
