@@ -6,7 +6,7 @@ import styles from '../css/register.module.css'
 import { Button, Col, Container, FormGroup, Row, } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form'
 import { createStudent } from '../host/Config';
-
+import { idT } from '../host/Host';
 
 export default class Registration extends Component {
 
