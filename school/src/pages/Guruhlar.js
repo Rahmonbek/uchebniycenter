@@ -24,7 +24,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import BorderColorIcon from '@material-ui/icons/BorderColor';
 import ImageDemo from './ImageDemo';
 import { idT } from '../host/Host';
-
+import moment from 'moment';
+import 'moment/locale/zh-cn';
 
 const { TextArea } = Input;
 
@@ -39,7 +40,7 @@ export default function Guruhlar() {
   const [teacher, setTeacher]=useState([])
   const [grlar, setGrlar]=useState([])
   const [show, setShow]=useState(false)
-  const [guruh, setGuruh]=useState({})
+  const [guruh, setGuruh]=useState(null)
   const [date, setDate]=useState('')
   const [time, setTime]=useState('')
   const [datef, setDatef]=useState('')
@@ -50,11 +51,9 @@ export default function Guruhlar() {
   const getTrainingS=()=>{
   getTraining().then(res=>{
     console.log(res.data)
-    if(res.data.groups){
-      setGrlar(res.data.groups)
-    
-    }
-    setSubjects(res.data.subjects)
+
+      setGrlar(res.data.group)
+        setSubjects(res.data.subjects)
     setTeacher(res.data.teachers)
 
   }).catch(err=>{console.log(err)})
@@ -67,7 +66,7 @@ const chengeDate=(date, dateString)=>{
   }
   const chengeTime=(date, dateString)=>{
     setTimef(date)
-    setTime(date)
+    setTime(dateString)
    
   }
     
@@ -75,10 +74,11 @@ const handleCancel=()=>{
   setteachers([])
 setEdit(null)
 setDate('')
+setGuruh(null)
 setTime('')
 setDatef('')
 setTimef('')
-setImage({})
+setImage('')
 onReset()
   
   var g=document.querySelectorAll('#percent')
@@ -148,94 +148,128 @@ const echoSubjects=(a)=>{
 
 
 const onFinish=(value)=>{
+if(edit===null){
+
+  var percent=[]
+  var g=document.querySelectorAll('#percent')
+  
+  for(let i=0; i<g.length; i++){
+  percent[i]=g[i].value
+  
+  }
+  console.log(value)
+  
+  let formData = new FormData();
+  
+  formData.append(
+    "name",
+     value.name ?? ""
+  );
   
   
-var percent=[]
-var g=document.querySelectorAll('#percent')
+  formData.append(
+    "duration",
+   value.duration ?? null
+  );
+  formData.append(
+    "image",
+   image ?? null
+  );
+  formData.append(
+    "start_date",
+    date ?? ""
+  );
+  formData.append(
+    "percent",
+    percent ?? null
+  );
+  
+  formData.append(
+    "description",
+    value.description ?? '',
+  );
+  
+  formData.append(
+    "money",
+    value.money ?? ''
+  );
+  
+  formData.append(
+    "training_center",
+   idT
+  );
+  
+  
+    
+    createGroup(formData).then(res=>{
+      var config={
+        
+        
+        teacher:value.teacher ?? [],
+        category:value.category ?? [],
+        subject:value.subject ?? [],
+        
+        days:value.days ?? null,
+        time:time ?? null,
+    }
+  
+    
+  
+      editGroup(config, res.data.id).then(res1=>{
+        getTrainingS()
+  
+      }).catch(err1=>{console.log(err1)})
+      }).catch(err=>{console.log(err)})
+}  
+  else{
 
-for(let i=0; i<g.length; i++){
-percent[i]=g[i].value
-
-}
-console.log(value)
-
-let formData = new FormData();
-var config={
-  name:value.name ?? "",
-  duration:value.duration ?? null,
-  teacher:value.teacher ?? [],
-  category:value.category ?? [],
-  subject:value.subject ?? [],
-  image:image ?? null,
-  days:value.days ?? null,
-  time:time ?? null,
-  start_date:date ?? "",
-  percent:percent ?? null,
-  description:value.description ?? '',
-  money:value.money ?? '',
-  training_center:idT,
-}
-
-formData.append(
-  "name",
-   value.name ?? ""
-);
-
-
-formData.append(
-  "duration",
- value.duration ?? null
-);
-formData.append(
-  "image",
- image ?? null
-);
-formData.append(
-  "start_date",
-  date ?? ""
-);
-formData.append(
-  "percent",
-  percent ?? null
-);
-
-formData.append(
-  "description",
-  value.description ?? '',
-);
-
-formData.append(
-  "money",
-  value.money ?? ''
-);
-
-formData.append(
-  "training_center",
- idT
-);
-
+    if(image===""){
+      var editConfig={
+        teacher:value.teacher ?? [],
+        category:value.category ?? [],
+        subject:value.subject ?? [],
+        name:value.name?? '',
+        duration:value.duration?? '',
+        description:value.description?? '',
+        money:value.money?? '',
+        days:value.days ?? null,
+        percent:percent ?? null,
+        time:time,  
+        start_date:date,
+      // image:guruh.image,
+   
+    }
+    console.log(editConfig)
+      editGroup(editConfig, edit).then(res=>{console.log(res);getTrainingS()}).catch(err=>{console.log(err)})
+    }else{
+      let formData = new FormData();
+  
+  formData.append(
+    "image",
+     image ?? ""
+  );
+  var editConfig={
+    teacher:value.teacher ?? [],
+    category:value.category ?? [],
+    subject:value.subject ?? [],
+    name:value.name?? '',
+    duration:value.duration?? '',
+    description:value.description?? '',
+    money:value.money?? '',
+    days:value.days ?? null,
+    percent:percent ?? null,
+    time:time,  
+    start_date:date,
+  }
+  editGroup(formData, edit).then(res=>{
+    console.log(res)
+    editGroup(editConfig, edit).then(res=>{console.log(res); getTrainingS()}).catch(err=>{console.log(err)})
+  }).catch(err=>{console.log(err)})
 
   
-  createGroup(formData).then(res=>{
-    var config={
-      
-      
-      teacher:value.teacher ?? [],
-      category:value.category ?? [],
-      subject:value.subject ?? [],
-      
-      days:value.days ?? null,
-      time:time ?? null,
-      dayf:datef,
-      timef:timef
-}
-    console.log(config)
-
-    editGroup(config, res.data.id).then(res1=>{
-      getTrainingS()
-
-    }).catch(err1=>{console.log(err1)})
-    }).catch(err=>{console.log(err)})
+    }
+    
+  }
   handleCancel()
 }
 const handleExpandClick = (id) => {
@@ -251,6 +285,7 @@ const onReset = () => {
 };
 const openModal = () => {
   setShow(true)
+ 
 }
 const teacherlar=(value)=>{
  var te=[]
@@ -271,18 +306,16 @@ const teacherlar=(value)=>{
   }
 
 const editGuruh=(id)=>{
-  setTime(grlar[id].time)
-  setDate(grlar[id].date)
-  setTimef(grlar[id].timef)
-  setDatef(grlar[id].dayf)
-console.log(grlar[id].timef,
-  grlar[id].dayf)
+setEdit(grlar[id].id)
+setGuruh(grlar[id])
+setTime(grlar[id].time)  
+setDate(grlar[id].start_date)  
   setTimeout(function () {
 form.setFieldsValue(grlar[id])
 },0); 
+
 teacherlar(grlar[id].teacher)
 openModal()
-  
 }
 console.log(grlar);
   return (
@@ -310,8 +343,7 @@ console.log(grlar);
            />
            <CardContent>
              <Typography variant="body2" color="textSecondary" component="p">
-             <p> <b>O'qituvchilar: </b>{item.teacher.map((item1, key)=>{return(
-               <p>{echoTeacher(item1)} - {item.percent[key]}%</p>
+             <p> <b>O'qituvchilar: </b>{item.teacher.map((item1, key)=>{return(<p>{echoTeacher(item1)} - {item.percent[key]}%</p>
              )})}</p>
              <p> <b>Yo'nalishi: </b>{item.category.map(item1=>{return(echoCategory(item1)+' / ')})}</p>
              <p> <b>Fanlar/Dasturlar: </b>{item.subject.map(item1=>{return(echoSubjects(item1)+' / ')})}</p>
@@ -521,11 +553,11 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     <Col lg={6}>
     <Form.Item
         label="Ochilish sanasini kiriting"
-       name="start_dateD"
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+       name="day"
+        rules={[{ required:false, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
         <DatePicker  value={datef} onChange={chengeDate}
-        />
+        /><span>  {guruh!==null?guruh.start_date:''}</span>
       </Form.Item>
 
 
@@ -534,10 +566,14 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     <Form.Item
    
         label="Dars vaqtini kiriting"
-        name="timeD"
-        rules={[{ required: true, message: 'Bu joyni to\'ldirish majburiy!' }]}
+        name="timefв"
+       
+        rules={[{ required:false, message: 'Bu joyni to\'ldirish majburiy!' }]}
       >
-        <TimePicker.RangePicker value={timef}  onChange={chengeTime}/>
+        <TimePicker.RangePicker 
+        value={timef}
+        onChange={chengeTime}/>
+        <span> {guruh!==null?guruh.time[0]:''} - {guruh!==null?guruh.time[1]:''}</span>
       </Form.Item >
 
 
@@ -594,8 +630,8 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
         
         rules={[{ required: false, message: 'Bu joyni to\'ldirish majburiy!' }]}
 >
-        <Input type="file"   id="rasmlar" required={true} style={{marginBottom:'20px'}}/>
-        {ImageDemo(guruh.image)}
+        <Input type="file"   id="rasmlar" required={edit===null?true:false} style={{marginBottom:'20px'}}/>
+        {ImageDemo(guruh!==null??guruh.image)}
 </Form.Item>
     <Form.Item         
         label="Guruh uchun qo'shimcha ma'lumot kiriting"
@@ -608,7 +644,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     return(
       <>
         <p>{item5}ga beriladigan summa foiz miqdorda</p>
-        <Input required id="percent" defaultValue={()=>{return (guruh.percent[key]==undefined)? 0: guruh.percent[key]}} placeholder="100%" name={item5+key} min="0" max="100" type="number"/>
+        <Input required id="percent" defaultValue={0} placeholder="100%" name={item5+key} min="0" max="100" type="number"/>
         <br/>
       </>
     )
