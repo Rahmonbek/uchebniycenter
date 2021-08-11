@@ -50,12 +50,11 @@ export default function Guruhlar() {
   const [subjects, setSubjects]=useState([])
   const getTrainingS=()=>{
   getTraining().then(res=>{
-    console.log(res.data)
 
       setGrlar(res.data.group)
         setSubjects(res.data.subjects)
     setTeacher(res.data.teachers)
-
+  console.log(teacher)
   }).catch(err=>{console.log(err)})
 }  
 
@@ -108,6 +107,7 @@ for(let i=0; i<grlar.length; i++){
 fer.push(false)
 
 }
+
 getCategory().then(res=>{setCategory(res.data);}).catch(err=>{console.log(err)})
 setExpanded(fer)
 
@@ -116,11 +116,16 @@ setExpanded(fer)
 
 const echoTeacher=(a)=>{
   var te=""
+     console.log(teacher)
   for(let i=0; i<teacher.length; i++){
+    console.log(teacher[i])
     if(teacher[i].id===a){
       te=teacher[i].full_name
+      
     }
+ 
   }
+  
   return(te)
 }
 
@@ -148,15 +153,16 @@ const echoSubjects=(a)=>{
 
 
 const onFinish=(value)=>{
-if(edit===null){
-
-  var percent=[]
+ var percent=[]
   var g=document.querySelectorAll('#percent')
   
   for(let i=0; i<g.length; i++){
   percent[i]=g[i].value
   
   }
+ 
+if(edit===null){
+
   console.log(value)
   
   let formData = new FormData();
@@ -180,11 +186,6 @@ if(edit===null){
     date ?? ""
   );
   formData.append(
-    "percent",
-    percent ?? null
-  );
-  
-  formData.append(
     "description",
     value.description ?? '',
   );
@@ -204,7 +205,7 @@ if(edit===null){
     createGroup(formData).then(res=>{
       var config={
         
-        
+        percent:percent?? null,
         teacher:value.teacher ?? [],
         category:value.category ?? [],
         subject:value.subject ?? [],
@@ -308,6 +309,7 @@ const teacherlar=(value)=>{
 const editGuruh=(id)=>{
 setEdit(grlar[id].id)
 setGuruh(grlar[id])
+console.log(grlar[id])
 setTime(grlar[id].time)  
 setDate(grlar[id].start_date)  
   setTimeout(function () {
@@ -317,7 +319,7 @@ form.setFieldsValue(grlar[id])
 teacherlar(grlar[id].teacher)
 openModal()
 }
-console.log(grlar);
+
   return (
     <div>
                       <input type="checkbox" id="modal" className={styles.smbox}/>
@@ -331,7 +333,7 @@ console.log(grlar);
                               return(<Col lg={4} md={6} sm={12} style={{marginTop:'20px'}}>
                                    <Card className={style.root}>
            <CardHeader 
-             
+            //  style={{fontSize:'30px'}}
              title={item.name}
              
              
@@ -343,10 +345,10 @@ console.log(grlar);
            />
            <CardContent>
              <Typography variant="body2" color="textSecondary" component="p">
-             <p> <b>O'qituvchilar: </b>{item.teacher.map((item1, key)=>{return(<p>{echoTeacher(item1)} - {item.percent[key]}%</p>
-             )})}</p>
+          
              <p> <b>Yo'nalishi: </b>{item.category.map(item1=>{return(echoCategory(item1)+' / ')})}</p>
              <p> <b>Fanlar/Dasturlar: </b>{item.subject.map(item1=>{return(echoSubjects(item1)+' / ')})}</p>
+             {/* <p> <b>O'qituvchilar: </b>{item.teacher.map((item1, key)=>{ return(<p>{echoTeacher(item1)} - {item.percent[key]}%</p>)})}</p> */}
              <p> <b>Kurs puli (oylik): </b>{item.money} so'm</p>
              
               <p> <b>Boshlanish vaqti: </b>{item.start_date}</p>
@@ -644,7 +646,7 @@ label="Guruhning kurs pulini kiriting (oylik to'lov so'mda)"
     return(
       <>
         <p>{item5}ga beriladigan summa foiz miqdorda</p>
-        <Input required id="percent" defaultValue={0} placeholder="100%" name={item5+key} min="0" max="100" type="number"/>
+        <Input required id="percent" defaultValue={guruh===null?0:guruh.percent[key]} placeholder="100%" name={item5+key} min="0" max="100" type="number"/>
         <br/>
       </>
     )
