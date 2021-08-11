@@ -49,8 +49,11 @@ export default function Guruhlar() {
   const [subjects, setSubjects]=useState([])
   const getTrainingS=()=>{
   getTraining().then(res=>{
+    console.log(res.data)
+    if(res.data.groups){
+      setGrlar(res.data.groups)
     
-    setGrlar(res.data.groups)
+    }
     setSubjects(res.data.subjects)
     setTeacher(res.data.teachers)
 
@@ -281,6 +284,7 @@ teacherlar(grlar[id].teacher)
 openModal()
   
 }
+console.log(grlar);
   return (
     <div>
                       <input type="checkbox" id="modal" className={styles.smbox}/>
@@ -289,6 +293,7 @@ openModal()
                 <Button onClick={()=>{openModal()}} type="primary">Guruh qo'shish</Button>
                   <Row>
                       {
+                        
                          grlar!==[]? grlar.map((item, key)=>{
                               return(<Col lg={4} md={6} sm={12} style={{marginTop:'20px'}}>
                                    <Card className={style.root}>
