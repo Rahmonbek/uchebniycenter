@@ -4,21 +4,34 @@ import { Row, Col, Button } from "react-bootstrap"
 import { Modal } from "antd"
 import img1 from "../img/lgg.png"
 import img2 from "../img/lc.png"
-import { YMaps, Map, Placemark } from 'react-yandex-maps';
+import { YMaps, Map, ZoomControl, FullscreenControl, SearchControl, GeolocationControl, Placemark } from "react-yandex-maps";
+
 import EventAvailableOutlinedIcon from '@material-ui/icons/EventAvailableOutlined';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 export default class LearningCenter extends Component {
     state = {
+
         ft: false,
         isModalVisible: false,
-        coordinates: null
+        coordinates: null,
+        data:{},
+         mapState: {
+                center: [41.2825125, 69.1392826],
+                zoom: 9
+            },
     }
     handleCancel = () => {
         this.setState({
             isModalVisible: false
         })
     }
+    onMapClick = (e) => {
+        const coords = e.get("coords");
+        this.setState({ coords: coords })
+        console.log(coords)
+    };
+
     handleOk = () => {
         this.handleCancel()
     }
@@ -30,19 +43,21 @@ export default class LearningCenter extends Component {
             <div className={style.mat}>
 
                 <Modal title="Basic Modal" bodyStyle={{ padding: "0" }} visible={this.state.isModalVisible} onOk={this.handleOk} onCancel={this.handleCancel}>
-                    <YMaps>
-                        <div style={{ width: "100%", height: "360px" }}>
-
-                            <Map defaultState={{ center: [41.311211, 69.279410], zoom: 13 }} style={{ width: "100%", height: "360px" }}>
-
-                                <Placemark
-                                    geometry={[41.311211, 69.279410]}
-                                    modules={['geoObject.addon.balloon', 'geoObject.addon.hint']}
-                                />
-                            </Map>
-
-                        </div>
-                    </YMaps>
+                     <YMaps query={{ apikey: "" }}>
+                    <Map
+                        modules={["Placemark", "geocode", "geoObject.addon.balloon"]}
+                        onClick={this.onMapClick}
+                        state={this.state.mapState}
+                        width='100%'
+                        height='500px'
+                    >
+                        {this.state.coords!==[] ? <Placemark geometry={this.state.coords} /> : null}
+                        <ZoomControl />
+                        <FullscreenControl />
+                        <SearchControl data={this.state.data!=={}?this.state.data:{}}/>
+                        <GeolocationControl />
+                    </Map>
+                </YMaps>
                 </Modal>
                 <div className={this.state.ft ? style.javon1 : style.javon}>
                     <div className={this.state.ft ? style.adPanel1 : style.adPanel}>
