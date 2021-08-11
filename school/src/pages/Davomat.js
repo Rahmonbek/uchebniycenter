@@ -19,8 +19,11 @@ export default function Davomat() {
     const [visible,setVisible]=useState(false)
     const [date, setDate]=useState('')
   const [datef, setDatef]=useState('')
+const [id,setId]=useState(0)
+const idGenerate=()=>{
+   return (setId(id+1))
 
-
+}
     const  showModal = () => {
        setVisible(true) 
     };
@@ -35,7 +38,6 @@ export default function Davomat() {
     const sanaGenerate=(cell, row, rowIndex, formatExtraData)=>{
       return(
         <div>
-          
         <IconButton onClick={()=>getDate(cell)} rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><MdDateRange/></IconButton>
         <IconButton onClick={()=> getColumn()} rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><AiOutlinePlus/></IconButton>
         </div>
@@ -57,13 +59,40 @@ export default function Davomat() {
             footer: ''
           },
       {
-      dataField: 'inStock',
+      dataField:'enrf',
       text: 'Sana',
       headerFormatter:sanaGenerate,
-      formatter: (cellContent, rowIndex) => (
+      formatter: (cellContent, row) => (
         <div className="checkbox disabled">
           <label>
-            <input type="checkbox"  onClick={()=>console.log(rowIndex)}/*checked={ row.inStock }*//>
+            <input type="checkbox"  onClick={()=>console.log(row)}/*checked={ row.inStock }*//>
+          </label>
+        </div>
+      ),
+      classes: 'id-custom-cell',
+      footer: "Jo'natish",
+      formatExtraData: idGenerate,
+      footerStyle:{
+        width:'200px',
+        backgroundColor:'#E4EBF5',
+        margin:'20px',
+        borderRadius: '50px',
+        background: '#E4EBF5',
+         boxShadow:  '5px 5px 10px #c2c8d0,-5px -5px 10px #ffffff',
+         border:'none'
+      }
+    }])
+    var column2=column
+    const getColumn=()=>{
+      var newColumn=[{
+      dataField:'enrf',
+      text: 'Sana',
+      headerFormatter:sanaGenerate,
+      formatExtraData: idGenerate,
+      formatter: (cellContent, row) => (
+        <div className="checkbox disabled">
+          <label>
+            <input type="checkbox"  onClick={()=>console.log(row)}/*checked={ row.inStock }*//>
           </label>
         </div>
       ),
@@ -78,30 +107,6 @@ export default function Davomat() {
          boxShadow:  '5px 5px 10px #c2c8d0,-5px -5px 10px #ffffff',
          border:'none'
       }
-    }])
-    var column2=column
-    const getColumn=()=>{
-      var newColumn=[{
-        dataField: 'inStock',
-        text: 'Sana',
-        headerFormatter:sanaGenerate,
-        formatter: (cellContent, row) => (
-          <div className="checkbox disabled">
-            <label>
-              <input type="checkbox"  onClick={()=>console.log(row)}/*checked={ row.inStock }*//>
-            </label>
-          </div>
-        ),
-        footer: "Jo'natish",
-        footerStyle:{
-          width:'200px',
-          backgroundColor:'#E4EBF5',
-          margin:'20px',
-          borderRadius: '50px',
-          background: '#E4EBF5',
-           boxShadow:  '5px 5px 10px #c2c8d0,-5px -5px 10px #ffffff',
-           border:'none'
-        }
       },]
       var column3=column2.concat(newColumn)     
       setColumn(column3)     
@@ -153,7 +158,8 @@ export default function Davomat() {
       useEffect(()=>{
        getGroupS()
        getStudentS()
-      },[count])
+       idGenerate()
+      },[column])
     return (
         
         <div>
