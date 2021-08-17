@@ -64,6 +64,15 @@ export const editStudent=(data, id)=>{
 
     return(httpsRequest(config))
 }
+export const editDavomat=(data, id)=>{
+    var config={
+        url:`${url}/api/attendance/${id}/`,
+        method:'put',
+        data:data
+    }
+
+    return(httpsRequest(config))
+}
 export const deleteGroupC=(id)=>{
    
     var config={
@@ -107,6 +116,15 @@ export const createStudent=(data)=>{
 export const createTeacher=(data)=>{
     var config={
         url:`${url}/api/teacher/`,
+        method:'post',
+        data:data
+    }
+
+    return(httpsRequest(config))
+}
+export const createDavomat=(data)=>{
+    var config={
+        url:`${url}/api/attendance/`,
         method:'post',
         data:data
     }

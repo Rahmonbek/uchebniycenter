@@ -1,247 +1,190 @@
-import React from 'react'
-import {useEffect} from 'react'
-import {useState} from 'react'
-import MaterialTable from 'material-table'
+
+import React,{useState,useEffect} from 'react'
+import {Container,Row,Col} from 'react-bootstrap'
+import styles from '../css/davomat.module.css'
+import {Modal} from 'antd'
 import { idT } from '../host/Host';
-import { forwardRef } from 'react';
-import AddBox from '@material-ui/icons/AddBox';
-import ArrowDownward from '@material-ui/icons/ArrowDownward';
-import Check from '@material-ui/icons/Check';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import ChevronRight from '@material-ui/icons/ChevronRight';
-import Clear from '@material-ui/icons/Clear';
-import DeleteOutline from '@material-ui/icons/DeleteOutline';
-import Edit from '@material-ui/icons/Edit';
-import FilterList from '@material-ui/icons/FilterList';
-import FirstPage from '@material-ui/icons/FirstPage';
-import LastPage from '@material-ui/icons/LastPage';
-import Remove from '@material-ui/icons/Remove';
-import SaveAlt from '@material-ui/icons/SaveAlt';
-import Search from '@material-ui/icons/Search';
-import ViewColumn from '@material-ui/icons/ViewColumn';
-import {getTraining} from '../host/Config'
-const tableIcons = {
-    Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
-    Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
-    Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
-    DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
-    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
-    Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
-    FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
-    LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
-    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-    PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
-    ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
-    SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
-    ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
-  }
 
-
+import { getGroups,getStudents,createDavomat,editDavomat} from '../host/Config';
+import { Card, Button,Fab ,IconButton,Divider,Checkbox ,Chip} from 'ui-neumorphism'
+import {AiOutlinePlus} from 'react-icons/ai'
+import {MdDateRange} from 'react-icons/md'
+import { getTraining } from '../host/Config';
+import BootstrapTable from 'react-bootstrap-table-next';
+import "react-datepicker/dist/react-datepicker.css";
+import { Form, Input } from 'antd';
+import {DatePicker} from 'antd'
 export default function OqituvchiTable() {
-    const [edit,setEdit]=useState(null)
-    const [visible,setVisible]=useState(false)
-    const [teachers,setTeachers]=useState([])
-    const [iserror, setIserror] = useState(false)
-    const [errorMessages, setErrorMessages] = useState([])
-    const [image, setImage]=useState('')
-    const getTrainingS=()=>{
-        getTraining().then(res=>{
-          console.log(res.data)
-          setTeachers(res.data.teachers)
-        }).catch(err=>{console.log(err)})
-      }
-      useEffect(()=>{
-        getTrainingS()
-      }, [])
-      var columns = [
-        {title: "F.I.O", field: "full_name"},
-        {title: "Rasm", render: rowData => <img src={rowData.photo} style={{width:'200px'}}/>  },
-        {title: "Telefon raqam", field: "phone_number"},
-        {title: "Ma'lumot", field: "text"},
-        ]
-      const handleRowUpdate = (newData, oldData, resolve) => {
-        
-      }
-      const handleRowDelete = (oldData, resolve) => {
-        
-      }
-    return (
-        <div  style={{padding:'5%'}}>
-            <div class="fresh-table full-color-orange">
+  const [visible,setVisible]=useState(false)
+  const [edit,setEdit] =useState(null)
+const [date,setDate]=useState('')
+  const  showModal = () => {
+    setVisible(true) 
+ };
+ const getDate=(val)=>{
+  setDate(val)
+  hideModal()
+}
+ const hideModal = () => {
+   setVisible(false) 
+ }
+  const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+  };
+  const tailLayout = {
+    wrapperCol: { offset: 8, span: 16 },
+  };
+  const [form] = Form.useForm();
+  const onFill = () => {
+ 
+  };
+  const [groups,setGroups]=useState([])
+  const [students,setStudents]=useState([])
+  const [studentArray,setStudenarray]=useState([])
+  const [numberGroup,getNumberGroup]=useState([1])
+  const [number, setNumber]=useState(1)
+  const getNumber=(id)=>{
+    setNumber(id)
+    setNumber(id)
+    console.log(number)
+  }
+  const setNumberGroup=()=>{
+    console.log(numberGroup)
+    var n=numberGroup
+    n.push(Math.floor(Math.random()*10-1))
+    console.log(numberGroup)
 
-  <div class="toolbar">
-    <button id="alertBtn" class="btn btn-default">Alert</button>
-  </div>
+  }
+  const getStudentS=()=>{
+    getStudents().then(res=>{
+      setStudents(res.data)
+    }).catch(err=>{console.log(err)})
+  }
+  const get=(val)=>{
+    studentArray.push(val.id)
+   setStudenarray(studentArray)
+  }
+  const getStudent=()=>{
+    var newObj={
+      day:'2021-08-19T23:08:00+05:00',
+      training_center:idT,
+      group:1,
+      students:studentArray
+    }
+        if (edit === null) {
+          createDavomat(newObj).then(res => { console.log(res) }).catch(err => { console.log(err) })
+        }
+        else {
+          editDavomat(newObj, edit).then(res => { console.log(res) }).catch(err => { console.log(err)})
+        }
+        hideModal()
 
-  <table id="fresh-table" class="table">
-    <thead>
-      <th data-field="id">ID</th>
-      <th data-field="name">Name</th>
-      <th data-field="salary">Salary</th>
-      <th data-field="country">Country</th>
-      <th data-field="city">City</th>
-      <th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Dakota Rice</td>
-        <td>$36,738</td>
-        <td>Niger</td>
-        <td>Oud-Turnhout</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Minerva Hooper</td>
-        <td>$23,789</td>
-        <td>Curaçao</td>
-        <td>Sinaai-Waas</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Sage Rodriguez</td>
-        <td>$56,142</td>
-        <td>Netherlands</td>
-        <td>Baileux</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>Philip Chaney</td>
-        <td>$38,735</td>
-        <td>Korea, South</td>
-        <td>Overland Park</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td>Doris Greene</td>
-        <td>$63,542</td>
-        <td>Malawi</td>
-        <td>Feldkirchen in Kärnten</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>6</td>
-        <td>Mason Porter</td>
-        <td>$78,615</td>
-        <td>Chile</td>
-        <td>Gloucester</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>7</td>
-        <td>Alden Chen</td>
-        <td>$63,929</td>
-        <td>Finland</td>
-        <td>Gary</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>8</td>
-        <td>Colton Hodges</td>
-        <td>$93,961</td>
-        <td>Nicaragua</td>
-        <td>Delft</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>9</td>
-        <td>Illana Nelson</td>
-        <td>$56,142</td>
-        <td>Heard Island</td>
-        <td>Montone</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>10</td>
-        <td>Nicole Lane</td>
-        <td>$93,148</td>
-        <td>Cayman Islands</td>
-        <td>Cottbus</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>11</td>
-        <td>Chaim Saunders</td>
-        <td>$5,502</td>
-        <td>Romania</td>
-        <td>New Quay</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>12</td>
-        <td>Josiah Simon</td>
-        <td>$50,265</td>
-        <td>Christmas Island</td>
-        <td>Sint-Jans-Molenbeek</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>13</td>
-        <td>Ila Poole</td>
-        <td>$67,413</td>
-        <td>Montenegro</td>
-        <td>Pontevedra</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>14</td>
-        <td>Shana Mejia</td>
-        <td>$58,566</td>
-        <td>Afghanistan</td>
-        <td>Ballarat</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>15</td>
-        <td>Lana Ryan</td>
-        <td>$64,151</td>
-        <td>Martinique</td>
-        <td>Portobuffolè</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>16</td>
-        <td>Daquan Bender</td>
-        <td>$91,906</td>
-        <td>Sao Tome and Principe</td>
-        <td>Walhain-Saint-Paul</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>17</td>
-        <td>Connor Wagner</td>
-        <td>$86,537</td>
-        <td>Germany</td>
-        <td>Solihull</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>18</td>
-        <td>Boris Horton</td>
-        <td>$35,094</td>
-        <td>Laos</td>
-        <td>Saint-Mard</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>19</td>
-        <td>Winifred Ryan</td>
-        <td>$64,436</td>
-        <td>Ireland</td>
-        <td>Ronciglione</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-        </div>
+  }
+  const [studentBygroup,setStudentBygroup]=useState([])
+  const getS=()=>{
+    var studentBygroup = students.filter(function (el)
+    {
+      return el.group==number
+    }
     )
+    setStudentBygroup(studentBygroup)
+    console.log(studentBygroup,'rehbvev')
+    
+  }
+  const getGroupS=()=>{
+      getGroups().then(res=>{
+        setGroups(res.data)
+        
+      }).catch(err=>{console.log(err)})
+    }
+    useEffect(()=>{
+      getGroupS()
+      getStudentS()
+      getS()
+     },[number,students])
+  return (
+    <div>
+      <Container fluid style={{padding:'5%'}}> 
+                <Row>
+                    <Col lg={12} md={12} sm={12}>
+                        <Row>
+                            {
+                              groups && Array.isArray(groups)?groups.map((item,key)=>{
+                                  return(
+                                      <Col lg={1} style={{marginLeft:'20px'}}>
+                                         <Button active={number==item.id?true:false} onClick={()=>getNumber(`${item.id}`)}> {item.name}</Button>
+                                      </Col>
+                                  )
+                              }):''
+                            }   
+                        </Row>
+                    </Col>
+                </Row>
+                <Row>
+                <Col lg={12}  style={{marginTop:'100px'}}>
+                    <Card >
+                    <Row>
+                      <Col lg={3} style={{paddingTop:'60px',paddingLeft:'16px'}}>
+                        <Card inset style={{padding:'13px'}}>
+                        {
+                          studentBygroup && Array.isArray(studentBygroup)?studentBygroup.map(item=>{
+                            return(
+                             
+                              
+                                <div>
+                                    <p>{item.full_name}</p>
+                                  <Divider dense  />
+                              </div>
+                             
+                            )
+                          }):''
+                        }
+                        </Card>
+                      </Col>
+                      <Divider dense  style={{width:'10px',height:'100%'}}/>
+                      {
+                        numberGroup.map(item=>{
+                          return(
+                            <Col lg={2}  style={{paddingTop:'15px'}}>
+        <IconButton onClick={()=>showModal()}  rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><MdDateRange/></IconButton>
+        <IconButton onClick={()=>setNumberGroup()} rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><AiOutlinePlus/></IconButton>
+        {
+          studentBygroup && Array.isArray(studentBygroup)?studentBygroup.map((item,key)=>{
+            return(
+              <div style={{marginBottom:'15px',marginTop:'10px'}}>
+                <Checkbox onClick={()=>get(item)}  color='var(--success)' style={{display:'block'}}/>
+              </div>
+              // <input onClick={()=>get(item)} type="checkbox" style={{display:'block',margin:'20px',}}/>
+            )
+          }):''
+        }
+                                         <Button onClick={()=>getStudent()} style={{margin:'15px'}}>Saqlash</Button>
+        
+                      </Col>
+                          )
+                        })
+                      }
+                    </Row>
+                    </Card>
+                </Col>
+                </Row>
+            </Container>
+            <Modal
+          title="Sanani tanlang"
+          visible={visible}
+          width={400}
+          footer={false}
+        >
+          <Form {...layout} form={form} name="control-hooks" onFinish={getDate}>
+            <Form.Item name="date" label="Sanani kiriting" rules={[{ required: true }]}>
+              <Input placeholder="24.08.2021"/>
+            </Form.Item>  
+            <Button type="primary" htmlType="submit">
+          Saqlash
+        </Button>
+    </Form>
+        </Modal>
+    </div>
+  )
 }

@@ -35,18 +35,19 @@ const idGenerate=()=>{
       console.log(cell)
       showModal()
     }
-    const sanaGenerate=(cell, row, rowIndex, formatExtraData)=>{
-      return(
-        <div>
-        <IconButton onClick={()=>getDate(cell)} rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><MdDateRange/></IconButton>
-        <IconButton onClick={()=> getColumn()} rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><AiOutlinePlus/></IconButton>
-        </div>
-      )
-    }
     const chengeDate=(date, dateString)=>{
       setDate(dateString)
       setDatef(date)
       }
+    const sanaGenerate=(cell, row, rowIndex, formatExtraData)=>{
+      return(
+        <div>
+          <DatePicker  value={datef} onChange={chengeDate}/>
+        {/* <IconButton onClick={()=>getDate(cell)} rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><MdDateRange/></IconButton> */}
+        <IconButton onClick={()=> getDate()} rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><AiOutlinePlus/></IconButton>
+        </div>
+      )
+    }
     const [column,setColumn]=useState([
       {
             dataField: 'id',
@@ -62,26 +63,19 @@ const idGenerate=()=>{
       dataField:'enrf',
       text: 'Sana',
       headerFormatter:sanaGenerate,
-      formatter: (cellContent, row) => (
+      formatter: (colIndex, row) => (
         <div className="checkbox disabled">
           <label>
-            <input type="checkbox"  onClick={()=>console.log(row)}/*checked={ row.inStock }*//>
+            <input type="checkbox"  onClick={()=>console.log(row,colIndex)}/*checked={ row.inStock }*//>
           </label>
         </div>
       ),
       classes: 'id-custom-cell',
-      footer: "Jo'natish",
       formatExtraData: idGenerate,
-      footerStyle:{
-        width:'200px',
-        backgroundColor:'#E4EBF5',
-        margin:'20px',
-        borderRadius: '50px',
-        background: '#E4EBF5',
-         boxShadow:  '5px 5px 10px #c2c8d0,-5px -5px 10px #ffffff',
-         border:'none'
-      }
-    }])
+    },
+
+    
+  ])
     var column2=column
     const getColumn=()=>{
       var newColumn=[{
@@ -199,7 +193,12 @@ const idGenerate=()=>{
           okText= "Saqlash"
           cancelText= "O'chirish"
         >
-        <DatePicker  value={datef} onChange={chengeDate}/>
+           <BootstrapTable
+                          style={{backgroundColor:'white'}}
+                          keyField="id"
+                          data={students}
+                          columns={column}
+                          />
         </Modal>
         </div>
         
