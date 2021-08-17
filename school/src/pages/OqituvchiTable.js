@@ -5,7 +5,7 @@ import styles from '../css/davomat.module.css'
 import {Modal} from 'antd'
 import { idT } from '../host/Host';
 
-import { getGroups,getStudents,createDavomat,editDavomat} from '../host/Config';
+import { getGroups,getStudents,createDavomat,editDavomat,getAttendance} from '../host/Config';
 import { Card, Button,Fab ,IconButton,Divider,Checkbox ,Chip} from 'ui-neumorphism'
 import {AiOutlinePlus} from 'react-icons/ai'
 import {MdDateRange} from 'react-icons/md'
@@ -43,7 +43,7 @@ const [date,setDate]=useState('')
   const [students,setStudents]=useState([])
   const [studentArray,setStudenarray]=useState([])
   const [numberGroup,getNumberGroup]=useState([1])
-  const [number, setNumber]=useState(1)
+  const [number, setNumber]=useState(2)
   const getNumber=(id)=>{
     setNumber(id)
     setNumber(id)
@@ -54,11 +54,18 @@ const [date,setDate]=useState('')
     var n=numberGroup
     n.push(Math.floor(Math.random()*10-1))
     console.log(numberGroup)
-
+    setEdit(1)
   }
   const getStudentS=()=>{
     getStudents().then(res=>{
       setStudents(res.data)
+    }).catch(err=>{console.log(err)})
+  }
+  const [attendance,setAttendance]=useState([])
+  const getAttendances=()=>{
+    getAttendance().then(res=>{
+      setAttendance(res.data)
+      console.log(attendance)
     }).catch(err=>{console.log(err)})
   }
   const get=(val)=>{
@@ -67,9 +74,9 @@ const [date,setDate]=useState('')
   }
   const getStudent=()=>{
     var newObj={
-      day:'2021-08-19T23:08:00+05:00',
+      day:'2021-08-22T23:08:00+05:00',
       training_center:idT,
-      group:1,
+      group:2,
       students:studentArray
     }
         if (edit === null) {
@@ -88,9 +95,7 @@ const [date,setDate]=useState('')
       return el.group==number
     }
     )
-    setStudentBygroup(studentBygroup)
-    console.log(studentBygroup,'rehbvev')
-    
+    setStudentBygroup(studentBygroup)   
   }
   const getGroupS=()=>{
       getGroups().then(res=>{
@@ -102,7 +107,8 @@ const [date,setDate]=useState('')
       getGroupS()
       getStudentS()
       getS()
-     },[number,students])
+      getAttendances()
+     },[number,students,numberGroup])
   return (
     <div>
       <Container fluid style={{padding:'5%'}}> 
@@ -146,22 +152,46 @@ const [date,setDate]=useState('')
                       {
                         numberGroup.map(item=>{
                           return(
-                            <Col lg={2}  style={{paddingTop:'15px'}}>
-        <IconButton onClick={()=>showModal()}  rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><MdDateRange/></IconButton>
-        <IconButton onClick={()=>setNumberGroup()} rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><AiOutlinePlus/></IconButton>
-        {
-          studentBygroup && Array.isArray(studentBygroup)?studentBygroup.map((item,key)=>{
-            return(
-              <div style={{marginBottom:'15px',marginTop:'10px'}}>
-                <Checkbox onClick={()=>get(item)}  color='var(--success)' style={{display:'block'}}/>
-              </div>
-              // <input onClick={()=>get(item)} type="checkbox" style={{display:'block',margin:'20px',}}/>
-            )
-          }):''
-        }
-                                         <Button onClick={()=>getStudent()} style={{margin:'15px'}}>Saqlash</Button>
-        
-                      </Col>
+                            
+                            
+                             
+                               
+                                  <Col lg={2}  style={{paddingTop:'15px'}}>
+              <IconButton onClick={()=>showModal()}  rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><MdDateRange/></IconButton>
+              <IconButton onClick={()=>setNumberGroup()} rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><AiOutlinePlus/></IconButton>
+              {
+                studentBygroup && Array.isArray(studentBygroup)?studentBygroup.map((item,key)=>{
+                  return(
+                    <div style={{marginBottom:'15px',marginTop:'10px'}}>
+                      
+                       {
+                       
+                             attendance.map(item4=>{
+                               return(
+                                item4.students.map(item3=>{
+                                  return(
+                                    
+                                      <Checkbox checked={item.id==item3} onClick={()=>get(item)}  color='var(--success)' style={{display:'block'}}/>
+                                    
+                                  )
+                                  })
+                               )
+                             })
+                }  
+         
+                      
+                    </div>
+                  )
+                }):''
+              }
+                                               <Button onClick={()=>getStudent()} style={{margin:'15px'}}>Saqlash</Button>
+              
+                            </Col>
+                                
+                              
+                            
+                          
+                            
                           )
                         })
                       }
