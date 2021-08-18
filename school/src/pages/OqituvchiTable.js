@@ -6,9 +6,10 @@ import {Modal} from 'antd'
 import { idT } from '../host/Host';
 
 import { getGroups,getStudents,createDavomat,editDavomat,getAttendance} from '../host/Config';
-import { Card, Button,Fab ,IconButton,Divider,Checkbox ,Chip} from 'ui-neumorphism'
+import { Card, Button,Fab ,IconButton,Divider,Checkbox} from 'ui-neumorphism'
 import {AiOutlinePlus} from 'react-icons/ai'
 import {MdDateRange} from 'react-icons/md'
+import {BiRefresh} from 'react-icons/bi'
 import { getTraining } from '../host/Config';
 import BootstrapTable from 'react-bootstrap-table-next';
 import "react-datepicker/dist/react-datepicker.css";
@@ -71,12 +72,13 @@ const [date,setDate]=useState('')
   const get=(val)=>{
     studentArray.push(val.id)
    setStudenarray(studentArray)
+   console.log()
   }
   const getStudent=()=>{
     var newObj={
-      day:'2021-08-22T23:08:00+05:00',
+      day:'2021-08-24',
       training_center:idT,
-      group:2,
+      group:number,
       students:studentArray
     }
         if (edit === null) {
@@ -150,49 +152,60 @@ const [date,setDate]=useState('')
                       </Col>
                       <Divider dense  style={{width:'10px',height:'100%'}}/>
                       {
-                        numberGroup.map(item=>{
-                          return(
-                           attendance.map((val,key5)=>{
-                             return(
-                               (number==val.group)?(
-<Col lg={2}  style={{paddingTop:'15px'}}>
-              <IconButton onClick={()=>showModal()}  rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><MdDateRange/></IconButton>
-              <IconButton onClick={()=>setNumberGroup()} rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><AiOutlinePlus/></IconButton>
-              {
-                studentBygroup && Array.isArray(studentBygroup)?studentBygroup.map((item,key)=>{
-                  return(
-                    <div style={{marginBottom:'15px',marginTop:'10px'}}>
-                      
-                       {
+                        
+                        
+                                attendance.map((val,key5)=>{
+                              return(
+                                (number==val.group)?(
+ <Col lg={2}  style={{paddingTop:'15px'}}>
+              <Button size='small'  color='#4CAF50'>{val.day}</Button>
+               {
+                 studentBygroup && Array.isArray(studentBygroup)?studentBygroup.map((item,key)=>{
+                   return(
+                     <div style={{marginBottom:'15px',marginTop:'10px'}}>
                        
-                             attendance.map(item4=>{
-                               return(
-                                item4.students.map(item3=>{
-                                  return(
-                                    
-                                      (item.group==item4.group)?<Checkbox checked={item.id==item3} onClick={()=>get(item)}  color='var(--success)' style={{display:'block'}}/>:''
-                                    
-                                  )
-                                  })
-                               )
-                             })
-                }  
-         
+                        {
+                        
+                              
+                                 val.students.map(item3=>{
+                                   return(
+                                     
+                                       (item.group==val.group)?<Checkbox checked={item.id==item3} onClick={()=>get(item)}  color='var(--success)' style={{display:'block'}}/>:''
+                                     
+                                   )
+                                   })
+                               
+                 }  
+          
+                       
+                     </div>
+                   )
+                 }):''
+               }
+                                                <IconButton rounded text={false} bgColor={'#E4EBF5'}  onClick={()=>getStudent()} style={{fontSize:'15px',marginTop:'10px',marginLeft:'5px',marginBottom:'5px'}}><BiRefresh style={{color:'#4CAF50'}}/></IconButton>
+               
+                             </Col>
+                                ):''
+                              )
+                            })}
+               <Col lg={2}  style={{paddingTop:'15px'}}>
+               <IconButton onClick={()=>showModal()}  rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><MdDateRange/></IconButton>
+               {
+                 studentBygroup && Array.isArray(studentBygroup)?studentBygroup.map((item,key)=>{
+                   return(
+                     <div style={{marginBottom:'15px',marginTop:'10px'}}>
+                                                          
+                                       <Checkbox  onClick={()=>get(item)}  color='var(--success)' style={{display:'block'}}/>                   
+                     </div>
+                   )
+                 }):''
+               }
+                                                <Button size='small' onClick={()=>getStudent()} style={{margin:'15px'}}>Saqlash</Button>
+               
+                             </Col>
+                               
+                                
                       
-                    </div>
-                  )
-                }):''
-              }
-                                               <Button onClick={()=>getStudent()} style={{margin:'15px'}}>Saqlash</Button>
-              
-                            </Col>
-                               ):''
-                             )
-                           })
-                            
-                          )
-                        })
-                      }
                     </Row>
                     </Card>
                 </Col>
