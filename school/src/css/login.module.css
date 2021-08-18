@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500&family=Quicksand:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500&family=Quicksand:wght@300&display=swap");
 
-.bd{
-    height: 100vh;
-background-image: url(../img/bg-01.webp);
+.bd {
+  height: 100vh;
+  background-image: url(../img/bg-01.webp);
   display: flex;
   align-items: center;
   text-align: center;
@@ -12,46 +12,42 @@ background-image: url(../img/bg-01.webp);
   font-family: poppins;
   background-repeat: no-repeat;
   background-size: cover;
-  
-} 
+}
 
-.formLogin{
-    position: relative;
-    width: 450px;
-    height: 85vh;
-    border-radius: 10px;
-    padding: 40px;
-    box-sizing: border-box;
-    background: #fff;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-    /* box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white; */
+.formLogin {
+  position: relative;
+  width: 450px;
+  height: 85vh;
+  border-radius: 10px;
+  padding: 40px;
+  box-sizing: border-box;
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  /* box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white; */
 }
-.formLogin h1{
-    font-size: 35px;
-    font-family: 'Poppins',sans-serif;
-    margin-top: 30px;
-    color: #1A86D0;
-    letter-spacing: 1px;
-    line-height: 1.2;
-    text-align: center;
-    text-transform: uppercase;
-    
-
-    
+.formLogin h1 {
+  font-size: 35px;
+  font-family: "Poppins", sans-serif;
+  margin-top: 30px;
+  color: #1a86d0;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
 }
-.Logo{
-    height: 130px;
-    width: 130px;
-    background-image: url('../img/user.png');
-    background-position: center;
-    background-size: 100% 101%;
-    margin: auto;
-    border-radius: 50%;
-    box-sizing: cover;
-    box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
+.Logo {
+  height: 130px;
+  width: 130px;
+  background-image: url("../img/user.png");
+  background-position: center;
+  background-size: 100% 101%;
+  margin: auto;
+  border-radius: 50%;
+  box-sizing: cover;
+  box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
 }
-.inputForm{
-    background: #fff;
+.inputForm {
+  background: #fff;
   padding: 10px;
   padding-left: 20px;
   height: 50px;
@@ -59,33 +55,31 @@ background-image: url(../img/bg-01.webp);
   border-radius: 50px;
   box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #cbced1;
 }
-.btnInput{
-   
-        margin-top: 30px;
-        margin-left: 125px;
-        background: #1DA1F2;
-        min-width: 120px;
-        height: 50px;
-        outline: none;
-        border-radius: 25px;
-        cursor: pointer;
-        font-family: Poppins-Medium;
-        font-size: 20px;
-        font-family: 'Poppins',sans-serif;
-        line-height: 1.2;
-        box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
-        transition: 0.5s;
-      
+.btnInput {
+  /* margin-top: 30px; */
+  margin-left: 125px;
+  background: #1da1f2;
+  min-width: 120px;
+  height: 50px;
+  outline: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-family: Poppins-Medium;
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+  line-height: 1.2;
+  box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+  transition: 0.5s;
 }
-.btnInput:hover{
-    box-shadow:none
+.btnInput:hover {
+  box-shadow: none;
 }
-.labelForm{
-    display: block;
-    width: 100%;
-    padding: 0;
-    border: none;
-    outline: none;
-    box-sizing: border-box;
-    font-weight: 700;
+.labelForm {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  font-weight: 700;
 }
