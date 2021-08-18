@@ -13,6 +13,7 @@ import { createLogin, createRegister, verify } from "../host/Config";
 export default class LearningCenter extends Component {
   state = {
     ft: false,
+    idT:null,
     isModalVisible: false,
     coordinates: null,
     data: {},
@@ -71,13 +72,16 @@ export default class LearningCenter extends Component {
       kod: document.querySelector("#verify").value,
     };
     verify(data)
-      .then((res) => console.log(res))
+      .then((res) => {console.log(res); window.localStorage.setItem("token", res.data.token); this.setState({idT:res.data.id})})
       .catch((err) => console.log(err));
   };
   render() {
+    const { myContext: { globalState, globalDispatch } } = this.props;
     return (
       <>
-        {this.state.email !== "" ? (
+      {
+        this.state.idT!==null?
+        this.state.email !== "" ? (
           <div className="container">
             <div className="position-absolute top-50 start-50 translate-middle text-center" style={{ width: "400px", padding: "25px", backgroundColor: "white", border: "1px solid #f1f4f6", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
               <h3 className="mb-5">Emailingizga jo`natilgan kodni kiriting!</h3>
@@ -218,7 +222,9 @@ export default class LearningCenter extends Component {
               </div>
             </div>
           </div>
-        )}{" "}
+        ):<Redirect to={`/cabinet`}/>
+      }
+        
       </>
     );
   }

@@ -27,7 +27,7 @@ function App() {
         <Route exact path="/registration/uz">
           <Registration />
         </Route>
-        <Route path="/cabinet/">
+        <Route path="/cabinet/:id">
           <Main />
         </Route>
         <Route path="/malumot">
