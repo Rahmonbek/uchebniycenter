@@ -126,7 +126,7 @@ state = {
           <h5 className={this.state.collapsed? styles.headingMenu1:styles.headingMenu2}>Admin</h5>
           <div className={this.state.collapsed? styles.hrMenu1:styles.hrMenu2}></div>
             <Menu.Item key="1" icon={<PieChartOutlined style={{fontSize:'18px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2} > 
-            <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/cabinet/"> Bosh bo'lim</Link>
+            <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/cabinet/:id"> Bosh bo'lim</Link>
             </Menu.Item>
             <Menu.Item key="2" icon={<DiJavascript1 style={{fontSize:'20px',color:'rgba(0,0,0,0.3)'}}/>} className={this.state.collapsed? styles.list1:styles.list2}>
             <Link style={{textDecoration:'none',color:'rgba(0,0,0,0.7)'}} to="/cabinet/kurslar">Kurslar</Link>
