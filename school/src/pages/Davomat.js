@@ -49,6 +49,10 @@ const [date,setDate]=useState('')
    setStudenarray(studentArray)
    console.log(val,e)
   }
+  const getN=(val)=>{
+   studentArray.push(val.id)
+   setStudenarray(studentArray)
+  }
   const [edit,setEdit]=useState(null)
   const getStudent=()=>{
     console.log(studentArray)
@@ -107,33 +111,32 @@ const [date,setDate]=useState('')
                 </Row>
                 <Row>
                 <Col lg={12}  style={{marginTop:'100px'}}>
-                    <Card >
+                    <Card>
+                      <div style={{overflowY:'scroll',display:'flex',flexDirection:'row',flexWrap:'nowrap'}}>
                     <Row>
-                      <Col lg={3} style={{paddingTop:'60px',paddingLeft:'16px'}}>
+                      <div style={{paddingTop:'60px',paddingLeft:'16px',width:'200px'}}>
                         <Card inset style={{padding:'13px'}}>
                         {
                           studentBygroup && Array.isArray(studentBygroup)?studentBygroup.map(item=>{
                             return(
-                             
                               
                                 <div>
                                     <p>{item.full_name}</p>
                                   <Divider dense  />
-                              </div>
-                             
+                                </div>
+                                
                             )
                           }):''
                         }
                         </Card>
-                      </Col>
-                      <Divider dense  style={{width:'10px',height:'100%'}}/>
+                      </div>
                       {
                         
                         
                                 attendance.map((val,key5)=>{
                               return(
                                 (number==val.group)?(
- <Col lg={2}  style={{paddingTop:'15px'}}>
+ <div   style={{paddingTop:'15px',width:'200px'}}>
               {/* <Button size='small'  color='#4CAF50'>{val.day}</Button> */}
               <NeuTextInput
               type="date"
@@ -171,11 +174,11 @@ const [date,setDate]=useState('')
                }
                                                 <IconButton rounded text={false} bgColor={'#E4EBF5'}  onClick={()=>getStudent()} style={{fontSize:'15px',marginTop:'10px',marginLeft:'5px',marginBottom:'5px'}}><BiRefresh style={{color:'#4CAF50'}}/></IconButton>
                
-                             </Col>
+                             </div>
                                 ):''
                               )
                             })}
-               <Col lg={2}  style={{paddingTop:'15px'}}>
+               <div  style={{paddingTop:'15px',width:'200px'}}>
                <NeuTextInput
               type="date"
     color="#E4EBF5"
@@ -192,18 +195,19 @@ const [date,setDate]=useState('')
                    return(
                      <div style={{marginBottom:'15px',marginTop:'10px'}}>
                                                           
-                                       <Checkbox  onClick={()=>get(item)}  color='var(--success)' style={{display:'block'}}/>                   
+                                       <Checkbox  onClick={()=>getN(item)}  color='var(--success)' style={{display:'block'}}/>                   
                      </div>
                    )
                  }):''
                }
                                                 <Button size='small' onClick={()=>getStudent()} style={{margin:'15px'}}>Saqlash</Button>
                
-                             </Col>
+                             </div>
                                
                                 
                       
                     </Row>
+                    </div>
                     </Card>
                 </Col>
                 </Row>
