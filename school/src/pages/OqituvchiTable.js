@@ -43,7 +43,7 @@ const [date,setDate]=useState('')
   const [students,setStudents]=useState([])
   const [studentArray,setStudenarray]=useState([])
   const [numberGroup,getNumberGroup]=useState([1])
-  const [number, setNumber]=useState(2)
+  const [number, setNumber]=useState(1)
   const getNumber=(id)=>{
     setNumber(id)
     setNumber(id)
@@ -152,11 +152,10 @@ const [date,setDate]=useState('')
                       {
                         numberGroup.map(item=>{
                           return(
-                            
-                            
-                             
-                               
-                                  <Col lg={2}  style={{paddingTop:'15px'}}>
+                           attendance.map((val,key5)=>{
+                             return(
+                               (number==val.group)?(
+<Col lg={2}  style={{paddingTop:'15px'}}>
               <IconButton onClick={()=>showModal()}  rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><MdDateRange/></IconButton>
               <IconButton onClick={()=>setNumberGroup()} rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><AiOutlinePlus/></IconButton>
               {
@@ -171,7 +170,7 @@ const [date,setDate]=useState('')
                                 item4.students.map(item3=>{
                                   return(
                                     
-                                      <Checkbox checked={item.id==item3} onClick={()=>get(item)}  color='var(--success)' style={{display:'block'}}/>
+                                      (item.group==item4.group)?<Checkbox checked={item.id==item3} onClick={()=>get(item)}  color='var(--success)' style={{display:'block'}}/>:''
                                     
                                   )
                                   })
@@ -187,10 +186,9 @@ const [date,setDate]=useState('')
                                                <Button onClick={()=>getStudent()} style={{margin:'15px'}}>Saqlash</Button>
               
                             </Col>
-                                
-                              
-                            
-                          
+                               ):''
+                             )
+                           })
                             
                           )
                         })
