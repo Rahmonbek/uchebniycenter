@@ -9,8 +9,8 @@ import {BiRefresh} from 'react-icons/bi'
 export default function OqituvchiTable() {
 const [date,setDate]=useState('')
  const getDate=(val)=>{
-   console.log(val)
-  setDate(val)
+   setDate(val)
+  console.log(date)
 }
   const [groups,setGroups]=useState([])
   const [students,setStudents]=useState([])
@@ -20,7 +20,6 @@ const [date,setDate]=useState('')
   const getNumber=(id)=>{
     setNumber(id)
     setNumber(id)
-    console.log(number)
   }
   const getStudentS=()=>{
     getStudents().then(res=>{
@@ -31,16 +30,28 @@ const [date,setDate]=useState('')
   const getAttendances=()=>{
     getAttendance().then(res=>{
       setAttendance(res.data)
-      console.log(attendance)
     }).catch(err=>{console.log(err)})
   }
-  const get=(val)=>{
-    studentArray.push(val.id)
+  const get=(val,e)=>{
+    if(date==''){
+      setDate(e.day)
+    }
+    setEdit(e.id)
+    attendance.map(item=>{
+      return(
+        item.students.map(item2=>{
+          return(
+            (val.id==item2)?'':studentArray.push(val.id)
+          )
+        })
+      )
+    })
    setStudenarray(studentArray)
-   console.log()
+   console.log(val,e)
   }
   const [edit,setEdit]=useState(null)
   const getStudent=()=>{
+    console.log(studentArray)
     var newObj={
       day:date,
       training_center:idT,
@@ -48,10 +59,10 @@ const [date,setDate]=useState('')
       students:studentArray
     }
         if (edit === null) {
-          createDavomat(newObj).then(res => { console.log(res) }).catch(err => { console.log(err) })
+          createDavomat(newObj).then(res => {console.log() }).catch(err => { console.log(err) })
         }
         else {
-          editDavomat(newObj, edit).then(res => { console.log(res) }).catch(err => { console.log(err)})
+          editDavomat(newObj, edit).then(res => { console.log() }).catch(err => { console.log(err)})
         }
 
   }
@@ -127,7 +138,7 @@ const [date,setDate]=useState('')
               <NeuTextInput
               type="date"
     color="#E4EBF5"
-    onChange={(newValue) => getDate(newValue)}
+    onChange={(newValue) => getDate(newValue,val.id,val.day)}
     width="123px"
     height="30px"
     distance={1}
@@ -146,7 +157,7 @@ const [date,setDate]=useState('')
                                  val.students.map(item3=>{
                                    return(
                                      
-                                       (item.group==val.group)?<Checkbox checked={item.id==item3} onClick={()=>get(item)}  color='var(--success)' style={{display:'block'}}/>:''
+                                       (item.group==val.group)?<Checkbox checked={item.id==item3} onClick={()=>get(item,val)}  color='var(--success)' style={{display:'block'}}/>:''
                                      
                                    )
                                    })
