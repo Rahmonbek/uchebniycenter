@@ -4,7 +4,7 @@ import {Container,Row,Col} from 'react-bootstrap'
 import styles from '../css/davomat.module.css'
 import {Modal} from 'antd'
 import { idT } from '../host/Host';
-
+import { NeuTextInput } from "neumorphism-react";
 import { getGroups,getStudents,createDavomat,editDavomat,getAttendance} from '../host/Config';
 import { Card, Button,Fab ,IconButton,Divider,Checkbox} from 'ui-neumorphism'
 import {AiOutlinePlus} from 'react-icons/ai'
@@ -158,7 +158,18 @@ const [date,setDate]=useState('')
                               return(
                                 (number==val.group)?(
  <Col lg={2}  style={{paddingTop:'15px'}}>
-              <Button size='small'  color='#4CAF50'>{val.day}</Button>
+              {/* <Button size='small'  color='#4CAF50'>{val.day}</Button> */}
+              <NeuTextInput
+    placeholder="Type some text"
+    color="#6a8d88"
+    onChange={(newValue) => console.log("newValue : ", newValue)}
+    width="500px"
+    height="40px"
+    distance={2}
+    onChange={(newValue) => console.log("newValue : ", newValue)}
+    fontSize={15}
+    fontColor="#000000"
+  />
                {
                  studentBygroup && Array.isArray(studentBygroup)?studentBygroup.map((item,key)=>{
                    return(
