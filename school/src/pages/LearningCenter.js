@@ -76,7 +76,7 @@ export default class LearningCenter extends Component {
       .catch((err) => console.log(err));
   };
   render() {
-    const { myContext: { globalState, globalDispatch } } = this.props;
+ 
     return (
       <>
       {
