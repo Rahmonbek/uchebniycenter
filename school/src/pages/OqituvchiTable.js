@@ -1,45 +1,17 @@
 
 import React,{useState,useEffect} from 'react'
 import {Container,Row,Col} from 'react-bootstrap'
-import styles from '../css/davomat.module.css'
-import {Modal} from 'antd'
 import { idT } from '../host/Host';
 import { NeuTextInput } from "neumorphism-react";
 import { getGroups,getStudents,createDavomat,editDavomat,getAttendance} from '../host/Config';
-import { Card, Button,Fab ,IconButton,Divider,Checkbox} from 'ui-neumorphism'
-import {AiOutlinePlus} from 'react-icons/ai'
-import {MdDateRange} from 'react-icons/md'
+import { Card, Button,IconButton,Divider,Checkbox} from 'ui-neumorphism'
 import {BiRefresh} from 'react-icons/bi'
-import { getTraining } from '../host/Config';
-import BootstrapTable from 'react-bootstrap-table-next';
-import "react-datepicker/dist/react-datepicker.css";
-import { Form, Input } from 'antd';
-import {DatePicker} from 'antd'
 export default function OqituvchiTable() {
-  const [visible,setVisible]=useState(false)
-  const [edit,setEdit] =useState(null)
 const [date,setDate]=useState('')
-  const  showModal = () => {
-    setVisible(true) 
- };
  const getDate=(val)=>{
+   console.log(val)
   setDate(val)
-  hideModal()
 }
- const hideModal = () => {
-   setVisible(false) 
- }
-  const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-  };
-  const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
-  };
-  const [form] = Form.useForm();
-  const onFill = () => {
- 
-  };
   const [groups,setGroups]=useState([])
   const [students,setStudents]=useState([])
   const [studentArray,setStudenarray]=useState([])
@@ -49,13 +21,6 @@ const [date,setDate]=useState('')
     setNumber(id)
     setNumber(id)
     console.log(number)
-  }
-  const setNumberGroup=()=>{
-    console.log(numberGroup)
-    var n=numberGroup
-    n.push(Math.floor(Math.random()*10-1))
-    console.log(numberGroup)
-    setEdit(1)
   }
   const getStudentS=()=>{
     getStudents().then(res=>{
@@ -74,9 +39,10 @@ const [date,setDate]=useState('')
    setStudenarray(studentArray)
    console.log()
   }
+  const [edit,setEdit]=useState(null)
   const getStudent=()=>{
     var newObj={
-      day:'2021-08-24',
+      day:date,
       training_center:idT,
       group:number,
       students:studentArray
@@ -87,7 +53,6 @@ const [date,setDate]=useState('')
         else {
           editDavomat(newObj, edit).then(res => { console.log(res) }).catch(err => { console.log(err)})
         }
-        hideModal()
 
   }
   const [studentBygroup,setStudentBygroup]=useState([])
@@ -160,15 +125,15 @@ const [date,setDate]=useState('')
  <Col lg={2}  style={{paddingTop:'15px'}}>
               {/* <Button size='small'  color='#4CAF50'>{val.day}</Button> */}
               <NeuTextInput
-    placeholder="Type some text"
-    color="#6a8d88"
-    onChange={(newValue) => console.log("newValue : ", newValue)}
-    width="500px"
-    height="40px"
-    distance={2}
-    onChange={(newValue) => console.log("newValue : ", newValue)}
-    fontSize={15}
-    fontColor="#000000"
+              type="date"
+    color="#E4EBF5"
+    onChange={(newValue) => getDate(newValue)}
+    width="123px"
+    height="30px"
+    distance={1}
+    value={val.day}
+    fontSize={12}
+    fontColor="#4CAF50"
   />
                {
                  studentBygroup && Array.isArray(studentBygroup)?studentBygroup.map((item,key)=>{
@@ -200,7 +165,17 @@ const [date,setDate]=useState('')
                               )
                             })}
                <Col lg={2}  style={{paddingTop:'15px'}}>
-               <IconButton onClick={()=>showModal()}  rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><MdDateRange/></IconButton>
+               <NeuTextInput
+              type="date"
+    color="#E4EBF5"
+    width="123px"
+    height="30px"
+    distance={1}
+    placeholder="01.01.2021"
+    fontSize={12}
+    fontColor="#4CAF50"
+    onChange={(newValue) => getDate(newValue)}
+  />
                {
                  studentBygroup && Array.isArray(studentBygroup)?studentBygroup.map((item,key)=>{
                    return(
@@ -222,21 +197,6 @@ const [date,setDate]=useState('')
                 </Col>
                 </Row>
             </Container>
-            <Modal
-          title="Sanani tanlang"
-          visible={visible}
-          width={400}
-          footer={false}
-        >
-          <Form {...layout} form={form} name="control-hooks" onFinish={getDate}>
-            <Form.Item name="date" label="Sanani kiriting" rules={[{ required: true }]}>
-              <Input placeholder="24.08.2021"/>
-            </Form.Item>  
-            <Button type="primary" htmlType="submit">
-          Saqlash
-        </Button>
-    </Form>
-        </Modal>
     </div>
   )
 }

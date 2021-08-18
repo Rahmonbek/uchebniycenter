@@ -1,163 +1,84 @@
+
 import React,{useState,useEffect} from 'react'
 import {Container,Row,Col} from 'react-bootstrap'
-import styles from '../css/davomat.module.css'
-import {Modal} from 'antd'
-import { getGroups,getStudents } from '../host/Config';
-import { getTraining } from '../host/Config';
-import BootstrapTable from 'react-bootstrap-table-next';
-import { Card, Button,Fab ,IconButton,Divider} from 'ui-neumorphism'
-import {AiOutlinePlus} from 'react-icons/ai'
-import {MdDateRange} from 'react-icons/md'
-import "react-datepicker/dist/react-datepicker.css";
-import {DatePicker} from 'antd'
-export default function Davomat() {
-  const [count, setCount] = useState(0);
-    const today = new Date();
-    const [groups,setGroups]=useState([])
-    const [numberGroup,getNumberGroup]=useState(1)
-    const [students,setStudents]=useState([])
-    const [visible,setVisible]=useState(false)
-    const [date, setDate]=useState('')
-  const [datef, setDatef]=useState('')
-const [id,setId]=useState(0)
-const idGenerate=()=>{
-   return (setId(id+1))
-
+import { idT } from '../host/Host';
+import { NeuTextInput } from "neumorphism-react";
+import { getGroups,getStudents,createDavomat,editDavomat,getAttendance} from '../host/Config';
+import { Card, Button,IconButton,Divider,Checkbox} from 'ui-neumorphism'
+import {BiRefresh} from 'react-icons/bi'
+export default function OqituvchiTable() {
+const [date,setDate]=useState('')
+ const getDate=(val)=>{
+   console.log(val)
+  setDate(val)
 }
-    const  showModal = () => {
-       setVisible(true) 
-    };
-  
-    const hideModal = () => {
-      setVisible(false) 
+  const [groups,setGroups]=useState([])
+  const [students,setStudents]=useState([])
+  const [studentArray,setStudenarray]=useState([])
+  const [numberGroup,getNumberGroup]=useState([1])
+  const [number, setNumber]=useState(1)
+  const getNumber=(id)=>{
+    setNumber(id)
+    setNumber(id)
+    console.log(number)
+  }
+  const getStudentS=()=>{
+    getStudents().then(res=>{
+      setStudents(res.data)
+    }).catch(err=>{console.log(err)})
+  }
+  const [attendance,setAttendance]=useState([])
+  const getAttendances=()=>{
+    getAttendance().then(res=>{
+      setAttendance(res.data)
+      console.log(attendance)
+    }).catch(err=>{console.log(err)})
+  }
+  const get=(val)=>{
+    studentArray.push(val.id)
+   setStudenarray(studentArray)
+   console.log()
+  }
+  const [edit,setEdit]=useState(null)
+  const getStudent=()=>{
+    var newObj={
+      day:date,
+      training_center:idT,
+      group:number,
+      students:studentArray
     }
-    const getDate=(cell)=>{
-      console.log(cell)
-      showModal()
-    }
-    const chengeDate=(date, dateString)=>{
-      setDate(dateString)
-      setDatef(date)
-      }
-    const sanaGenerate=(cell, row, rowIndex, formatExtraData)=>{
-      return(
-        <div>
-          <DatePicker  value={datef} onChange={chengeDate}/>
-        {/* <IconButton onClick={()=>getDate(cell)} rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><MdDateRange/></IconButton> */}
-        <IconButton onClick={()=> getDate()} rounded text={false} bgColor={'#E4EBF5'} style={{marginLeft:'10px'}}><AiOutlinePlus/></IconButton>
-        </div>
-      )
-    }
-    const [column,setColumn]=useState([
-      {
-            dataField: 'id',
-            text: 'Guruh',
-            formatter: (cell, row, rowIndex, extraData) => (
-              <div>
-                <span>{row.full_name}</span>
-              </div>
-            ),
-            footer: ''
-          },
-      {
-      dataField:'enrf',
-      text: 'Sana',
-      headerFormatter:sanaGenerate,
-      formatter: (colIndex, row) => (
-        <div className="checkbox disabled">
-          <label>
-            <input type="checkbox"  onClick={()=>console.log(row,colIndex)}/*checked={ row.inStock }*//>
-          </label>
-        </div>
-      ),
-      classes: 'id-custom-cell',
-      formatExtraData: idGenerate,
-    },
+        if (edit === null) {
+          createDavomat(newObj).then(res => { console.log(res) }).catch(err => { console.log(err) })
+        }
+        else {
+          editDavomat(newObj, edit).then(res => { console.log(res) }).catch(err => { console.log(err)})
+        }
 
-    
-  ])
-    var column2=column
-    const getColumn=()=>{
-      var newColumn=[{
-      dataField:'enrf',
-      text: 'Sana',
-      headerFormatter:sanaGenerate,
-      formatExtraData: idGenerate,
-      formatter: (cellContent, row) => (
-        <div className="checkbox disabled">
-          <label>
-            <input type="checkbox"  onClick={()=>console.log(row)}/*checked={ row.inStock }*//>
-          </label>
-        </div>
-      ),
-      classes: 'id-custom-cell',
-      footer: "Jo'natish",
-      footerStyle:{
-        width:'200px',
-        backgroundColor:'#E4EBF5',
-        margin:'20px',
-        borderRadius: '50px',
-        background: '#E4EBF5',
-         boxShadow:  '5px 5px 10px #c2c8d0,-5px -5px 10px #ffffff',
-         border:'none'
-      }
-      },]
-      var column3=column2.concat(newColumn)     
-      setColumn(column3)     
+  }
+  const [studentBygroup,setStudentBygroup]=useState([])
+  const getS=()=>{
+    var studentBygroup = students.filter(function (el)
+    {
+      return el.group==number
     }
-    const getStudentS=()=>{
-      getStudents().then(res=>{
-        setStudents(res.data)
+    )
+    setStudentBygroup(studentBygroup)   
+  }
+  const getGroupS=()=>{
+      getGroups().then(res=>{
+        setGroups(res.data)
+        
       }).catch(err=>{console.log(err)})
     }
-    const getGroupS=()=>{
-        getGroups().then(res=>{
-          console.log(res.data)
-          setGroups(res.data)
-          
-        }).catch(err=>{console.log(err)})
-      }
-
-    //   const onFinish=()=>{         
-    //   let formData = new FormData();
-      
-    //   formData.append(
-    //     "dat",
-    //     date ?? ""
-    //   );
-    //   formData.append(
-    //     "group",
-    //   value.phone_number ?? ""
-    //   ); 
-    //   formData.append(
-    //     "photo",
-    //    image?? null
-    //   );        
-    //   formData.append(
-    //     "text",
-    //     value.text ?? "",
-    //   );
-    //   formData.append(
-    //     "training_center",
-    //   idT   
-    //   );  
-    //   if (edit === null) {
-    //     createTeacher(formData).then(res => { getTrainingS() }).catch(err => { console.log(err) })
-    //   }
-    //   else {
-    //     editTeacher(formData, edit).then(res => { getTrainingS() }).catch(err => { console.log(err)})
-    //   }
-    //   hideModal()
-    // }
-      useEffect(()=>{
-       getGroupS()
-       getStudentS()
-       idGenerate()
-      },[column])
-    return (
-        
-        <div>
-            <Container fluid style={{padding:'5%'}}> 
+    useEffect(()=>{
+      getGroupS()
+      getStudentS()
+      getS()
+      getAttendances()
+     },[number,students,numberGroup])
+  return (
+    <div>
+      <Container fluid style={{padding:'5%'}}> 
                 <Row>
                     <Col lg={12} md={12} sm={12}>
                         <Row>
@@ -165,7 +86,7 @@ const idGenerate=()=>{
                               groups && Array.isArray(groups)?groups.map((item,key)=>{
                                   return(
                                       <Col lg={1} style={{marginLeft:'20px'}}>
-                                         <Button onClick={()=>getNumberGroup(`${item.id}`)}> {item.name}</Button>
+                                         <Button active={number==item.id?true:false} onClick={()=>getNumber(`${item.id}`)}> {item.name}</Button>
                                       </Col>
                                   )
                               }):''
@@ -175,32 +96,107 @@ const idGenerate=()=>{
                 </Row>
                 <Row>
                 <Col lg={12}  style={{marginTop:'100px'}}>
-                    <BootstrapTable
-                          style={{backgroundColor:'white'}}
-                          keyField="id"
-                          data={students}
-                          columns={column}
-                          />
-                    </Col>
+                    <Card >
+                    <Row>
+                      <Col lg={3} style={{paddingTop:'60px',paddingLeft:'16px'}}>
+                        <Card inset style={{padding:'13px'}}>
+                        {
+                          studentBygroup && Array.isArray(studentBygroup)?studentBygroup.map(item=>{
+                            return(
+                             
+                              
+                                <div>
+                                    <p>{item.full_name}</p>
+                                  <Divider dense  />
+                              </div>
+                             
+                            )
+                          }):''
+                        }
+                        </Card>
+                      </Col>
+                      <Divider dense  style={{width:'10px',height:'100%'}}/>
+                      {
+                        
+                        
+                                attendance.map((val,key5)=>{
+                              return(
+                                (number==val.group)?(
+ <Col lg={2}  style={{paddingTop:'15px'}}>
+              {/* <Button size='small'  color='#4CAF50'>{val.day}</Button> */}
+              <NeuTextInput
+              type="date"
+    color="#E4EBF5"
+    onChange={(newValue) => getDate(newValue)}
+    width="123px"
+    height="30px"
+    distance={1}
+    value={val.day}
+    fontSize={12}
+    fontColor="#4CAF50"
+  />
+               {
+                 studentBygroup && Array.isArray(studentBygroup)?studentBygroup.map((item,key)=>{
+                   return(
+                     <div style={{marginBottom:'15px',marginTop:'10px'}}>
+                       
+                        {
+                        
+                              
+                                 val.students.map(item3=>{
+                                   return(
+                                     
+                                       (item.group==val.group)?<Checkbox checked={item.id==item3} onClick={()=>get(item)}  color='var(--success)' style={{display:'block'}}/>:''
+                                     
+                                   )
+                                   })
+                               
+                 }  
+          
+                       
+                     </div>
+                   )
+                 }):''
+               }
+                                                <IconButton rounded text={false} bgColor={'#E4EBF5'}  onClick={()=>getStudent()} style={{fontSize:'15px',marginTop:'10px',marginLeft:'5px',marginBottom:'5px'}}><BiRefresh style={{color:'#4CAF50'}}/></IconButton>
+               
+                             </Col>
+                                ):''
+                              )
+                            })}
+               <Col lg={2}  style={{paddingTop:'15px'}}>
+               <NeuTextInput
+              type="date"
+    color="#E4EBF5"
+    width="123px"
+    height="30px"
+    distance={1}
+    placeholder="01.01.2021"
+    fontSize={12}
+    fontColor="#4CAF50"
+    onChange={(newValue) => getDate(newValue)}
+  />
+               {
+                 studentBygroup && Array.isArray(studentBygroup)?studentBygroup.map((item,key)=>{
+                   return(
+                     <div style={{marginBottom:'15px',marginTop:'10px'}}>
+                                                          
+                                       <Checkbox  onClick={()=>get(item)}  color='var(--success)' style={{display:'block'}}/>                   
+                     </div>
+                   )
+                 }):''
+               }
+                                                <Button size='small' onClick={()=>getStudent()} style={{margin:'15px'}}>Saqlash</Button>
+               
+                             </Col>
+                               
+                                
+                      
+                    </Row>
+                    </Card>
+                </Col>
                 </Row>
             </Container>
-            <Modal
-          title="Sanani tanlang"
-          visible={visible}
-          onOk={hideModal}
-          width={300}
-          onCancel={hideModal}
-          okText= "Saqlash"
-          cancelText= "O'chirish"
-        >
-           <BootstrapTable
-                          style={{backgroundColor:'white'}}
-                          keyField="id"
-                          data={students}
-                          columns={column}
-                          />
-        </Modal>
-        </div>
-        
-    )
+    </div>
+  )
 }

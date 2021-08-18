@@ -183,9 +183,6 @@ state = {
         <Route exact path="/cabinet/oqituvchi">
           <Oqituvchi/>
         </Route>
-        <Route exact path="/cabinet/kurslar">
-          <OqituvchiTable/>
-        </Route>
 
       </Switch>
       </div>
