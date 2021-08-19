@@ -15,7 +15,6 @@ import GLOBAL from "./Token";
 export default class LearningCenter extends Component {
   state = {
     ft: false,
-    idT: null,
     isModalVisible: false,
     coordinates: null,
     data: {},
@@ -93,7 +92,7 @@ export default class LearningCenter extends Component {
   render() {
     return (
       <>
-        {this.state.idT === null ? (
+        {GLOBAL.id === null ? (
           this.state.email !== "" ? (
             <div className="container">
               <div className="position-absolute top-50 start-50 translate-middle text-center" style={{ width: "400px", padding: "25px", backgroundColor: "white", border: "1px solid #f1f4f6", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>

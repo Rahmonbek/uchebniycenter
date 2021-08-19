@@ -245,6 +245,6 @@ export default function Oquvchiqoshish() {
       </Modal>
     </div>
   ) : (
-    <Redirect path="/login" />
+    <Redirect to={"/cabinet"} />
   );
 }

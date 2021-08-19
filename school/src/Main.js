@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Link, Redirect } from "react-router-dom";
 import styles from "./top.module.css";
 import { Menu, Dropdown, Button } from "antd";
 
@@ -28,6 +28,7 @@ import { Col, Row } from "react-bootstrap";
 import Malumot from "./pages/Malumot";
 import LearningCenter from "./pages/LearningCenter";
 import OqituvchiTable from "./pages/OqituvchiTable";
+import GLOBAL from "./pages/Token";
 export default class Main extends Component {
   state = {
     collapsed: false,
@@ -76,7 +77,7 @@ export default class Main extends Component {
   };
   render() {
     const { SubMenu } = Menu;
-    return (
+    return GLOBAL.id !== null ? (
       <div>
         <BrowserRouter>
           <div className={styles.top}>
@@ -206,6 +207,8 @@ export default class Main extends Component {
           </div>
         </BrowserRouter>
       </div>
+    ) : (
+      <Redirect to={"/login"} />
     );
   }
 }
