@@ -151,7 +151,7 @@ export const getTeacher = (id) => {
 };
 export const getStudents = () => {
   var config = {
-    url: `${url}/api/student/`,
+    url: `${url}/api/student/${idT}`,
     method: "get",
   };
   return httpsRequest(config);

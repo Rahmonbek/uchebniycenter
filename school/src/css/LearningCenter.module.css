@@ -23,7 +23,7 @@
 }
 .adPanel {
   max-width: 1200px;
-  height: 600px;
+  height: 550px;
   margin: 40px auto;
   display: flex;
   flex-direction: row;
@@ -56,7 +56,7 @@
 
 .adPanel1 {
   max-width: 1200px;
-  height: 600px;
+  height: 550px;
   margin: 40px auto;
   display: flex;
   flex-direction: row;
