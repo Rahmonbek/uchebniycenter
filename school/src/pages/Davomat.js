@@ -85,6 +85,16 @@ const [date,setDate]=useState('')
         
       }).catch(err=>{console.log(err)})
     }
+
+    const check=(a)=>{
+      attendance.map(item=>{
+        return(
+          item.students.map(item2=>{
+            return (item2==a? true:false)
+          })
+        )
+      })
+    }
     useEffect(()=>{
       getGroupS()
       getStudentS()
@@ -157,17 +167,13 @@ const [date,setDate]=useState('')
                         {
                         
                               
-                                 val.students.map(item3=>{
-                                   return(
+                              
                                      
-                                       (item.group==val.group)?<Checkbox checked={item.id==item3} onClick={()=>get(item,val)}  color='var(--success)' style={{display:'block'}}/>:''
+   (item.group==val.group)?<Checkbox checked={val.students.includes(item.id)} onClick={()=>get(item,val)}  color='var(--success)' style={{display:'block'}}/>:''
                                      
-                                   )
-                                   })
-                               
-                 }  
+                
           
-                       
+                        }
                      </div>
                    )
                  }):''

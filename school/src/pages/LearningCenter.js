@@ -9,6 +9,7 @@ import { YMaps, Map, ZoomControl, FullscreenControl, SearchControl, GeolocationC
 import EventAvailableOutlinedIcon from "@material-ui/icons/EventAvailableOutlined";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import { createLogin, createRegister, verify } from "../host/Config";
+import { Redirect } from "react-router-dom"
 
 export default class LearningCenter extends Component {
   state = {
