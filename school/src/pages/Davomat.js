@@ -32,23 +32,29 @@ const [date,setDate]=useState('')
       setAttendance(res.data)
     }).catch(err=>{console.log(err)})
   }
+  const [arr,setArr]=useState([])
   const get=(val,e)=>{
     if(date==''){
       setDate(e.day)
     }
     setEdit(e.id)
-    attendance.map(item=>{
-      return(
-        item.students.map(item2=>{
+    console.log(e.students)
+        e.students.map(item2=>{
           return(
-            (val.id==item2)?'':studentArray.push(val.id)
+            (val.id==item2)? (
+               e.students= e.students.filter(function(abs) {
+                return abs !== item2
+             })
+            )
+              :(
+               e.students.push(val.id)
+              
+          )
           )
         })
-      )
-    })
-   setStudenarray(studentArray)
-   console.log(val,e)
-  }
+        console.log(e.students)
+      setStudenarray(e.students)  
+    }
   const getN=(val)=>{
    studentArray.push(val.id)
    setStudenarray(studentArray)
@@ -84,16 +90,6 @@ const [date,setDate]=useState('')
         setGroups(res.data)
         
       }).catch(err=>{console.log(err)})
-    }
-
-    const check=(a)=>{
-      attendance.map(item=>{
-        return(
-          item.students.map(item2=>{
-            return (item2==a? true:false)
-          })
-        )
-      })
     }
     useEffect(()=>{
       getGroupS()
