@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@300&family=Noto+Sans+TC&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Lobster+Two&family=Poppins&family=Satisfy&display=swap');
 *{
     margin: 0;
     padding: 0;
@@ -27,17 +27,18 @@
     /* padding-bottom: 30px; */
 }
 .section h1{
-    font-size: 50px;
-    font-weight: 400;
+    font-size: 70px;
+    font-weight: 10;
     width: 500px;
-    color: rgb(0, 68, 255);
+    color: #3F51B5;
     font-family: 'Mukta', sans-serif;
     font-family: 'Noto Sans TC', sans-serif;
     text-align: center;
     padding-bottom: 20px;
     margin: auto;
-    margin-bottom: 50px;
-    border-bottom: 1px solid blue;
+    margin-bottom: 40px;
+    font-family: 'Lobster', cursive;
+    /* border-bottom: 1px solid blue; */
 
     
 }

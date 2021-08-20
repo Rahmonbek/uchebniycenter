@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { NeuTextInput } from "neumorphism-react";
-import { getGroups, getStudents, createDavomat, editDavomat, getAttendance } from "../host/Config";
+import { getGroups, getStudents, createDavomat, editDavomat, getAttendance,getTraining } from "../host/Config";
 import { Card, Button, IconButton, Divider, Checkbox } from "ui-neumorphism";
 import { BiRefresh } from "react-icons/bi";
 import GLOBAL from "./Token";
@@ -21,25 +21,29 @@ export default function OqituvchiTable() {
     setNumber(id);
     setNumber(id);
   };
-  const getStudentS = () => {
-    getStudents()
-      .then((res) => {
-        setStudents(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+
+ const  getTraningS=()=>{
+    getTraining().then(res=>{
+      setStudents(res.data.students) 
+      setGroups(res.data.group) 
+    }).catch(err=>{console.log(err)})
+   
+  }
   const [attendance, setAttendance] = useState([]);
   const getAttendances = () => {
     getAttendance()
-      .then((res) => {
-        setAttendance(res.data);
-      })
+      .then((res) => (
+        
+        res.data.map(item=>{
+          return(
+            (parseInt(item.training_center)===parseInt(GLOBAL.id))? setAttendance(item):''
+          )
+        })
+      ))
       .catch((err) => {
         console.log(err);
       });
-  };
+  }
   const [arr, setArr] = useState([]);
   const get = (val, e) => {
     if (date === "") {
@@ -90,26 +94,17 @@ export default function OqituvchiTable() {
   };
   const [studentBygroup, setStudentBygroup] = useState([]);
   const getS = () => {
+    console.log(attendance)
     var studentBygroup = students.filter(function (el) {
       return el.group == number;
     });
     setStudentBygroup(studentBygroup);
   };
-  const getGroupS = () => {
-    getGroups()
-      .then((res) => {
-        setGroups(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   useEffect(() => {
-    getGroupS();
-    getStudentS();
     getS();
     getAttendances();
-  }, [number, students, numberGroup]);
+    getTraningS()
+  }, []);
   return (
     <div>
       <Container fluid style={{ padding: "5%" }}>
@@ -150,7 +145,7 @@ export default function OqituvchiTable() {
                         : ""}
                     </Card>
                   </div>
-                  {attendance.map((val, key5) => {
+                  {attendance && Array.isArray(attendance)?attendance.map((val, key5) => {
                     return number == val.group ? (
                       <div style={{ paddingTop: "15px", width: "200px" }}>
                         {/* <Button size='small'  color='#4CAF50'>{val.day}</Button> */}
@@ -167,7 +162,7 @@ export default function OqituvchiTable() {
                     ) : (
                       ""
                     );
-                  })}
+                  }):''}
                   <div style={{ paddingTop: "15px", width: "200px" }}>
                     <NeuTextInput type="date" color="#E4EBF5" width="123px" height="30px" distance={1} placeholder="01.01.2021" fontSize={12} fontColor="#4CAF50" onChange={(newValue) => getDate(newValue)} />
                     {studentBygroup && Array.isArray(studentBygroup)

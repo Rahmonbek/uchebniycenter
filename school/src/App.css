@@ -209,3 +209,10 @@ element.style {
 .custom-shape-divider-bottom-1627221721 .shape-fill {
   fill: #FFFFFF;
 }
+
+.MuiTab-wrapper{
+  font-size: 16px;
+}
+.MuiSvgIcon-root{
+  font-size: 25px !important;
+}

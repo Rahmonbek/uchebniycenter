@@ -5,29 +5,20 @@ import { BsPersonPlusFill } from "react-icons/bs";
 import { Form, Input, Select } from "antd";
 import { AiFillEdit, AiOutlineDelete } from "react-icons/ai";
 import { Table } from "react-bootstrap";
-import { createStudent, getStudents, getGroups, deleteStudent, editStudent } from "../host/Config";
+import { createStudent, getStudents, getGroups, deleteStudent, editStudent, getTraining } from "../host/Config";
 import GLOBAL from "./Token";
 import { Redirect } from "react-router";
+
 export default function Oquvchiqoshish() {
   const [edit, setEdit] = useState(null);
   const [oquvchi, setOquvchi] = useState([]);
   const [group, setGroup] = useState([]);
 
   const getSS = () => {
-    getStudents()
-      .then((res) => {
-        setOquvchi(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    getGroups()
-      .then((res) => {
-        setGroup(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    getTraining().then((res) => {
+      setOquvchi(res.data.students);
+      setGroup(res.data.group);
+    });
   };
 
   const [visible, setVisible] = useState(false);
@@ -63,6 +54,7 @@ export default function Oquvchiqoshish() {
       .catch((err) => {
         console.log(err);
       });
+    getSS();
   };
 
   const onFinish = (value) => {
@@ -78,6 +70,7 @@ export default function Oquvchiqoshish() {
       createStudent(formData)
         .then((res) => {
           console.log(res);
+          getSS();
         })
         .catch((err) => {
           console.log("err");
@@ -86,15 +79,13 @@ export default function Oquvchiqoshish() {
       editStudent(formData, edit)
         .then((res) => {
           console.log("succes");
+          getSS();
         })
         .catch((err) => {
           console.log(err);
-          console.log(edit);
         });
     }
-    getSS();
     hideModal();
-
     getSS();
   };
 
@@ -117,8 +108,8 @@ export default function Oquvchiqoshish() {
   };
 
   useEffect(() => {
-    if (GLOBAL.id !== null) getSS();
-  }, []);
+    getSS();
+  });
 
   return GLOBAL.id !== null ? (
     <div style={{ padding: "5%" }}>

@@ -50,6 +50,7 @@ import {YMaps, Map, Clusterer, Placemark,
 import {Carousel} from '3d-react-carousal';
 import { getGroups } from '../host/Config';
 import { getTrainingS } from '../host/Config';
+import Category from './Category';
 
   export default class Courses extends Component {
    
@@ -196,8 +197,9 @@ t=this.state.traning[i]
                     <div id='1' className={styles.section}>
                     <Container>
                     <h1 data-aos="zoom-in-up">Yangi kurslar</h1>
-
-                    <MDBTabs justify className='mb-3' >
+                    
+                    <Category/>
+                    {/* <MDBTabs justify className='mb-3' >
         <MDBTabsItem style={{marginBottom:'40px'}}>
           <MDBTabsLink onClick={() => this.handleJustifyClick('tab1')} active={this.state.justifyActive === 'tab1'} >
           All
@@ -219,7 +221,7 @@ t=this.state.traning[i]
           </MDBTabsLink>
         </MDBTabsItem>
         
-      </MDBTabs>
+      </MDBTabs> */}
 
       
       <Row>    
