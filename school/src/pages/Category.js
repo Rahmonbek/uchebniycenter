@@ -1,83 +1,129 @@
-import React, { Component } from 'react'
-import styles from '../css/category.module.css'
-import {IoLogoJavascript,IoLogoPython} from 'react-icons/io'
-import {CgMathPercent} from 'react-icons/cg'
-import {FaLanguage} from 'react-icons/fa'
-import {TiSortAlphabeticallyOutline} from 'react-icons/ti'
-import {IoIosPeople} from 'react-icons/io'
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
-const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
-    items: 5
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 3
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1
-  }
+import React from 'react';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import PhoneIcon from '@material-ui/icons/Phone';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import PersonPinIcon from '@material-ui/icons/PersonPin';
+import HelpIcon from '@material-ui/icons/Help';
+import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
+import ThumbDown from '@material-ui/icons/ThumbDown';
+import ThumbUp from '@material-ui/icons/ThumbUp';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import styles from '../css/courses.module.css'
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`scrollable-force-tabpanel-${index}`}
+      aria-labelledby={`scrollable-force-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
 };
-export default class Category extends Component {
-  
-  render() {
 
-    
-      
-    return (
-      <div style={{padding:'5%'}}>
-        <div className={styles.container}>
-        <Carousel responsive={responsive}>
- 
-        <div className={styles.card}>
-             <div>
-               <TiSortAlphabeticallyOutline/>
-             </div>
-             <div>Hammasi</div>
-           </div>,
-           <div className={styles.card}>
-             <div>
-               <IoLogoJavascript/>
-             </div>
-             <div>Javascript</div>
-           </div>,
-           <div className={styles.card}>
-             <div>
-               <IoLogoPython/>
-             </div>
-             <div>Python </div>
-           </div>,
-           <div className={styles.card}>
-             <div>
-               <CgMathPercent/>
-             </div>
-             <div>Matematika</div>
-           </div>,
-           <div className={styles.card}>
-             <div>
-               <FaLanguage/>
-             </div>
-             <div>Xorijiy tillar</div>
-           </div>,
-           <div className={styles.card}>
-             <div>
-               <IoIosPeople/>
-             </div>
-             <div>Abituriyent</div>
-           </div>;
-</Carousel>;
-       
+function a11yProps(index) {
+  return {
+    id: `scrollable-force-tab-${index}`,
+    'aria-controls': `scrollable-force-tabpanel-${index}`,
+  };
+}
 
-        </div>
-      </div>
-    )
-  }
+const useStyles = makeStyles((theme) => ({
+  root: {
+    fontSize: 20,
+    flexGrow: 1,
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
+
+export default function Category() {
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <div className={classes.root}>
+      <AppBar position="static" color="default">
+        <Tabs
+          
+          value={value}
+          onChange={handleChange}
+          variant="scrollable"
+          scrollButtons="on"
+          indicatorColor="primary"
+          textColor="primary"
+          aria-label="scrollable force tabs example"
+        >
+          <Tab label="Item One" icon={<PhoneIcon />} {...a11yProps(0)} />
+          <Tab label="Item Two" icon={<FavoriteIcon />} {...a11yProps(1)} />
+          <Tab label="Item Three" icon={<PersonPinIcon />} {...a11yProps(2)} />
+          <Tab label="Item Four" icon={<HelpIcon />} {...a11yProps(3)} />
+          <Tab label="Item Five" icon={<ShoppingBasket />} {...a11yProps(4)} />
+          <Tab label="Item Six" icon={<ThumbDown />} {...a11yProps(5)} />
+          <Tab label="Item Seven" icon={<ThumbUp />} {...a11yProps(6)} />
+          <Tab label="Item Four" icon={<HelpIcon />} {...a11yProps(7)} />
+          <Tab label="Item Five" icon={<ShoppingBasket />} {...a11yProps(8)} />
+          <Tab label="Item Six" icon={<ThumbDown />} {...a11yProps(9)} />
+          <Tab label="Item Seven" icon={<ThumbUp />} {...a11yProps(10)} />
+        </Tabs>
+      </AppBar>
+      <TabPanel value={value} index={0}>
+        Item One
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        Item Two
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        Item Three
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        Item Four
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        Item Five
+      </TabPanel>
+      <TabPanel value={value} index={5}>
+        Item Six
+      </TabPanel>
+      <TabPanel value={value} index={6}>
+        Item Seven
+      </TabPanel>
+      <TabPanel value={value} index={7}>
+        Item Four
+      </TabPanel>
+      <TabPanel value={value} index={8}>
+        Item Five
+      </TabPanel>
+      <TabPanel value={value} index={9}>
+        Item Six
+      </TabPanel>
+      <TabPanel value={value} index={10}>
+        Item Seven
+      </TabPanel>
+    </div>
+  );
 }
