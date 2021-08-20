@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { NeuTextInput } from "neumorphism-react";
-import { getGroups, getStudents, createDavomat, editDavomat, getAttendance } from "../host/Config";
+import { getGroups, getStudents, createDavomat, editDavomat, getAttendance,getTrainingS } from "../host/Config";
 import { Card, Button, IconButton, Divider, Checkbox } from "ui-neumorphism";
 import { BiRefresh } from "react-icons/bi";
 import GLOBAL from "./Token";
@@ -21,15 +21,14 @@ export default function OqituvchiTable() {
     setNumber(id);
     setNumber(id);
   };
-  const getStudentS = () => {
-    getStudents()
-      .then((res) => {
-        setStudents(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  getTraningS=()=>{
+    getTrainingS().then(res=>{
+      console.log(res.data)
+      setStudents(res.data.students)
+      
+    }).catch(err=>{console.log(err)})
+   
+  }
   const [attendance, setAttendance] = useState([]);
   const getAttendances = () => {
     getAttendance()

@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter, Route, Switch, Link, Redirect } from "react-router-dom";
 import styles from "./top.module.css";
 import { Menu, Dropdown, Button } from "antd";
-
+import Category from './pages/Category'
 import { PieChartOutlined } from "@ant-design/icons";
 import { FaBell, FaLanguage, FaUserEdit } from "react-icons/fa";
 import { DiJavascript1 } from "react-icons/di";
@@ -201,6 +201,9 @@ export default class Main extends Component {
                 </Route>
                 <Route exact path="/cabinet/oqituvchi">
                   <Oqituvchi />
+                </Route>
+                <Route exact path="/cabinet/kurslar">
+                  <Category />
                 </Route>
               </Switch>
             </div>
