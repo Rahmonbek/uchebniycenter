@@ -21,6 +21,7 @@ export default function OqituvchiTable() {
     setNumber(id);
     setNumber(id);
   };
+  const [jfw]=useState(0)
  const  getTraningS=()=>{
     getTraining().then(res=>{
       setStudents(res.data.students)   
