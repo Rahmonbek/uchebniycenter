@@ -21,19 +21,20 @@ export default function OqituvchiTable() {
     setNumber(id);
     setNumber(id);
   };
-  const [jfw]=useState(0)
+
  const  getTraningS=()=>{
     getTraining().then(res=>{
-      setStudents(res.data.students)   
+      setStudents(res.data.students) 
+      setGroups(res.data.group) 
     }).catch(err=>{console.log(err)})
    
   }
   const [attendance, setAttendance] = useState([]);
   const getAttendances = () => {
     getAttendance()
-      .then((res) => {
-        setAttendance(res.data);
-      })
+      .then((res) => (
+        (parseInt(res.data.training_center)==parseInt(GLOBAL.id))? setAttendance(res.data):''
+      ))
       .catch((err) => {
         console.log(err);
       });
@@ -88,22 +89,13 @@ export default function OqituvchiTable() {
   };
   const [studentBygroup, setStudentBygroup] = useState([]);
   const getS = () => {
+    console.log(attendance)
     var studentBygroup = students.filter(function (el) {
       return el.group == number;
     });
     setStudentBygroup(studentBygroup);
   };
-  const getGroupS = () => {
-    getGroups()
-      .then((res) => {
-        setGroups(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   useEffect(() => {
-    getGroupS();
     getS();
     getAttendances();
     getTraningS( )
