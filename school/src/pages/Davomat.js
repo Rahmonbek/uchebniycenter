@@ -33,12 +33,17 @@ export default function OqituvchiTable() {
   const getAttendances = () => {
     getAttendance()
       .then((res) => (
-        (parseInt(res.data.training_center)==parseInt(GLOBAL.id))? setAttendance(res.data):''
+        
+        res.data.map(item=>{
+          return(
+            (parseInt(item.training_center)===parseInt(GLOBAL.id))? setAttendance(item):''
+          )
+        })
       ))
       .catch((err) => {
         console.log(err);
       });
-  };
+  }
   const [arr, setArr] = useState([]);
   const get = (val, e) => {
     if (date === "") {
@@ -98,8 +103,8 @@ export default function OqituvchiTable() {
   useEffect(() => {
     getS();
     getAttendances();
-    getTraningS( )
-  }, [number, students, numberGroup]);
+    getTraningS()
+  }, []);
   return (
     <div>
       <Container fluid style={{ padding: "5%" }}>
@@ -140,7 +145,7 @@ export default function OqituvchiTable() {
                         : ""}
                     </Card>
                   </div>
-                  {attendance.map((val, key5) => {
+                  {attendance && Array.isArray(attendance)?attendance.map((val, key5) => {
                     return number == val.group ? (
                       <div style={{ paddingTop: "15px", width: "200px" }}>
                         {/* <Button size='small'  color='#4CAF50'>{val.day}</Button> */}
@@ -157,7 +162,7 @@ export default function OqituvchiTable() {
                     ) : (
                       ""
                     );
-                  })}
+                  }):''}
                   <div style={{ paddingTop: "15px", width: "200px" }}>
                     <NeuTextInput type="date" color="#E4EBF5" width="123px" height="30px" distance={1} placeholder="01.01.2021" fontSize={12} fontColor="#4CAF50" onChange={(newValue) => getDate(newValue)} />
                     {studentBygroup && Array.isArray(studentBygroup)
