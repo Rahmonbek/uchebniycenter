@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { NeuTextInput } from "neumorphism-react";
-import { getGroups, getStudents, createDavomat, editDavomat, getAttendance,getTrainingS } from "../host/Config";
+import { getGroups, getStudents, createDavomat, editDavomat, getAttendance,getTraining } from "../host/Config";
 import { Card, Button, IconButton, Divider, Checkbox } from "ui-neumorphism";
 import { BiRefresh } from "react-icons/bi";
 import GLOBAL from "./Token";
@@ -21,11 +21,9 @@ export default function OqituvchiTable() {
     setNumber(id);
     setNumber(id);
   };
-  getTraningS=()=>{
-    getTrainingS().then(res=>{
-      console.log(res.data)
-      setStudents(res.data.students)
-      
+ const  getTraningS=()=>{
+    getTraining().then(res=>{
+      setStudents(res.data.students)   
     }).catch(err=>{console.log(err)})
    
   }
@@ -105,9 +103,9 @@ export default function OqituvchiTable() {
   };
   useEffect(() => {
     getGroupS();
-    getStudentS();
     getS();
     getAttendances();
+    getTraningS( )
   }, [number, students, numberGroup]);
   return (
     <div>
