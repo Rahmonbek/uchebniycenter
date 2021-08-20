@@ -5,7 +5,7 @@ import { getGroups, getStudents, createDavomat, editDavomat, getAttendance,getTr
 import { Card, Button, IconButton, Divider, Checkbox } from "ui-neumorphism";
 import { BiRefresh } from "react-icons/bi";
 import GLOBAL from "./Token";
-
+import '../css/davomat.css'
 export default function OqituvchiTable() {
   const [date, setDate] = useState("");
   const getDate = (val) => {
@@ -26,6 +26,7 @@ export default function OqituvchiTable() {
     getTraining().then(res=>{
       setStudents(res.data.students) 
       setGroups(res.data.group) 
+      console.log(students,groups)
     }).catch(err=>{console.log(err)})
    
   }
@@ -34,15 +35,18 @@ export default function OqituvchiTable() {
     getAttendance()
       .then((res) => (
         
-        res.data.map(item=>{
+       res.data && Array.isArray(res.data)? res.data.map(item=>{
           return(
-            (parseInt(item.training_center)===parseInt(GLOBAL.id))? setAttendance(item):''
+            (parseInt(item.training_center)===parseInt(GLOBAL.id))? 
+              attendance.push(item)
+              :" "
           )
-        })
+        }):''
       ))
       .catch((err) => {
         console.log(err);
       });
+      console.log(attendance,GLOBAL.id)
   }
   const [arr, setArr] = useState([]);
   const get = (val, e) => {
@@ -104,7 +108,7 @@ export default function OqituvchiTable() {
     getS();
     getAttendances();
     getTraningS()
-  }, []);
+  },[]);
   return (
     <div>
       <Container fluid style={{ padding: "5%" }}>
@@ -129,9 +133,9 @@ export default function OqituvchiTable() {
         <Row>
           <Col lg={12} style={{ marginTop: "100px" }}>
             <Card>
-              <div style={{ overflowY: "scroll", display: "flex", flexDirection: "row", flexWrap: "nowrap" }}>
-                <Row>
-                  <div style={{ paddingTop: "60px", paddingLeft: "16px", width: "200px" }}>
+              <div style={{ display: "flex", flexDirection: "row", flexWrap: "nowrap" }}>
+                
+                  <div style={{ paddingTop: "60px", paddingLeft: "16px", width: "20%" }}>
                     <Card inset style={{ padding: "13px" }}>
                       {studentBygroup && Array.isArray(studentBygroup)
                         ? studentBygroup.map((item) => {
@@ -145,9 +149,10 @@ export default function OqituvchiTable() {
                         : ""}
                     </Card>
                   </div>
+                  <div style={{overflowX:'scroll',display: "flex", flexDirection: "row",width:'80%'}}>
                   {attendance && Array.isArray(attendance)?attendance.map((val, key5) => {
                     return number == val.group ? (
-                      <div style={{ paddingTop: "15px", width: "200px" }}>
+                      <div style={{ paddingTop: "15px", width: "200px" ,marginRight:'20px' }}>
                         {/* <Button size='small'  color='#4CAF50'>{val.day}</Button> */}
                         <NeuTextInput type="date" color="#E4EBF5" onChange={(newValue) => getDate(newValue, val.id, val.day)} width="123px" height="30px" distance={1} value={val.day} fontSize={12} fontColor="#4CAF50" />
                         {studentBygroup && Array.isArray(studentBygroup)
@@ -178,11 +183,11 @@ export default function OqituvchiTable() {
                       Saqlash
                     </Button>
                   </div>
-                </Row>
+                  </div>
               </div>
             </Card>
           </Col>
-        </Row>
+          </Row>
       </Container>
     </div>
   );

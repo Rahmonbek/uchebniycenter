@@ -1,0 +1,17 @@
+::-webkit-scrollbar {
+    width: 4px;
+    background-color:#E4EBF5 !important;
+    background: #EEF0F4;
+border-radius: 15%;
+box-shadow: inset 9.91px 9.91px 15px #D9DADE, inset -9.91px -9.91px 15px #FFFFFF;
+cursor: pointer !important;
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset -2px -2px 5px #fff,inset 2px 2px 5px #bec8e4
+}
+::-webkit-scrollbar-thumb {
+    background: #EEF0F4;
+border-radius: 15%;
+    border-radius: 5px;
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, #E4EBF5), color-stop(0.72, #E4EBF5), color-stop(0.86, #E4EBF5));
+}
