@@ -4,7 +4,7 @@ import { Form, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import styles from "../css/login.module.css";
 import GLOBAL from "./Token";
-import { createLogin } from "../host/Config";
+import { createLogin, getTraining } from "../host/Config";
 
 function Login() {
   let history = useHistory();
@@ -15,6 +15,7 @@ function Login() {
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         GLOBAL.id = res.data.id;
+        getTraining().then((res) => (GLOBAL.training = res.data));
         history.push("/cabinet");
       })
       .catch((err) => alert("Email yoki parol noto'g'ri!!!"));

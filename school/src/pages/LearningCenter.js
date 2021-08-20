@@ -9,7 +9,7 @@ import { YMaps, Map, ZoomControl, FullscreenControl, SearchControl, GeolocationC
 
 import EventAvailableOutlinedIcon from "@material-ui/icons/EventAvailableOutlined";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
-import { createLogin, createRegister, verify } from "../host/Config";
+import { createLogin, createRegister, getTraining, verify } from "../host/Config";
 import GLOBAL from "./Token";
 
 export default class LearningCenter extends Component {
@@ -84,6 +84,7 @@ export default class LearningCenter extends Component {
           .then((res) => {
             window.localStorage.setItem("token", res.data.token);
             GLOBAL.id = res.data.id;
+            getTraining().then((res) => (GLOBAL.training = res.data));
           })
           .catch((err) => console.log(err));
       })
