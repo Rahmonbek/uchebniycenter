@@ -58,13 +58,24 @@ expanded:[],
 justifyActive:'tab1',
 group:[],
 traning:[],
+date:"",
 points:[
     {
       name: "IT Tower",
       param: [41.317648, 69.230585], 
     }, 
-]
+],
 
+    }
+
+    getDate(){
+      var today = new Date();
+      var date = today.getFullYear()+"-"+((today.getMonth()+1)<10? "0"+(today.getMonth()+1): (today.getMonth()+1))+"-"+((today.getDate()+1)<10? "0"+today.getDate(): today.getDate());
+      this.setState({
+        date: date
+      })
+
+      console.log(date)
     }
   
     getGroupS=()=>{
@@ -110,6 +121,7 @@ t=this.state.traning[i]
     this.setState({expanded:[false, false, false]});
 
     this.getTraningS();
+    this.getDate();
     }
     
   
@@ -216,7 +228,9 @@ t=this.state.traning[i]
 
                return(
                
-                <Col lg={4} md={6} sm={12}>
+                (item.start_date>=this.state.date)?(
+                  
+                  <Col lg={4} md={6} sm={12}>
                   <Row>
      <Col lg={12}>
                     
@@ -1700,6 +1714,7 @@ t=this.state.traning[i]
                    </Col>
                  </Row>
                   </Col>
+                ):""
       
                  
                 
