@@ -14,6 +14,8 @@ import ThumbUp from '@material-ui/icons/ThumbUp';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import styles from '../css/courses.module.css'
+import { getGroups } from '../host/Config';
+import { getCategory } from '../host/Config';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -50,20 +52,99 @@ function a11yProps(index) {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    fontSize: 20,
     flexGrow: 1,
     width: '100%',
     backgroundColor: theme.palette.background.paper,
   },
 }));
 
+
+
 export default function Category() {
+  
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [categorya, setCategorya] = React.useState([]);
+  const [categoryas, setCategoryas] = React.useState([]);
+
+  const [guruh, setGuruh] = React.useState([]);
+ 
+
+  const getGroupS = () => {
+    getGroups()
+      .then((res) => {
+        setGuruh(res.data);
+        
+          getCategoryG(res.data)
+          
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getCategoryS = () => {
+    getCategory()
+      .then((res) => {
+        setCategoryas(res.data);
+        getCategoryas(res.data)
+        console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      
+  };
+
+  const getCategoryas = (cat) => {
+    var categoriyas = []
+    console.log(cat)
+      // setCategoryas(cat)
+      for(let i=0;i<cat.length;i++){
+        categoriyas.push(cat[i])
+      }
+    console.log(categoriyas)
+    setCategoryas(categoriyas)
+    console.log(categoryas)
+    
+  }
+
+  const getCategoryG = (guruh) =>{
+    
+    var category = []
+    console.log(guruh)
+     for(let i=0;i<guruh.length; i++){
+      
+      for(let a=0; a<guruh[i].category.length; a++){
+      var t=true
+      for(let j=0; j<category.length; j++){
+        if(category[j]===guruh[i].category[a]){
+          t=false
+        }}
+        if(t){
+          category.push(guruh[i].category[a])
+        }
+      }
+     }
+setCategorya(category)
+console.log(category)
+
+  }
+  
+
+
+
+    
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  React.useEffect(() => {
+   getGroupS();
+   getCategoryS();
+
+  }, []);
 
   return (
     <div className={classes.root}>
@@ -78,17 +159,15 @@ export default function Category() {
           textColor="primary"
           aria-label="scrollable force tabs example"
         >
-          <Tab label="Item One" icon={<PhoneIcon />} {...a11yProps(0)} />
-          <Tab label="Item Two" icon={<FavoriteIcon />} {...a11yProps(1)} />
-          <Tab label="Item Three" icon={<PersonPinIcon />} {...a11yProps(2)} />
-          <Tab label="Item Four" icon={<HelpIcon />} {...a11yProps(3)} />
-          <Tab label="Item Five" icon={<ShoppingBasket />} {...a11yProps(4)} />
-          <Tab label="Item Six" icon={<ThumbDown />} {...a11yProps(5)} />
-          <Tab label="Item Seven" icon={<ThumbUp />} {...a11yProps(6)} />
-          <Tab label="Item Four" icon={<HelpIcon />} {...a11yProps(7)} />
-          <Tab label="Item Five" icon={<ShoppingBasket />} {...a11yProps(8)} />
-          <Tab label="Item Six" icon={<ThumbDown />} {...a11yProps(9)} />
-          <Tab label="Item Seven" icon={<ThumbUp />} {...a11yProps(10)} />
+          {categorya && Array.isArray(categorya)?categorya.map((item,key)=>{
+               return(
+           categoryas && Array.isArray(categoryas)?categoryas.map((item2)=>{
+             return(
+               (item==item2.id)?<Tab label={item2.name_uz}   icon={<PhoneIcon />} {...a11yProps(0)} />:""
+             )
+           }):''
+               )
+          }):''} 
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
