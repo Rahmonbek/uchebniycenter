@@ -186,7 +186,7 @@ export const createRegister = (data) => {
 export const editTraining = (data, id) => {
   var config = {
     url: `${url}/api/training/${id}/`,
-    method: "post",
+    method: "put",
     data: data,
   };
   return httpsRequest(config);
