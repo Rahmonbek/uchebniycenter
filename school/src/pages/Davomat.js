@@ -16,17 +16,23 @@ export default function OqituvchiTable() {
   const [students, setStudents] = useState([]);
   const [studentArray, setStudenarray] = useState([]);
   const [numberGroup, getNumberGroup] = useState([1]);
-  const [number, setNumber] = useState(1);
+  const [number, setNumber] = useState(3);
   const getNumber = (id) => {
     setNumber(id);
-    setNumber(id);
+  
+    getTraningS()
+    // getAttendances()
+    console.log(number)
   };
 
  const  getTraningS=()=>{
+   console.log(studentBygroup)
+  
     getTraining().then(res=>{
-      setStudents(res.data.students) 
+      setStudents(res.data.students)
+      console.log(res.data.group[0].id);
+      
       setGroups(res.data.group) 
-      console.log(students,groups)
     }).catch(err=>{console.log(err)})
    
   }
@@ -46,9 +52,8 @@ export default function OqituvchiTable() {
       .catch((err) => {
         console.log(err);
       });
-      console.log(attendance,GLOBAL.id)
+      console.log(students,attendance)
   }
-  const [arr, setArr] = useState([]);
   const get = (val, e) => {
     if (date === "") {
       setDate(e.day);
@@ -66,6 +71,7 @@ export default function OqituvchiTable() {
     setStudenarray(e.students);
   };
   const getN = (val) => {
+    setEdit(null)
     studentArray.push(val.id);
     setStudenarray(studentArray);
   };
@@ -97,17 +103,17 @@ export default function OqituvchiTable() {
     }
   };
   const [studentBygroup, setStudentBygroup] = useState([]);
-  const getS = () => {
-    console.log(attendance)
+  const getS = (id) => {
     var studentBygroup = students.filter(function (el) {
-      return el.group == number;
+      return el.group == id;
     });
     setStudentBygroup(studentBygroup);
+   
   };
   useEffect(() => {
-    getS();
-    getAttendances();
+   
     getTraningS()
+    getAttendances()
   },[]);
   return (
     <div>
@@ -119,7 +125,9 @@ export default function OqituvchiTable() {
                 ? groups.map((item, key) => {
                     return (
                       <Col lg={1} style={{ marginLeft: "20px" }}>
-                        <Button active={number == item.id ? true : false} onClick={() => getNumber(`${item.id}`)}>
+                        <Button active={number == item.id ? true : false} onClick={() => { 
+                          getS(`${item.id}`); getNumber(`${item.id}`)
+                          }}>
                           {" "}
                           {item.name}
                         </Button>

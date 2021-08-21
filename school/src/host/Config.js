@@ -152,7 +152,7 @@ export const getTeacher = (id) => {
 };
 export const getStudents = () => {
   var config = {
-    url: `${url}/api/student/${GLOBAL.id}`,
+    url: `${url}/api/student/`,
     method: "get",
   };
   return httpsRequest(config);
