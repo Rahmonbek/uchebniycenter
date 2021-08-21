@@ -1,6 +1,8 @@
 import GLOBAL from "../pages/Token";
 import { httpsRequest, url } from "./Host";
 
+
+
 export const getTraining = () => {
   var config = {
     url: `${url}/api/training/${GLOBAL.id}/`,
