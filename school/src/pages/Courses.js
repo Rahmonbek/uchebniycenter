@@ -284,7 +284,7 @@ t=this.state.traning[i]
                   
                 }
                 title={this.echoTraining(item.training_center).name}
-                
+               
                 subheader={item.name}
                 
               />
@@ -293,7 +293,7 @@ t=this.state.traning[i]
                       <CardMedia
                         className={styles.media}
                         image={item.image}
-                        title="Paella dish"
+                        
                       />
                       <CardContent>
                         <Typography variant="body2" color="textSecondary" component="p">
@@ -1730,7 +1730,6 @@ t=this.state.traning[i]
       
          </div>   
          <footer >
-         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c91fa" fill-opacity="1" d="M0,192L720,256L1440,224L1440,320L720,320L0,320Z"></path></svg>
              <div className={styles.footer}>
                <Container>
                  <Row>
@@ -1767,41 +1766,50 @@ t=this.state.traning[i]
         </Map>
     </YMaps>
                    </Col>
-                   <Col lg={6} md={6} sm={12} >
+                   <Col lg={6} md={6} sm={12} className={styles.contact}>
+                     {/* <Row> */}
+                     <div>
                      <div className={styles.logo}>
                          <img src={logo} /> 
                      </div>
                      <h4 style={{color:'#fff', fontSize:'20px', textAlign:'center', marginBottom:'30px'}}>IT Tower</h4>
+                     </div>
 
                      <div>
-                       <Row>
+                       
                          <Col> 
                          <p style={{textAlign:'center'}}>Biz haqimizda</p>
-                         <div className={styles.connection}>
+                         <div className={styles.connection} style={{ marginLeft:'auto', marginRight:'auto'}}>
                            
-                         <IconButton ><InfoOutlinedIcon color="primary" style={{fontSize:'45px'}}/></IconButton>
+                         <Link to="/malumot/">
+                         <IconButton ><InfoOutlinedIcon color="primary" style={{fontSize:'23px',}}/></IconButton>
+                         </Link>
                          </div></Col>
                          <Col>
                          <p style={{textAlign:'center'}}>Aloqa</p>
                          <div style={{display:'flex'}}>
                          <div className={styles.connection}>
-                         <IconButton ><TelegramIcon color="primary" style={{fontSize:'23px'}}/></IconButton>
+                         <a href='@ItTower'>
+                         <IconButton ><TelegramIcon color="primary" style={{fontSize:'23px'}}/></IconButton></a>
                          </div>
                          <div className={styles.connection}>
-                         <IconButton ><CallIcon color="primary" style={{fontSize:'23px'}}/></IconButton>
+                         <a href='tel:+998935555555'>
+                         <IconButton ><CallIcon color="primary" style={{fontSize:'23px'}}/></IconButton></a>
                          </div>
                          <div className={styles.connection}>
-                         <IconButton ><InstagramIcon color="primary" style={{fontSize:'23px'}}/></IconButton>
+                         <a href='http://instagram.com/ItTower'>
+                         <IconButton ><InstagramIcon color="primary" style={{fontSize:'23px'}}/></IconButton></a>
                          </div>
                          <div className={styles.connection}>
-                         <IconButton ><MailOutlineIcon color="primary" style={{fontSize:'23px'}}/></IconButton>
+                         <a href="mailto:it_tower@gmail.com">
+                         <IconButton ><MailOutlineIcon color="primary" style={{fontSize:'23px'}}/></IconButton></a>
                          </div>
                            </div>
                        </Col>
-                       </Row>
+                       
                      </div>
                     
-
+                     {/* </Row> */}
 
                    </Col>
                  </Row>

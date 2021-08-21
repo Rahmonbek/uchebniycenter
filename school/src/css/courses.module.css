@@ -109,6 +109,12 @@
 .MuiCardHeader-content span{
   font-size: 18px !important;
 }
+/* .MuiPaper-root{
+  margin-top: 100px !important;
+} */
+header{
+  margin-bottom: 80px !important;
+}
 .section ul{
     display: flex;
     justify-content: space-around;
@@ -135,7 +141,7 @@
 } */
 .root {
     max-width: 345;
-   
+ 
   }
   .media {
     height: 0;
@@ -153,10 +159,13 @@
     background-color: red;
   }
 
+
   .footer{
     width: 100%;
-    height: 340px;
-    background-color: #3C91FA;
+    height: 400px;
+    background-image: linear-gradient(to left, rgb(149,153,226) 0%, rgb(78, 118, 248) 100%);
+    padding: 60px;
+    margin-top: 50px;
   }
   .col{
     display: flex;
@@ -178,6 +187,7 @@
   .logo img{
     width: 70px;
     height: 70px;
+    cursor: pointer;
   }
   .footer p{
      
@@ -186,7 +196,7 @@
      
   }
   .connection{
-   margin: auto;
+   margin: 20px;
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -195,4 +205,9 @@
     justify-content: center;
     align-items: center;
     font-size: 30px;
+  }
+  .contact{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }

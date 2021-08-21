@@ -170,7 +170,7 @@ console.log(category)
           }):''} 
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
+      {/* <TabPanel value={value} index={0}>
         Item One
       </TabPanel>
       <TabPanel value={value} index={1}>
@@ -202,7 +202,7 @@ console.log(category)
       </TabPanel>
       <TabPanel value={value} index={10}>
         Item Seven
-      </TabPanel>
+      </TabPanel> */}
     </div>
   );
 }

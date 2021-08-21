@@ -216,3 +216,7 @@ element.style {
 .MuiSvgIcon-root{
   font-size: 25px !important;
 }
+
+.MuiCardHeader-content span{
+  font-size: 16px;
+}
