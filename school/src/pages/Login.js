@@ -4,7 +4,7 @@ import { Form, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import styles from "../css/login.module.css";
 import GLOBAL from "./Token";
-import { createLogin, getTraining } from "../host/Config";
+import { createLogin } from "../host/Config";
 
 function Login() {
   let history = useHistory();

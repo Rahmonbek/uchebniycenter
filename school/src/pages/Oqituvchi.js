@@ -130,7 +130,7 @@ export default function Oqituvchiqoshish() {
       </div>
       <div style={{ padding: "10px" }} className={styles.backgroundTable}>
         <h5>O'qituvchilar ro'yxati</h5>
-        <Table responsive style={{ marginTop: "20px" }} style={{ color: "rgba(0,0,0,0.7)" }}>
+        <Table responsive style={{ marginTop: "20px", color: "rgba(0,0,0,0.7)" }}>
           <thead>
             <tr>
               <th style={{ border: " 1px solid #3F6AD8", padding: "10px" }}>#</th>
@@ -157,7 +157,7 @@ export default function Oqituvchiqoshish() {
                       <td style={{ border: " 1px solid #3F6AD8", padding: "10px" }}>{item.phone_number}</td>
                       {/* <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.email}</td> */}
                       <td style={{ border: " 1px solid #3F6AD8", padding: "10px" }}>
-                        <img style={{ width: "200px" }} src={item.photo} />
+                        <img style={{ width: "200px" }} src={item.photo} alt="" />
                       </td>
                       {/* <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.yonalish}</td> */}
                       {/* <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>
