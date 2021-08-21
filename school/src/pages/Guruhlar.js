@@ -51,7 +51,7 @@ export default function Guruhlar() {
         setGrlar(res.data.group);
         setSubjects(res.data.subjects);
         setTeacher(res.data.teachers);
-        console.log(teacher);
+        console.log(teacher, res.data.group);
       })
       .catch((err) => {
         console.log(err);
@@ -303,7 +303,7 @@ export default function Guruhlar() {
   };
 
   return (
-    <div>
+    <div className="pb-5">
       <input type="checkbox" id="modal" className={styles.smbox} />
       <label for="modal" className="modal-background"></label>
       <Container fluid>
@@ -365,9 +365,11 @@ export default function Guruhlar() {
                           <p>
                             {" "}
                             <b>Kunlari: </b>
-                            {item.days.map((item1) => {
-                              return item1 + " ";
-                            })}
+                            {item.days !== null
+                              ? item.days.map((item1) => {
+                                  return item1 + " ";
+                                })
+                              : ""}
                           </p>
                           <p>
                             {" "}

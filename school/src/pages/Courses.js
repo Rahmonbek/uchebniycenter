@@ -76,12 +76,12 @@ points:[
         date: date
       })
 
-      console.log(date)
+ 
     }
   
     getGroupS=()=>{
       getGroups().then(res=>{
-        console.log(res.data)
+   
         this.setState({
           group:res.data
         })
@@ -92,7 +92,7 @@ points:[
   
     getTraningS=()=>{
       getTrainingS().then(res=>{
-        console.log(res.data)
+   
         this.setState({
           traning:res.data
         })
@@ -102,15 +102,12 @@ points:[
     }
 echoTraining=(id)=>{
   var t={}
-  console.log(this.state.traning)
   for(let i=0; i<this.state.traning.length; i++){
-   console.log(this.state.traning[i])
     if(id===this.state.traning[i].id){
 t=this.state.traning[i]
 
     }
   }
-  console.log(t)
   return(t)
 }
     componentDidMount(){
@@ -289,6 +286,7 @@ t=this.state.traning[i]
                 title={this.echoTraining(item.training_center).name}
                 
                 subheader={item.name}
+                
               />
                         :''
                       }

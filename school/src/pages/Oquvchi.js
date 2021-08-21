@@ -5,7 +5,7 @@ import { BsPersonPlusFill } from "react-icons/bs";
 import { Form, Input, Select } from "antd";
 import { AiFillEdit, AiOutlineDelete } from "react-icons/ai";
 import { Table } from "react-bootstrap";
-import { createStudent, getStudents, getGroups, deleteStudent, editStudent, getTraining } from "../host/Config";
+import { createStudent, deleteStudent, editStudent, getTraining } from "../host/Config";
 import GLOBAL from "./Token";
 import { Redirect } from "react-router";
 
