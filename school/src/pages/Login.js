@@ -7,10 +7,10 @@ import GLOBAL from "./Token";
 import { createLogin } from "../host/Config";
 
 function Login() {
+  GLOBAL.id = null;
   let history = useHistory();
   function saveData() {
     var config = { email: document.getElementById("formUsername").value, password: document.getElementById("formPassword").value };
-    console.log(config);
     createLogin(config)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
