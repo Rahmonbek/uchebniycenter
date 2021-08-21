@@ -5,12 +5,24 @@ import { Form, Input, Modal } from "antd";
 import img1 from "../img/lgg.png";
 import { Redirect } from "react-router-dom";
 // import img2 from "../img/lc.png";
-import { YMaps, Map, ZoomControl, FullscreenControl, SearchControl, GeolocationControl, Placemark } from "react-yandex-maps";
 
+import {
+  YMaps,
+  Map,
+  Clusterer,
+  Placemark,
+  TypeSelector,
+  ZoomControl,
+  GeolocationControl,
+  RouteButton,
+  TrafficControl,
+  GeoObject,
+} from "react-yandex-maps";
 import EventAvailableOutlinedIcon from "@material-ui/icons/EventAvailableOutlined";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
-import { createLogin, createRegister, getTraining, verify } from "../host/Config";
+import { createLogin, createRegister, editTraining, getTraining, getTrainingS, verify } from "../host/Config";
 import GLOBAL from "./Token";
+import { st } from "../host/Host";
 
 export default class LearningCenter extends Component {
   state = {
@@ -18,13 +30,12 @@ export default class LearningCenter extends Component {
     isModalVisible: false,
     coordinates: null,
     data: {},
-    mapState: {
-      center: [41.2825125, 69.1392826],
-      zoom: 9,
-    },
     photo: "",
+    coords:[],
     email: "",
     password: "",
+    rows:[],
+    user:[],
   };
   handleCancel = () => {
     this.setState({
@@ -36,7 +47,14 @@ export default class LearningCenter extends Component {
     this.setState({ coords: coords });
     console.log(coords);
   };
+  onMapClick = (e) => {
+    var coords = e.get("coords");
 
+    
+    this.setState({
+      coords: coords,
+    });
+  };
   handleOk = () => {
     this.handleCancel();
   };
@@ -51,6 +69,7 @@ export default class LearningCenter extends Component {
     formData.append("you_tube", document.getElementById("youtube").value ?? "");
     formData.append("text", document.getElementById("text").value ?? "");
     formData.append("languages", "uz");
+    
     if (this.state.photo !== "") {
       formData.append("photo", this.state.photo ?? null);
     } else {
@@ -59,6 +78,9 @@ export default class LearningCenter extends Component {
     createRegister(formData)
       .then((res) => {
         this.setState({ email: document.getElementById("email").value, password: document.getElementById("password").value });
+      var g=res.data
+      g.param=this.state.coords
+        editTraining(g, res.data.id).then(res=>{console.log(res)}).catch(err=>{console.log(err)})
       })
       .catch((err) => {
         return alert("Email tizimda mavjud iltimos boshqa email kiriting!");
@@ -90,6 +112,25 @@ export default class LearningCenter extends Component {
       })
       .catch((err) => console.log(err));
   };
+  getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.getCoordsA)
+    } else {
+      alert('GeoLocation not enabled');
+    }
+  }
+
+  getCoordsA = pos => {
+    console.log(pos)
+    this.setState({
+   coords:[ pos.coords.latitude, pos.coords.longitude]
+       
+    })
+  }
+  componentDidMount(){
+    getTrainingS().then(res=>{console.log(res.data)}).catch(err=>{console.log(err)})
+ this.getLocation()
+  }
   render() {
     return (
       <>
@@ -111,13 +152,62 @@ export default class LearningCenter extends Component {
           ) : (
             <div className={style.mat}>
               <Modal title="Manzilni kiritish" bodyStyle={{ padding: "0" }} visible={this.state.isModalVisible} onOk={this.handleOk} onCancel={this.handleCancel}>
-                <YMaps query={{ apikey: "" }}>
-                  <Map modules={["Placemark", "geocode", "geoObject.addon.balloon"]} onClick={this.onMapClick} state={this.state.mapState} width="100%" height="500px">
-                    {this.state.coords !== [] ? <Placemark geometry={this.state.coords} /> : null}
-                    <ZoomControl />
-                    <FullscreenControl />
-                    <SearchControl data={this.state.data !== {} ? this.state.data : {}} />
-                    <GeolocationControl />
+                <YMaps>
+                <Map
+                    onClick={this.onMapClick}
+                    width="100%"
+                    height="65vh"
+                    defaultState={{
+                      center:[41.268383899999996,
+                        69.22814149999999
+                        ] ,
+                      zoom: 6,
+                    }}
+                  >
+                    <Clusterer
+                      options={{
+                        preset: "islands#invertedVioletClusterIcons",
+                        groupByCoordinates: false,
+                      }}
+                    >
+                      {this.state.rows.map((info, index) => {
+                        return (
+                          <Placemark
+                            key={index}
+                            geometry={
+                              info.param !== [] || info.param !== null
+                                ? info.param
+                                : []
+                            }
+                            properties={{
+                              balloonContent: info.name,
+                            }}
+                          />
+                        );
+                      })}
+                    </Clusterer>
+                    <Clusterer
+                      options={{
+                        preset: "islands#invertedVioletClusterIcons",
+                        groupByCoordinates: false,
+                      }}
+                    >
+                          <Placemark
+                            key={-1}
+                            geometry={
+                              this.state.coords
+                            }
+                            // properties={{
+                            // }}
+                          />
+                    
+                    </Clusterer>
+
+                    <GeolocationControl options={{ float: "left" }} />
+                    <TypeSelector options={{ float: "right" }} />
+                    <TrafficControl options={{ float: "right" }} />
+                    <RouteButton options={{ float: "right" }} />
+                    <ZoomControl options={{ float: "left" }} />
                   </Map>
                 </YMaps>
               </Modal>
@@ -162,17 +252,15 @@ export default class LearningCenter extends Component {
                             <label className={style.inputLabel}>Parol</label>
                           </div>
                           <Row>
-                            <Col xs={2}>
+                          <Col xs={2}>
                               <Button className={style.btnm} onClick={() => this.setState({ isModalVisible: true })}>
                                 <LocationOnIcon />
                               </Button>
                             </Col>
                             <Col xs={10}>
-                              <div className={style.input}>
-                                <input placeholder=" " type="text" id="address" className={style.inputField} required />
-                                <label className={style.inputLabel}>Manzili</label>
-                              </div>
+                            <br/> <b> Bu tugmani bosib o'z o'quv markaziz binosini xaritadan belgilab qo'ying !!!</b>
                             </Col>
+                           
                           </Row>
                           <br />
                         </Col>

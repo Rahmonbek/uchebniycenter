@@ -183,6 +183,14 @@ export const createRegister = (data) => {
   };
   return httpsRequest(config);
 };
+export const editTraining = (data, id) => {
+  var config = {
+    url: `${url}/api/training/${id}/`,
+    method: "post",
+    data: data,
+  };
+  return httpsRequest(config);
+};
 
 export const verify = (data) => {
   var config = {
