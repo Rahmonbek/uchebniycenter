@@ -37,14 +37,14 @@ export default class Malumot extends Component {
                                    <a>Aloqa</a>
                                </div>
                            </Col>
-                           <Col lg={5} md={6} sm={12} style={{padding:'0'}}>
+                           <Col lg={5} md={6} sm={12} >
                                <div className={styles.logo}>
                                    <img src={logo2}/>
                                </div>
                                <p>O'quv markazlari uchun ma'lumotlar ombori bilan ishlash uchun yaratilgan qulay administrator paneli. Foydalanish uchun qo'ng'iroq qiling ! </p>
                                <button  depressed color="white" style={{marginLeft:'45px',marginTop:'10px'}} bgColor='#9E81C4'><FaPhoneAlt style={{marginRight:'10px',marginTop:'-5px'}}/> Qo'ng'iroq qilish</button>
                            </Col>
-                           <Col lg={7}  md={6} sm={12}>
+                           <Col lg={7}  md={6} className={styles.WorkImg} sm={12}>
                                <img src={back}/>
                            </Col>
                        </Row>
@@ -65,19 +65,23 @@ export default class Malumot extends Component {
                        </Row>
                    </Container>
                    <Container fluid style={{position:'relative',padding:'0'}}>
-                   <svg id="wave" style={{position:'absolute',transform:'rotate(0deg)', transition: '0.3s'}} viewBox="0 0 1440 490" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(182, 148, 225, 1)" offset="0%"></stop><stop stop-color="rgba(134, 110, 167, 1)" offset="100%"></stop></linearGradient></defs><path style={{transform:'translate(0, 0px)', opacity:'1'}} fill="url(#sw-gradient-0)" d="M0,49L48,98C96,147,192,245,288,236.8C384,229,480,114,576,89.8C672,65,768,131,864,179.7C960,229,1056,261,1152,302.2C1248,343,1344,392,1440,383.8C1536,376,1632,310,1728,277.7C1824,245,1920,245,2016,277.7C2112,310,2208,376,2304,367.5C2400,359,2496,278,2592,228.7C2688,180,2784,163,2880,147C2976,131,3072,114,3168,147C3264,180,3360,261,3456,310.3C3552,359,3648,376,3744,351.2C3840,327,3936,261,4032,245C4128,229,4224,261,4320,261.3C4416,261,4512,229,4608,228.7C4704,229,4800,261,4896,285.8C4992,310,5088,327,5184,334.8C5280,343,5376,343,5472,351.2C5568,359,5664,376,5760,318.5C5856,261,5952,131,6048,73.5C6144,16,6240,33,6336,73.5C6432,114,6528,180,6624,228.7C6720,278,6816,310,6864,326.7L6912,343L6912,490L6864,490C6816,490,6720,490,6624,490C6528,490,6432,490,6336,490C6240,490,6144,490,6048,490C5952,490,5856,490,5760,490C5664,490,5568,490,5472,490C5376,490,5280,490,5184,490C5088,490,4992,490,4896,490C4800,490,4704,490,4608,490C4512,490,4416,490,4320,490C4224,490,4128,490,4032,490C3936,490,3840,490,3744,490C3648,490,3552,490,3456,490C3360,490,3264,490,3168,490C3072,490,2976,490,2880,490C2784,490,2688,490,2592,490C2496,490,2400,490,2304,490C2208,490,2112,490,2016,490C1920,490,1824,490,1728,490C1632,490,1536,490,1440,490C1344,490,1248,490,1152,490C1056,490,960,490,864,490C768,490,672,490,576,490C480,490,384,490,288,490C192,490,96,490,48,490L0,490Z"></path></svg>
-                       <Row>
-                           <Col lg={4}  md={6} sm={12}  className={styles.card1} data-aos="fade-up">
+                   <svg id="wave" style={{position:'absolute',transform:'rotate(0deg)', transition: '0.3s'}} viewBox="0 0 1440 490" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                       <defs><linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
+                           <stop stop-color="rgba(182, 148, 225, 1)" offset="0%"></stop>
+                           <stop stop-color="rgba(134, 110, 167, 1)" offset="100%"></stop></linearGradient></defs>
+                           <path style={{transform:'translate(0, 0px)', opacity:'1'}} fill="url(#sw-gradient-0)" d="M0,49L48,98C96,147,192,245,288,236.8C384,229,480,114,576,89.8C672,65,768,131,864,179.7C960,229,1056,261,1152,302.2C1248,343,1344,392,1440,383.8C1536,376,1632,310,1728,277.7C1824,245,1920,245,2016,277.7C2112,310,2208,376,2304,367.5C2400,359,2496,278,2592,228.7C2688,180,2784,163,2880,147C2976,131,3072,114,3168,147C3264,180,3360,261,3456,310.3C3552,359,3648,376,3744,351.2C3840,327,3936,261,4032,245C4128,229,4224,261,4320,261.3C4416,261,4512,229,4608,228.7C4704,229,4800,261,4896,285.8C4992,310,5088,327,5184,334.8C5280,343,5376,343,5472,351.2C5568,359,5664,376,5760,318.5C5856,261,5952,131,6048,73.5C6144,16,6240,33,6336,73.5C6432,114,6528,180,6624,228.7C6720,278,6816,310,6864,326.7L6912,343L6912,490L6864,490C6816,490,6720,490,6624,490C6528,490,6432,490,6336,490C6240,490,6144,490,6048,490C5952,490,5856,490,5760,490C5664,490,5568,490,5472,490C5376,490,5280,490,5184,490C5088,490,4992,490,4896,490C4800,490,4704,490,4608,490C4512,490,4416,490,4320,490C4224,490,4128,490,4032,490C3936,490,3840,490,3744,490C3648,490,3552,490,3456,490C3360,490,3264,490,3168,490C3072,490,2976,490,2880,490C2784,490,2688,490,2592,490C2496,490,2400,490,2304,490C2208,490,2112,490,2016,490C1920,490,1824,490,1728,490C1632,490,1536,490,1440,490C1344,490,1248,490,1152,490C1056,490,960,490,864,490C768,490,672,490,576,490C480,490,384,490,288,490C192,490,96,490,48,490L0,490Z"></path></svg>
+                       <Row style={{margin:'auto',textAlign:'center'}}>
+                           <Col lg={4}  md={6} sm={12} style={{margin:'auto',textAlign:'center'}} className={styles.card} data-aos="fade-up">
                                <FaSignInAlt style={{color:'#9E81C4',fontSize:'40px'}}/>
                                <h4>Advance Insights</h4>
                                <p>Churn rate paradigm shift innovator facebook android infographic strategy investor social proof. Churn rate paradigm shift innovator facebook android.</p>
                            </Col>
-                           <Col lg={4}  md={6} sm={12} className={styles.card} data-aos="fade-up">
+                           <Col lg={4}  md={6} sm={12} style={{margin:'auto',textAlign:'center'}} className={styles.card} data-aos="fade-up">
                                <FaSignInAlt style={{color:'#9E81C4',fontSize:'40px'}}/>
                                <h4>Advance Insights</h4>
                                <p>Churn rate paradigm shift innovator facebook android infographic strategy investor social proof. Churn rate paradigm shift innovator facebook android.</p>
                            </Col>
-                           <Col lg={4}  md={6} sm={12} className={styles.card} data-aos="fade-up">
+                           <Col lg={4}  md={6} sm={12} style={{margin:'auto',textAlign:'center'}} className={styles.card} data-aos="fade-up">
                                <FaSignInAlt style={{color:'#9E81C4',fontSize:'40px'}}/>
                                <h4>Advance Insights</h4>
                                <p>Churn rate paradigm shift innovator facebook android infographic strategy investor social proof. Churn rate paradigm shift innovator facebook android.</p>
@@ -87,8 +91,8 @@ export default class Malumot extends Component {
                    </Container>
                    <Container>
                        <Row>
-                       <Col lg={7} md={6} sm={12}>
-                               <img src={dashboard} style={{width:'100%'}} data-aos="fade-right"/>
+                       <Col style={{marginTop:'200px'}} lg={7} md={6} sm={12}>
+                               <img src={dashboard}  style={{width:'100%'}} data-aos="fade-right"/>
                            </Col>
                            <Col lg={5}  md={6} sm={12} className={styles.afzalliklar} data-aos="fade-left">
                                <h6>POWERED BY AI</h6>
@@ -115,8 +119,8 @@ export default class Malumot extends Component {
                    </Container>
              <Container fluid>
                  <Row>
-                     <Col lg={12}  md={12} sm={12} className={styles.youtube}>
-                     <div class="custom-shape-divider-top-1627219937">
+                     <Col lg={12}  md={12} sm={12}  className={styles.youtube}>
+                     <div  class="custom-shape-divider-top-1627219937">
     <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
         <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
         <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
@@ -126,13 +130,12 @@ export default class Malumot extends Component {
 <h6>POWERED BY AI</h6>
                                <h1>Advance Insights</h1>
                                <p>Social proof bootstrapping seed money twitter. Product management iPad buzz business-to-consumer. User experience equity influencer.</p>
+                              <div className={styles.yoytobevideo} style={{position:'relative',zIndex:'1298376'}}>
                                <ReactPlayer
                                data-aos="fade-up"
-                               style={{marginLeft:'250px',marginTop:'70px',position:'inherit',zIndex:'111111111111'}}
-                               width='800px'
-                               height='500px'
+                              width="100%"
         url="https://www.youtube.com/watch?v=ug50zmP9I7s"
-      />
+      /></div>
                        <div class="custom-shape-divider-bottom-1627221721">
     <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
         <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
@@ -172,6 +175,17 @@ export default class Malumot extends Component {
                      </Col>
                  </Row>
              </Container>
+
+
+
+
+
+
+
+
+
+
+             
             </div>
         )
     }

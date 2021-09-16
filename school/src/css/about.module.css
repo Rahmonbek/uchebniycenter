@@ -11,8 +11,8 @@
     margin-left: 70px;
 }
 .logo {
-    width: 200px !important;
-    height: 200px !important;
+    width: 200px ;
+    height: 200px ;
     border-radius: 50% !important;
     background-color: #9E81C4 !important;
   margin-top: 100px;
@@ -91,6 +91,23 @@ box-shadow:  20px 20px 60px #866ea7,
     font-size:16px;
 }
 
+
+@media (max-width:880px) {
+    .WorkImg{
+        display:none;
+    }
+    .navbar a{
+        font-size: 10px;
+    }
+    
+}
+@media (max-width:400px) {
+    .logo{
+display: flex;
+width: 100px;
+height: 100px;
+    }
+}
 .card{
     background-color: white;
     margin:10px;
@@ -202,7 +219,7 @@ box-shadow:  20px 20px 60px #866ea7,
 @media screen and (max-width:566px) {
     
 .top{
-    height: 141vh;
+    height: 80vh;
 }
 .top img{
     width: 100%;
@@ -210,10 +227,17 @@ box-shadow:  20px 20px 60px #866ea7,
     margin-left: 0px;
 }
 .logo {
-  margin-top: 30px;
+  width: 100px;
+  height: 100px;
 }
-.navbar{
-    display: none;
+.logo img{
+    position: relative;
+    top:-40px;
+}
+.navbar a{
+   font-size: 15px;
+   padding:3px;
+   margin: 10px;
 }
 .aboutleft{
     margin-top: 150px !important;
@@ -418,7 +442,10 @@ box-shadow:  20px 20px 60px #866ea7,
         color:#6d6969
     }
     .afzalliklar{
+        margin-top: 200px;
         padding-top: 100px;
+        border-radius: 10px;
+        background-color:#9E81C4;
     }
     .afzalliklar h6{
         color:#9E81C4;
@@ -510,3 +537,32 @@ box-shadow:  20px 20px 60px #866ea7,
     }
     
 }
+.yoytobevideo{
+    margin:auto;
+    text-align: center;
+  width: 800px;
+    position: relative;
+    z-index: 122;
+
+}
+@media (max-width:991px) {
+    .yoytobevideo{
+        margin:auto;
+        text-align: center;
+      width: 400px;
+        position: relative;
+        z-index: 122;
+    
+    }
+    
+}
+
+@media (max-width:400px) {
+    .yoytobevideo{
+        margin:auto;
+        text-align: center;
+      width: 90%;
+        position: relative;
+        z-index: 122;
+    
+    }}
