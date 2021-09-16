@@ -38,10 +38,23 @@
     margin: auto;
     margin-bottom: 40px;
     font-family: 'Lobster', cursive;
-    /* border-bottom: 1px solid blue; */
-
-    
+    /* border-bottom: 1px solid blue; */  
 }
+@media (max-width:776px){
+  .section h1{
+    font-size: 35px;
+
+  }
+}
+@media (max-width:406px){
+  .section h1{
+    margin: auto;
+    text-align: center;
+    font-size: 20px;
+  }
+}
+
+
 .navbar{
   /* border:  2px solid red; */
   /* background-color: #fff; */
@@ -130,48 +143,9 @@ header{
  text-align: center;
 }
 
-/* .signup:befor{
-   content: "Ro'yxatdan o'tish";
-   width: 200px;
-   height: 30px;
-   visibility: hidden;
-}
-.signup:hover .signup:befor{
-    visibility: visible;
-} */
-.root {
-    max-width: 345;
- 
-  }
-  .media {
-    height: 0;
-    padding-top: 56.25%;
-   
-  }
-  .expand {
-    transform: rotate(0 deg);
-    margin-left: auto;
-   }
-  .expandOpen {
-    transform: rotate(180 deg);
-  }
-  .avatar {
-    background-color: red;
-  }
 
 
-  .footer{
-    width: 100%;
-    height: 400px;
-    background-image: linear-gradient(to left, rgb(149,153,226) 0%, rgb(78, 118, 248) 100%);
-    padding: 60px;
-    margin-top: 50px;
-  }
-  .col{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  
   .logo{
     width: 90px;
     height: 90px;
@@ -183,31 +157,15 @@ header{
     background-color: #fff;
     margin-bottom: 10px;
     margin-top: 20px;
+    
   }
+ 
+    
+ 
   .logo img{
     width: 70px;
     height: 70px;
     cursor: pointer;
   }
-  .footer p{
-     
-     color: #fff;
-     font-size: 18px;
-     
-  }
-  .connection{
-   margin: 20px;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background-color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-  }
-  .contact{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
+  
+

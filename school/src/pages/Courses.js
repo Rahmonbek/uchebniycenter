@@ -158,7 +158,7 @@ t=this.state.traning[i]
            
       <header className={styles.header}>
 
-                      <div className={styles.navbar}>
+                      <div style={{overflowX:'hidden',width:'90%'}} className={styles.navbar}>
                              <ul>
                              
                              <Link to="/malumot"><li>Biz haqimizda</li></Link>
@@ -175,7 +175,7 @@ t=this.state.traning[i]
     
     
 
-                       <Carousel slides={slides} autoplay={false} interval={2000} style={{marginTop:'50px'}}/>
+                       <Carousel slides={slides} autoplay={false} interval={2000} style={{marginTop:'50px'}} style={{overflowX:'hidden'}}/>
                          
                       
                           
@@ -1729,12 +1729,11 @@ t=this.state.traning[i]
         
       
          </div>   
-         <footer >
-             <div className={styles.footer}>
-               <Container>
-                 <Row>
-                   <Col lg={6} md={6} sm={12}  className={styles.col}>
-                   <YMaps >
+         
+         <footer class="footer-distributed">
+
+			<div class="footer-left">
+      <YMaps >
         <Map
           width='90%'
           height='280px'
@@ -1765,60 +1764,48 @@ t=this.state.traning[i]
   
         </Map>
     </YMaps>
-                   </Col>
-                   <Col lg={6} md={6} sm={12} className={styles.contact}>
-                     {/* <Row> */}
-                     <div>
+			</div>
+
+			<div class="footer-center">
+
+				<div style={{display:'flex'}}>
+					<i class="fa fa-map-marker"></i>
+					<p><span>2-qavat. Yashnobot mahalla kametiteti</span> Chilonzor, Toshkent</p>
+				</div>
+
+				<div>
+					<i class="fa fa-phone" ></i>
+					<p>+996487223</p>
+				</div>
+			  <div >
                      <div className={styles.logo}>
                          <img src={logo} /> 
                      </div>
-                     <h4 style={{color:'#fff', fontSize:'20px', textAlign:'center', marginBottom:'30px'}}>IT Tower</h4>
+                     <h4 style={{color:'#000', fontSize:'20px', textAlign:'center', marginBottom:'30px'}}>IT Tower</h4>
                      </div>
+			</div>
 
-                     <div>
-                       
-                         <Col> 
-                         <p style={{textAlign:'center'}}>Biz haqimizda</p>
-                         <div className={styles.connection} style={{ marginLeft:'auto', marginRight:'auto'}}>
-                           
-                         <Link to="/malumot/">
-                         <IconButton ><InfoOutlinedIcon color="primary" style={{fontSize:'23px',}}/></IconButton>
-                         </Link>
-                         </div></Col>
-                         <Col>
-                         <p style={{textAlign:'center'}}>Aloqa</p>
-                         <div style={{display:'flex'}}>
-                         <div className={styles.connection}>
-                         <a href='@ItTower'>
-                         <IconButton ><TelegramIcon color="primary" style={{fontSize:'23px'}}/></IconButton></a>
-                         </div>
-                         <div className={styles.connection}>
-                         <a href='tel:+998935555555'>
-                         <IconButton ><CallIcon color="primary" style={{fontSize:'23px'}}/></IconButton></a>
-                         </div>
-                         <div className={styles.connection}>
-                         <a href='http://instagram.com/ItTower'>
-                         <IconButton ><InstagramIcon color="primary" style={{fontSize:'23px'}}/></IconButton></a>
-                         </div>
-                         <div className={styles.connection}>
-                         <a href="mailto:it_tower@gmail.com">
-                         <IconButton ><MailOutlineIcon color="primary" style={{fontSize:'23px'}}/></IconButton></a>
-                         </div>
-                           </div>
-                       </Col>
-                       
-                     </div>
-                    
-                     {/* </Row> */}
+			<div class="footer-right">
 
-                   </Col>
-                 </Row>
-               </Container>
-               </div>
-             </footer>
-            
+				<div class="footer-company-about" style={{background:'rgba(0, 60, 255, 0.384)',borderRadius:'10px'}} >
+					<span style={{paddingTop:'15px',textAlign:'center'}}>Biz haqimizda</span>
+				<div class="footer-icons" >  <Link to="/malumot/">
+        <InfoOutlinedIcon color="primary" style={{fontSize:'23px',color:'white',margin:'auto',textAlign:'center',zIndex:'12'}}/>
+        </Link></div>
+				</div>
+        <div style={{marginTop:'10px',background:'rgba(0, 60, 255, 0.384)',borderRadius:'10px'}}>
+ <p style={{color:'white',fontSize:'24px',paddingTop:'15px',textAlign:'center'}}>Aloqa</p>
+				<div class="footer-icons">
+
+        <a href='@ItTower'><IconButton ><TelegramIcon color="primary" style={{fontSize:'23px',color:'white'}}/></IconButton></a>
+        <a href='tel:+998935555555'> <IconButton ><CallIcon color="primary" style={{fontSize:'23px',color:'white'}}/></IconButton></a>
+        <a href='http://instagram.com/ItTower'><IconButton ><InstagramIcon color="primary" style={{fontSize:'23px',color:'white'}}/></IconButton></a>
+        <a href="mailto:it_tower@gmail.com"><IconButton ><MailOutlineIcon color="primary" style={{fontSize:'23px',color:'white'}}/></IconButton></a>
+    
+				</div></div>
+			</div>
+		</footer>           
          </div>
-         
         </div>
        );
     }
