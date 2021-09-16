@@ -3,6 +3,11 @@ import styles from '../css/about.module.css'
 import back from '../img/back.png'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import TelegramIcon from '@material-ui/icons/Telegram';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import CallIcon from '@material-ui/icons/Call';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import { Container,Row,Col } from 'react-bootstrap'
 import logo2 from '../img/12347.png'
 import {FaSignInAlt,FaTelegramPlane,FaPhoneAlt} from 'react-icons/fa'
@@ -11,11 +16,31 @@ import { Card, Button,Fab ,IconButton,Divider} from 'ui-neumorphism'
 import dashboard1 from '../img/present-right_xmbzj1bc.png'
 import ReactPlayer from "react-player"
 import '../App.css'
+import logo from '../img/logo1.png'
+import {YMaps, Map, Clusterer, Placemark, 
+    TypeSelector, ZoomControl, GeolocationControl, RouteButton, TrafficControl } from 'react-yandex-maps'
 import {HiOutlineLocationMarker} from 'react-icons/hi'
 import {AiOutlineInstagram,AiOutlineMail} from 'react-icons/ai'
 import Aos from 'aos';
+import { Link } from 'react-router-dom';
 import 'aos/dist/aos.css';
 export default class Malumot extends Component {
+    state={
+        expanded:[],
+        justifyActive:'tab1',
+        group:[],
+        traning:[],
+        date:"",
+        points:[
+            {
+              name: "IT Tower",
+              param: [41.317648, 69.230585], 
+            }, 
+        ],
+        
+            }
+        
+   
     componentDidMount(){
         Aos.init({
           duration:2000
@@ -176,7 +201,79 @@ export default class Malumot extends Component {
                  </Row>
              </Container>
 
+             <footer class="footer-distributed">
 
+<div class="footer-left">
+<YMaps >
+<Map
+width='90%'
+height='280px'
+defaultState={{
+center: [41.311151, 69.279716],
+zoom: 8
+}}
+>
+<Clusterer options={{  preset: 'islands#invertedVioletClusterIcons',  groupByCoordinates: false, }}  >
+{this.state.points.map((coordinates, index) => (
+  
+  <Placemark  balloonContent= '<img src="http://img-fotki.yandex.ru/get/6114/82599242.2d6/0_88b97_ec425cf5_M" />'
+  iconContent= {coordinates.name}   key={index}
+   geometry={coordinates.param} 
+   options={{preset: "islands#blueStretchyIcon",
+   // Отключаем кнопку закрытия балуна.
+   balloonCloseButton: false,
+    // Балун будем открывать и закрывать кликом по иконке метки.
+   hideIconOnBalloonOpen: false,
+   openBalloonOnClick:true}}/>
+))}
+</Clusterer> 
+<GeolocationControl options={{ float: 'left' }} />
+<TypeSelector options={{ float: 'right' }} />
+<TrafficControl options={{ float: 'right' }} />
+<RouteButton options={{ float: 'right' }} />
+<ZoomControl options={{ float: 'left' }} />
+
+</Map>
+</YMaps>
+</div>
+
+<div class="footer-center">
+
+    <div style={{display:'flex'}}>
+        <i class="fa fa-map-marker"></i>
+        <p><span>2-qavat. Yashnobot mahalla kametiteti</span> Chilonzor, Toshkent</p>
+    </div>
+
+    <div>
+        <i class="fa fa-phone" ></i>
+        <p>+996487223</p>
+    </div>
+  <div  className={styles.logotip2}>
+ <img src={logo}/>
+       <h4>IT Tower</h4>
+         </div>
+</div>
+
+<div class="footer-right">
+
+    <div class="footer-company-about" style={{background:'rgba(0, 60, 255, 0.384)',borderRadius:'10px'}} >
+        <span style={{paddingTop:'15px',textAlign:'center'}}>Biz haqimizda</span>
+    <div class="footer-icons" >  <Link to="/malumot/">
+<InfoOutlinedIcon color="primary" style={{fontSize:'23px',color:'white',margin:'auto',textAlign:'center',zIndex:'12'}}/>
+</Link></div>
+    </div>
+<div style={{marginTop:'10px',background:'rgba(0, 60, 255, 0.384)',borderRadius:'10px'}}>
+<p style={{color:'white',fontSize:'24px',paddingTop:'15px',textAlign:'center'}}>Aloqa</p>
+    <div class="footer-icons">
+
+<a href='@ItTower'><IconButton ><TelegramIcon color="primary" style={{fontSize:'23px',color:'white'}}/></IconButton></a>
+<a href='tel:+998935555555'> <IconButton ><CallIcon color="primary" style={{fontSize:'23px',color:'white'}}/></IconButton></a>
+<a href='http://instagram.com/ItTower'><IconButton ><InstagramIcon color="primary" style={{fontSize:'23px',color:'white'}}/></IconButton></a>
+<a href="mailto:it_tower@gmail.com"><IconButton ><MailOutlineIcon color="primary" style={{fontSize:'23px',color:'white'}}/></IconButton></a>
+
+    </div></div>
+</div>
+</footer>    
 
 
 
