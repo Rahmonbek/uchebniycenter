@@ -168,7 +168,7 @@ export const getGroups = () => {
 
 export const createLogin = (data) => {
   var config = {
-    url: `${url}/api/login/`,
+    url: `${url}/auth/login/`,
     method: "post",
     data: data,
   };

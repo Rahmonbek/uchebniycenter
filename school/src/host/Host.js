@@ -1,5 +1,5 @@
 import axios from "axios";
-export const url = "https://ews-backend.herokuapp.com";
+export const url = "http://ews.electronicpoint.uz";
 
 export const httpsRequest = (config) => {
   return axios({

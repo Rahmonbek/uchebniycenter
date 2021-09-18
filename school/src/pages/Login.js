@@ -7,17 +7,17 @@ import GLOBAL from "./Token";
 import { createLogin } from "../host/Config";
 
 function Login() {
-  GLOBAL.id = null;
+  GLOBAL.id = 1;
   let history = useHistory();
   function saveData() {
-    var config = { email: document.getElementById("formUsername").value, password: document.getElementById("formPassword").value };
+    var config = { username: document.getElementById("formUsername").value, password: document.getElementById("formPassword").value };
     createLogin(config)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         GLOBAL.id = res.data.id;
         history.push("/cabinet");
       })
-      .catch((err) => alert("Email yoki parol noto'g'ri!!!"));
+      .catch((err) => alert("Login yoki parol noto'g'ri!!!"));
   }
   return (
     <div className={styles.bd}>
@@ -28,8 +28,8 @@ function Login() {
           <div style={{ textAlign: "left" }}>
             <Form>
               <Form.Group className="mb-3" controlId="formUsername">
-                <Form.Label className={styles.labelForm}>Email</Form.Label>
-                <Form.Control type="text" placeholder="Email" className={styles.inputForm} />
+                <Form.Label className={styles.labelForm}>Login</Form.Label>
+                <Form.Control type="text" placeholder="Login" className={styles.inputForm} />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formPassword">
