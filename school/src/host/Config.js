@@ -185,7 +185,7 @@ export const createSignUp = (data) => {
 
 export const createRegister = (data) => {
   var config = {
-    url: `${url}/api/register/`,
+    url: `${url}/api/training/`,
     method: "post",
     data: data,
   };

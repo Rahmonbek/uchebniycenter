@@ -52,19 +52,19 @@ export default class LearningCenter extends Component {
     let formData = new FormData();
     formData.append("name", document.getElementById("name").value ?? "");
     formData.append("email", document.getElementById("email").value ?? "");
-    // formData.append("phone_number", document.getElementById("phonenumber").value ?? "");
+    formData.append("phone_number", document.getElementById("phonenumber").value ?? "");
     formData.append("password", document.getElementById("password").value ?? "");
-    // formData.append("telegram", document.getElementById("telegram").value ?? "");
-    // formData.append("instagram", document.getElementById("instagram").value ?? "");
-    // formData.append("you_tube", document.getElementById("youtube").value ?? "");
-    // formData.append("text", document.getElementById("text").value ?? "");
-    // formData.append("languages", "uz");
+    formData.append("telegram", document.getElementById("telegram").value ?? "");
+    formData.append("instagram", document.getElementById("instagram").value ?? "");
+    formData.append("you_tube", document.getElementById("youtube").value ?? "");
+    formData.append("text", document.getElementById("text").value ?? "");
+    formData.append("languages", "uz");
 
-    // if (this.state.photo !== "") {
-    //   formData.append("photo", this.state.photo ?? null);
-    // } else {
-    //   return alert("Logotip rasmini kiritmadingiz!");
-    // }
+    if (this.state.photo !== "") {
+      formData.append("photo", this.state.photo ?? null);
+    } else {
+      return alert("Logotip rasmini kiritmadingiz!");
+    }
     createRegister(formData)
       .then((res) => {
         this.setState({ email: document.getElementById("email").value, password: document.getElementById("password").value });
@@ -309,7 +309,7 @@ export default class LearningCenter extends Component {
                               />
                               <label className={style.inputLabel}>Parol</label>
                             </div>
-                            {/* <Row>
+                            <Row>
                               <Col xs={2}>
                                 <Button
                                   className={style.btnm}
@@ -328,10 +328,10 @@ export default class LearningCenter extends Component {
                                   xaritadan belgilab qo'ying !!!
                                 </b>
                               </Col>
-                            </Row> */}
+                            </Row> 
                             <br />
                           </Col>
-                          {/* <Col sm={3} className={style.logoinp}>
+                           <Col sm={3} className={style.logoinp}>
                             <label for="inpimg">
                               <i>Logotip kiritish joyi</i>
                             </label>
@@ -341,7 +341,7 @@ export default class LearningCenter extends Component {
                               id="inpimg"
                               accept="image/*"
                             />
-                          </Col> */}
+                          </Col>
                           {/* <Col sm={6}>
                     <div className={style.input}>
                       <select className={style.inputField}>
@@ -352,7 +352,7 @@ export default class LearningCenter extends Component {
                       <label className={style.inputLabel}>Languages</label>
                     </div>
                   </Col> */}
-                          {/* <Col sm={6}>
+                          <Col sm={6}>
                             <div className={style.input}>
                               <input
                                 placeholder=" "
@@ -407,8 +407,8 @@ export default class LearningCenter extends Component {
                                 YouTube manzili
                               </label>
                             </div>
-                          </Col> */}
-                          {/* <Col sm={12}>
+                          </Col>
+                          <Col sm={12}>
                             <div className={style.input}>
                               <textarea
                                 placeholder=" "
@@ -421,7 +421,7 @@ export default class LearningCenter extends Component {
                                 Qo'shimcha malumot...
                               </label>
                             </div>
-                          </Col> */}
+                          </Col>
 
                           <Col xs={7} sm={9}></Col>
                           <Col xs={5} sm={3} style={{ paddingTop: "15px" }}>

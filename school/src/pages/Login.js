@@ -49,7 +49,7 @@ function Login() {
 
               <p className={styles.content}>
                 Agarda hali tizimda mavjud bo`lmasangiz
-                <Link to="/lcenter">
+                <Link to="/sigup">
                   <p
                     style={{
                       textAlign: "center",
