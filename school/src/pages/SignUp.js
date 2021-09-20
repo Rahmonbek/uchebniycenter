@@ -26,6 +26,7 @@ export default function SignUp() {
       .then((res) => {
         localStorage.setItem("token", res.data.key);
         // GLOBAL.id = res.data.id;
+        GLOBAL.email = signmail;
         history.push("/lcenter");
         console.log("Res data", res.data);
       })

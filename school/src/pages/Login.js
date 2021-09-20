@@ -16,7 +16,7 @@ function Login() {
     createLogin(config)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
-        GLOBAL.id =1;         
+        GLOBAL.id = 1;
         history.push("/cabinet");
       })
       .catch((err) => alert("Email yoki parol noto'g'ri!!!"));
