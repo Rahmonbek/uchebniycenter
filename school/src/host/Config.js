@@ -174,6 +174,14 @@ export const createLogin = (data) => {
   };
   return httpsRequest(config);
 };
+export const createSignUp = (data) => {
+  var config = {
+    url: `${url}/auth/registration/`,
+    method: "post",
+    data: data,
+  };
+  return httpsRequest(config);
+};
 
 export const createRegister = (data) => {
   var config = {

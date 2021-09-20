@@ -10,7 +10,10 @@ function Login() {
   GLOBAL.id = null;
   let history = useHistory();
   function saveData() {
-    var config = { email: document.getElementById("formUsername").value, password: document.getElementById("formPassword").value };
+    var config = {
+      email: document.getElementById("formUsername").value,
+      password: document.getElementById("formPassword").value,
+    };
     createLogin(config)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
@@ -29,21 +32,46 @@ function Login() {
             <Form>
               <Form.Group className="mb-3" controlId="formUsername">
                 <Form.Label className={styles.labelForm}>Email</Form.Label>
-                <Form.Control type="text" placeholder="Email" className={styles.inputForm} />
+                <Form.Control
+                  type="text"
+                  placeholder="Email"
+                  className={styles.inputForm}
+                />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formPassword">
                 <Form.Label className={styles.labelForm}>Parol</Form.Label>
-                <Form.Control type="password" placeholder="Parol" className={styles.inputForm} />
+                <Form.Control
+                  type="password"
+                  placeholder="Parol"
+                  className={styles.inputForm}
+                />
               </Form.Group>
 
               <p className={styles.content}>
                 Agarda hali tizimda mavjud bo`lmasangiz
-                <Link to="/lcenter">
-                  <p style={{ textAlign: "center", fontSize: "12.5px", fontWeight: "500", display: "inline-block", marginBottom: "0px", marginLeft: "5px" }}>ro'yxatdan o'ting!</p>
+                <Link to="/sigup">
+                  <p
+                    style={{
+                      textAlign: "center",
+                      fontSize: "12.5px",
+                      fontWeight: "500",
+                      display: "inline-block",
+                      marginBottom: "0px",
+                      marginLeft: "5px",
+                    }}
+                  >
+                    ro'yxatdan o'ting!
+                  </p>
                 </Link>
               </p>
-              <Button variant="primary" type="button" onClick={saveData} style={{ backgroundColor: "#1A86D0" }} className={styles.btnInput}>
+              <Button
+                variant="primary"
+                type="button"
+                onClick={saveData}
+                style={{ backgroundColor: "#1A86D0" }}
+                className={styles.btnInput}
+              >
                 Kirish
               </Button>
             </Form>
@@ -53,5 +81,4 @@ function Login() {
     </div>
   );
 }
-
 export default Login;

@@ -1,4 +1,5 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import React from "react";
 import Courses from "./pages/Courses";
 import Registration from "./pages/Registration";
 import Main from "./Main";
@@ -6,6 +7,7 @@ import Malumot from "./pages/Malumot";
 import LearningCenter from "./pages/LearningCenter";
 import Login from "./pages/Login";
 import Xarita from "./pages/Xarita";
+import SignUp from "./pages/SignUp";
 // import { useEffect } from "react";
 // import Category from "./pages/Category";
 // import { useDispatch } from "react-redux";
@@ -36,6 +38,10 @@ function App() {
         <Route exact path="/lcenter">
           {" "}
           <LearningCenter />{" "}
+        </Route>
+        <Route exact path="/sigup">
+          {" "}
+          <SignUp />
         </Route>
         <Route exact path="/login">
           {" "}
