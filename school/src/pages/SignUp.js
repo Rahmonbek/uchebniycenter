@@ -115,7 +115,7 @@ export default function SignUp() {
                   required
                 />
               </Form.Group>
-              <div style={{ display: "flex" }} className="footerTitleSign">
+              <div className={styles.EnterLogIn} style={{ display: "flex" }}>
                 <p>Already have an account? </p>
                 <p
                   style={{
@@ -142,11 +142,6 @@ export default function SignUp() {
               >
                 Kirish
               </Button>
-              {/* <input
-                className={styles.Inputbutton}
-                type="submit"
-                value="Sign Up"
-              /> */}
             </Form>
           </div>
         </div>

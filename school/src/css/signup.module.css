@@ -16,7 +16,6 @@
 
 
 .formLogin {
-    border: 1px solid black;
     position: relative;
     width: 450px;
     height: 100vh;
@@ -80,8 +79,10 @@
     line-height: 1.2;
     box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
     transition: 0.5s;
+    margin-left: 35%;
+    }
 
-}
+
 
 .btnInput:hover {
     box-shadow: none;
@@ -111,4 +112,19 @@
     line-height: 1.2;
     box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
     transition: 0.5s;
+}
+.EnterLogIn {
+    width: 70%;
+    text-align: center;
+    justify-content: space-around;
+    margin: auto;
+    height: auto;
+}
+
+.EnterLogIn p:nth-child(1) {
+    font-size: 2vh;
+}
+
+.EnterLogIn p:nth-child(2) a {
+    font-size: 2vh;
 }
