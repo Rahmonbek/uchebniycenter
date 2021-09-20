@@ -34,12 +34,10 @@ function App() {
           <Malumot />
         </Route>
         <Route exact path="/lcenter">
-          {" "}
-          <LearningCenter />{" "}
+          <LearningCenter />
         </Route>
         <Route exact path="/login">
-          {" "}
-          <Login />{" "}
+          <Login />
         </Route>
         {/* <Route exact path="/"> <Category/> </Route> */}
       </Switch>

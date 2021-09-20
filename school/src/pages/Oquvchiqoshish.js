@@ -102,7 +102,7 @@ document.getElementById('telefon2').value=''
     },
     {
         name: "kurs",
-        label: "Kurs",
+        label: "Kurs", 
         options: {
             filter: true,
             sort: false,
