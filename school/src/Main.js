@@ -80,7 +80,7 @@ export default class Main extends Component {
     return GLOBAL.id !== null ? (
       <div>
         <BrowserRouter>
-          <div className={styles.top}>
+          <div className={styles.top} style={{overflowX:'hidden'}}>
             <h1 className={this.state.collapsed ? styles.header1 : styles.header2}>IT Tower</h1>
             <div onClick={this.toggleCollapsed} className={this.state.collapsed ? styles.btntop1 : styles.btntop}>
               <div></div>
@@ -118,7 +118,7 @@ export default class Main extends Component {
           </div>
           <div style={{ display: "flex", flexDirection: "row" }}>
             <div style={{ backgroundColor: "rgba(255,255,255,0.8)" }} className={this.state.collapsed ? styles.collapsed1 : styles.collapsed2}>
-              <Menu className={styles.menuNav} mode="inline" style={{ boxShadow: "0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%), 0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%)" }} inlineCollapsed={this.state.collapsed}>
+              <Menu className={styles.menuNav} mode="inline" style={{zIndex:'394123221873', boxShadow: "0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%), 0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%)" }} inlineCollapsed={this.state.collapsed}>
                 <h5 className={this.state.collapsed ? styles.headingMenu1 : styles.headingMenu2}>Admin</h5>
                 <div className={this.state.collapsed ? styles.hrMenu1 : styles.hrMenu2}></div>
                 <Menu.Item key="1" icon={<PieChartOutlined style={{ fontSize: "18px", color: "rgba(0,0,0,0.3)" }} />} className={this.state.collapsed ? styles.list1 : styles.list2}>
