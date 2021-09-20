@@ -7,7 +7,6 @@ import GLOBAL from "./Token";
 import { createLogin } from "../host/Config";
 
 function Login() {
-  GLOBAL.id = null;
   let history = useHistory();
   function saveData() {
     var config = {
@@ -17,7 +16,7 @@ function Login() {
     createLogin(config)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
-        GLOBAL.id = res.data.id;
+        GLOBAL.id =1;         
         history.push("/cabinet");
       })
       .catch((err) => alert("Email yoki parol noto'g'ri!!!"));
