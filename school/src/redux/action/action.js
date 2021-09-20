@@ -1,6 +1,6 @@
 
 export const getTraining=()=>{
-    return{
-        type:"GET"
-    }
-}
+  return {
+    type: "GET",
+  };
+} 
