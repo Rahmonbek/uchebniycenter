@@ -130,7 +130,7 @@ export default function Oqituvchiqoshish() {
       </div>
       <div style={{ padding: "10px" }} className={styles.backgroundTable}>
         <h5>O'qituvchilar ro'yxati</h5>
-        <Table responsive style={{ marginTop: "20px", color: "rgba(0,0,0,0.7)" }}>
+        <Table responsive style={{ marginTop: "20px", color: "rgba(0,0,0,0.7)", overflowX:'scroll' }}>
           <thead>
             <tr>
               <th style={{ border: " 1px solid #3F6AD8", padding: "10px" }}>#</th>

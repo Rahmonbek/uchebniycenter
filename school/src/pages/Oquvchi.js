@@ -109,7 +109,7 @@ export default function Oquvchiqoshish() {
 
   useEffect(() => {
     getSS();
-  });
+  },[]);
 
   return GLOBAL.id !== null ? (
     <div style={{ padding: "5%" }}>
@@ -118,9 +118,9 @@ export default function Oquvchiqoshish() {
           O'quvchi qo'shish <BsPersonPlusFill style={{ color: "#3F6AD8", marginLeft: "10px", marginTop: "-5px", cursor: "pointer" }} />
         </Button>
       </div>
-      <div style={{ padding: "10px" }} className={styles.backgroundTable}>
+      <div style={{ padding: "10px", overflowX:'scroll'  }} className={styles.backgroundTable}>
         <h5>O'quvchilar ro'yxati</h5>
-        <Table style={{ marginTop: "20px", color: "rgba(0,0,0,0.7)" }}>
+        <Table style={{ marginTop: "20px", color: "rgba(0,0,0,0.7)"}}>
           <thead>
             <tr>
               <th style={{ borderBottom: " 1px solid #3F6AD8", padding: "10px" }}>#</th>

@@ -273,13 +273,14 @@ const takeOy=()=>{
      takeOy()
  },[oylar])
     return (
-        <div style={{padding:'5%'}}>
+        <div style={{padding:'5%'}} >
               <div style={{marginBottom:'20px'}}>
             <Button bgColor='#F1F4F6' onClick={showModal}>To'lov <FcPlus style={{color:'#3F6AD8',marginLeft:'10px',marginTop:'-5px',cursor:'pointer'}}/></Button>
             </div>
             <Card style={{padding:'10px',marginBottom:'20px', backgroundColor:'#F1F4F6'}} className={styles.backgroundTable}>
             <h6>Oxirgi to'lov qilganlar ro'yxati</h6>
-            <Card inset style={{backgroundColor:'#F1F4F6',marginTop:'20px'}}>
+
+            <Card  inset style={{backgroundColor:'#F1F4F6',marginTop:'20px',  overflow:'scroll',}}>
             <Table  style={{marginTop:'20px'}} style={{color:'rgba(0,0,0,0.7)'}}>
                         <thead>
                             <tr>
