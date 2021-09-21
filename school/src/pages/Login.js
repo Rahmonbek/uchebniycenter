@@ -65,6 +65,23 @@ function Login() {
                   </p>
                 </Link>
               </p>
+              <p className={styles.content}>
+                Agar parolingizni unitgan bo`lsangiz
+                <Link to="/sigup">
+                  <p
+                    style={{
+                      textAlign: "center",
+                      fontSize: "12.5px",
+                      fontWeight: "500",
+                      display: "inline-block",
+                      marginBottom: "0px",
+                      marginLeft: "5px",
+                    }}
+                  >
+                    bosing!
+                  </p>
+                </Link>
+              </p>
               <Button
                 variant="primary"
                 type="button"
