@@ -6,10 +6,28 @@ import img1 from "../img/lgg.png";
 import { Link, Redirect } from "react-router-dom";
 // import img2 from "../img/lc.png";
 
-import { YMaps, Map, Clusterer, Placemark, TypeSelector, ZoomControl, GeolocationControl, RouteButton, TrafficControl, GeoObject } from "react-yandex-maps";
+import {
+  YMaps,
+  Map,
+  Clusterer,
+  Placemark,
+  TypeSelector,
+  ZoomControl,
+  GeolocationControl,
+  RouteButton,
+  TrafficControl,
+  GeoObject,
+} from "react-yandex-maps";
 import EventAvailableOutlinedIcon from "@material-ui/icons/EventAvailableOutlined";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
-import { createLogin, createRegister, editTraining, getTraining, getTrainingS, verify } from "../host/Config";
+import {
+  createLogin,
+  createRegister,
+  editTraining,
+  getTraining,
+  getTrainingS,
+  verify,
+} from "../host/Config";
 import GLOBAL from "./Token";
 import { TiArrowBackOutline } from "react-icons/ti";
 import { st } from "../host/Host";
@@ -53,7 +71,7 @@ export default class LearningCenter extends Component {
     formData.append("name", document.getElementById("name").value ?? "");
     formData.append("email", document.getElementById("email").value ?? "");
     formData.append("phone_number", document.getElementById("phonenumber").value ?? "");
-    formData.append("password", document.getElementById("password").value ?? "");
+    formData.append("password",document.getElementById("password").value ?? "" );
     formData.append("telegram", document.getElementById("telegram").value ?? "");
     formData.append("instagram", document.getElementById("instagram").value ?? "");
     formData.append("you_tube", document.getElementById("youtube").value ?? "");
@@ -67,7 +85,10 @@ export default class LearningCenter extends Component {
     }
     createRegister(formData)
       .then((res) => {
-        this.setState({ email: document.getElementById("email").value, password: document.getElementById("password").value });
+        this.setState({
+          email: document.getElementById("email").value,
+          password: document.getElementById("password").value,
+        });
         var g = res.data;
         g.param = this.state.coords;
         editTraining(g, res.data.id)
@@ -86,12 +107,13 @@ export default class LearningCenter extends Component {
     console.log(e.target.files[0]);
     this.setState({ photo: e.target.files[0] });
   };
+  // --------------------------------
   onCodeSubmit = () => {
     var data = {
       email: this.state.email,
       kod: document.querySelector("#verify").value,
     };
-    verify(data)
+    verify(data) 
       .then((res) => {
         console.log(res);
         var config = {
@@ -108,6 +130,7 @@ export default class LearningCenter extends Component {
       })
       .catch((err) => console.log(err));
   };
+  // ---------------------------------
   getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.getCoordsA);
@@ -267,12 +290,12 @@ export default class LearningCenter extends Component {
                     <div
                       className={style.forf}
                       style={{ padding: "0xp 0px 12px 0px" }}
-                    > 
+                    >
                       <h3 onClick={() => this.setState({ ft: false })}>
                         O'quv markazi haqida
                       </h3>
                       <br />
-                      
+
                       <form className={style.cardForm}>
                         <Row>
                           <Col sm={9}>
@@ -328,10 +351,10 @@ export default class LearningCenter extends Component {
                                   xaritadan belgilab qo'ying !!!
                                 </b>
                               </Col>
-                            </Row> 
+                            </Row>
                             <br />
                           </Col>
-                           <Col sm={3} className={style.logoinp}>
+                          <Col sm={3} className={style.logoinp}>
                             <label for="inpimg">
                               <i>Logotip kiritish joyi</i>
                             </label>
@@ -435,7 +458,7 @@ export default class LearningCenter extends Component {
                           </Col>
                         </Row>
                       </form>
-                    </div> 
+                    </div>
                   </div>
                 </div>
               </div>

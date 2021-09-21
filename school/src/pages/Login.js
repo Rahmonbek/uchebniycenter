@@ -50,6 +50,7 @@ function Login() {
               <p className={styles.content}>
                 Agarda hali tizimda mavjud bo`lmasangiz
                 <Link to="/sigup">
+                  {/* <Link to="/lcenter"> */}
                   <p
                     style={{
                       textAlign: "center",

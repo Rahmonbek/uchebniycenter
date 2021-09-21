@@ -183,6 +183,16 @@ export const createSignUp = (data) => {
   return httpsRequest(config);
 };
 
+export const verifySignUp = (data) => {
+  var config = {
+    // url: `${url}/api/verify/`,
+    url: `${url}/email-verification-send/`,
+    method: "post",
+    data: data,
+  };
+  return httpsRequest(config);
+};
+
 export const createRegister = (data) => {
   var config = {
     url: `${url}/api/training/`,
@@ -210,9 +220,11 @@ export const editTrainings = (data, id) => {
 
 export const verify = (data) => {
   var config = {
-    url: `${url}/api/verify/`,
+    // url: `${url}/api/verify/`,
+    url: `${url}/api/center-admin/`,
     method: "post",
     data: data,
   };
   return httpsRequest(config);
 };
+
