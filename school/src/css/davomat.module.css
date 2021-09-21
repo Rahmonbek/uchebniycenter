@@ -87,3 +87,8 @@
 .tecnoUl li {
     margin: auto 5px;
 }
+@media (max-width:991px) {
+    .backgroundTable{
+        width:100%;
+    }
+}
