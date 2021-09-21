@@ -65,7 +65,7 @@ function Login() {
                 </Link>
               </p>
               <p className={styles.content}>
-                Agar parolingizni unitgan bo`lsangiz
+                Parolingizni
                 <Link to="/sigup">
                   <p
                     style={{
@@ -77,7 +77,7 @@ function Login() {
                       marginLeft: "5px",
                     }}
                   >
-                    bosing!
+                    unitdingizmi!
                   </p>
                 </Link>
               </p>
