@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import styles from "../css/signup.module.css";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import GLOBAL from "./Token";
 import { createSignUp } from "../host/Config";
-
+import { createLogin } from "../host/Config";
+import { verifySignUp } from "../host/Config";
 import Login from "./Login";
+import { Input, Modal } from "antd";
+
 export default function SignUp() {
   const [signusername, setSignUsername] = useState("");
   const [signmail, setSignMail] = useState("");
@@ -44,6 +47,28 @@ export default function SignUp() {
       signpasswordconfirm
     );
   }
+  // // -------------------------------
+  // const onCodeSubmit = () => {
+  //   var data = {
+  //     email: signmail,
+  //     kod: signpassword,
+  //   };
+  //   verifySignUp(data)
+  //     .then((res) => {
+  //       console.log(res);
+  //       var config = {
+  //         email: signmail,
+  //         password: signpassword,
+  //       };
+  //       createLogin(config)
+  //         .then((res) => {
+  //           window.localStorage.setItem("token", res.data.token);
+  //           GLOBAL.id = res.data.id;
+  //         })
+  //         .catch((err) => console.log(err));
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   const handleChangeSignUser = (event) => {
     setSignUsername(event.target.value);
