@@ -19,10 +19,22 @@ export default function Malumot_ozgartirish() {
     let formData = new FormData();
     formData.append("email", document.getElementById("email").value ?? null);
     formData.append("name", document.getElementById("name").value ?? null);
-    formData.append("phone_number", document.getElementById("number").value ?? null);
-    formData.append("telegram", document.getElementById("telegram").value ?? null);
-    formData.append("instagram", document.getElementById("instagram").value ?? null);
-    formData.append("you_tube", document.getElementById("you_tube").value ?? null);
+    formData.append(
+      "phone_number",
+      document.getElementById("number").value ?? null
+    );
+    formData.append(
+      "telegram",
+      document.getElementById("telegram").value ?? null
+    );
+    formData.append(
+      "instagram",
+      document.getElementById("instagram").value ?? null
+    );
+    formData.append(
+      "you_tube",
+      document.getElementById("you_tube").value ?? null
+    );
     formData.append("text", document.getElementById("text").value ?? null);
     formData.append("categories", admin.categories ?? null);
     formData.append("group", admin.group ?? null);
@@ -30,7 +42,21 @@ export default function Malumot_ozgartirish() {
     formData.append("subjects", admin.subjects ?? null);
     formData.append("teachers", admin.teachers ?? null);
     formData.append("params", admin.params ?? null);
-    console.log(document.getElementById("email").value, document.getElementById("name").value, document.getElementById("number").value, document.getElementById("telegram").value, document.getElementById("instagram").value, document.getElementById("you_tube").value, document.getElementById("text").value, admin.categories, admin.group, admin.students, admin.subjects, admin.teachers, admin.params);
+    console.log(
+      document.getElementById("email").value,
+      document.getElementById("name").value,
+      document.getElementById("number").value,
+      document.getElementById("telegram").value,
+      document.getElementById("instagram").value,
+      document.getElementById("you_tube").value,
+      document.getElementById("text").value,
+      admin.categories,
+      admin.group,
+      admin.students,
+      admin.subjects,
+      admin.teachers,
+      admin.params
+    );
     if (photo !== null) {
       formData.append("photo", photo ?? null);
     }
@@ -49,7 +75,16 @@ export default function Malumot_ozgartirish() {
   }, []);
   return admin !== [] ? (
     <div>
-      <Form id="editForm" style={{ marginLeft: "auto", marginRight: "auto", marginTop: "30px", marginBottom: "30px", padding: "40px" }}>
+      <Form
+        id="editForm"
+        style={{
+          marginLeft: "auto",
+          marginRight: "auto",
+          marginTop: "30px",
+          marginBottom: "30px",
+          padding: "40px",
+        }}
+      >
         <h1>O'quv markaz ma'lumotlari</h1>
         <Row>
           <div className="col-lg-6 offset-md-3 col-md-9 px-3 m-0">
@@ -59,15 +94,24 @@ export default function Malumot_ozgartirish() {
             </Form.Group>
             <Form.Group controlId="email">
               <Form.Label>E-mail</Form.Label>
-              <Form.Control placeholder="info@gmail.com" defaultValue={admin.email} />
+              <Form.Control
+                placeholder="info@gmail.com"
+                defaultValue={admin.email}
+              />
             </Form.Group>
             <Form.Group controlId="number">
               <Form.Label>Telefon raqam</Form.Label>
-              <Form.Control placeholder="998*********" defaultValue={admin.phone_number} />
+              <Form.Control
+                placeholder="998*********"
+                defaultValue={admin.phone_number}
+              />
             </Form.Group>
             <Form.Group controlId="telegram">
               <Form.Label>Telegram link</Form.Label>
-              <Form.Control placeholder="https://t.me/IT_Tower_Admin" defaultValue={admin.telegram} />
+              <Form.Control
+                placeholder="https://t.me/IT_Tower_Admin"
+                defaultValue={admin.telegram}
+              />
             </Form.Group>
           </div>
           <div className="col-lg-6 offset-md-3 col-md-9 px-3 m-0">
@@ -82,23 +126,38 @@ export default function Malumot_ozgartirish() {
           <div className="col-lg-6 offset-md-3 col-md-9 px-3 m-0">
             <Form.Group controlId="instagram">
               <Form.Label>Instagram link</Form.Label>
-              <Form.Control placeholder="https://t.me/IT_Tower_Admin" defaultValue={admin.instagram} />
+              <Form.Control
+                placeholder="https://t.me/IT_Tower_Admin"
+                defaultValue={admin.instagram}
+              />
             </Form.Group>
           </div>
           <div className="col-lg-6 offset-md-3 col-md-9 px-3 m-0">
             <Form.Group controlId="you_tube">
               <Form.Label>YouTube link</Form.Label>
-              <Form.Control placeholder="https://t.me/IT_Tower_Admin" defaultValue={admin.you_tube} />
+              <Form.Control
+                placeholder="https://t.me/IT_Tower_Admin"
+                defaultValue={admin.you_tube}
+              />
             </Form.Group>
           </div>
           <div className="col-lg-6 offset-md-3 col-md-9 px-3 m-0">
             <Form.Group controlId="text">
               <Form.Label>Qo'shimcha ma'lumot</Form.Label>
-              <Form.Control as="textarea" placeholder="Izoh..." style={{ height: 150 }} defaultValue={admin.text} />
+              <Form.Control
+                as="textarea"
+                placeholder="Izoh..."
+                style={{ height: 150 }}
+                defaultValue={admin.text}
+              />
             </Form.Group>
           </div>
         </Row>
-        <Button type="danger" htmlType="reset" style={{ marginLeft: "5px", marginRight: "10px" }}>
+        <Button
+          type="danger"
+          htmlType="reset"
+          style={{ marginLeft: "5px", marginRight: "10px" }}
+        >
           Bekor qilish
         </Button>
         <Button type="primary" onClick={edittrainings}>

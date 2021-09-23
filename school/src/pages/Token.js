@@ -1,4 +1,4 @@
 module.exports = {
   id: null,
-  email: "",
+  training: null,
 };

@@ -1,12 +1,12 @@
 import GLOBAL from "../pages/Token";
 import { httpsRequest, url } from "./Host";
 
-export const getTraining = () => {
+export const getTraining = (data) => {
   var config = {
-    url: `${url}/api/training/${GLOBAL.id}/`,
-    method: "get",
+    url: `${url}/api/center-admin/`,
+    method: "post",
+    data: data,
   };
-
   return httpsRequest(config);
 };
 export const getAttendance = () => {
@@ -195,7 +195,7 @@ export const verifySignUp = (data) => {
 
 export const createRegister = (data) => {
   var config = {
-    url: `${url}/api/training/`,
+    url: `${url}/auth/registration/`,
     method: "post",
     data: data,
   };
@@ -227,4 +227,12 @@ export const verify = (data) => {
   };
   return httpsRequest(config);
 };
-
+export const verify1 = (data) => {
+  var config = {
+    // url: `${url}/api/verify/`,
+    url: `${url}api/email-verification-complete/`,
+    method: "post",
+    data: data,
+  };
+  return httpsRequest(config);
+};

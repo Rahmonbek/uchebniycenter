@@ -24,6 +24,7 @@ import {
   createLogin,
   createRegister,
   editTraining,
+  editTrainings,
   getTraining,
   getTrainingS,
   verify,
@@ -39,10 +40,12 @@ export default class LearningCenter extends Component {
     isModalVisible: false,
     coordinates: null,
     data: {},
-    photo: "",
+    photo: null,
     coords: [],
     email: "",
     password: "",
+    training: null,
+    center_name: "",
     rows: [],
     user: [],
   };
@@ -70,34 +73,46 @@ export default class LearningCenter extends Component {
     let formData = new FormData();
     formData.append("name", document.getElementById("name").value ?? "");
     formData.append("email", document.getElementById("email").value ?? "");
-    formData.append("phone_number", document.getElementById("phonenumber").value ?? "");
-    formData.append("password",document.getElementById("password").value ?? "" );
-    formData.append("telegram", document.getElementById("telegram").value ?? "");
-    formData.append("instagram", document.getElementById("instagram").value ?? "");
+    formData.append(
+      "phone_number",
+      document.getElementById("phonenumber").value ?? ""
+    );
+    formData.append(
+      "password",
+      document.getElementById("password1").value ?? ""
+    );
+    formData.append(
+      "telegram",
+      document.getElementById("telegram").value ?? ""
+    );
+    formData.append(
+      "instagram",
+      document.getElementById("instagram").value ?? ""
+    );
     formData.append("you_tube", document.getElementById("youtube").value ?? "");
     formData.append("text", document.getElementById("text").value ?? "");
     formData.append("languages", "uz");
-
-    if (this.state.photo !== "") {
-      formData.append("photo", this.state.photo ?? null);
-    } else {
-      return alert("Logotip rasmini kiritmadingiz!");
-    }
-    createRegister(formData)
+    formData.append("photo", this.state.photo ?? null);
+    // if (this.state.photo !== null) {
+    // formData.append("photo", this.state.photo ?? null);
+    // } else {
+    //   return alert("Logotip rasmini kiritmadingiz!");
+    // }
+    var data = {
+      name: document.getElementById("name").value,
+      username: document.getElementById("username").value,
+      email: document.getElementById("email").value,
+      password: document.getElementById("password1").value,
+      confirm: document.getElementById("password2").value,
+    };
+    createRegister(data)
       .then((res) => {
         this.setState({
           email: document.getElementById("email").value,
-          password: document.getElementById("password").value,
+          password: document.getElementById("password1").value,
+          training: formData,
+          center_name: document.getElementById("name").value,
         });
-        var g = res.data;
-        g.param = this.state.coords;
-        editTraining(g, res.data.id)
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
       })
       .catch((err) => {
         return alert("Email tizimda mavjud iltimos boshqa email kiriting!");
@@ -112,8 +127,9 @@ export default class LearningCenter extends Component {
     var data = {
       email: this.state.email,
       kod: document.querySelector("#verify").value,
+      name: document.getElementById("name").value,
     };
-    verify(data) 
+    verify(data)
       .then((res) => {
         console.log(res);
         var config = {
@@ -122,9 +138,20 @@ export default class LearningCenter extends Component {
         };
         createLogin(config)
           .then((res) => {
-            window.localStorage.setItem("token", res.data.token);
-            GLOBAL.id = res.data.id;
-            getTraining().then((res) => (GLOBAL.training = res.data));
+            window.localStorage.setItem("token", res.data.key);
+            getTraining(res.data.key).then((res) => {
+              GLOBAL.training = res.data;
+              GLOBAL.id = res.data.training_center.id;
+              // var g = res.data;
+              // g.param = this.state.coords;
+              editTrainings(this.state.training, res.data.training_center.id)
+                .then((res) => {
+                  console.log(res);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            });
           })
           .catch((err) => console.log(err));
       })
@@ -239,7 +266,7 @@ export default class LearningCenter extends Component {
                           // }}
                         />
                       </Clusterer>
-
+                      0
                       <GeolocationControl options={{ float: "left" }} />
                       <TypeSelector options={{ float: "right" }} />
                       <TrafficControl options={{ float: "right" }} />
@@ -303,6 +330,19 @@ export default class LearningCenter extends Component {
                               <input
                                 placeholder=" "
                                 type="text"
+                                id="username"
+                                className={style.inputField}
+                                required
+                              />
+                              <label className={style.inputLabel}>
+                                Username
+                              </label>
+                            </div>
+
+                            <div className={style.input}>
+                              <input
+                                placeholder=" "
+                                type="text"
                                 id="name"
                                 className={style.inputField}
                                 required
@@ -326,12 +366,23 @@ export default class LearningCenter extends Component {
                               <input
                                 placeholder=" "
                                 type="password"
-                                id="password"
+                                id="password1"
                                 className={style.inputField}
                                 required
                               />
                               <label className={style.inputLabel}>Parol</label>
                             </div>
+                            <div className={style.input}>
+                              <input
+                                placeholder=" "
+                                type="password"
+                                id="password2"
+                                className={style.inputField}
+                                required
+                              />
+                              <label className={style.inputLabel}>Parol</label>
+                            </div>
+
                             <Row>
                               <Col xs={2}>
                                 <Button
@@ -431,7 +482,7 @@ export default class LearningCenter extends Component {
                               </label>
                             </div>
                           </Col>
-                          <Col sm={12}>
+                          {/* <Col sm={12}>
                             <div className={style.input}>
                               <textarea
                                 placeholder=" "
@@ -444,7 +495,7 @@ export default class LearningCenter extends Component {
                                 Qo'shimcha malumot...
                               </label>
                             </div>
-                          </Col>
+                          </Col> */}
 
                           <Col xs={7} sm={9}></Col>
                           <Col xs={5} sm={3} style={{ paddingTop: "15px" }}>

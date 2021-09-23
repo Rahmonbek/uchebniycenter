@@ -8,6 +8,7 @@ import LearningCenter from "./pages/LearningCenter";
 import Login from "./pages/Login";
 import Xarita from "./pages/Xarita";
 import SignUp from "./pages/SignUp";
+import SignDown from './pages/SignDown'
 // import { useEffect } from "react";
 // import Category from "./pages/Category";
 // import { useDispatch } from "react-redux";
@@ -40,7 +41,7 @@ function App() {
         </Route>
         <Route exact path="/sigup">
           {" "}
-          <SignUp />
+          <SignDown />
         </Route>
         <Route exact path="/login">
           <Login />

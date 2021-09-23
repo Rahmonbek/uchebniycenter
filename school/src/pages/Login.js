@@ -4,7 +4,9 @@ import { Form, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import styles from "../css/login.module.css";
 import GLOBAL from "./Token";
-import { createLogin } from "../host/Config";
+import { createLogin, getTraining } from "../host/Config";
+import { globalConfig } from "antd/lib/config-provider";
+import { message } from "antd";
 
 function Login() {
   let history = useHistory();
@@ -15,9 +17,17 @@ function Login() {
     };
     createLogin(config)
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        GLOBAL.id = 1;
-        history.push("/cabinet");
+        getTraining({ key: res.data.key })
+          .then((res1) => {
+            localStorage.setItem("token", res.data.key);
+            GLOBAL.training = res1.data;
+            GLOBAL.id = res1.data.training_center.id;
+            history.push("/cabinet");
+          })
+          .catch((err) => {
+            console.log(err);
+            message.error("Bunday o'quv markaz topilmadi!");
+          });
       })
       .catch((err) => alert("Email yoki parol noto'g'ri!!!"));
   }
@@ -49,7 +59,7 @@ function Login() {
 
               <p className={styles.content}>
                 Agarda hali tizimda mavjud bo`lmasangiz
-                <Link to="/sigup">
+                <Link to="/lcenter">
                   {/* <Link to="/lcenter"> */}
                   <p
                     style={{
