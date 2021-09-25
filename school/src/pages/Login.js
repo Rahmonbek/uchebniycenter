@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 import styles from "../css/login.module.css";
 import GLOBAL from "./Token";
 import { createLogin, getTraining } from "../host/Config";
-import { globalConfig } from "antd/lib/config-provider";
 import { message } from "antd";
 
 function Login() {
@@ -21,7 +20,7 @@ function Login() {
           .then((res1) => {
             localStorage.setItem("token", res.data.key);
             GLOBAL.training = res1.data;
-            GLOBAL.id = res1.data.training_center.id;
+            GLOBAL.id = res1.data.id;
             history.push("/cabinet");
           })
           .catch((err) => {

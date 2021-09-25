@@ -19,7 +19,7 @@ export const getAttendance = () => {
 };
 export const getTrainingS = () => {
   var config = {
-    url: `${url}/api/training/`,
+    url: `${url}/api/training/${GLOBAL.id}/`,
     method: "get",
   };
 
@@ -58,7 +58,7 @@ export const editGroup = (data, id) => {
 export const editTeacher = (data, id) => {
   var config = {
     url: `${url}/api/teacher/${id}/`,
-    method: "put",
+    method: "patch",
     data: data,
   };
 
