@@ -1,94 +1,90 @@
-.card1{
-    background-color: #FFFFFF;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-    border-radius: 5px;
-    margin-right: 10px;
-    padding:0 15px !important
-
+.card1 {
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  border-radius: 5px;
+  margin-right: 10px;
+  padding: 0 15px !important;
 }
-.card2{
-    background-color: #FFFFFF;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-    border-radius: 5px;
-    margin-right: 10px;
-
+.card2 {
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  border-radius: 5px;
+  margin-right: 10px;
 }
-.card3{
-    background-color: #FFFFFF;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-    border-radius: 5px;
-
+.card3 {
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  border-radius: 5px;
 }
-.container{
-    width: 100%!important;
+.container {
+  width: 100% !important;
 }
-.card1 h1{
-    font-size: 20px;
-    color:rgba(0, 0, 0, 0.7);
-    font-weight: 400;
-    padding:10px 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    
+.card1 h1 {
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 400;
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
-.card2 h1{
-    font-size: 20px;
-    color:rgba(0, 0, 0, 0.7);
-    font-weight: 400;
-    padding:10px 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    
+.card2 h1 {
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 400;
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
-.card3 h1{
-    font-size: 20px;
-    color:rgba(0, 0, 0, 0.7);
-    font-weight: 400;
-    padding:10px 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    
+.card3 h1 {
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 400;
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
-.gr{
-    width:14% !important;
-    margin:2% !important;
-    cursor: pointer;
-    font-size: 15px !important;
+.gr {
+  width: 14% !important;
+  margin: 2% !important;
+  cursor: pointer;
+  font-size: 15px !important;
 }
-.backgroundTable{
-    margin-top: 20px !important;
-    background-color:white;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-    border-radius:5px
+.backgroundTable {
+  margin-top: 20px !important;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  border-radius: 5px;
 }
-.backgroundTable h5{
-    margin-top: 10px;
-    position: relative;
-    display: inline-block;
-    padding: 10px;
-    border-bottom: 1px solid #3F6AD8;
+.backgroundTable h5 {
+  margin-top: 10px;
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+  border-bottom: 1px solid #3f6ad8;
 }
-/* .backgroundTable h5::after{
-    content: '';
-    position: absolute;
-    top: 160%;
-    left: 0%;
-    width: 50%;
-    height: 1px;
-    background-color:#3F6AD8
-} */
-.date2{
-    display: none !important;
+.date2 {
+  display: none !important;
 }
 
 .tecnoUl {
-    padding-left: 0;
-    display: flex;
-    list-style: none;
-    flex-wrap: wrap;
+  padding-left: 0;
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
 }
 .tecnoUl li {
-    margin: auto 5px;
+  margin: auto 5px;
 }
-@media (max-width:991px) {
-    .backgroundTable{
-        width:90vw;
-    }
+.tbody_element {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+@media (max-width: 991px) {
+  .backgroundTable {
+    width: 90vw;
+  }
 }

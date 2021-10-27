@@ -7,8 +7,17 @@ import Malumot from "./pages/Malumot";
 import LearningCenter from "./pages/LearningCenter";
 import Login from "./pages/Login";
 import Xarita from "./pages/Xarita";
+import SignUp from "./pages/SignUp";
 import SignDown from "./pages/SignDown";
+// import { useEffect } from "react";
+// import Category from "./pages/Category";
+// import { useDispatch } from "react-redux";
+// import { getTraining } from "./redux/action/action";
 function App() {
+  //   const dispatch=useDispatch()
+  //   useEffect(()=>{
+  // dispatch(()=>{getTraining()})
+  //   }, [])
   return (
     <BrowserRouter>
       <Switch>

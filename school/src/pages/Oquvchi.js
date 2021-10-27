@@ -5,12 +5,7 @@ import { BsPersonPlusFill } from "react-icons/bs";
 import { Form, Input, Select } from "antd";
 import { AiFillEdit, AiOutlineDelete } from "react-icons/ai";
 import { Table } from "react-bootstrap";
-import {
-  createStudent,
-  deleteStudent,
-  editStudent,
-  getTraining,
-} from "../host/Config";
+import { createStudent, deleteStudent, editStudent } from "../host/Config";
 import GLOBAL from "./Token";
 import { Redirect } from "react-router";
 
@@ -18,13 +13,14 @@ export default function Oquvchiqoshish() {
   const [edit, setEdit] = useState(null);
   const [oquvchi, setOquvchi] = useState([]);
   const [group, setGroup] = useState([]);
+  const [visible, setVisible] = useState(false);
+  const [form] = Form.useForm();
 
   const getSS = () => {
     setOquvchi(GLOBAL.training.students);
     setGroup(GLOBAL.training.group);
   };
 
-  const [visible, setVisible] = useState(false);
   const showModal = () => {
     setVisible(true);
   };
@@ -47,7 +43,6 @@ export default function Oquvchiqoshish() {
       span: 16,
     },
   };
-  const [form] = Form.useForm();
 
   const deleteStudents = (id) => {
     deleteStudent(id)
@@ -112,11 +107,11 @@ export default function Oquvchiqoshish() {
 
   useEffect(() => {
     getSS();
-  }, []);
+  }, [oquvchi]);
 
   return GLOBAL.id !== null ? (
     <div style={{ padding: "5%" }}>
-      <div>
+      <>
         <Button onClick={showModal} type="primary">
           O'quvchi qo'shish{" "}
           <BsPersonPlusFill
@@ -128,125 +123,57 @@ export default function Oquvchiqoshish() {
             }}
           />
         </Button>
-      </div>
-      <div
-        style={{ padding: "10px", overflowX: "scroll" }}
-        className={styles.backgroundTable}
-      >
+      </>
+      <div style={{ padding: "10px" }} className={styles.backgroundTable}>
         <h5>O'quvchilar ro'yhati</h5>
-        <Table style={{ marginTop: "20px", color: "rgba(0,0,0,0.7)" }}>
+        <Table responsive>
           <thead>
             <tr>
-              <th
-                style={{ borderBottom: " 1px solid #3F6AD8", padding: "10px" }}
-              >
-                #
-              </th>
-              <th
-                style={{ borderBottom: " 1px solid #3F6AD8", padding: "10px" }}
-              >
-                F.I.O
-              </th>
-              <th
-                style={{ borderBottom: " 1px solid #3F6AD8", padding: "10px" }}
-              >
-                Telefon raqami
-              </th>
-              <th
-                style={{ borderBottom: " 1px solid #3F6AD8", padding: "10px" }}
-              >
-                Uy telefon raqami
-              </th>
-              {/* <th style={{ borderBottom: ' 1px solid #3F6AD8', padding: '10px' }}>O'quv markazi</th> */}
-              <th
-                style={{ borderBottom: " 1px solid #3F6AD8", padding: "10px" }}
-              >
-                Guruh raqami
-              </th>
-              <th
-                style={{ borderBottom: " 1px solid #3F6AD8", padding: "10px" }}
-              >
-                O'zgartirish/O'chirish
+              <th>#</th>
+              <th>F.I.O</th>
+              <th>Telefon raqami</th>
+              <th>Uy telefon raqami</th>
+              <th>Guruh raqami</th>
+              <th>
+                <div className={styles.tbody_element}>
+                  O'zgartirish/O'chirish
+                </div>
               </th>
             </tr>
           </thead>
           <tbody>
-            {console.log(oquvchi)}
             {oquvchi !== [] && Array.isArray(oquvchi) ? (
               oquvchi.map((item, key) => {
                 return (
-                  <tr>
-                    <td
-                      style={{
-                        borderBottom: " 1px solid #3F6AD8",
-                        padding: "10px",
-                      }}
-                    >
-                      {key + 1}
-                    </td>
-                    <td
-                      style={{
-                        borderBottom: " 1px solid #3F6AD8",
-                        padding: "10px",
-                      }}
-                    >
-                      {item.full_name}
-                    </td>
-                    <td
-                      style={{
-                        borderBottom: " 1px solid #3F6AD8",
-                        padding: "10px",
-                      }}
-                    >
-                      {item.phone_number}
-                    </td>
-                    <td
-                      style={{
-                        borderBottom: " 1px solid #3F6AD8",
-                        padding: "10px",
-                      }}
-                    >
-                      {item.home_phone_number}
-                    </td>
-                    {/* <td style={{ borderBottom: ' 1px solid #3F6AD8', padding: '10px' }}>
-                      {item.training_center}
-                    </td> */}
-                    <td
-                      style={{
-                        borderBottom: " 1px solid #3F6AD8",
-                        padding: "10px",
-                      }}
-                    >
+                  <tr key={key}>
+                    <td>{key + 1}</td>
+                    <td>{item.full_name}</td>
+                    <td>{item.phone_number}</td>
+                    <td>{item.home_phone_number}</td>
+                    <td>
                       {group
                         ? group.map((res) => {
                             return item.group === res.id ? res.name : "";
                           })
                         : ""}
                     </td>
-                    <td style={{ borderBottom: " 1px solid #3F6AD8" }}>
-                      <AiFillEdit
-                        style={{
-                          fontSize: "16px",
-                          color: "green",
-                          marginLeft: "5px",
-                          marginTop: "-5px",
-                        }}
-                        onClick={() => {
-                          onFill(`${key}`);
-                        }}
-                      />
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <AiOutlineDelete
-                        style={{
-                          fontSize: "16px",
-                          color: "red",
-                          marginLeft: "5px",
-                          marginTop: "-5px",
-                        }}
-                        onClick={() => {
-                          deleteStudents(`${item.id}`);
-                        }}
-                      />
+                    <td>
+                      <div className={styles.tbody_element}>
+                        <AiFillEdit
+                          style={{
+                            color: "#3f6ad8",
+                          }}
+                          onClick={() => {
+                            onFill(`${key}`);
+                          }}
+                        />
+                        <AiOutlineDelete
+                          style={{ color: "#ff0000" }}
+                          onClick={() => {
+                            deleteStudents(`${item.id}`);
+                          }}
+                        />
+                      </div>
                     </td>
                   </tr>
                 );

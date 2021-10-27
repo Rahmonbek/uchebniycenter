@@ -3,7 +3,15 @@ import { Col, Row } from "react-bootstrap";
 import style from "../css/Dashboard.module.css";
 import GroupOutlinedIcon from "@material-ui/icons/GroupOutlined";
 import PersonOutlinedIcon from "@material-ui/icons/PersonOutlined";
-import { Bar, Tooltip, BarChart, CartesianGrid, Legend, XAxis, YAxis } from "recharts";
+import {
+  Bar,
+  Tooltip,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 export default class Dashboard extends Component {
   state = {
@@ -108,8 +116,17 @@ export default class Dashboard extends Component {
                 <Row>
                   <Col lg="4">
                     <div className={style.icon}>
-                      <div className={style.iconItem} style={{ width: "160px", height: "60px", backgroundColor: "#f9d40d" }}>
-                        <PersonOutlinedIcon style={{ color: "white", fontSize: "30px" }} />
+                      <div
+                        className={style.iconItem}
+                        style={{
+                          width: "160px",
+                          height: "60px",
+                          backgroundColor: "#f9d40d",
+                        }}
+                      >
+                        <PersonOutlinedIcon
+                          style={{ color: "white", fontSize: "30px" }}
+                        />
                       </div>
                     </div>
                   </Col>
@@ -117,7 +134,10 @@ export default class Dashboard extends Component {
                     <p className={style.xira}> O'quvchilar</p>
                     <h1 className={style.title}>85</h1>
                     <p className={style.xira2}>
-                      <span style={{ fontWeight: "bold", color: "#f9d40d" }}>14 %</span> o'sdi
+                      <span style={{ fontWeight: "bold", color: "#f9d40d" }}>
+                        14 %
+                      </span>{" "}
+                      o'sdi
                     </p>
                   </Col>
                 </Row>
@@ -128,8 +148,17 @@ export default class Dashboard extends Component {
                 <Row>
                   <Col lg="4">
                     <div className={style.icon}>
-                      <div className={style.iconItem} style={{ width: "160px", height: "60px", backgroundColor: "#de0202" }}>
-                        <GroupOutlinedIcon style={{ color: "white", fontSize: "30px" }} />
+                      <div
+                        className={style.iconItem}
+                        style={{
+                          width: "160px",
+                          height: "60px",
+                          backgroundColor: "#de0202",
+                        }}
+                      >
+                        <GroupOutlinedIcon
+                          style={{ color: "white", fontSize: "30px" }}
+                        />
                       </div>
                     </div>
                   </Col>
@@ -137,7 +166,10 @@ export default class Dashboard extends Component {
                     <p className={style.xira}> Guruhlar</p>
                     <h1 className={style.title}>10</h1>
                     <p className={style.xira2}>
-                      <span style={{ fontWeight: "bold", color: "#de0202" }}>14 %</span> o'sdi
+                      <span style={{ fontWeight: "bold", color: "#de0202" }}>
+                        14 %
+                      </span>{" "}
+                      o'sdi
                     </p>
                   </Col>
                 </Row>
@@ -148,8 +180,17 @@ export default class Dashboard extends Component {
                 <Row>
                   <Col lg="4">
                     <div className={style.icon}>
-                      <div className={style.iconItem} style={{ width: "160px", height: "60px", backgroundColor: "green" }}>
-                        <PersonOutlinedIcon style={{ color: "white", fontSize: "30px" }} />
+                      <div
+                        className={style.iconItem}
+                        style={{
+                          width: "160px",
+                          height: "60px",
+                          backgroundColor: "green",
+                        }}
+                      >
+                        <PersonOutlinedIcon
+                          style={{ color: "white", fontSize: "30px" }}
+                        />
                       </div>
                     </div>
                   </Col>
@@ -157,7 +198,10 @@ export default class Dashboard extends Component {
                     <p className={style.xira}>Foyda</p>
                     <h1 className={style.title}>6</h1>
                     <p className={style.xira2}>
-                      <span style={{ fontWeight: "bold", color: "green" }}>14 %</span> o'sdi
+                      <span style={{ fontWeight: "bold", color: "green" }}>
+                        14 %
+                      </span>{" "}
+                      o'sdi
                     </p>
                   </Col>
                 </Row>
@@ -168,11 +212,29 @@ export default class Dashboard extends Component {
 
         <div className={style.graf}>
           <h4 className={style.titleh}>O'quvchilar</h4>
-          <div style={{ width: "200px", height: "6px", marginBottom: "20px", backgroundColor: "#f9d40d", marginLeft: "30px", marginBottom: "20px" }}></div>
+          <div
+            style={{
+              width: "200px",
+              height: "6px",
+              marginBottom: "20px",
+              backgroundColor: "#f9d40d",
+              marginLeft: "30px",
+              marginBottom: "20px",
+            }}
+          ></div>
           <Row style={{ justifyConten: "center" }}>
             <Col lg={4} md={6} sm={12}>
               <div style={{ overFlowX: "hidden", width: "100%" }}>
-                <BarChart style={{ backgroundColor: "white", marginTop: "20px", marginBottom: "20px" }} width={900} height={300} data={this.state.data}>
+                <BarChart
+                  style={{
+                    backgroundColor: "white",
+                    marginTop: "20px",
+                    marginBottom: "20px",
+                  }}
+                  width={900}
+                  height={300}
+                  data={this.state.data}
+                >
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis />
@@ -186,11 +248,29 @@ export default class Dashboard extends Component {
         </div>
         <div className={style.graf}>
           <h4 className={style.titleh}>Foyda</h4>
-          <div style={{ width: "200px", height: "6px", marginBottom: "20px", backgroundColor: "green", marginLeft: "30px", marginBottom: "20px" }}></div>
+          <div
+            style={{
+              width: "200px",
+              height: "6px",
+              marginBottom: "20px",
+              backgroundColor: "green",
+              marginLeft: "30px",
+              marginBottom: "20px",
+            }}
+          ></div>
           <Row style={{ justifyConten: "center" }}>
             <Col lg={4} md={6} sm={12}>
               <div style={{ overFlowX: "hidden", width: "100%" }}>
-                <BarChart style={{ backgroundColor: "white", marginTop: "20px", marginBottom: "20px" }} width={900} height={300} data={this.state.data}>
+                <BarChart
+                  style={{
+                    backgroundColor: "white",
+                    marginTop: "20px",
+                    marginBottom: "20px",
+                  }}
+                  width={900}
+                  height={300}
+                  data={this.state.data}
+                >
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis />
@@ -204,11 +284,29 @@ export default class Dashboard extends Component {
         </div>
         <div className={style.graf}>
           <h4 className={style.titleh}>Guruhlar</h4>
-          <div style={{ width: "200px", height: "6px", marginBottom: "20px", backgroundColor: "#de0202", marginLeft: "30px", marginBottom: "20px" }}></div>
+          <div
+            style={{
+              width: "200px",
+              height: "6px",
+              marginBottom: "20px",
+              backgroundColor: "#de0202",
+              marginLeft: "30px",
+              marginBottom: "20px",
+            }}
+          ></div>
           <Row style={{ justifyConten: "center" }}>
             <Col lg={4} md={6} sm={12}>
               <div style={{ overFlowX: "hidden", width: "100%" }}>
-                <BarChart style={{ backgroundColor: "white", marginTop: "20px", marginBottom: "20px" }} width={900} height={300} data={this.state.data}>
+                <BarChart
+                  style={{
+                    backgroundColor: "white",
+                    marginTop: "20px",
+                    marginBottom: "20px",
+                  }}
+                  width={900}
+                  height={300}
+                  data={this.state.data}
+                >
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis />
