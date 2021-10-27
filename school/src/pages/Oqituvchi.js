@@ -19,16 +19,6 @@ export default function Oqituvchiqoshish() {
   const [visible, setVisible] = useState(false);
   const [teachers, setTeachers] = useState([]);
   const [image, setImage] = useState(null);
-
-  const showModal = () => {
-    setVisible(true);
-  };
-  const hideModal = () => {
-    onReset();
-    setVisible(false);
-    setEdit(null);
-    setImage(null);
-  };
   const { Option } = Select;
   const layout = {
     labelCol: {
@@ -45,6 +35,24 @@ export default function Oqituvchiqoshish() {
     },
   };
   const [form] = Form.useForm();
+  const children = [];
+  children.push(<Option key="html">html</Option>);
+  children.push(<Option key="css">css</Option>);
+  children.push(<Option key="bootstrap">bootstrap</Option>);
+  children.push(<Option key="js">js</Option>);
+  children.push(<Option key="ajax">ajax</Option>);
+  children.push(<Option key="react">react</Option>);
+  children.push(<Option key="redux">redux</Option>);
+
+  const showModal = () => {
+    setVisible(true);
+  };
+  const hideModal = () => {
+    onReset();
+    setVisible(false);
+    setEdit(null);
+    setImage(null);
+  };
   const onReset = () => {
     form.resetFields();
     setEdit(null);
@@ -61,15 +69,6 @@ export default function Oqituvchiqoshish() {
     }, 0);
     showModal();
   };
-  const children = [];
-
-  children.push(<Option key="html">html</Option>);
-  children.push(<Option key="css">css</Option>);
-  children.push(<Option key="bootstrap">bootstrap</Option>);
-  children.push(<Option key="js">js</Option>);
-  children.push(<Option key="ajax">ajax</Option>);
-  children.push(<Option key="react">react</Option>);
-  children.push(<Option key="redux">redux</Option>);
 
   const customRequest = (e) => {
     let imageT = e.target.files[0];
@@ -78,6 +77,7 @@ export default function Oqituvchiqoshish() {
 
   const onFinish = (value) => {
     let formData = new FormData();
+
     formData.append("full_name", value.full_name ?? "");
     formData.append("phone_number", value.phone_number ?? "");
     formData.append("text", value.text ?? "");
@@ -154,39 +154,15 @@ export default function Oqituvchiqoshish() {
       </div>
       <div style={{ padding: "10px" }} className={styles.backgroundTable}>
         <h5>O'qituvchilar ro'yhati</h5>
-        <Table
-          responsive
-          style={{
-            marginTop: "20px",
-            color: "rgba(0,0,0,0.7)",
-            overflowX: "scroll",
-          }}
-        >
+        <Table responsive bordered hover>
           <thead>
             <tr>
-              <th style={{ border: " 1px solid #3F6AD8", padding: "10px" }}>
-                #
-              </th>
-              <th style={{ border: " 1px solid #3F6AD8", padding: "10px" }}>
-                F.I.O
-              </th>
-              {/* <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>Tug'ilgan sana</th> */}
-              <th style={{ border: " 1px solid #3F6AD8", padding: "10px" }}>
-                Telefon
-              </th>
-              {/* <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>E-mail</th> */}
-              <th style={{ border: " 1px solid #3F6AD8", padding: "10px" }}>
-                Rasm
-              </th>
-              {/* <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>Yo'nalish</th>
-                            <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>Texnologiyalar</th> */}
-              <th style={{ border: " 1px solid #3F6AD8", padding: "10px" }}>
-                Ma'lumot
-              </th>
-              {/* <th style={{border:' 1px solid #3F6AD8',padding:'10px'}}>Sana</th> */}
-              <th style={{ border: " 1px solid #3F6AD8", padding: "10px" }}>
-                O'zgartirish/O'chirish
-              </th>
+              <th>#</th>
+              <th>Rasm</th>
+              <th>F.I.O</th>
+              <th>Telefon</th>
+              <th>Ma'lumot</th>
+              <th>O'zgartirish/O'chirish</th>
             </tr>
           </thead>
           {teachers && Array.isArray(teachers) ? (
@@ -194,74 +170,48 @@ export default function Oqituvchiqoshish() {
               {teachers.map((item, key) => {
                 return (
                   <tr>
-                    <td
-                      style={{ border: " 1px solid #3F6AD8", padding: "10px" }}
-                    >
-                      {key + 1}
+                    <td>{key + 1}</td>
+                    <td>
+                      <div
+                        style={{
+                          width: "100px",
+                          height: "100px",
+                          borderRadius: "10px",
+                          overflow: "hidden",
+                        }}
+                      >
+                        <img
+                          style={{ width: "100%", height: "100%" }}
+                          src={url + item.photo}
+                          alt=""
+                        />
+                      </div>
                     </td>
-                    <td
-                      style={{ border: " 1px solid #3F6AD8", padding: "10px" }}
-                    >
-                      {item.full_name}
-                    </td>
-                    {/* <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}><p style={{width: 100}}>{item.tugilgansana}</p></td> */}
-                    <td
-                      style={{ border: " 1px solid #3F6AD8", padding: "10px" }}
-                    >
-                      {item.phone_number}
-                    </td>
-                    {/* <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.email}</td> */}
-                    <td
-                      style={{ border: " 1px solid #3F6AD8", padding: "10px" }}
-                    >
-                      <img
-                        style={{ width: "200px" }}
-                        src={url + item.photo}
-                        alt=""
-                      />
-                    </td>
-                    {/* <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>{item.yonalish}</td> */}
-                    {/* <td style={{border:' 1px solid #3F6AD8',padding:'10px'}}>
-                                  <ul className={styles.tecnoUl}>
-                                  {
-                                item.texnologiyalar && Array.isArray(item.texnologiyalar)?item.texnologiyalar.map(item=>{
-                                   return(
-                                           <li>{item} </li>
-                                           )
-                                          }):''
-                                          
-                                        } 
-                                  </ul>
-                                </td> */}
-                    <td
-                      style={{ border: " 1px solid #3F6AD8", padding: "10px" }}
-                    >
+                    <td>{item.full_name}</td>
+                    <td>{item.phone_number}</td>
+
+                    <td>
                       <p style={{ width: "250px" }}>{item.text}</p>
                     </td>
-                    <td style={{ border: " 1px solid #3F6AD8" }}>
-                      <AiFillEdit
-                        onClick={() => onFill(key)}
+                    <td>
+                      <div
                         style={{
-                          fontSize: "20px",
-                          color: "green",
-                          marginLeft: "10px",
-                          marginTop: "5px",
-                          cursor: "pointer",
-                          marginRight: "10px",
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "space-around",
                         }}
-                      />{" "}
-                      <AiOutlineDelete
-                        onClick={() => deleteTeachers(`${item.id}`)}
-                        style={{
-                          fontSize: "20px",
-                          color: "red",
-                          marginLeft: "10px",
-                          marginTop: "5px",
-                          cursor: "pointer",
-                          marginRight: "10px",
-                          float: "right",
-                        }}
-                      />{" "}
+                      >
+                        <AiFillEdit
+                          style={{
+                            color: "#3f6ad8",
+                          }}
+                          onClick={() => onFill(key)}
+                        />{" "}
+                        <AiOutlineDelete
+                          style={{ color: "#ff0000" }}
+                          onClick={() => deleteTeachers(`${item.id}`)}
+                        />
+                      </div>
                     </td>
                   </tr>
                 );

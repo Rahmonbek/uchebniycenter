@@ -15,19 +15,6 @@ export default function Oquvchiqoshish() {
   const [group, setGroup] = useState([]);
   const [visible, setVisible] = useState(false);
   const [form] = Form.useForm();
-
-  const getSS = () => {
-    setOquvchi(GLOBAL.training.students);
-    setGroup(GLOBAL.training.group);
-  };
-
-  const showModal = () => {
-    setVisible(true);
-  };
-  const hideModal = () => {
-    onReset();
-    setVisible(false);
-  };
   // const { Option } = Select;
   const layout = {
     labelCol: {
@@ -44,10 +31,24 @@ export default function Oquvchiqoshish() {
     },
   };
 
+  const getSS = () => {
+    setOquvchi(GLOBAL.training.students);
+    setGroup(GLOBAL.training.group);
+  };
+
+  const showModal = () => {
+    setVisible(true);
+  };
+  const hideModal = () => {
+    onReset();
+    setVisible(false);
+  };
+
   const deleteStudents = (id) => {
     deleteStudent(id)
       .then((res) => {
         getSS();
+        setOquvchi(oquvchi.filter((item) => item.id !== parseInt(id)));
       })
       .catch((err) => {
         console.log(err);
@@ -63,12 +64,11 @@ export default function Oquvchiqoshish() {
     formData.append("home_phone_number", value.home_phone_number ?? "");
     formData.append("group", value.group ?? null);
     formData.append("training_center", GLOBAL.id);
-
     if (edit === null) {
       createStudent(formData)
         .then((res) => {
-          console.log(res);
           getSS();
+          setOquvchi([...oquvchi, res.data]);
         })
         .catch((err) => {
           console.log("err");
@@ -76,8 +76,12 @@ export default function Oquvchiqoshish() {
     } else {
       editStudent(formData, edit)
         .then((res) => {
-          console.log("succes");
           getSS();
+          const newdata = [];
+          oquvchi.map((item) =>
+            item.id === res.data.id ? newdata.push(value) : newdata.push(item)
+          );
+          setOquvchi(newdata);
         })
         .catch((err) => {
           console.log(err);
@@ -107,7 +111,7 @@ export default function Oquvchiqoshish() {
 
   useEffect(() => {
     getSS();
-  }, [oquvchi]);
+  }, []);
 
   return GLOBAL.id !== null ? (
     <div style={{ padding: "5%" }}>
@@ -126,7 +130,7 @@ export default function Oquvchiqoshish() {
       </>
       <div style={{ padding: "10px" }} className={styles.backgroundTable}>
         <h5>O'quvchilar ro'yhati</h5>
-        <Table responsive>
+        <Table responsive hover bodered>
           <thead>
             <tr>
               <th>#</th>
