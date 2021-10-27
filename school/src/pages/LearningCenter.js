@@ -35,6 +35,7 @@ import { st } from "../host/Host";
 
 export default class LearningCenter extends Component {
   state = {
+    id: null,
     login: false,
     ft: false,
     isModalVisible: false,
@@ -48,6 +49,7 @@ export default class LearningCenter extends Component {
     center_name: "",
     rows: [],
     user: [],
+    name: "",
   };
   handleCancel = () => {
     this.setState({
@@ -90,7 +92,7 @@ export default class LearningCenter extends Component {
       document.getElementById("instagram").value ?? ""
     );
     formData.append("you_tube", document.getElementById("youtube").value ?? "");
-    formData.append("text", document.getElementById("text").value ?? "");
+    // formData.append("text", document.getElementById("text").value ?? "");
     formData.append("languages", "uz");
     formData.append("photo", this.state.photo ?? null);
     // if (this.state.photo !== null) {
@@ -112,6 +114,7 @@ export default class LearningCenter extends Component {
           password: document.getElementById("password1").value,
           training: formData,
           center_name: document.getElementById("name").value,
+          name: data.name,
         });
       })
       .catch((err) => {
@@ -126,34 +129,35 @@ export default class LearningCenter extends Component {
   onCodeSubmit = () => {
     var data = {
       email: this.state.email,
-      kod: document.querySelector("#verify").value,
-      name: document.getElementById("name").value,
+      code: document.querySelector("#verify").value,
+      name: this.state.name,
     };
     verify(data)
       .then((res) => {
-        console.log(res);
         var config = {
           email: this.state.email,
           password: this.state.password,
         };
         createLogin(config)
-          .then((res) => {
-            window.localStorage.setItem("token", res.data.key);
-            getTraining(res.data.key).then((res) => {
-              GLOBAL.training = res.data;
-              GLOBAL.id = res.data.training_center.id;
-              // var g = res.data;
-              // g.param = this.state.coords;
-              editTrainings(this.state.training, res.data.training_center.id)
-                .then((res) => {
-                  console.log(res);
-                })
-                .catch((err) => {
-                  console.log(err);
-                });
-            });
+          .then((res1) => {
+            window.localStorage.setItem("token", res1.data.key);
+            getTraining({ key: res1.data.key })
+              .then((res2) => {
+                // var g = res2.data;
+                // g.param = this.state.coords;
+                editTrainings(this.state.training, res2.data.id)
+                  .then((res3) => {
+                    GLOBAL.id = res2.data.id;
+                    GLOBAL.training = res3.data;
+                    this.setState({ id: res2.data.id });
+                  })
+                  .catch((err3) => {
+                    console.log(err3);
+                  });
+              })
+              .catch((err2) => console.log(err2));
           })
-          .catch((err) => console.log(err));
+          .catch((err1) => console.log(err1));
       })
       .catch((err) => console.log(err));
   };
@@ -186,7 +190,7 @@ export default class LearningCenter extends Component {
     return (
       <>
         {this.state.login !== true ? (
-          GLOBAL.id === null ? (
+          this.state.id === null ? (
             this.state.email !== "" ? (
               <div className="container">
                 <div

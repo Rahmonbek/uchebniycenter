@@ -220,8 +220,7 @@ export const editTrainings = (data, id) => {
 
 export const verify = (data) => {
   var config = {
-    // url: `${url}/api/verify/`,
-    url: `${url}/api/center-admin/`,
+    url: `${url}/api/email-verification-complete/`,
     method: "post",
     data: data,
   };
@@ -230,7 +229,7 @@ export const verify = (data) => {
 export const verify1 = (data) => {
   var config = {
     // url: `${url}/api/verify/`,
-    url: `${url}api/email-verification-complete/`,
+    url: `${url}/api/email-verification-complete/`,
     method: "post",
     data: data,
   };
