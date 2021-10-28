@@ -147,7 +147,7 @@ export default class LearningCenter extends Component {
                 // g.param = this.state.coords;
                 editTrainings(this.state.training, res2.data.id)
                   .then((res3) => {
-                    GLOBAL.id = res2.data.id;
+                    GLOBAL.id = res3.data.id;
                     GLOBAL.training = res3.data;
                     this.setState({ id: res2.data.id });
                   })
