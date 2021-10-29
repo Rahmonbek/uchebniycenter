@@ -169,7 +169,7 @@ export default function Oqituvchiqoshish() {
             <tbody>
               {teachers.map((item, key) => {
                 return (
-                  <tr>
+                  <tr key={key}>
                     <td>{key + 1}</td>
                     <td>
                       <div
@@ -204,11 +204,12 @@ export default function Oqituvchiqoshish() {
                         <AiFillEdit
                           style={{
                             color: "#3f6ad8",
+                            margin: "10px",
                           }}
                           onClick={() => onFill(key)}
                         />{" "}
                         <AiOutlineDelete
-                          style={{ color: "#ff0000" }}
+                          style={{ color: "#ff0000", margin: "10px" }}
                           onClick={() => deleteTeachers(`${item.id}`)}
                         />
                       </div>
