@@ -19,15 +19,14 @@ import {
 } from "antd";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/modalStyle.css";
-
 import style from "../css/courses.module.css";
 import "../App.css";
 import {
   createGroup,
   deleteGroupC,
   editGroup,
-  getCategory,
-  getTraining,
+  // getCategory,
+  // getTraining,
   getTrainingS,
 } from "../host/Config";
 import "aos/dist/aos.css";
@@ -45,7 +44,6 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import BorderColorIcon from "@material-ui/icons/BorderColor";
 import ImageDemo from "./ImageDemo";
 import Global from "./Token";
-// import moment from 'moment';
 import "moment/locale/zh-cn";
 
 const { TextArea } = Input;
@@ -55,7 +53,6 @@ export default function Guruhlar() {
   const [teachers, setTeachers] = useState([]);
   const [edit, setEdit] = useState(null);
   const [category, setCategory] = useState([]);
-
   const [teacher, setTeacher] = useState([]);
   const [grlar, setGrlar] = useState([]);
   const [show, setShow] = useState(false);
@@ -67,6 +64,7 @@ export default function Guruhlar() {
   const [image, setImage] = useState("");
   const [form] = Form.useForm();
   const [subjects, setSubjects] = useState([]);
+
   const getTraining = () => {
     setGrlar(Global.training.group);
     setSubjects(Global.training.subjects);
@@ -103,10 +101,7 @@ export default function Guruhlar() {
   };
   const customRequest = (e) => {
     let imageT = e.target.files[0];
-
     setImage(imageT);
-
-    console.log(imageT);
   };
 
   useEffect(() => {
@@ -120,17 +115,17 @@ export default function Guruhlar() {
     }
   }, []);
 
-  const echoTeacher = (a) => {
-    var te = "";
-    console.log(teacher);
-    for (let i = 0; i < teacher.length; i++) {
-      console.log(teacher[i]);
-      if (teacher[i].id === a) {
-        te = teacher[i].full_name;
-      }
-    }
-    return te;
-  };
+  // const echoTeacher = (a) => {
+  //   var te = "";
+  //   console.log(teacher);
+  //   for (let i = 0; i < teacher.length; i++) {
+  //     console.log(teacher[i]);
+  //     if (teacher[i].id === a) {
+  //       te = teacher[i].full_name;
+  //     }
+  //   }
+  //   return te;
+  // };
 
   const echoCategory = (a) => {
     var te = "";
@@ -139,6 +134,7 @@ export default function Guruhlar() {
         te = category[i].name_uz;
       }
     }
+    console.log(a);
     return te;
   };
 
@@ -153,6 +149,7 @@ export default function Guruhlar() {
   };
 
   const onFinish = (value) => {
+    console.log(value);
     var percent = [];
     var g = document.querySelectorAll("#percent");
     for (let i = 0; i < g.length; i++) {
@@ -257,6 +254,7 @@ export default function Guruhlar() {
           });
       }
     }
+
     handleCancel();
   };
   const handleExpandClick = (id) => {
@@ -270,9 +268,7 @@ export default function Guruhlar() {
     form.resetFields();
     setEdit(null);
   };
-  const openModal = () => {
-    setShow(true);
-  };
+
   const teacherlar = (value) => {
     var te = [];
     for (let i = 0; i < value.length; i++) {
@@ -290,6 +286,7 @@ export default function Guruhlar() {
     deleteGroupC(id)
       .then((res) => {
         getTraining();
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -299,84 +296,75 @@ export default function Guruhlar() {
   const editGuruh = (id) => {
     setEdit(grlar[id].id);
     setGuruh(grlar[id]);
-    console.log(grlar[id]);
     setTime(grlar[id].time);
     setDate(grlar[id].start_date);
     setTimeout(function () {
       form.setFieldsValue(grlar[id]);
     }, 0);
-
     teacherlar(grlar[id].teacher);
-    openModal();
   };
 
   return (
-    <div className="pb-5">
+    <div className="p-5">
       <input type="checkbox" id="modal" className={styles.smbox} />
       <label for="modal" className="modal-background"></label>
       <Container fluid>
-        <br />
-        <br />
         <Button
           onClick={() => {
-            openModal();
+            setShow(true);
           }}
           type="primary"
         >
           Guruh qo'shish
         </Button>
+
         <>
           {grlar !== [] ? (
             <Row>
               {grlar.map((item, key) => {
+                console.log(grlar);
                 return (
-                  <Col lg={4} md={6} sm={12} style={{ marginTop: "20px" }}>
+                  <Col
+                    lg={4}
+                    md={6}
+                    sm={12}
+                    style={{ marginTop: "20px" }}
+                    key={key}
+                  >
                     <Card className={style.root}>
-                      <CardHeader
-                        //  style={{fontSize:'30px'}}
-                        title={item.name}
-                      />
+                      <CardHeader title={item.name} />
                       <CardMedia className={style.media} image={item.image} />
                       <CardContent>
                         <Typography
                           variant="body2"
                           color="textSecondary"
-                          component="p"
+                          component="div"
                         >
                           <p>
-                            {" "}
                             <b>Yo'nalishi: </b>
                             {item.category.map((item1) => {
                               return echoCategory(item1) + " / ";
                             })}
                           </p>
                           <p>
-                            {" "}
                             <b>Fanlar/Dasturlar: </b>
                             {item.subject.map((item1) => {
                               return echoSubjects(item1) + " / ";
                             })}
                           </p>
-                          {/* <p> <b>O'qituvchilar: </b>{item.teacher.map((item1, key)=>{ return(<p>{echoTeacher(item1)} - {item.percent[key]}%</p>)})}</p> */}
                           <p>
-                            {" "}
                             <b>Kurs puli (oylik): </b>
                             {item.money} so'm
                           </p>
-
                           <p>
-                            {" "}
                             <b>Boshlanish vaqti: </b>
                             {item.start_date}
                           </p>
-
                           <p>
-                            {" "}
                             <b>Davomiyligi: </b>
                             {item.duration} oy
                           </p>
                           <p>
-                            {" "}
                             <b>Kunlari: </b>
                             {item.days !== null
                               ? item.days.map((item1) => {
@@ -385,7 +373,6 @@ export default function Guruhlar() {
                               : ""}
                           </p>
                           <p>
-                            {" "}
                             <b>Vaqti: </b>
                             {item.time !== null ? item.time[0] : ""} -{" "}
                             {item.time !== null ? item.time[1] : ""}
@@ -520,10 +507,11 @@ export default function Guruhlar() {
       </Container>
       <Modal
         title="Guruh"
-        width="70%"
         visible={show}
+        width="70%"
         footer={false}
         onCancel={handleCancel}
+        style={{ zIndex: 2000, marginRight: "5%" }}
       >
         <Form
           form={form}
@@ -562,7 +550,7 @@ export default function Guruhlar() {
                   {category !== [] && category !== undefined
                     ? category.map((item) => {
                         return (
-                          <Option value={item.id} label={item.name_uz}>
+                          <Option value={item.name_uz} label={item.name_uz}>
                             <div className="demo-option-label-item">
                               {item.name_uz}
                             </div>
@@ -589,7 +577,7 @@ export default function Guruhlar() {
                   {subjects !== [] && subjects !== undefined
                     ? subjects.map((item) => {
                         return (
-                          <Option value={item.id} label={item.name}>
+                          <Option value={item.name} label={item.name}>
                             {item.name}
                           </Option>
                         );

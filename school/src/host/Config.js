@@ -43,7 +43,6 @@ export const createGroup = (data) => {
 
   return httpsRequest(config);
 };
-
 export const editGroup = (data, id) => {
   console.log(data);
   var config = {
@@ -54,7 +53,6 @@ export const editGroup = (data, id) => {
 
   return httpsRequest(config);
 };
-
 export const editTeacher = (data, id) => {
   var config = {
     url: `${url}/api/teacher/${id}/`,
@@ -157,7 +155,6 @@ export const getStudents = () => {
   };
   return httpsRequest(config);
 };
-
 export const getGroups = () => {
   var config = {
     url: `${url}/api/group/`,
@@ -165,7 +162,6 @@ export const getGroups = () => {
   };
   return httpsRequest(config);
 };
-
 export const createLogin = (data) => {
   var config = {
     url: `${url}/auth/login/`,
@@ -182,7 +178,6 @@ export const createSignUp = (data) => {
   };
   return httpsRequest(config);
 };
-
 export const verifySignUp = (data) => {
   var config = {
     // url: `${url}/api/verify/`,
@@ -192,7 +187,6 @@ export const verifySignUp = (data) => {
   };
   return httpsRequest(config);
 };
-
 export const createRegister = (data) => {
   var config = {
     url: `${url}/auth/registration/`,
@@ -217,7 +211,6 @@ export const editTrainings = (data, id) => {
   };
   return httpsRequest(config);
 };
-
 export const verify = (data) => {
   var config = {
     url: `${url}/api/email-verification-complete/`,
