@@ -134,7 +134,6 @@ export default function Guruhlar() {
         te = category[i].name_uz;
       }
     }
-    console.log(a);
     return te;
   };
 
@@ -158,11 +157,11 @@ export default function Guruhlar() {
     if (edit === null) {
       let formData = new FormData();
       formData.append("name", value.name ?? "");
+      formData.append("money", value.money ?? "");
       formData.append("duration", value.duration ?? null);
       formData.append("image", image ?? null);
       formData.append("start_date", date ?? "");
       formData.append("description", value.description ?? "");
-      formData.append("money", value.money ?? "");
       formData.append("training_center", Global.id);
       createGroup(formData)
         .then((res) => {

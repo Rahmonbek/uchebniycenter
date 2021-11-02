@@ -110,101 +110,98 @@ export default class Dashboard extends Component {
       <div>
         <div className={style.head}>
           <h1 className={style.h}>Statistika</h1>
-          <Row style={{ width: "90%" }}>
+          <Row>
             <Col lg="4" md="6" sm="12">
               <div className={style.cards}>
-                <Row>
-                  <Col lg="4">
-                    <div className={style.icon}>
-                      <div
-                        className={style.iconItem}
-                        style={{
-                          width: "160px",
-                          height: "60px",
-                          backgroundColor: "#f9d40d",
-                        }}
-                      >
-                        <PersonOutlinedIcon
-                          style={{ color: "white", fontSize: "30px" }}
-                        />
-                      </div>
+                <div className={style.cardItem}>
+                  <div className={style.icon}>
+                    <div
+                      className={style.iconItem}
+                      style={{
+                        width: "60px",
+                        height: "60px",
+                        backgroundColor: "#f9d40d",
+                      }}
+                    >
+                      <GroupOutlinedIcon
+                        style={{ color: "white", fontSize: "30px" }}
+                      />
                     </div>
-                  </Col>
-                  <Col lg="8">
+                  </div>
+
+                  <div className={style.cardText}>
                     <p className={style.xira}> O'quvchilar</p>
-                    <h1 className={style.title}>85</h1>
+                    <h1 className={style.title}>200</h1>
                     <p className={style.xira2}>
                       <span style={{ fontWeight: "bold", color: "#f9d40d" }}>
                         14 %
                       </span>{" "}
                       o'sdi
                     </p>
-                  </Col>
-                </Row>
+                  </div>
+                </div>
               </div>
             </Col>
             <Col lg="4" md="6" sm="12">
               <div className={style.cards}>
-                <Row>
-                  <Col lg="4">
-                    <div className={style.icon}>
-                      <div
-                        className={style.iconItem}
-                        style={{
-                          width: "160px",
-                          height: "60px",
-                          backgroundColor: "#de0202",
-                        }}
-                      >
-                        <GroupOutlinedIcon
-                          style={{ color: "white", fontSize: "30px" }}
-                        />
-                      </div>
+                <div className={style.cardItem}>
+                  <div className={style.icon}>
+                    <div
+                      className={style.iconItem}
+                      style={{
+                        width: "60px",
+                        height: "60px",
+                        backgroundColor: "#f9d40d",
+                      }}
+                    >
+                      <GroupOutlinedIcon
+                        style={{ color: "white", fontSize: "30px" }}
+                      />
                     </div>
-                  </Col>
-                  <Col lg="8">
-                    <p className={style.xira}> Guruhlar</p>
+                  </div>
+
+                  <div className={style.cardText}>
+                    <p className={style.xira}> O'qtuvchilar</p>
                     <h1 className={style.title}>10</h1>
                     <p className={style.xira2}>
-                      <span style={{ fontWeight: "bold", color: "#de0202" }}>
-                        14 %
+                      <span style={{ fontWeight: "bold", color: "#f9d40d" }}>
+                        10 %
                       </span>{" "}
                       o'sdi
                     </p>
-                  </Col>
-                </Row>
+                  </div>
+                </div>
               </div>
             </Col>
             <Col lg="4" md="6" sm="12">
               <div className={style.cards}>
-                <Row>
-                  <Col lg="4">
-                    <div className={style.icon}>
-                      <div
-                        className={style.iconItem}
-                        style={{
-                          width: "160px",
-                          height: "60px",
-                          backgroundColor: "green",
-                        }}
-                      >
-                        <PersonOutlinedIcon
-                          style={{ color: "white", fontSize: "30px" }}
-                        />
-                      </div>
+                <div className={style.cardItem}>
+                  <div className={style.icon}>
+                    <div
+                      className={style.iconItem}
+                      style={{
+                        width: "60px",
+                        height: "60px",
+                        backgroundColor: "#f9d40d",
+                      }}
+                    >
+                      <PersonOutlinedIcon
+                        style={{ color: "white", fontSize: "30px" }}
+                      />
                     </div>
-                  </Col>
-                  <Col lg="8">
-                    <p className={style.xira}>Foyda</p>
-                    <h1 className={style.title}>6</h1>
+                  </div>
+
+                  <div className={style.cardText}>
+                    <p className={style.xira}> Guruhlar</p>
+                    <h1 className={style.title}>30</h1>
                     <p className={style.xira2}>
-                      <span style={{ fontWeight: "bold", color: "green" }}>
-                        14 %
+                      <span style={{ fontWeight: "bold", color: "#f9d40d" }}>
+                        15 %
                       </span>{" "}
                       o'sdi
                     </p>
-                  </Col>
-                </Row>
+                  </div>
+                </div>
               </div>
             </Col>
           </Row>
@@ -219,7 +216,6 @@ export default class Dashboard extends Component {
               marginBottom: "20px",
               backgroundColor: "#f9d40d",
               marginLeft: "30px",
-              marginBottom: "20px",
             }}
           ></div>
           <Row style={{ justifyConten: "center" }}>
@@ -291,7 +287,6 @@ export default class Dashboard extends Component {
               marginBottom: "20px",
               backgroundColor: "#de0202",
               marginLeft: "30px",
-              marginBottom: "20px",
             }}
           ></div>
           <Row style={{ justifyConten: "center" }}>

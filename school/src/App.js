@@ -7,7 +7,6 @@ import Malumot from "./pages/Malumot";
 import LearningCenter from "./pages/LearningCenter";
 import Login from "./pages/Login";
 import Xarita from "./pages/Xarita";
-import SignUp from "./pages/SignUp";
 import SignDown from "./pages/SignDown";
 // import { useEffect } from "react";
 // import Category from "./pages/Category";
