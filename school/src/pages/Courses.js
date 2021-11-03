@@ -13,12 +13,7 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import logo from "../img/logo1.png";
-import frontend from "../img/frontend.jpg";
-import backend from "../img/backend.png";
-import fullstack from "../img/fullstack.png";
-import { BrowserRouter, Route, Link } from "react-router-dom";
-import Malumot from "./Malumot";
-import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -29,8 +24,6 @@ import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
-import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import TelegramIcon from "@material-ui/icons/Telegram";
@@ -39,20 +32,9 @@ import CallIcon from "@material-ui/icons/Call";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import WebIcon from "@material-ui/icons/Web";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { FaChevronDown } from "react-icons/fa";
-
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { Menu, Switch } from "antd";
-import { NavLink } from "react-router-dom";
-import {
-  MDBTabs,
-  MDBTabsItem,
-  MDBTabsLink,
-  MDBTabsContent,
-  MDBTabsPane,
-} from "mdb-react-ui-kit";
 import {
   YMaps,
   Map,
@@ -166,7 +148,7 @@ export default class Courses extends Component {
       <img src="https://picsum.photos/800/304/?random" alt="5" />,
     ];
 
-    const { active, group, traning } = this.state;
+    const { group, traning } = this.state;
     return (
       <div>
         <div className={styles.bg}>
@@ -195,8 +177,7 @@ export default class Courses extends Component {
               slides={slides}
               autoplay={false}
               interval={2000}
-              style={{ marginTop: "50px" }}
-              style={{ overflowX: "hidden" }}
+              style={{ marginTop: "50px", overflowX: "hidden" }}
             />
 
             <a href="#1">
@@ -256,7 +237,7 @@ export default class Courses extends Component {
                                         className={styles.avatar}
                                         style={{ backgroundColor: "white" }}
                                       >
-                                        <img
+                                        <Image
                                           src={
                                             this.echoTraining(
                                               item.training_center
@@ -1872,7 +1853,7 @@ export default class Courses extends Component {
               </div>
               <div>
                 <div className={styles.logo}>
-                  <img src={logo} />
+                  <Image src={logo} />
                 </div>
                 <h4
                   style={{
