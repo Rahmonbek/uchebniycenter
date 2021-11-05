@@ -25,20 +25,20 @@ import {
   createGroup,
   deleteGroupC,
   editGroup,
-  // getCategory,
-  // getTraining,
   getTrainingS,
 } from "../host/Config";
 import "aos/dist/aos.css";
 import clsx from "clsx";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
+import {
+  Card,
+  CardHeader,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Collapse,
+  IconButton,
+  Typography,
+} from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import BorderColorIcon from "@material-ui/icons/BorderColor";
@@ -79,6 +79,7 @@ export default function Guruhlar() {
   const chengeTime = (date, dateString) => {
     setTimef(date);
     setTime(dateString);
+    console.log(dateString);
   };
 
   const handleCancel = () => {
@@ -148,111 +149,115 @@ export default function Guruhlar() {
   };
 
   const onFinish = (value) => {
-    console.log(value);
-    var percent = [];
-    var g = document.querySelectorAll("#percent");
-    for (let i = 0; i < g.length; i++) {
-      percent[i] = g[i].value;
-    }
-    if (edit === null) {
-      let formData = new FormData();
-      formData.append("name", value.name ?? "");
-      formData.append("money", value.money ?? "");
-      formData.append("duration", value.duration ?? null);
-      formData.append("image", image ?? null);
-      formData.append("start_date", date ?? "");
-      formData.append("description", value.description ?? "");
-      formData.append("training_center", Global.id);
-      createGroup(formData)
-        .then((res) => {
-          var config = {
-            percent: percent ?? null,
-            teacher: value.teacher ?? [],
-            category: value.category ?? [],
-            subject: value.subject ?? [],
-            days: value.days ?? null,
-            time: time ?? null,
-          };
-          editGroup(config, res.data.id)
-            .then((res1) => {
-              getTrainingS()
-                .then((res2) => {
-                  Global.training = res2.data;
-                  getTraining();
-                })
-                .catch((err2) => console.log(err2));
-            })
-            .catch((err1) => {
-              console.log(err1);
-            });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      if (image === "") {
-        var editConfig = {
-          teacher: value.teacher ?? [],
-          category: value.category ?? [],
-          subject: value.subject ?? [],
-          name: value.name ?? "",
-          duration: value.duration ?? "",
-          description: value.description ?? "",
-          money: value.money ?? "",
-          days: value.days ?? null,
-          percent: percent ?? null,
-          time: time,
-          start_date: date,
-          // image:guruh.image,
-        };
-        editGroup(editConfig, edit)
-          .then((res) => {
-            getTrainingS()
-              .then((res2) => {
-                Global.training = res2.data;
-                getTraining();
-              })
-              .catch((err2) => console.log(err2));
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      } else {
-        let formData = new FormData();
-        formData.append("image", image ?? "");
-        var editConfig = {
-          teacher: value.teacher ?? [],
-          category: value.category ?? [],
-          subject: value.subject ?? [],
-          name: value.name ?? "",
-          duration: value.duration ?? "",
-          description: value.description ?? "",
-          money: value.money ?? "",
-          days: value.days ?? null,
-          percent: percent ?? null,
-          time: time,
-          start_date: date,
-        };
-        editGroup(formData, edit)
-          .then((res) => {
-            editGroup(editConfig, edit)
-              .then((res) => {
-                getTrainingS()
-                  .then((res2) => {
-                    Global.training = res2.data;
-                    getTraining();
-                  })
-                  .catch((err2) => console.log(err2));
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    }
+    const values = {
+      ...value,
+      start_date: date,
+    };
+    console.log(values);
+    // var percent = [];
+    // var g = document.querySelectorAll("#percent");
+    // for (let i = 0; i < g.length; i++) {
+    //   percent[i] = g[i].value;
+    // }
+    // if (edit === null) {
+    //   let formData = new FormData();
+    //   formData.append("name", value.name ?? "");
+    //   formData.append("money", value.money ?? "");
+    //   formData.append("duration", value.duration ?? null);
+    //   formData.append("image", image ?? null);
+    //   formData.append("start_date", date ?? "");
+    //   formData.append("description", value.description ?? "");
+    //   formData.append("training_center", Global.id);
+    //   createGroup(formData)
+    //     .then((res) => {
+    //       var config = {
+    //         percent: percent ?? null,
+    //         teacher: value.teacher ?? [],
+    //         category: value.category ?? [],
+    //         subject: value.subject ?? [],
+    //         days: value.days ?? null,
+    //         time: time ?? null,
+    //       };
+    //       editGroup(config, res.data.id)
+    //         .then((res1) => {
+    //           getTrainingS()
+    //             .then((res2) => {
+    //               Global.training = res2.data;
+    //               getTraining();
+    //             })
+    //             .catch((err2) => console.log(err2));
+    //         })
+    //         .catch((err1) => {
+    //           console.log(err1);
+    //         });
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // } else {
+    //   if (image === "") {
+    //     var editConfig = {
+    //       teacher: value.teacher ?? [],
+    //       category: value.category ?? [],
+    //       subject: value.subject ?? [],
+    //       name: value.name ?? "",
+    //       duration: value.duration ?? "",
+    //       description: value.description ?? "",
+    //       money: value.money ?? "",
+    //       days: value.days ?? null,
+    //       percent: percent ?? null,
+    //       time: time,
+    //       start_date: date,
+    //       // image:guruh.image,
+    //     };
+    //     editGroup(editConfig, edit)
+    //       .then((res) => {
+    //         getTrainingS()
+    //           .then((res2) => {
+    //             Global.training = res2.data;
+    //             getTraining();
+    //           })
+    //           .catch((err2) => console.log(err2));
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //       });
+    //   } else {
+    //     let formData = new FormData();
+    //     formData.append("image", image ?? "");
+    //     // var editConfig = {
+    //     //   teacher: value.teacher ?? [],
+    //     //   category: value.category ?? [],
+    //     //   subject: value.subject ?? [],
+    //     //   name: value.name ?? "",
+    //     //   duration: value.duration ?? "",
+    //     //   description: value.description ?? "",
+    //     //   money: value.money ?? "",
+    //     //   days: value.days ?? null,
+    //     //   percent: percent ?? null,
+    //     //   time: time,
+    //     //   start_date: date,
+    //     // };
+    //     editGroup(formData, edit)
+    //       .then((res) => {
+    //         editGroup(editConfig, edit)
+    //           .then((res) => {
+    //             getTrainingS()
+    //               .then((res2) => {
+    //                 Global.training = res2.data;
+    //                 getTraining();
+    //               })
+    //               .catch((err2) => console.log(err2));
+    //           })
+    //           .catch((err) => {
+    //             console.log(err);
+    //           });
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //       });
+    //   }
+    // }
 
     handleCancel();
   };
@@ -321,7 +326,6 @@ export default function Guruhlar() {
           {grlar !== [] ? (
             <Row>
               {grlar.map((item, key) => {
-                console.log(grlar);
                 return (
                   <Col
                     lg={4}
@@ -549,7 +553,11 @@ export default function Guruhlar() {
                   {category !== [] && category !== undefined
                     ? category.map((item) => {
                         return (
-                          <Option value={item.name_uz} label={item.name_uz}>
+                          <Option
+                            key={item.id}
+                            value={item.name_uz}
+                            label={item.name_uz}
+                          >
                             <div className="demo-option-label-item">
                               {item.name_uz}
                             </div>
@@ -576,7 +584,11 @@ export default function Guruhlar() {
                   {subjects !== [] && subjects !== undefined
                     ? subjects.map((item) => {
                         return (
-                          <Option value={item.name} label={item.name}>
+                          <Option
+                            key={item.id}
+                            value={item.name}
+                            label={item.name}
+                          >
                             {item.name}
                           </Option>
                         );
@@ -601,7 +613,11 @@ export default function Guruhlar() {
                   {teacher !== [] && teacher !== undefined
                     ? teacher.map((item) => {
                         return (
-                          <Option value={item.id} label={item.full_name}>
+                          <Option
+                            key={item.id}
+                            value={item.full_name}
+                            label={item.full_name}
+                          >
                             <div className="demo-option-label-item">
                               {item.full_name}
                             </div>
@@ -624,22 +640,23 @@ export default function Guruhlar() {
                 <Col lg={6}>
                   <Form.Item
                     label="Ochilish sanasini kiriting"
-                    name="day"
+                    name="start_date"
                     rules={[
                       {
+                        type: "object",
                         required: false,
                         message: "Bu joyni to'ldirish majburiy!",
                       },
                     ]}
                   >
-                    <DatePicker value={datef} onChange={chengeDate} />
+                    <DatePicker onChange={chengeDate} />
                     <span> {guruh !== null ? guruh.start_date : ""}</span>
                   </Form.Item>
                 </Col>
                 <Col lg={6}>
                   <Form.Item
                     label="Dars vaqtini kiriting"
-                    name="timefв"
+                    name="time"
                     rules={[
                       {
                         required: false,
@@ -652,7 +669,6 @@ export default function Guruhlar() {
                       onChange={chengeTime}
                     />
                     <span>
-                      {" "}
                       {guruh !== null ? guruh.time[0] : ""} -{" "}
                       {guruh !== null ? guruh.time[1] : ""}
                     </span>
@@ -673,7 +689,7 @@ export default function Guruhlar() {
                       },
                     ]}
                   >
-                    <Input type="number" min="0" />
+                    <Input type="number" min="1" />
                   </Form.Item>
                 </Col>
                 <Col lg={7}>
@@ -769,8 +785,7 @@ export default function Guruhlar() {
             <Button type="danger" onClick={handleCancel} htmlType="button">
               Bekor qilish
             </Button>
-
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" className="mx-2">
               Saqlash
             </Button>
           </Form.Item>
