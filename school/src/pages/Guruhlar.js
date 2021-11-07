@@ -77,9 +77,8 @@ export default function Guruhlar() {
     setDatef(date);
   };
   const chengeTime = (date, dateString) => {
-    setTimef(date);
-    setTime(dateString);
-    console.log(dateString);
+    setTime(dateString[0]);
+    setTimef(dateString[1]);
   };
 
   const handleCancel = () => {
@@ -149,115 +148,119 @@ export default function Guruhlar() {
   };
 
   const onFinish = (value) => {
-    const values = {
-      ...value,
-      start_date: date,
-    };
-    console.log(values);
-    // var percent = [];
-    // var g = document.querySelectorAll("#percent");
-    // for (let i = 0; i < g.length; i++) {
-    //   percent[i] = g[i].value;
-    // }
-    // if (edit === null) {
-    //   let formData = new FormData();
-    //   formData.append("name", value.name ?? "");
-    //   formData.append("money", value.money ?? "");
-    //   formData.append("duration", value.duration ?? null);
-    //   formData.append("image", image ?? null);
-    //   formData.append("start_date", date ?? "");
-    //   formData.append("description", value.description ?? "");
-    //   formData.append("training_center", Global.id);
-    //   createGroup(formData)
-    //     .then((res) => {
-    //       var config = {
-    //         percent: percent ?? null,
-    //         teacher: value.teacher ?? [],
-    //         category: value.category ?? [],
-    //         subject: value.subject ?? [],
-    //         days: value.days ?? null,
-    //         time: time ?? null,
-    //       };
-    //       editGroup(config, res.data.id)
-    //         .then((res1) => {
-    //           getTrainingS()
-    //             .then((res2) => {
-    //               Global.training = res2.data;
-    //               getTraining();
-    //             })
-    //             .catch((err2) => console.log(err2));
-    //         })
-    //         .catch((err1) => {
-    //           console.log(err1);
-    //         });
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // } else {
-    //   if (image === "") {
-    //     var editConfig = {
-    //       teacher: value.teacher ?? [],
-    //       category: value.category ?? [],
-    //       subject: value.subject ?? [],
-    //       name: value.name ?? "",
-    //       duration: value.duration ?? "",
-    //       description: value.description ?? "",
-    //       money: value.money ?? "",
-    //       days: value.days ?? null,
-    //       percent: percent ?? null,
-    //       time: time,
-    //       start_date: date,
-    //       // image:guruh.image,
-    //     };
-    //     editGroup(editConfig, edit)
-    //       .then((res) => {
-    //         getTrainingS()
-    //           .then((res2) => {
-    //             Global.training = res2.data;
-    //             getTraining();
-    //           })
-    //           .catch((err2) => console.log(err2));
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-    //   } else {
-    //     let formData = new FormData();
-    //     formData.append("image", image ?? "");
-    //     // var editConfig = {
-    //     //   teacher: value.teacher ?? [],
-    //     //   category: value.category ?? [],
-    //     //   subject: value.subject ?? [],
-    //     //   name: value.name ?? "",
-    //     //   duration: value.duration ?? "",
-    //     //   description: value.description ?? "",
-    //     //   money: value.money ?? "",
-    //     //   days: value.days ?? null,
-    //     //   percent: percent ?? null,
-    //     //   time: time,
-    //     //   start_date: date,
-    //     // };
-    //     editGroup(formData, edit)
-    //       .then((res) => {
-    //         editGroup(editConfig, edit)
-    //           .then((res) => {
-    //             getTrainingS()
-    //               .then((res2) => {
-    //                 Global.training = res2.data;
-    //                 getTraining();
-    //               })
-    //               .catch((err2) => console.log(err2));
-    //           })
-    //           .catch((err) => {
-    //             console.log(err);
-    //           });
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-    //   }
-    // }
+    // const values = {
+    //   ...value,
+    //   start_date: date,
+    //   time,
+    //   timef,
+    //   image,
+    // };
+    // console.log(values);
+
+    var percent = [];
+    var g = document.querySelectorAll("#percent");
+    for (let i = 0; i < g.length; i++) {
+      percent[i] = g[i].value;
+    }
+    if (edit === null) {
+      let formData = new FormData();
+      formData.append("name", value.name ?? "");
+      formData.append("money", value.money ?? "");
+      formData.append("duration", value.duration ?? null);
+      formData.append("image", image ?? null);
+      formData.append("start_date", date ?? "");
+      formData.append("description", value.description ?? "");
+      formData.append("training_center", Global.id);
+      createGroup(formData)
+        .then((res) => {
+          var config = {
+            percent: percent ?? null,
+            teacher: value.teacher ?? [],
+            category: value.category ?? [],
+            subject: value.subject ?? [],
+            days: value.days ?? null,
+            time: time ?? null,
+          };
+          editGroup(config, res.data.id)
+            .then((res1) => {
+              getTrainingS()
+                .then((res2) => {
+                  Global.training = res2.data;
+                  getTraining();
+                })
+                .catch((err2) => console.log(err2));
+            })
+            .catch((err1) => {
+              console.log(err1);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      if (image === "") {
+        var editConfig = {
+          teacher: value.teacher ?? [],
+          category: value.category ?? [],
+          subject: value.subject ?? [],
+          name: value.name ?? "",
+          duration: value.duration ?? "",
+          description: value.description ?? "",
+          money: value.money ?? "",
+          days: value.days ?? null,
+          percent: percent ?? null,
+          time: time,
+          start_date: date,
+          // image:guruh.image,
+        };
+        editGroup(editConfig, edit)
+          .then((res) => {
+            getTrainingS()
+              .then((res2) => {
+                Global.training = res2.data;
+                getTraining();
+              })
+              .catch((err2) => console.log(err2));
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        let formData = new FormData();
+        formData.append("image", image ?? "");
+        var editConfig = {
+          teacher: value.teacher ?? [],
+          category: value.category ?? [],
+          subject: value.subject ?? [],
+          name: value.name ?? "",
+          duration: value.duration ?? "",
+          description: value.description ?? "",
+          money: value.money ?? "",
+          days: value.days ?? null,
+          percent: percent ?? null,
+          time: time,
+          start_date: date,
+        };
+        editGroup(formData, edit)
+          .then((res) => {
+            editGroup(editConfig, edit)
+              .then((res) => {
+                getTrainingS()
+                  .then((res2) => {
+                    Global.training = res2.data;
+                    getTraining();
+                  })
+                  .catch((err2) => console.log(err2));
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    }
 
     handleCancel();
   };
@@ -664,13 +667,10 @@ export default function Guruhlar() {
                       },
                     ]}
                   >
-                    <TimePicker.RangePicker
-                      value={timef}
-                      onChange={chengeTime}
-                    />
+                    <TimePicker.RangePicker onChange={chengeTime} />
                     <span>
-                      {guruh !== null ? guruh.time[0] : ""} -{" "}
-                      {guruh !== null ? guruh.time[1] : ""}
+                      {guruh !== null ? guruh.time : ""} -{" "}
+                      {guruh !== null ? guruh.timef : ""}
                     </span>
                   </Form.Item>
                 </Col>

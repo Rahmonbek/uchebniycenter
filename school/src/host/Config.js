@@ -34,7 +34,6 @@ export const getCategory = () => {
   return httpsRequest(config);
 };
 export const createGroup = (data) => {
-  console.log(data);
   var config = {
     url: `${url}/api/group/`,
     method: "post",
