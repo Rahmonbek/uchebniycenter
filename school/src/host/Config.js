@@ -43,7 +43,6 @@ export const createGroup = (data) => {
   return httpsRequest(config);
 };
 export const editGroup = (data, id) => {
-  console.log(data);
   var config = {
     url: `${url}/api/group/${id}/`,
     method: "patch",

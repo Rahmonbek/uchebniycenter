@@ -15,7 +15,7 @@ import { ImUserPlus } from "react-icons/im";
 import { GoSearch } from "react-icons/go";
 import { VscChromeClose } from "react-icons/vsc";
 import Davomat from "./pages/Davomat";
-import Guruhlar from "./pages/Guruhlar";
+import Guruhlar from "./pages/Groups";
 import Dashboard from "./pages/Dashboard";
 import logo1 from "./img/logo1.png";
 import Tolov from "./pages/Tolov";

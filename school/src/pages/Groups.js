@@ -47,6 +47,7 @@ import Global from "./Token";
 import "moment/locale/zh-cn";
 
 const { TextArea } = Input;
+const { Option } = Select;
 
 export default function Guruhlar() {
   const [expanded, setExpanded] = useState([]);
@@ -67,42 +68,25 @@ export default function Guruhlar() {
 
   const getTraining = () => {
     setGrlar(Global.training.group);
-    setSubjects(Global.training.subjects);
-    setCategory(Global.training.categories);
-    setTeacher(Global.training.teachers);
+    //     setSubjects(Global.training.subjects);
+    //     setCategory(Global.training.categories);
+    //     setTeacher(Global.training.teachers);
   };
 
-  const chengeDate = (date, dateString) => {
-    setDatef(dateString);
-  };
-  const chengeTime = (date, dateString) => {
-    setTime(dateString[0]);
-    setTimef(dateString);
-    console.log(dateString);
-  };
+  //   const chengeDate = (date, dateString) => {
+  //     setDatef(dateString);
+  //   };
+  //   const chengeTime = (date, dateString) => {
+  //     setTime(dateString[0]);
+  //     setTimef(dateString);
+  //     console.log(dateString);
+  //   };
 
   const handleCancel = () => {
-    setTeachers([]);
-    setEdit(null);
-    setDate("");
-    setGuruh(null);
-    setTime("");
-    setDatef("");
-    setTimef("");
-    setImage("");
-    onReset();
-
-    var g = document.querySelectorAll("#percent");
-
-    for (let i = 0; i < g.length; i++) {
-      g[i].value = "";
-    }
     setShow(false);
   };
   const customRequest = (e) => {
-    //let imageT = e.target.files[0];
     let imageT = e.target.value;
-    //console.log(imageT);
     setImage(imageT);
   };
 
@@ -149,180 +133,63 @@ export default function Guruhlar() {
     return te;
   };
 
-  const onFinish = (value) => {
-    // const values = {
-    //   ...value,
-    //   timef,
-    //   datef,
-    //   image,
-    //   training_center: Global.id,
-    // };
-    // if (edit) {
-    //   createGroup(values)
-    //     .then((res) => console.log(res))
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // } else {
-    //   console.log(values);
-    // }
-    // buni kere masa deb  o'yladim
-    var percent = [];
-    var g = document.querySelectorAll("#percent");
-    for (let i = 0; i < g.length; i++) {
-      percent[i] = g[i].value;
-    }
+  //   const onFinish = (value) => {
+  //     const values = {
+  //       ...value,
+  //       timef,
+  //       datef,
+  //       image,
+  //       training_center: Global.id,
+  //     };
 
-    if (edit === null) {
-      let formData = new FormData();
-      formData.append("name", value.name ?? "");
-      formData.append("money", value.money ?? "");
-      formData.append("duration", value.duration ?? null);
-      formData.append("image", image ?? null);
-      formData.append("start_date", date ?? "");
-      formData.append("description", value.description ?? "");
-      formData.append("training_center", Global.id);
-      createGroup(formData)
-        .then((res) => {
-          var config = {
-            percent: percent ?? null,
-            teacher: value.teacher ?? [],
-            category: value.category ?? [],
-            subject: value.subject ?? [],
-            days: value.days ?? null,
-            time: time ?? null,
-          };
-          editGroup(config, res.data.id)
-            .then((res1) => {
-              getTrainingS()
-                .then((res2) => {
-                  Global.training = res2.data;
-                  getTraining();
-                })
-                .catch((err2) => console.log(err2));
-            })
-            .catch((err1) => {
-              console.log(err1);
-            });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      if (image === "") {
-        var editConfig = {
-          teacher: value.teacher ?? [],
-          category: value.category ?? [],
-          subject: value.subject ?? [],
-          name: value.name ?? "",
-          duration: value.duration ?? "",
-          description: value.description ?? "",
-          money: value.money ?? "",
-          days: value.days ?? null,
-          percent: percent ?? null,
-          time: time,
-          start_date: date,
-          // image:guruh.image,
-        };
-        editGroup(editConfig, edit)
-          .then((res) => {
-            getTrainingS()
-              .then((res2) => {
-                Global.training = res2.data;
-                getTraining();
-              })
-              .catch((err2) => console.log(err2));
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      } else {
-        let formData = new FormData();
-        formData.append("image", image ?? "");
-        var editConfig = {
-          teacher: value.teacher ?? [],
-          category: value.category ?? [],
-          subject: value.subject ?? [],
-          name: value.name ?? "",
-          duration: value.duration ?? "",
-          description: value.description ?? "",
-          money: value.money ?? "",
-          days: value.days ?? null,
-          percent: percent ?? null,
-          time: time,
-          start_date: date,
-        };
-        editGroup(formData, edit)
-          .then((res) => {
-            editGroup(editConfig, edit)
-              .then((res) => {
-                getTrainingS()
-                  .then((res2) => {
-                    Global.training = res2.data;
-                    getTraining();
-                  })
-                  .catch((err2) => console.log(err2));
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    }
+  //     if (edit) {
+  //       createGroup(values)
+  //         .then((res) => console.log(res))
+  //         .catch((err) => {
+  //           console.log(err);
+  //         });
+  //     } else {
+  //       console.log(values);
+  //     }
+  //   };
+  //   const handleExpandClick = (id) => {
+  //     var a = expanded;
+  //     a[id] = !a[id];
+  //     setExpanded(a);
+  //   };
 
-    handleCancel();
-  };
-  const handleExpandClick = (id) => {
-    var a = expanded;
+  //   const onReset = () => {
+  //     form.resetFields();
+  //     setEdit(null);
+  //   };
 
-    a[id] = !a[id];
-    setExpanded(a);
-  };
+  //   const teacherlar = (value) => {
+  //     var te = [];
+  //     for (let i = 0; i < value.length; i++) {
+  //       for (let j = 0; j < teacher.length; j++) {
+  //         if (value[i] === teacher[j].id) {
+  //           te.push(teacher[j].full_name);
+  //         }
+  //       }
+  //     }
+  //     setTeachers(te);
+  //   };
 
-  const onReset = () => {
-    form.resetFields();
-    setEdit(null);
-  };
+  //   const deleteGroup = (id) => {
+  //     deleteGroupC(id)
+  //       .then((res) => {
+  //         getTraining();
+  //         console.log(res.data);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   };
 
-  const teacherlar = (value) => {
-    var te = [];
-    for (let i = 0; i < value.length; i++) {
-      for (let j = 0; j < teacher.length; j++) {
-        if (value[i] === teacher[j].id) {
-          te.push(teacher[j].full_name);
-        }
-      }
-    }
-    setTeachers(te);
-  };
-  const { Option } = Select;
-
-  const deleteGroup = (id) => {
-    deleteGroupC(id)
-      .then((res) => {
-        getTraining();
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const editGuruh = (id) => {
-    console.log(id);
-    setEdit(true);
-    // setEdit(grlar[id].id);
-    // setGuruh(grlar[id]);
-    // setTime(grlar[id].time);
-    // setDate(grlar[id].start_date);
-    // setTimeout(function () {
-    //   form.setFieldsValue(grlar[id]);
-    // }, 0);
-    // teacherlar(grlar[id].teacher);
-  };
+  //   const editGuruh = (id) => {
+  //     console.log(id);
+  //     setEdit(true);
+  //   };
 
   return (
     <div className="p-5">
@@ -385,9 +252,12 @@ export default function Guruhlar() {
                           </p>
                           <p>
                             <b>Kunlari: </b>
+
                             {item.days !== null
                               ? item.days.map((item1) => {
-                                  return item1 + " ";
+                                  console.log(typeof item1);
+
+                                  return item1;
                                 })
                               : ""}
                           </p>
@@ -418,9 +288,9 @@ export default function Guruhlar() {
                         >
                           {({ ref, ...triggerHandler }) => (
                             <Button
-                              onClick={() => {
-                                editGuruh(key);
-                              }}
+                              //   onClick={() => {
+                              //     editGuruh(key);
+                              //   }}
                               variant="blue"
                               {...triggerHandler}
                               className="d-inline-flex align-items-center"
@@ -447,9 +317,9 @@ export default function Guruhlar() {
                         >
                           {({ ref, ...triggerHandler }) => (
                             <Button
-                              onClick={() => {
-                                deleteGroup(item.id);
-                              }}
+                              //   onClick={() => {
+                              //     deleteGroup(item.id);
+                              //   }}
                               variant="#f30838"
                               {...triggerHandler}
                               className="d-inline-flex align-items-center"
@@ -485,9 +355,9 @@ export default function Guruhlar() {
                                 className={clsx(styles.expand, {
                                   [styles.expandOpen]: expanded[key],
                                 })}
-                                onClick={() => {
-                                  handleExpandClick(key);
-                                }}
+                                // onClick={() => {
+                                //   handleExpandClick(key);
+                                // }}
                                 aria-expanded={expanded[key]}
                                 aria-label="Ko'proq ma'lumotni ko'rish"
                               >
@@ -539,7 +409,7 @@ export default function Guruhlar() {
           labelCol={{ span: 24 }}
           wrapperCol={{ span: 24 }}
           initialValues={{ remember: true, ...guruh }}
-          onFinish={onFinish}
+          //   onFinish={onFinish}
         >
           <Row>
             <Col lg={6} md={12} sm={12}>
@@ -623,7 +493,7 @@ export default function Guruhlar() {
                   mode="multiple"
                   style={{ width: "100%" }}
                   placeholder="O'qituvchini tanlang"
-                  onChange={teacherlar}
+                  //   onChange={teacherlar}
                   optionLabelProp="label"
                 >
                   {teacher !== [] && teacher !== undefined
@@ -665,7 +535,9 @@ export default function Guruhlar() {
                       },
                     ]}
                   >
-                    <DatePicker onChange={chengeDate} />
+                    <DatePicker
+                    //onChange={chengeDate}
+                    />
                     <span> {guruh !== null ? guruh.start_date : ""}</span>
                   </Form.Item>
                 </Col>
@@ -680,7 +552,9 @@ export default function Guruhlar() {
                       },
                     ]}
                   >
-                    <TimePicker.RangePicker onChange={chengeTime} />
+                    <TimePicker.RangePicker
+                    //onChange={chengeTime}
+                    />
                     <span>
                       {guruh !== null ? guruh.time : ""} -{" "}
                       {guruh !== null ? guruh.timef : ""}
@@ -796,7 +670,11 @@ export default function Guruhlar() {
           </Row>
 
           <Form.Item className="my-2">
-            <Button type="danger" onClick={handleCancel} htmlType="button">
+            <Button
+              type="danger"
+              //onClick={handleCancel}
+              htmlType="button"
+            >
               Bekor qilish
             </Button>
             <Button type="primary" htmlType="submit" className="mx-2">
