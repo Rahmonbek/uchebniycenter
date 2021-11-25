@@ -21,12 +21,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/modalStyle.css";
 import style from "../css/courses.module.css";
 import "../App.css";
-import {
-  createGroup,
-  deleteGroupC,
-  editGroup,
-  getTrainingS,
-} from "../host/Config";
+// import {
+//   createGroup,
+//   deleteGroupC,
+//   editGroup,
+//   getTrainingS,
+// } from "../host/Config";
 import "aos/dist/aos.css";
 import clsx from "clsx";
 import {
@@ -52,35 +52,25 @@ const { Option } = Select;
 export default function Guruhlar() {
   const [expanded, setExpanded] = useState([]);
   const [teachers, setTeachers] = useState([]);
-  const [edit, setEdit] = useState(null);
+  const [edit, setEdit] = useState(false);
   const [category, setCategory] = useState([]);
   const [teacher, setTeacher] = useState([]);
   const [grlar, setGrlar] = useState([]);
   const [show, setShow] = useState(false);
   const [guruh, setGuruh] = useState(null);
-  const [date, setDate] = useState("");
+  const [start_date, setStartDate] = useState("");
   const [time, setTime] = useState([]);
-  const [datef, setDatef] = useState([]);
   const [timef, setTimef] = useState([]);
+  const [dayf, setDayf] = useState([]);
   const [image, setImage] = useState("");
-  const [form] = Form.useForm();
   const [subjects, setSubjects] = useState([]);
 
   const getTraining = () => {
     setGrlar(Global.training.group);
-    //     setSubjects(Global.training.subjects);
-    //     setCategory(Global.training.categories);
-    //     setTeacher(Global.training.teachers);
+    setSubjects(Global.training.subjects);
+    setCategory(Global.training.categories);
+    setTeacher(Global.training.teachers);
   };
-
-  //   const chengeDate = (date, dateString) => {
-  //     setDatef(dateString);
-  //   };
-  //   const chengeTime = (date, dateString) => {
-  //     setTime(dateString[0]);
-  //     setTimef(dateString);
-  //     console.log(dateString);
-  //   };
 
   const handleCancel = () => {
     setShow(false);
@@ -90,29 +80,19 @@ export default function Guruhlar() {
     setImage(imageT);
   };
 
-  useEffect(() => {
-    getTraining();
-    var fer = [];
-    if (grlar !== []) {
-      for (let i = 0; i < grlar.length; i++) {
-        fer.push(false);
-      }
-      setExpanded(fer);
-    }
-  }, []);
+  const StartDate = (date, dateString) => {
+    setStartDate(dateString);
+  };
+  const handleTime = (date, dateString) => {
+    setTime(dateString);
+  };
 
-  // const echoTeacher = (a) => {
-  //   var te = "";
-  //   console.log(teacher);
-  //   for (let i = 0; i < teacher.length; i++) {
-  //     console.log(teacher[i]);
-  //     if (teacher[i].id === a) {
-  //       te = teacher[i].full_name;
-  //     }
-  //   }
-  //   return te;
-  // };
-
+  const handleDayf = (date, dateString) => {
+    setDayf(dateString);
+  };
+  const handleTimef = (date, dateString) => {
+    setTimef(dateString);
+  };
   const echoCategory = (a) => {
     var te = "";
     for (let i = 0; i < category.length; i++) {
@@ -132,64 +112,45 @@ export default function Guruhlar() {
     }
     return te;
   };
+  useEffect(() => {
+    getTraining();
+    var fer = [];
+    if (grlar !== []) {
+      for (let i = 0; i < grlar.length; i++) {
+        fer.push(false);
+      }
+      setExpanded(fer);
+    }
+  }, []);
 
-  //   const onFinish = (value) => {
-  //     const values = {
-  //       ...value,
-  //       timef,
-  //       datef,
-  //       image,
-  //       training_center: Global.id,
-  //     };
+  const onFinish = (value) => {
+    const values = {
+      id: grlar.length + 1,
+      ...value,
+      image,
+      start_date,
+      time,
+      timef,
+      dayf,
+      training_center: Global.id,
+    };
+    console.log(values);
+    setGrlar([...grlar, values]);
+    setShow(false);
+  };
 
-  //     if (edit) {
-  //       createGroup(values)
-  //         .then((res) => console.log(res))
-  //         .catch((err) => {
-  //           console.log(err);
-  //         });
-  //     } else {
-  //       console.log(values);
-  //     }
-  //   };
-  //   const handleExpandClick = (id) => {
-  //     var a = expanded;
-  //     a[id] = !a[id];
-  //     setExpanded(a);
-  //   };
-
-  //   const onReset = () => {
-  //     form.resetFields();
-  //     setEdit(null);
-  //   };
-
-  //   const teacherlar = (value) => {
-  //     var te = [];
-  //     for (let i = 0; i < value.length; i++) {
-  //       for (let j = 0; j < teacher.length; j++) {
-  //         if (value[i] === teacher[j].id) {
-  //           te.push(teacher[j].full_name);
-  //         }
-  //       }
-  //     }
-  //     setTeachers(te);
-  //   };
-
-  //   const deleteGroup = (id) => {
-  //     deleteGroupC(id)
-  //       .then((res) => {
-  //         getTraining();
-  //         console.log(res.data);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   };
-
-  //   const editGuruh = (id) => {
-  //     console.log(id);
-  //     setEdit(true);
-  //   };
+  const deleteGroup = (id) => {
+    const newGrlar = grlar.filter((item) => item.id !== id);
+    setGrlar(newGrlar);
+    // deleteGroupC(id)
+    //   .then((res) => {
+    //     getTraining();
+    //     console.log(res.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  };
 
   return (
     <div className="p-5">
@@ -252,14 +213,7 @@ export default function Guruhlar() {
                           </p>
                           <p>
                             <b>Kunlari: </b>
-
-                            {item.days !== null
-                              ? item.days.map((item1) => {
-                                  console.log(typeof item1);
-
-                                  return item1;
-                                })
-                              : ""}
+                            {item.days !== null ? item.days.join("/") : ""}
                           </p>
                           <p>
                             <b>Vaqti: </b>
@@ -317,9 +271,9 @@ export default function Guruhlar() {
                         >
                           {({ ref, ...triggerHandler }) => (
                             <Button
-                              //   onClick={() => {
-                              //     deleteGroup(item.id);
-                              //   }}
+                              onClick={() => {
+                                deleteGroup(item.id);
+                              }}
                               variant="#f30838"
                               {...triggerHandler}
                               className="d-inline-flex align-items-center"
@@ -403,13 +357,12 @@ export default function Guruhlar() {
         style={{ zIndex: 2000, marginRight: "5%" }}
       >
         <Form
-          form={form}
           name="basic"
           id="formGuruh"
           labelCol={{ span: 24 }}
           wrapperCol={{ span: 24 }}
           initialValues={{ remember: true, ...guruh }}
-          //   onFinish={onFinish}
+          onFinish={onFinish}
         >
           <Row>
             <Col lg={6} md={12} sm={12}>
@@ -493,7 +446,7 @@ export default function Guruhlar() {
                   mode="multiple"
                   style={{ width: "100%" }}
                   placeholder="O'qituvchini tanlang"
-                  //   onChange={teacherlar}
+                  //  onChange={teacherlar}
                   optionLabelProp="label"
                 >
                   {teacher !== [] && teacher !== undefined
@@ -525,8 +478,8 @@ export default function Guruhlar() {
               <Row>
                 <Col lg={6}>
                   <Form.Item
-                    label="Ochilish sanasini kiriting"
-                    name="datef"
+                    label="Birinchi dars sanasini kiriting"
+                    name="start_date"
                     rules={[
                       {
                         type: "object",
@@ -535,10 +488,44 @@ export default function Guruhlar() {
                       },
                     ]}
                   >
-                    <DatePicker
-                    //onChange={chengeDate}
-                    />
+                    <DatePicker onChange={StartDate} />
                     <span> {guruh !== null ? guruh.start_date : ""}</span>
+                  </Form.Item>
+                </Col>
+                <Col lg={6}>
+                  <Form.Item
+                    label="Birnichi dars vaqtini kiriting"
+                    name="time"
+                    rules={[
+                      {
+                        required: false,
+                        message: "Bu joyni to'ldirish majburiy!",
+                      },
+                    ]}
+                  >
+                    <TimePicker.RangePicker onChange={handleTime} />
+                    <span>
+                      {guruh !== null ? guruh.time[0] : ""} -{" "}
+                      {guruh !== null ? guruh.time[1] : ""}
+                    </span>
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row>
+                <Col lg={6}>
+                  <Form.Item
+                    label="Ochilish sanasini kiriting"
+                    name="dayf"
+                    rules={[
+                      {
+                        type: "object",
+                        required: false,
+                        message: "Bu joyni to'ldirish majburiy!",
+                      },
+                    ]}
+                  >
+                    <DatePicker onChange={handleDayf} />
+                    <span> {guruh !== null ? guruh.dayf : ""}</span>
                   </Form.Item>
                 </Col>
                 <Col lg={6}>
@@ -552,12 +539,10 @@ export default function Guruhlar() {
                       },
                     ]}
                   >
-                    <TimePicker.RangePicker
-                    //onChange={chengeTime}
-                    />
+                    <TimePicker.RangePicker onChange={handleTimef} />
                     <span>
-                      {guruh !== null ? guruh.time : ""} -{" "}
-                      {guruh !== null ? guruh.timef : ""}
+                      {guruh !== null ? guruh.timf[0] : ""} -{" "}
+                      {guruh !== null ? guruh.timef[1] : ""}
                     </span>
                   </Form.Item>
                 </Col>
@@ -670,11 +655,7 @@ export default function Guruhlar() {
           </Row>
 
           <Form.Item className="my-2">
-            <Button
-              type="danger"
-              //onClick={handleCancel}
-              htmlType="button"
-            >
+            <Button type="danger" onClick={handleCancel} htmlType="button">
               Bekor qilish
             </Button>
             <Button type="primary" htmlType="submit" className="mx-2">
