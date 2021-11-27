@@ -31,7 +31,6 @@ import {
 } from "../host/Config";
 import GLOBAL from "./Token";
 import { TiArrowBackOutline } from "react-icons/ti";
-import { st } from "../host/Host";
 
 export default class LearningCenter extends Component {
   state = {
